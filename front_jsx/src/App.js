@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';import logo from './logo.svg';
 import './App.css';
-import HelpQuestionnaire from './HelpQuestionnaire';
+import question from './HelpQuestionnaire';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <Link to="/questionnaire">Go to questionnaire</Link>
+          {/* <li><a href="/tools/help-score">HELP Score</a></li> */}
           <Routes>
           <Route path="/questionnaire" element={<HelpQuestionnaire />} />
           </Routes>
