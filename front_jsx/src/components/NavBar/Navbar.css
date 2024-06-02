@@ -1,0 +1,96 @@
+/* Estilos para la barra de navegación */
+.navbar {
+    background: #9b59b6;
+    color: white;
+    padding: 1em 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+  }
+  
+  .navbar-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .navbar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .navbar-menu li {
+    margin-left: 2em;
+  }
+  
+  .navbar-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 4px;
+  }
+  
+  .navbar-menu li a:hover {
+    background: #555;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-container {
+      flex-direction: column;
+    }
+  
+    .navbar-menu {
+      flex-direction: column;
+      width: 100%;
+      display: none;
+    }
+  
+    .navbar-menu li {
+      margin: 0;
+      width: 100%;
+    }
+  
+    .navbar-menu li a {
+      display: block;
+      text-align: center;
+    }
+  
+    .navbar-menu.active {
+      display: flex;
+    }
+  }
+  
+  .hamburger {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: 0.4s;
+  }
+  
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+  }
+  

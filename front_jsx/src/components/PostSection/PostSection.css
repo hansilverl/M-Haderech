@@ -1,0 +1,16 @@
+.posts-section {
+    padding: 2em;
+    background: #ffffff;
+  }
+  
+  .posts-section h2 {
+    text-align: right;
+    margin-bottom: 1em;
+  }
+  
+  .posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
