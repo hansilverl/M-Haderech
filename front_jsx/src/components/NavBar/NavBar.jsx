@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleScroll = (event) => {
     event.preventDefault();
     const targetId = event.currentTarget.getAttribute('href').substring(1);
@@ -13,12 +15,27 @@ const Navbar = () => {
         behavior: 'smooth'
       });
     }
+
+    // Close the menu on mobile after clicking a link
+    if (window.innerWidth <= 768) {
+      setIsOpen(false);
+    }
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <ul className="navbar-menu">
+        
+        <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
+          <div />
+          <div />
+          <div />
+        </div>
+        <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
           <li><a href="#posts" onClick={handleScroll}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו </a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
