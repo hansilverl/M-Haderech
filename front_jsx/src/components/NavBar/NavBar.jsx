@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import logo from '../../assets/logo.png';
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,8 +46,8 @@ const Navbar = () => {
           <li><a href="#donate" onClick={handleScroll}>לתרומה</a></li>
         </ul>
         <div className="navbar-logo">
-          Em Haderech Logo
-        </div>
+        <img src={logo} alt="Em Haderech" width="100" />
+                </div>
       </div>
     </nav>
   );
