@@ -46,7 +46,7 @@ const Navbar = () => {
           <li><a href="#donate" onClick={handleScroll}>לתרומה</a></li>
         </ul>
         <div className="navbar-logo">
-        <img src={logo} alt="Em Haderech" width="100" />
+        <img src={logo} alt="Em Haderech" width="90" />
                 </div>
       </div>
     </nav>
