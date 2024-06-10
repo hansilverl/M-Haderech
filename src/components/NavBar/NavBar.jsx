@@ -1,6 +1,6 @@
 // src/components/Navbar.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import './Navbar.css';
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useLogout();
   const { user, isAdmin, loading } = useAuthStatus();
+  const navigate = useNavigate();
 
   const handleScroll = (event) => {
     event.preventDefault();
@@ -33,6 +34,12 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    navigate('/');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -53,11 +60,11 @@ const Navbar = () => {
           <li><Link to="/help" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><a href="#donate" onClick={handleScroll}>לתרומה</a></li>
-          <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>
+          {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
           {user ? (
             <>
               {isAdmin && <li><Link to="/signup" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
-              <li><div className="logout-button" onClick={() => { logout(); setIsOpen(false); }}>התנתקות</div></li>
+              <li><div className="logout-button" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
             <li><Link to="/login" onClick={() => setIsOpen(false)}>התחברות</Link></li>
