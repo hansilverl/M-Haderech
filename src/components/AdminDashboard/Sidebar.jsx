@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaTachometerAlt, FaRegNewspaper, FaUsers, FaCog, FaBars, FaTimes } from 'react-icons/fa';
+import { FaTachometerAlt, FaRegNewspaper, FaUsers, FaCog, FaBars, FaTimes, FaQuestionCircle, FaArrowLeft, FaSignOutAlt } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -46,6 +46,18 @@ const Sidebar = () => {
             <Link to="/admin/statistics" onClick={closeSidebar}>
               <FaUsers className="statistics-icon" />
               <span>סטטיסטיקות</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/questionnaire" onClick={closeSidebar}>
+              <FaQuestionCircle className="sidebar-icon" />
+              <span>ניהול שאלון</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/" onClick={closeSidebar}>
+              <FaSignOutAlt className="sidebar-icon" />
+              <span>יציאה מדף ניהול</span>
             </Link>
           </li>
         </ul>
