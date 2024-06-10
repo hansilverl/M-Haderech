@@ -9,7 +9,6 @@ import DonationSection from '../../components/DonationSection/DonationSection';
 const HomePage = () => {
   return (
     <div className="homepage" dir="rtl">
-      <Navbar />
       <header className="header">
         <div className="header-image-container">
           <img src="https://images.inc.com/uploaded_files/image/1920x1080/evan-kirby-101570_199211.jpg" alt="Em Haderech" className="header-image" />
