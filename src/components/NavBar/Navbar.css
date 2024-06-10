@@ -1,4 +1,5 @@
-/* Estilos para la barra de navegación */
+/* src/components/Navbar.css */
+
 .navbar {
   background: #9b59b6;
   color: white;
@@ -19,10 +20,8 @@
   padding: 0 2em;
 }
 
-.navbar-logo {
-  font-size: 1.5em;
-  font-weight: bold;
-  order: 2; /* Asegura que el logo esté primero en la fila */
+.navbar-logo img {
+  height: 100px; 
 }
 
 .hamburger {
@@ -45,23 +44,29 @@
   display: flex;
   order: 2; /* Asegura que el menú esté después del logo */
   flex-grow: 1; /* Asegura que el menú ocupe el espacio disponible */
-  justify-content: flex-start; /* Alinea el menú a la derecha */
+  justify-content: flex-end; /* Alinea el menú a la derecha */
 }
 
 .navbar-menu li {
   margin-left: 2em;
+  white-space: nowrap; /* Prevent text from breaking into a new line */
+  display: flex; /* Ensure items are flex containers */
+  align-items: center; /* Vertically center items */
 }
 
-.navbar-menu li a {
+.navbar-menu li a, .logout-button {
   color: white;
   text-decoration: none;
   font-size: 1em;
   padding: 0.5em 1em;
   transition: background 0.3s, color 0.3s;
   border-radius: 4px;
+  display: flex; /* Ensure links and logout button are flex containers */
+  align-items: center; /* Vertically center text */
+  cursor: pointer; /* Ensure pointer cursor */
 }
 
-.navbar-menu li a:hover {
+.navbar-menu li a:hover, .logout-button:hover {
   background: #555;
   color: #fff;
 }
@@ -77,7 +82,7 @@
     width: 100%;
     display: none;
     position: absolute;
-    top: 60px; /* Ajusta según la altura de tu navbar */
+    top: 60px; /* Adjust according to your navbar height */
     left: 0;
     background: #9b59b6;
     padding: 1em 0;
