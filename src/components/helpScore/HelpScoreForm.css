@@ -1,76 +1,38 @@
-/* Base styles for the body to set font and background */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+.help-score-form {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Container for the form */
-.form-container {
-  background-color: #fff;
-  width: 80%;
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.questions-container {
+    margin-top: 20px;
 }
 
-/* Style for section headers */
-.section-header {
-  font-size: 1.5em;
-  color: #800080; /* Purple color */
-  margin-bottom: 10px;
+.question {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
-/* Style for lists within sections */
-.section-list {
-  list-style: none;
-  padding: 0;
+.description {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-/* Style for list items */
-.list-item {
-  background-color: #eee;
-  margin-bottom: 5px;
-  padding: 10px;
-  border-radius: 5px;
+.options {
+    display: flex;
+    justify-content: space-between;
 }
 
-/* Style for input elements like checkboxes, radio buttons */
-.input-element {
-  margin-right: 10px;
+.option {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer; /* if you want the options to be clickable */
 }
 
-/* Style for labels */
-.label {
-  display: block;
-  margin-bottom: 5px;
+.option:hover {
+    background-color: #f0f0f0; /* change color on hover */
 }
-
-/* Style for dropdown menus */
-.dropdown-menu {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-/* Style for buttons */
-.button {
-  background-color: #800080; /* Purple color */
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.button:hover {
-  background-color: #4b004b; /* Darker purple */
-}
-
-/* Additional styles can be added as needed */
