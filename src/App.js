@@ -5,7 +5,6 @@ import Signup from './screens/Signup/Signup';
 import Login from './screens/Login/Login';
 import Navbar from './components/NavBar/NavBar';
 import Contact from './screens/Contact/Contact';
-import HELP from './components/HELP/HELP';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
 import './App.css';
 
@@ -21,7 +20,6 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/help" element={<HELP />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
       </Routes>
     </div>
