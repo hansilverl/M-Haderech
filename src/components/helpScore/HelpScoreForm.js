@@ -1,64 +1,26 @@
-// src/components/helpScore/HelpScoreForm.js
-
-import React, { useState } from 'react';
-import Question from './Question'; // Fix the casing of the file name
-import './HelpScoreForm.css';
-
-const questions = [
-  {
-    questionText: "My nausea level most of the time:",
-    name: "nauseaLevel",
-    options: [
-      { value: 0, label: "None" },
-      { value: 1, label: "Mild" },
-      { value: 2, label: "Moderate" },
-      { value: 3, label: "4" },
-      { value: 4, label: "Severe" }
-    ]
-  },
-  {
-    questionText: "I average __ vomiting episodes/day:",
-    name: "vomitingEpisodes",
-    options: [
-      { value: 0, label: "0" },
-      { value: 1, label: "1-2" },
-      { value: 2, label: "3-5" },
-      { value: 3, label: "6-8" },
-      { value: 4, label: "9-12" },
-      { value: 5, label: "13 or more" }
-    ]
-  },
-  // Add more questions here...
-];
+import React from 'react';
+import useHelpScore from '../../hooks/useHelpScore';
+import Question from './Question';
 
 const HelpScoreForm = () => {
-  const [formData, setFormData] = useState({});
+    const { questions, loading, error } = useHelpScore();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form data submitted: ", formData);
-    // Here, you can handle form submission (e.g., send data to Firebase)
-  };
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
-  return (
-    <form className="help-score-form" onSubmit={handleSubmit}>
-      {questions.map((q, index) => (
-        <Question
-          key={index}
-          questionText={q.questionText}
-          options={q.options}
-          name={q.name}
-          onChange={handleChange}
-        />
-      ))}
-      <button type="submit" className="submit-button">Submit</button>
-    </form>
-  );
-};
+    return (
+        <div>
+            <h1>Help Score Form</h1>
+            {questions.map((question, index) => (
+                <Question key={index} question={question} />
+            ))}
+        </div>
+    );
+}
 
 export default HelpScoreForm;
