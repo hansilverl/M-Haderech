@@ -57,13 +57,13 @@ const Navbar = () => {
           <li><a href="#posts" onClick={handleScroll}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
+          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><a href="#donate" onClick={handleScroll}>לתרומה</a></li>
           {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
           {user ? (
             <>
-              {isAdmin && <li><Link to="/signup" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
+              {isAdmin && <li><Link to="/admin" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
               <li><div className="logout-button" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (

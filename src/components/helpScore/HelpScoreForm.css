@@ -1,0 +1,39 @@
+.help-score-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.question h4 {
+  margin-bottom: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.option input {
+  margin-right: 10px;
+}
+
+.submit-button {
+  background-color: var(--wp--preset--color--luminous-vivid-orange); /* Change color to luminous-vivid-orange */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: var(--wp--preset--color--luminous-vivid-amber); /* Change color to luminous-vivid-amber on hover */
+}
