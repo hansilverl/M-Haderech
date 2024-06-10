@@ -1,0 +1,10 @@
+.admin-dashboard {
+    display: flex;
+  }
+  
+  .admin-content {
+    margin-left: 250px; /* Deja espacio para la barra lateral */
+    padding: 20px;
+    width: 100%;
+  }
+  
