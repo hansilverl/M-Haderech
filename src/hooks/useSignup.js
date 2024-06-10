@@ -7,7 +7,7 @@ import { doc, setDoc } from 'firebase/firestore';
 export const useSignup = () => {
   const [error, setError] = useState(null);
 
-  const signup = async (email, password, navigate) => {
+  const signup = async (email, password, navigate = null, shouldNavigate = true) => {
     setError(null);
     try {
       // Create user with email and password
@@ -18,8 +18,8 @@ export const useSignup = () => {
         email: email,
         isAdmin: false,
       });
-      // Redirect to the main page
-      navigate('/');
+      // Redirect to the main page if navigate is provided and shouldNavigate is true
+      if (navigate && shouldNavigate) navigate('/');
     } catch (err) {
       setError(err.message);
     }

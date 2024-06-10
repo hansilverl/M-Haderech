@@ -1,10 +1,10 @@
 .users {
-  margin-right: 250px; /* Deja espacio para la barra lateral */
+  margin-right: 250px; /* Leave space for the sidebar */
   padding: 20px;
-  width: calc(100% - 250px); /* Ajusta el ancho del contenido */
-  box-sizing: border-box; /* Incluye el padding en el ancho total */
+  width: calc(100% - 250px); /* Adjust content width */
+  box-sizing: border-box; /* Include padding in total width */
   background-color: #f4f7f6;
-  min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+  min-height: 100vh; /* Ensure content occupies the full screen height */
 }
 
 .users h1 {
@@ -67,6 +67,11 @@
 
 .users-table button:hover {
   color: #2980b9;
+}
+
+.users-table input[type="checkbox"] {
+  transform: scale(1.5); /* Adjust scale to make checkbox bigger */
+  margin-right: 10px;
 }
 
 @media (max-width: 768px) {
