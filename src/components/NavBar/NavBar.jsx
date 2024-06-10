@@ -63,7 +63,7 @@ const Navbar = () => {
           {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
           {user ? (
             <>
-              {isAdmin && <li><Link to="/signup" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
+              {isAdmin && <li><Link to="/admin" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
               <li><div className="logout-button" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (

@@ -1,7 +1,8 @@
-// src/screens/Login/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../hooks/useLogin';
+import { auth } from '../../firebase/config';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import './Login.css';
 
 export default function Login() {
@@ -13,6 +14,21 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password, navigate);
+  };
+
+  const handleResetPassword = () => {
+    const email = prompt("אנא הזיני את כתובת האימייל שלך עבור איפוס הסיסמה:");
+    if (email) {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          // Password reset email sent
+          alert("אימייל לאיפוס סיסמה נשלח אליך.");
+        })
+        .catch((error) => {
+          // Error occurred. Handle error
+          alert("אירעה שגיאה בשליחת האימייל: " + error.message);
+        });
+    }
   };
 
   return (
@@ -38,6 +54,7 @@ export default function Login() {
           />
         </label>
         <button type="submit">התחברי</button>
+        <button type="button" onClick={handleResetPassword}>איפוס סיסמה</button>
         {error && <p>{error}</p>}
       </form>
     </div>
