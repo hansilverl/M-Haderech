@@ -1,19 +1,31 @@
 /* src/components/helpScore/HelpScoreForm.css */
 .question-container {
     margin-bottom: 20px;
+    justify-content: space-between;
+    align-self: center;
 }
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 90%;
+    table-layout: fixed; /* Ensures equal width for all cells */
+}
+
+thead {
+    background-color: #eeeeee;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+    border: 1px solid #d8d8d8;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ensure text doesn't overflow */
 }
 
-th {
-    background-color: #f2f2f2;
+/* General style for all questions */
+p[id^="question-"] {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: right;
 }
