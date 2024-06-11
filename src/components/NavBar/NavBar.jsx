@@ -9,7 +9,7 @@ import logo from '../../assets/logo_white.png'; // Import the logo image
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useLogout();
-  const { user, isAdmin, loading } = useAuthStatus();
+  const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
 
   const handleScroll = (event) => {
