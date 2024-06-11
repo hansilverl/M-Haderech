@@ -6,8 +6,17 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< Updated upstream
     "chart.js": "^4.4.3",
     "chartjs-plugin-datalabels": "^2.2.0",
+=======
+    "@tiptap/extension-color": "^2.4.0",
+    "@tiptap/extension-list-item": "^2.4.0",
+    "@tiptap/extension-text-style": "^2.4.0",
+    "@tiptap/pm": "^2.4.0",
+    "@tiptap/react": "^2.4.0",
+    "@tiptap/starter-kit": "^2.4.0",
+>>>>>>> Stashed changes
     "firebase": "^10.12.2",
     "firebase-admin": "^12.1.1",
     "nth-check": ">=2.0.1",
