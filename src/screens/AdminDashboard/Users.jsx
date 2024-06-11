@@ -1,24 +1,28 @@
-// src/screens/AdminDashboard/Users.jsx
 import React, { useState, useEffect } from 'react';
 import './Users.css';
 import { FaEdit, FaTrashAlt, FaKey, FaPlus } from 'react-icons/fa';
-import { db, auth } from '../../firebase/config'; 
+import { db, auth } from '../../firebase/config'; // Import auth here
 import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useSignup } from '../../hooks/useSignup';
-import { useNavigate } from 'react-router-dom';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const { signup, error } = useSignup();
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  const { signup, error: signupError } = useSignup();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersCollection = collection(db, 'users');
-      const userSnapshot = await getDocs(usersCollection);
-      const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setUsers(userList);
+      try {
+        const usersCollection = collection(db, 'users');
+        const userSnapshot = await getDocs(usersCollection);
+        const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setUsers(userList);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setError('Error fetching users.');
+      }
     };
 
     fetchUsers();
@@ -68,9 +72,17 @@ const Users = () => {
     const password = prompt('הזן את הסיסמה של המשתמש החדש:');
     if (email && password) {
       try {
-        await signup(email, password);
-        setUsers([...users, { id: email, email, isAdmin: false }]);
-        alert('המשתמש נוצר בהצלחה');
+        const success = await signup(email, password, null, false);
+        if (success) {
+          // Refresh the users list to include the newly created user
+          const usersCollection = collection(db, 'users');
+          const userSnapshot = await getDocs(usersCollection);
+          const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          setUsers(userList);
+          alert('המשתמש נוצר בהצלחה');
+        } else {
+          alert('שגיאה ביצירת המשתמש: המשתמש כבר קיים');
+        }
       } catch (error) {
         console.error('Error creating user: ', error);
         alert(`שגיאה ביצירת המשתמש: ${error.message}`);
@@ -86,7 +98,7 @@ const Users = () => {
       <button className='add-user-button' onClick={handleAddUser}>
         <FaPlus /> צור משתמש חדש
       </button>
-      {error && <div className='error'>{error}</div>}
+      {(error || signupError) && <div className='error'>{error || signupError}</div>}
       <table className='users-table'>
         <thead>
           <tr>
@@ -107,9 +119,18 @@ const Users = () => {
                 />
               </td>
               <td>
-                <button onClick={() => handleEdit(user.id)}><FaEdit style={{ color: 'black' }} /></button>
-                <button onClick={() => handleDelete(user.id, user.email)}><FaTrashAlt style={{ color: 'black' }} /></button>
-                <button onClick={() => handleResetPassword(user.email)}><FaKey style={{ color: 'black' }} /></button>
+                <div className="tooltip">
+                  <button onClick={() => handleEdit(user.id)}><FaEdit style={{ color: 'black' }} /></button>
+                  <span className="tooltiptext">ערוך</span>
+                </div>
+                <div className="tooltip">
+                  <button onClick={() => handleDelete(user.id, user.email)}><FaTrashAlt style={{ color: 'black' }} /></button>
+                  <span className="tooltiptext">מחק</span>
+                </div>
+                <div className="tooltip">
+                  <button onClick={() => handleResetPassword(user.email)}><FaKey style={{ color: 'black' }} /></button>
+                  <span className="tooltiptext">איפוס סיסמא</span>
+                </div>
               </td>
             </tr>
           ))}

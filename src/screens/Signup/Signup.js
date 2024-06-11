@@ -1,4 +1,3 @@
-// src/screens/Signup/Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignup } from '../../hooks/useSignup';
@@ -12,7 +11,7 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(email, password, navigate);
+    signup(email, password, navigate, true);
   };
 
   return (

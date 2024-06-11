@@ -1,3 +1,4 @@
+// src/screens/AdminDashboard/AdminDashboard.jsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './AdminDashboard.css';
@@ -7,6 +8,7 @@ import Users from './Users';
 import Sidebar from '../../components/AdminDashboard/Sidebar';
 import Statistics from './Statistics';
 import QuestionnaireManagement from './QuestionnaireManagement';
+import Miscellaneous  from './Miscellaneous';
 
 const AdminDashboard = () => {
   const questionnaireId = "help-score"; // Change this to your actual questionnaire ID
@@ -21,6 +23,7 @@ const AdminDashboard = () => {
           <Route exact path="users" element={<Users />} />
           <Route exact path="statistics" element={<Statistics />} />
           <Route exact path="questionnaire" element={<QuestionnaireManagement questionnaireId={questionnaireId} />} />
+          <Route exact path="miscellaneous" element={<Miscellaneous  />} />
         </Routes>
       </div>
     </div>
