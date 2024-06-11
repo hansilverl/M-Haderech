@@ -1,31 +1,29 @@
 // src/components/helpScore/question.js
-
-import React from 'react';
+import React from 'react'
 
 const Question = ({ question }) => {
-    const { id, description, ...options } = question;
-
+    // extract id and description from question object
+    // ... - Collect the remaining properties of `question` into an object called `options`.
+    const { id, q, ...options } = question
+    /* we will return "Description", and a vertical table with the options */
     return (
-        <div className="question-container">
-            {description && <p><strong>Description:</strong> {description}</p>}
+        <div>
+            <h3>{q}</h3>
             <table>
-                <thead>
-                    <tr>
-                        {Object.keys(options).map((key) => (
-                            <th key={key}>{key}</th>
-                        ))}
-                    </tr>
-                </thead>
                 <tbody>
-                    <tr>
-                        {Object.keys(options).map((key, index) => (
-                            key !== 'id' && <td key={index}>{options[key]}</td>
-                        ))}
-                    </tr>
+                    {Object.keys(options).map((option) => (
+                        <tr key={option}>
+                            <td>{option}</td>
+                            <td>{options[option]}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
-    );
+    )
+
 }
 
-export default Question;
+
+
+export default Question

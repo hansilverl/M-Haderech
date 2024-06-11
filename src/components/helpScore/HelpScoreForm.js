@@ -1,28 +1,35 @@
 // src/components/helpScore/HelpScoreForm.js
-import React from 'react';
-import useHelpScore from '../../hooks/useHelpScore';
-import Question from './Question';
-import './HelpScoreForm.css';
+import React from 'react'
+import useHelpScore from '../../hooks/useHelpScore'
+import Question from './Question'
+import './HelpScoreForm.css'
+
 
 const HelpScoreForm = () => {
-    const { questions, loading, error } = useHelpScore();
+    const { questions, loading, error } = useHelpScore()
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div>Error: {error.message}</div>
     }
 
-    return (
-        <div className="help-score-form">
-            <h1>Help Score Form</h1>
-            {questions.map((question, index) => (
-                <Question key={index} question={question} />
+const descriptionQuestion = questions[0]
+questions.forEach(question => {
+    console.log(question.q);
+});
+return (
+    <div className="help-score-form">
+        <Question question={descriptionQuestion} />
+        <div>
+            {questions.slice(1).map((question) => ( // Start from the second question
+                <Question key={question.id} question={question} />
             ))}
         </div>
-    );
+    </div>
+)
 }
 
-export default HelpScoreForm;
+export default HelpScoreForm
