@@ -1,0 +1,29 @@
+.question {
+    margin-bottom: 20px;
+}
+
+.description {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.options-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.options-table th,
+.options-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.options-table th {
+    background-color: #f9f9f9;
+}
+
+.options-table td input {
+    transform: scale(1.5);
+}

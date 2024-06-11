@@ -1,38 +1,19 @@
-.help-score-form {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.questions-container {
-    margin-top: 20px;
-}
-
-.question {
+/* src/components/helpScore/HelpScoreForm.css */
+.question-container {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
 }
 
-.description {
-    font-weight: bold;
-    margin-bottom: 10px;
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-.options {
-    display: flex;
-    justify-content: space-between;
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
 }
 
-.option {
-    flex: 1;
-    text-align: center;
-    border: 1px solid #ccc;
-    padding: 5px;
-    cursor: pointer; /* if you want the options to be clickable */
-}
-
-.option:hover {
-    background-color: #f0f0f0; /* change color on hover */
+th {
+    background-color: #f2f2f2;
 }

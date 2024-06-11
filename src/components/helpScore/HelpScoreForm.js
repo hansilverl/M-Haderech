@@ -2,6 +2,7 @@
 import React from 'react';
 import useHelpScore from '../../hooks/useHelpScore';
 import Question from './Question';
+import './HelpScoreForm.css';
 
 const HelpScoreForm = () => {
     const { questions, loading, error } = useHelpScore();
@@ -15,7 +16,7 @@ const HelpScoreForm = () => {
     }
 
     return (
-        <div>
+        <div className="help-score-form">
             <h1>Help Score Form</h1>
             {questions.map((question, index) => (
                 <Question key={index} question={question} />
