@@ -1,4 +1,5 @@
 // src/components/helpScore/question.js
+
 import React from 'react';
 
 const Question = ({ question }) => {
