@@ -20,8 +20,12 @@
   padding: 0 2em;
 }
 
+.navbar-logo {
+  order: 1;
+}
+
 .navbar-logo img {
-  height: 100px; 
+  height: 100px;
 }
 
 .hamburger {
@@ -42,16 +46,16 @@
   padding: 0;
   margin: 0;
   display: flex;
-  order: 2; /* Asegura que el menú esté después del logo */
-  flex-grow: 1; /* Asegura que el menú ocupe el espacio disponible */
-  justify-content: flex-end; /* Alinea el menú a la derecha */
+  flex-grow: 1;
+  justify-content: flex-end;
+  order: 2;
 }
 
 .navbar-menu li {
   margin-left: 2em;
-  white-space: nowrap; /* Prevent text from breaking into a new line */
-  display: flex; /* Ensure items are flex containers */
-  align-items: center; /* Vertically center items */
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-menu li a, .logout-button {
@@ -61,14 +65,18 @@
   padding: 0.5em 1em;
   transition: background 0.3s, color 0.3s;
   border-radius: 4px;
-  display: flex; /* Ensure links and logout button are flex containers */
-  align-items: center; /* Vertically center text */
-  cursor: pointer; /* Ensure pointer cursor */
+  cursor: pointer;
 }
 
 .navbar-menu li a:hover, .logout-button:hover {
   background: #555;
   color: #fff;
+}
+
+.navbar-end {
+  display: flex;
+  margin-left: auto;
+  order: 3;
 }
 
 @media (max-width: 768px) {
@@ -82,7 +90,7 @@
     width: 100%;
     display: none;
     position: absolute;
-    top: 60px; /* Adjust according to your navbar height */
+    top: 60px;
     left: 0;
     background: #9b59b6;
     padding: 1em 0;

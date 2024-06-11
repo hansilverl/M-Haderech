@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import './Homepage.css'
 import PostsSection from '../../components/PostSection/PostSection';

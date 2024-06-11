@@ -1,0 +1,48 @@
+/* src/screens/AdminDashboard/Statistics.css */
+.statistics {
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-right: 500px; /* Ensure it is not hidden behind the sidebar */
+    margin-left: 100px; /* Add margin to the left side */
+  }
+  
+  .stat-item {
+    background: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .stat-item h2 {
+    margin-bottom: 10px;
+  }
+  
+  .stat-label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .statistics button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .statistics button:hover {
+    background-color: #2ecc71;
+  }
+  

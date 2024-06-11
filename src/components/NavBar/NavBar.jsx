@@ -9,7 +9,7 @@ import logo from '../../assets/logo_white.png'; // Import the logo image
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useLogout();
-  const { user, isAdmin, loading } = useAuthStatus();
+  const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
 
   const handleScroll = (event) => {
@@ -57,7 +57,7 @@ const Navbar = () => {
           <li><a href="#posts" onClick={handleScroll}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
+          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><a href="#donate" onClick={handleScroll}>לתרומה</a></li>
           {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}

@@ -6,6 +6,8 @@ import Login from './screens/Login/Login';
 import Navbar from './components/NavBar/NavBar';
 import Contact from './screens/Contact/Contact';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
+import HelpScoreForm from './components/helpScore/HelpScoreForm';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 function App() {
@@ -20,7 +22,12 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route path="/admin/*" element={<AdminDashboard />} />
+        <Route exact path="/helpScore" element={<HelpScoreForm />} />
+        <Route path="/admin/*" element={
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        } />
       </Routes>
     </div>
   );
