@@ -1,11 +1,28 @@
 /* src/components/helpScore/HelpScoreForm.css */
-.question-container {
-    margin-bottom: 20px;
-    justify-content: space-between;
+
+
+
+
+.help-score-form {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center; /* Center items horizontally in the flex container */
+    justify-content: center; /* Center items vertically if flex-direction is row */
+    width: auto; /* Adjust based on content or set a max-width */
+    max-width: 90%; /* Prevents overflow and ensures padding */
+    margin: 0 auto; /* Center the form */
+    margin-top: 20px;
+}
+
+.bordered-container {
     align-self: center;
+    border: 2px solid #d8d8d8;
+    border-radius: 5px;
+    align-content: center;
 }
 
 table {
+    padding: 10px;
     border-collapse: collapse;
     width: 90%;
     table-layout: fixed; /* Ensures equal width for all cells */

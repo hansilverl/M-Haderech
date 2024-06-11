@@ -20,14 +20,16 @@ const HelpScoreForm = () => {
 const descriptionQuestion = questions[0]
 return (
     <div className="help-score-form">
-        <Question question={descriptionQuestion} />
-        <div>
-            {questions.slice(1).map((question) => ( // Start from the second question
-                <Question key={question.id} question={question} />
-            ))}
+        <div className="bordered-container">
+            <Question question={descriptionQuestion} />
+            <div>
+                {questions.slice(1).map((question) => (
+                    <Question key={question.id} question={question} />
+                ))}
+            </div>
         </div>
     </div>
-)
+);
 }
 
 export default HelpScoreForm
