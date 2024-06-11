@@ -8,7 +8,7 @@ const Question = ({ question }) => {
     /* we will return "Description", and a vertical table with the options */
     return (
         <div>
-            <h3>{q}</h3>
+            <p>{q}</p>
             <table>
                 <tbody>
                     {Object.keys(options).map((option) => (

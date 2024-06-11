@@ -17,9 +17,6 @@ const HelpScoreForm = () => {
     }
 
 const descriptionQuestion = questions[0]
-questions.forEach(question => {
-    console.log(question.q);
-});
 return (
     <div className="help-score-form">
         <Question question={descriptionQuestion} />
