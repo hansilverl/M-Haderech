@@ -41,7 +41,6 @@ th, td {
 
 /* General style for all questions */
 p[id^="question-"] {
-    font-weight: bold;
     color: #333;
     margin-bottom: 10px;
     text-align: right;
