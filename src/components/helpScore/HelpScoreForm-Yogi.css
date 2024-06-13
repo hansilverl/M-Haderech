@@ -52,8 +52,10 @@
 }
 
 .q-table td:hover {
-    background-color: #f2f2f2; /* darkens the color of the hovered cell */
-}
+    /* darkens the color of the hovered cell */
+    background-color: #f2f2f2;
+    }
+
 
 .q-table .selected {
     background-color: whitesmoke;
@@ -80,45 +82,12 @@
     display: inline-block;
     width: 0.85em;
     height: 0.85em;
+    /* margin: 0.2em 0.5em; */
     border-radius: 50%;
     border: 1.5px solid #333;
     cursor: pointer;
-    position: relative;
 }
 
-.radio-input:checked + .custom-radio {
-    background-color: #333;
-    border-color: #333;
-}
 
-.custom-radio::after {
-    content: '';
-    display: block;
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 50%;
-    background: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.2s ease-in-out;
-}
 
-.radio-input:checked + .custom-radio::after {
-    transform: translate(-50%, -50%) scale(1);
-}
 
-.custom-radio:hover {
-    border-color: #555;
-}
-
-.radio-input:focus + .custom-radio {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-.radio-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
