@@ -51,6 +51,8 @@ const MenuBar = () => {
 	}
 
 	const onFontSizeChange = (e) => {
+		const attributes = editor.getAttributes(editor.state.selection.$anchor.node().type.name)
+
 		const fontSize = e.target.value
 		for (let i = 1; i <= 6; i++) {
 			if (editor.isActive('heading', { level: 1 }))
@@ -74,6 +76,10 @@ const MenuBar = () => {
 			case 'h1':
 				editor.chain().focus().toggleHeading({ level: 1 }).run()
 				break
+		}
+
+		if (attributes?.textAlign) {
+			editor.chain().focus().setTextAlign(attributes.textAlign).run()
 		}
 	}
 
