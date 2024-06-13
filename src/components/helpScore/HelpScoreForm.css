@@ -82,6 +82,7 @@
 }
 
 .q-table .radio-input:checked {
-    accent-color: #D0FFBC;
+    accent-color: #d6b0f1;
+    border: none;
 }
 
