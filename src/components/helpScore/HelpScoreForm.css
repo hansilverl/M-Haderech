@@ -16,7 +16,7 @@
 
 .bordered-container {
     align-self: center;
-    border: 2px solid #d8d8d8;
+    border: 1px solid #bfbfbf;
     border-radius: 5px;
     align-content: center;
 }
@@ -33,7 +33,7 @@ thead {
 }
 
 th, td {
-    border: 1px solid #d8d8d8;
+    border: 1px solid #bfbfbf;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis; /* Ensure text doesn't overflow */
