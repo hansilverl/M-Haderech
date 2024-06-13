@@ -2,75 +2,84 @@
 
 .help-score-form {
     display: flex;
-    align-items: flex-start; /* Align items to the start of the container */
-    justify-content: center; /* Center items horizontally */
-    width: auto; /* Adjust based on content or set a max-width */
-    max-width: 90%; /* Prevents overflow and ensures padding */
-    margin: 0 auto; /* Center the form horizontally */
-    padding-top: 10vh; /* Add padding to the top */
-    padding-bottom: 10vh; /* Add padding to the bottom for better spacing */
+    align-items: flex-start;
+    justify-content: center;
+    width: auto;
+    max-width: 90%;
+    margin: 0 auto;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
 }
 
 .bordered-container {
-    display: flex; /* Enables flexbox layout */
-    flex-direction: column; /* Stacks children vertically */
-    align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border: 1.5px solid #d8d8d8;
     border-radius: 5px;
-    padding: 2.5%;
-    width: fit-content; /* Ensure container width fits its content */
+    padding: 2% 0;
+    width: fit-content;
 }
 
-.q_table {
-    margin: auto 4%; /* Center the table horizontally */
+.q-table {
+    margin: auto 4%;
     padding: 2%;
     border-collapse: collapse;
     width: 90%;
-    table-layout: fixed; /* Ensures equal width for all cells */
+    table-layout: fixed;
     margin-bottom: 2%;
 }
 
-thead {
+.q-table thead {
     background-color: #e6e5e5;
 }
 
-.q_table th, td {
+.q-table th {
     padding: 1% 0;
+}
+
+.q-table th,
+.q-table td {
     border: 1.5px solid #d8d8d8;
     text-align: center;
     overflow: hidden;
-    text-overflow: ellipsis; /* Ensure text doesn't overflow */
+    text-overflow: ellipsis;
 }
-td:hover {
+
+.q-table td:hover {
+    background-color: rgb(222, 222, 222);
+}
+
+
+.q-table .selected {
     background-color: whitesmoke;
 }
 
-/* General style for questions */
-p[id^="question-"] {
+.q-table td.selected:hover {
+    background-color: whitesmoke;
+}
+
+.question-text {
     font-size: 1.2em;
-    margin: auto 4%; /* Center the table horizontally */
+    margin: auto 4%;
     margin-bottom: 0.7%;
     padding: auto 2%;
     color: #333;
     text-align: right;
 }
 
-/* Style for radio buttons in the table */
-input[type="radio"] {
+.radio-input {
+    accent-color: #333;
     margin: 10px;
-    transform: scale(1.2); /* Makes the radio buttons larger */
+    transform: scale(1.2);
 }
 
-/* Targeting radio inputs within a table */
-table tr td input[type="radio"] {
-    cursor: pointer; /* Changes cursor to pointer on hover */
+.q-table .radio-input {
+    cursor: pointer;
 }
 
-
-/* Styling based on state, e.g., when the radio button is checked */
-.q_table input[type="radio"]:checked {
-    accent-color: green;
-    content: "✔";
-
+.q-table .radio-input:checked {
+    accent-color: #D0FFBC;
 }
+

@@ -1,44 +1,49 @@
-// src/components/helpScore/question.js
-import React from 'react'
-
+import React, { useState } from 'react';
 
 const Question = ({ question }) => {
-    // extract id and description from question object
-    // ... - Collect the remaining properties of `question` into an object called `options`.
-    const { id, q, ...options } = question
-    /* we will return "Description", and a vertical table with the options */
+    const { id, q, ...options } = question;
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    const handleRadioChange = (option) => {
+        setSelectedOption(option);
+    };
+
     return (
-        <div className="q_container">
-            <p id={`question-${id}`}>{q}</p>            
-            <table className="q_table">
+        <div className="q-container">
+            {/* ${id} is used to generate unique ids for each question */}
+            <p id={`question-${id}`} className="question-text">{q}</p>            
+            <table className="q-table">
                 <thead>
                     <tr>
-                        {/* the top row is the value of the options */}
                         {Object.keys(options).map((option) => (
-                            <th>
+                            <th key={option}>
                                 {options[option]}
                             </th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {/*radio button for each option*/}
                     <tr>
                         {Object.keys(options).map((option) => (
-                            <td>
-                                <input type="radio" name={id} value={option} />
+                            <td
+                                key={option}
+                                className={selectedOption === option ? 'selected' : ''}
+                            >
+                                <input
+                                    type="radio"
+                                    name={id}
+                                    value={option}
+                                    checked={selectedOption === option}
+                                    onChange={() => handleRadioChange(option)}
+                                    className="radio-input"
+                                />
                             </td>
                         ))}
                     </tr>
-
                 </tbody>
-
             </table>
         </div>
-    )
+    );
+};
 
-}
-
-
-
-export default Question
+export default Question;
