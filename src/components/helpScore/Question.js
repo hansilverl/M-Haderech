@@ -8,8 +8,9 @@ const Question = ({ question }) => {
     const { id, q, ...options } = question
     /* we will return "Description", and a vertical table with the options */
     return (
-        <div>
-            <p id={`question-${id}`}>{q}</p>            <table>
+        <div className="q_container">
+            <p id={`question-${id}`}>{q}</p>            
+            <table className="q_table">
                 <thead>
                     <tr>
                         {/* the top row is the value of the options */}
