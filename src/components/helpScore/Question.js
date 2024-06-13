@@ -1,3 +1,4 @@
+// src/components/helpScore/Question.js
 import React, { useState } from 'react';
 
 const Question = ({ question }) => {
@@ -10,7 +11,6 @@ const Question = ({ question }) => {
 
     return (
         <div className="q-container">
-            {/* ${id} is used to generate unique ids for each question */}
             <p id={`question-${id}`} className="question-text">{q}</p>            
             <table className="q-table">
                 <thead>
@@ -29,14 +29,16 @@ const Question = ({ question }) => {
                                 key={option}
                                 className={selectedOption === option ? 'selected' : ''}
                             >
-                                <input
-                                    type="radio"
-                                    name={id}
-                                    value={option}
-                                    checked={selectedOption === option}
-                                    onChange={() => handleRadioChange(option)}
-                                    className="radio-input"
-                                />
+                                <label className="radio-label">
+                                    <input
+                                        type="radio"
+                                        name={id}
+                                        value={option}
+                                        checked={selectedOption === option}
+                                        onChange={() => handleRadioChange(option)}
+                                        className="radio-input"
+                                    />
+                                </label>
                             </td>
                         ))}
                     </tr>
