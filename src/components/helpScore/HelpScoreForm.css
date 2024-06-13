@@ -22,7 +22,7 @@
     width: fit-content; /* Ensure container width fits its content */
 }
 
-table {
+.q_table {
     margin: auto 4%; /* Center the table horizontally */
     padding: 2%;
     border-collapse: collapse;
@@ -36,6 +36,7 @@ thead {
 }
 
 .q_table th, td {
+    padding: 1% 0;
     border: 1.5px solid #d8d8d8;
     text-align: center;
     overflow: hidden;
@@ -47,6 +48,7 @@ td:hover {
 
 /* General style for questions */
 p[id^="question-"] {
+    font-size: 1.2em;
     margin: auto 4%; /* Center the table horizontally */
     margin-bottom: 0.7%;
     padding: auto 2%;
@@ -68,8 +70,7 @@ table tr td input[type="radio"] {
 
 /* Styling based on state, e.g., when the radio button is checked */
 .q_table input[type="radio"]:checked {
-    
     accent-color: green;
     content: "✔";
-    
+
 }
