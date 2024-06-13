@@ -2,14 +2,14 @@ import './TextEditor.css'
 
 import React from 'react'
 
+import { useEditor, EditorContent, EditorProvider, useCurrentEditor } from '@tiptap/react'
+
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
-import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextDirection from 'tiptap-text-direction'
-import { bulletList, orderedList } from '@tiptap/pm/schema-list'
 
 import {
 	FaBold,
@@ -78,8 +78,8 @@ const MenuBar = () => {
 	}
 
 	return (
-		<div className='tiptap menu-bar'>
-			<div>
+		<div className='menu-bar'>
+			<div className='sub-menu-bar'>
 				<button
 					onClick={() => editor.chain().focus().undo().run()}
 					disabled={!editor.can().chain().focus().undo().run()}
@@ -93,7 +93,7 @@ const MenuBar = () => {
 					<FaUndo />
 				</button>
 			</div>
-			<div>
+			<div className='sub-menu-bar'>
 				<button
 					onClick={() => editor.chain().focus().toggleBold().run()}
 					disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -183,11 +183,11 @@ const MenuBar = () => {
 
 const extensions = [
 	TextDirection.configure({
-		types: ['heading', 'paragraph', StarterKit.bulletList.name],
+		types: ['heading', 'paragraph', 'orderedList'],
 		defaultDirection: 'rtl',
 	}),
 	TextAlign.configure({
-		types: ['heading', 'paragraph', bulletList.name],
+		types: ['heading', 'paragraph'],
 		alignments: ['left', 'center', 'right', 'justify'],
 	}),
 	Underline,
@@ -196,55 +196,51 @@ const extensions = [
 	StarterKit.configure({
 		bulletList: {
 			keepMarks: true,
-			keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+			keepAttributes: false,
 		},
 		orderedList: {
 			keepMarks: true,
-			keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+			keepAttributes: false,
 		},
 	}),
 ]
 
 const content = `
-<h2>
-  Hi there,
-</h2>
-<p>
-  this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
-</p>
+<h1 style="text-align: center">זה ניסיון</h1>
+<p style="text-align: right">אני כותב דברים</p>
 <ul>
-  <li>
-    That’s a bullet list with one …
-  </li>
-  <li>
-    … or two list items.
-  </li>
+	<li><p style="text-align: right">עם רשימה</p></li>
+	<li><p style="text-align: right">כזו</p></li>
 </ul>
-<p>
-  Isn’t that great? And all of that is editable. But wait, there’s more. Let’s try a code block:
+<p style="text-align: right">וגם</p>
+<ol>
+	<li><p style="text-align: right">רשימה</p></li>
+	<li><p style="text-align: right">כזו</p></li>
+</ol>
+<p style="text-align: right">
+	ואפשר לעשות כל מיני אפקטים כמו <strong>בולד, </strong><em>על הצד</em>, <u>קו תחתון</u> וגם
+	<s>קו כזה</s>.
 </p>
-<pre><code class="language-css">body {
-display: none;
-}</code></pre>
-<p>
-  I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.
-</p>
-<blockquote>
-  Wow, that’s amazing. Good work, boy! 👏
-  <br />
-  — Mom
-</blockquote>
+<p style="text-align: right">אפשר כמובן לכתוב בעברית, also in English</p>
+<h2 dir="ltr">Also we can type in English</h2>
+<p></p>
 `
 
 const TextEditor = () => {
+	let html = content
+
 	return (
 		<>
+			<MenuBar />
 			<EditorProvider
-				className='tiptap'
 				slotBefore={<MenuBar />}
 				extensions={extensions}
 				content={content}
+				onUpdate={({ editor }) => {
+					html = editor.getHTML()
+				}}
 			/>
+			<button onClick={() => console.log(html)}>save</button>
 		</>
 	)
 }
