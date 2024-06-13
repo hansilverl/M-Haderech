@@ -7,91 +7,114 @@ body,
 	height: 100%; /* Ensures the root element takes up full height */
 }
 
-body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 0;
-	direction: rtl; /* Right-to-Left */
-	text-align: right; /* Align text to the right */
+.tiptap {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: left;
+	text-justify: left;
+
+	margin: 20px;
 	background-color: #f0f0f0;
 	color: #333;
+	justify-content: center;
+	margin-right: 15px;
 }
 
 .tiptap > * + * {
 	margin-top: 0.75em;
 }
 
-.tiptap,
-ul,
-ol {
+.tiptap ul,
+.tiptap ol {
 	padding: 0 1rem;
+	margin: 0 2rem;
+	text-align: left;
 }
 
-.tiptap,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	line-height: 1.1;
+.tiptap h1,
+.tiptap h2,
+.tiptap h3,
+.tiptap h4,
+.tiptap h5,
+.tiptap h6 {
+	line-height: 1;
 }
 
-.tiptap,
-code {
+.tiptap[dir='rtl'] {
+	text-align: right;
+}
+
+.tiptap[dir='ltr'] {
+	text-align: left;
+}
+
+.tiptap code {
 	background-color: '0d0d0d';
 	color: #616161;
 	font-size: 0.9em;
-	font-family: 'JetBrainsMono', monospace;
 	padding: 0.25em 0.5em;
 }
 
-.tiptap,
-pre {
+.tiptap pre {
 	background: #ffffff;
 	color: #000000;
-	font-family: 'JetBrainsMono', monospace;
 	padding: 0.75rem 1rem;
 	border-radius: 0.5rem;
-
-	code {
-		color: inherit;
-		padding: 0;
-		background: none;
-		font-size: 0.8rem;
-	}
 }
 
-.tiptap,
-img {
+.tiptap pre code {
+	color: inherit;
+	padding: 0;
+	background: none;
+	font-size: 0.8rem;
+}
+
+.tiptap img {
 	max-width: 100%;
 	height: auto;
 }
 
-.tiptap,
-blockquote {
+.tiptap blockquote {
 	padding-left: 1rem;
 	border-left: 2px solid #0d0d0d;
 }
 
-.tiptap,
-hr {
+.tiptap hr {
 	border: none;
 	border-top: 2px solid #0d0d0d;
 	margin: 2rem 0;
 }
 
-.editor-button {
+.tiptap select,
+.tiptap option,
+.tiptap button,
+.tiptap button:hover {
 	display: inline-block;
-	border: 1px solid #0d0d0d;
-	border-radius: 5px;
+	border-radius: 0cqh;
 	background-color: white;
 	color: black;
 	padding: 0.25rem 0.5rem;
 }
 
-.editor-button-is-active,
-.editor-button:hover {
+.tiptap .is-active,
+.tiptap .is-active:hover,
+.tiptap .use-button:hover {
 	background-color: #0d0d0d;
 	color: #fff;
+}
+
+.use-button:disabled {
+	opacity: 0.5;
+	background-color: white;
+	color: black;
+}
+
+.menu-bar {
+	margin: 7px;
+	display: flex;
+	justify-content: space-between;
+	max-width: 600px;
+	padding: 0px;
 }
