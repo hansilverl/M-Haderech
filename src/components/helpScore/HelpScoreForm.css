@@ -36,7 +36,7 @@
 }
 
 .q-table th {
-    padding: 1% 0;
+    padding: 0.6% 0;
 }
 
 .q-table th,
@@ -48,7 +48,7 @@
 }
 
 .q-table td {
-    padding: 1% 0;
+    padding: 0.4% 0; 
 }
 
 .q-table td:hover {
@@ -78,43 +78,37 @@
 
 .custom-radio {
     display: inline-block;
+    position: relative;
     width: 0.85em;
     height: 0.85em;
+    border: 2px solid #ccc;
     border-radius: 50%;
-    border: 1.5px solid #333;
-    cursor: pointer;
-    position: relative;
 }
 
 .radio-input:checked + .custom-radio {
-    background-color: #333;
-    border-color: #333;
+    border-color: forestgreen;
 }
 
-.custom-radio::after {
-    content: '';
-    display: block;
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 50%;
-    background: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.2s ease-in-out;
-}
 
 .radio-input:checked + .custom-radio::after {
     transform: translate(-50%, -50%) scale(1);
+    content: "✔";
+    font-weight: bold;
+    border-radius: 50%;
+    color: forestgreen;
+    display: block;
+    position: absolute;
+    /* aligns the checkmark to the center of the radio button */
+    top: 50%;
+    left: 50%;
+    /* moves the checkmark to the center of the radio button */
+    transform: translate(-50%, -50%);
+    font-size: 0.7em;
 }
 
 .custom-radio:hover {
-    border-color: #555;
-}
-
-.radio-input:focus + .custom-radio {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    border-color: #e6e5e5;
+    cursor: pointer;
 }
 
 .radio-label {
