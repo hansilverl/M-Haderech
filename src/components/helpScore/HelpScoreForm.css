@@ -47,7 +47,6 @@
     text-overflow: ellipsis;
 }
 
-<<<<<<< HEAD
 .q-table td {
     padding: 1% 0;
 }
@@ -55,13 +54,6 @@
 .q-table td:hover {
     background-color: #f2f2f2; /* darkens the color of the hovered cell */
 }
-=======
-.q-table td:hover {
-    /* darkens the color of the hovered cell */
-    background-color: #f2f2f2;
-    }
-
->>>>>>> 5cfea6f08e34d753c2bdf50b670eae71483c3e14
 
 .q-table .selected {
     background-color: whitesmoke;
@@ -81,7 +73,6 @@
 }
 
 .radio-input {
-<<<<<<< HEAD
     display: none;
 }
 
@@ -131,20 +122,3 @@
     align-items: center;
     justify-content: center;
 }
-=======
-    /* create different radio buttons */
-    accent-color: #333;
-    margin: 10px;
-    transform: scale(1.2);
-}
-
-.q-table .radio-input {
-    cursor: pointer;
-}
-
-.q-table .radio-input:checked {
-    accent-color: #d6b0f1;
-    border: none;
-}
-
->>>>>>> 5cfea6f08e34d753c2bdf50b670eae71483c3e14
