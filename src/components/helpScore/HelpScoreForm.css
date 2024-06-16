@@ -116,3 +116,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.required {
+    color: #790000;
+    margin-left: 4px;
+}

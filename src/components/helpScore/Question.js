@@ -37,17 +37,20 @@ const OptionCells = ({ options, selectedOption, handleRadioChange, name }) => (
     </tbody>
 );
 
-const Question = ({ question }) => {
-    const { id, q, ...options } = question;
+const Question = ({ question, onRadioChange }) => {
+    const { id, q, required, ...options } = question;
     const [selectedOption, setSelectedOption] = useState(null);
 
     const handleRadioChange = (option) => {
         setSelectedOption(option);
+        onRadioChange(option);
     };
 
     return (
         <div className="q-container">
-            <p id={`question-${id}`} className="question-text">{q}</p>
+            <p id={`question-${id}`} className="question-text">
+                {q} {required ? <span className="required">*</span> : null}
+            </p>
             <table className="q-table">
                 <OptionHeaders options={options} />
                 <OptionCells 
