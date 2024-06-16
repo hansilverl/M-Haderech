@@ -1,3 +1,4 @@
+/* src/screens/AdminDashboard/Users.css */
 .users {
   margin-right: 250px; /* Leave space for the sidebar */
   padding: 20px;
@@ -11,29 +12,11 @@
   margin-bottom: 20px;
 }
 
-.users p {
+.search-input {
   margin-bottom: 20px;
-}
-
-.add-user-button {
-  background: #27ae60;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.add-user-button svg {
-  margin-left: 5px;
-}
-
-.add-user-button:hover {
-  background: #2ecc71;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .users-table {
@@ -86,8 +69,7 @@
     font-size: 0.9em;
   }
 
-  .add-user-button {
+  .search-input {
     width: 100%;
-    justify-content: center;
   }
 }
