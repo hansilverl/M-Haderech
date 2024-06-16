@@ -1,44 +1,47 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useHelpScore from '../../hooks/useHelpScore';
-import Question from './Question';
-import './HelpScoreForm.css';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import useHelpScore from '../../hooks/useHelpScore'
+import Question from './Question'
+import './HelpScoreForm.css'
 
 const HelpScoreForm = () => {
-    const { questions, loading, error } = useHelpScore();
-    const [answers, setAnswers] = useState({});
-    const [submitted, setSubmitted] = useState(false);
-    const [validationError, setValidationError] = useState(null);
-    const navigate = useNavigate();
+    const { questions, loading, error } = useHelpScore()
+    const [answers, setAnswers] = useState({})
+    const [submitted, setSubmitted] = useState(false)
+    const [validationError, setValidationError] = useState(null)
+    const navigate = useNavigate()
 
     const handleRadioChange = (questionId, selectedValue) => {
         setAnswers(prevAnswers => ({
             ...prevAnswers,
             [questionId]: selectedValue,
-        }));
-    };
+        }))
+    }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         // Check if all required questions have been answered
         if (questions.some(question => question.required && !answers[question.id])) {
-            setValidationError('Please answer all required questions.');
-            return;
+            // remodel and highlight the un-answered questions:
+            const unAnsweredQuestions = questions.filter(question => question.required && !answers[question.id])
+
+            setValidationError('Please answer all required questions.')
+            return
         }
 
         // If all questions are answered, navigate to CalculateHelpScore
-        setValidationError(null);
-        setSubmitted(true);
-        navigate('/calculate-score', { state: { answers } });
-    };
+        setValidationError(null)
+        setSubmitted(true)
+        navigate('/calculate-score', { state: { answers } })
+    }
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div>Error: {error.message}</div>
     }
 
     return (
@@ -55,7 +58,7 @@ const HelpScoreForm = () => {
                 {validationError && <p className="error-message">{validationError}</p>}
             </div>
         </form>
-    );
-};
+    )
+}
 
-export default HelpScoreForm;
+export default HelpScoreForm
