@@ -121,3 +121,15 @@
     color: #790000;
     margin-left: 4px;
 }
+
+.unanswered {
+    /* we want table background to be red if the user has not answered the question */
+    background-color: rgba(255, 223, 224, .5);
+}
+
+
+
+
+.error-message {
+    color: #790000;
+}

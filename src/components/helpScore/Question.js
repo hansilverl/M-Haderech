@@ -1,3 +1,4 @@
+// src/components/helpScore/Question.js
 import React, { useState } from 'react';
 
 const OptionHeaders = ({ options }) => (
