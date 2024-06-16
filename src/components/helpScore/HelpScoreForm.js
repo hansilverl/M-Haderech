@@ -26,7 +26,7 @@ const HelpScoreForm = () => {
             // remodel and highlight the un-answered questions:
             const unAnsweredQuestions = questions.filter(question => question.required && !answers[question.id])
 
-            setValidationError('Please answer all required questions.')
+            setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*')
             return
         }
 
