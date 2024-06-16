@@ -25,7 +25,11 @@ const HelpScoreForm = () => {
         if (questions.some(question => question.required && !answers[question.id])) {
             // remodel and highlight the un-answered questions:
             const unAnsweredQuestions = questions.filter(question => question.required && !answers[question.id])
-
+            unAnsweredQuestions.forEach(question => {
+                const questionElement = document.getElementById(`question-${question.id}`)
+                questionElement.classList.add('unanswered')
+                // now we can add custom styles to the unanswered questions
+            })
             setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*')
             return
         }
