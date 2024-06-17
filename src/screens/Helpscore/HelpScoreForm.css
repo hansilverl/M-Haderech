@@ -1,0 +1,193 @@
+/* src/screens/Helpscore/CalculateHelpScore.css */
+@import url('https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&display=swap');
+body {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont, 'Tahoma','IBM Plex Sans Hebrew',Arial, Helvetica;
+}
+
+.help-score-form {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,'IBM Plex Sans Hebrew';
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: auto;
+    max-width: 70%;
+    margin: 0 auto;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+
+.bordered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #a9a9a9;
+    border-radius: 5px;
+    padding: 2% 0;
+    width: fit-content;
+}
+
+.question-text {
+    /* make weight just a bit thicker for accessibility */
+    font-weight: 500;   /*much better, finally!*/
+    font-size: 16px;
+    margin: auto 4%;
+    margin-bottom: 0.7%;
+    padding: 0.5% 0;
+    color: #333;
+    text-align: right;
+}
+
+.q-table {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,'IBM Plex Sans Hebrew';
+    margin: auto 4%;
+    padding: 2%;
+    border-collapse: collapse;
+    width: 90%;
+    table-layout: fixed;
+    margin-bottom: 2%;
+}
+
+
+.q-table thead, q.table th { /* the two may be used interchangeably in the context of this page */
+    background-color: #e6e5e5;
+    font-family: sans-serif;
+    padding: auto 2.2%;
+    
+}
+
+
+.q-table th,
+.q-table td {
+    border: 1.5px solid #a9a9a9;
+    text-align: center;
+    /* overflow: hidden; */
+    overflow-wrap: break-word;
+}
+
+.q-table td {
+    padding: 0.4% 0; 
+}
+
+.q-table td:hover {
+    /* background-color: #f2f2f2;  */
+    background-color: #f1f8ff;
+}
+
+.q-table .selected {
+    background-color: #dfefff80;;
+}
+
+.q-table td.selected:hover {
+    background-color: #dfefff80;
+}
+
+
+.radio-input {
+    display: none;
+}
+
+.custom-radio {
+    display: inline-block;
+    position: relative;
+    width: 0.85em;
+    height: 0.85em;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+}
+
+.radio-input:checked + .custom-radio {
+    border-color: forestgreen;
+}
+
+
+.radio-input:checked + .custom-radio::after {
+    transform: translate(-50%, -50%) scale(1);
+    content: "✔";
+    font-weight: bold;
+    border-radius: 50%;
+    color: forestgreen;
+    display: block;
+    position: absolute;
+    /* aligns the checkmark to the center of the radio button */
+    top: 50%;
+    left: 50%;
+    /* moves the checkmark to the center of the radio button */
+    transform: translate(-50%, -50%);
+    font-size: 0.7em;
+}
+
+.custom-radio:hover {
+    border-color: #a9a9a9;
+    cursor: pointer;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.required { /*asterisk for required fields*/
+    color: #790000;
+    margin-left: 4px;
+}
+
+
+
+.help-score-form button[type="submit"] {
+    font-family: 'IBM Plex Sans Hebrew';
+    font-weight: bold;
+    background-color: #68478d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid #650040;
+    box-shadow: none;
+    cursor: pointer;
+    /* percentage values are relative to the parent element */
+    padding: 1% 2%;
+    margin: 2% 0;
+}
+
+.help-score-form button[type="submit"]:hover {
+    background-color: #a20067;
+}
+
+.req_question{
+    background-color: #ffdfe080;
+    /* outline to use background as a highlighter by using a border */
+    outline: 7.5px solid #f0f0f0;
+    outline-offset: -7.5px;
+}
+
+/* change the question-text of required questions to red */
+.req_question .question-text {
+    margin-left: 2%;
+
+}
+
+
+.req_question td, .req_question th {
+    border: 1px solid #790000; 
+    table-layout: fixed;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-2px) rotate(0deg); }
+    40% { transform: translateX(2px) rotate(0deg); }
+    60% { transform: translateX(-2px) rotate(0deg); }
+    80% { transform: translateX(2px) rotate(0deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+  }
+  
+
+.error-message {
+    color: #790000;
+    font-weight: bold;
+    font-size: 14px;
+    /*this line should slightly "shake" the error message to draw attention to it*/
+    animation: shake 0.3s;
+}
