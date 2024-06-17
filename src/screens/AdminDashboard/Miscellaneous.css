@@ -1,0 +1,37 @@
+.miscellaneous {
+  padding: 20px;
+  background-color: #f4f7f6;
+  margin-right: 300px; /* Adjust margin to move content to the right */
+}
+
+.bank-info-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bank-info-item h2 {
+  margin-bottom: 20px;
+}
+
+.bank-info-item p {
+  text-align: left;
+}
+
+.bank-info-item button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.bank-info-item button:hover {
+  background-color: #2ecc71;
+}
