@@ -1,36 +1,25 @@
+// src/screens/AdminDashboard/Users.jsx
 import React, { useState, useEffect } from 'react';
 import './Users.css';
-import { FaEdit, FaTrashAlt, FaKey, FaPlus } from 'react-icons/fa';
-import { db, auth } from '../../firebase/config'; // Import auth here
+import { FaTrashAlt, FaKey } from 'react-icons/fa';
+import { db, auth } from '../../firebase/config'; 
 import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { useSignup } from '../../hooks/useSignup';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState(null);
-
-  const { signup, error: signupError } = useSignup();
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchUsers = async () => {
-      try {
-        const usersCollection = collection(db, 'users');
-        const userSnapshot = await getDocs(usersCollection);
-        const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setUsers(userList);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        setError('Error fetching users.');
-      }
+      const usersCollection = collection(db, 'users');
+      const userSnapshot = await getDocs(usersCollection);
+      const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setUsers(userList);
     };
 
     fetchUsers();
   }, []);
-
-  const handleEdit = (id) => {
-    alert(`ערוך משתמש ${id}`);
-  };
 
   const handleDelete = async (id, email) => {
     const confirmation = window.confirm(`האם אתה בטוח שברצונך למחוק את המשתמש ${email}?`);
@@ -67,38 +56,18 @@ const Users = () => {
     }
   };
 
-  const handleAddUser = async () => {
-    const email = prompt('הזן את האימייל של המשתמש החדש:');
-    const password = prompt('הזן את הסיסמה של המשתמש החדש:');
-    if (email && password) {
-      try {
-        const success = await signup(email, password, null, false);
-        if (success) {
-          // Refresh the users list to include the newly created user
-          const usersCollection = collection(db, 'users');
-          const userSnapshot = await getDocs(usersCollection);
-          const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          setUsers(userList);
-          alert('המשתמש נוצר בהצלחה');
-        } else {
-          alert('שגיאה ביצירת המשתמש: המשתמש כבר קיים');
-        }
-      } catch (error) {
-        console.error('Error creating user: ', error);
-        alert(`שגיאה ביצירת המשתמש: ${error.message}`);
-      }
-    } else {
-      alert('נדרשים אימייל וסיסמה ליצירת משתמש חדש.');
-    }
-  };
+  const filteredUsers = users.filter(user => user.email.toLowerCase().startsWith(searchTerm.toLowerCase()));
 
   return (
     <div className='users'>
       <h1>משתמשים</h1>
-      <button className='add-user-button' onClick={handleAddUser}>
-        <FaPlus /> צור משתמש חדש
-      </button>
-      {(error || signupError) && <div className='error'>{error || signupError}</div>}
+      <input
+        type="text"
+        placeholder="חפש משתמש לפי אימייל"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className='search-input'
+      />
       <table className='users-table'>
         <thead>
           <tr>
@@ -108,7 +77,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
+          {filteredUsers.map(user => (
             <tr key={user.id}>
               <td>{user.email}</td>
               <td>
@@ -119,18 +88,8 @@ const Users = () => {
                 />
               </td>
               <td>
-                <div className="tooltip">
-                  <button onClick={() => handleEdit(user.id)}><FaEdit style={{ color: 'black' }} /></button>
-                  <span className="tooltiptext">ערוך</span>
-                </div>
-                <div className="tooltip">
-                  <button onClick={() => handleDelete(user.id, user.email)}><FaTrashAlt style={{ color: 'black' }} /></button>
-                  <span className="tooltiptext">מחק</span>
-                </div>
-                <div className="tooltip">
-                  <button onClick={() => handleResetPassword(user.email)}><FaKey style={{ color: 'black' }} /></button>
-                  <span className="tooltiptext">איפוס סיסמא</span>
-                </div>
+                <button title="מחק משתמש" onClick={() => handleDelete(user.id, user.email)}><FaTrashAlt style={{ color: 'black' }} /></button>
+                <button title="איפוס סיסמה" onClick={() => handleResetPassword(user.email)}><FaKey style={{ color: 'black' }} /></button>
               </td>
             </tr>
           ))}
