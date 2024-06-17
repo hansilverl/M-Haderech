@@ -129,7 +129,7 @@ body {
     justify-content: center;
 }
 
-.required {
+.required { /*asterisk for required fields*/
     color: #790000;
     margin-left: 4px;
 }
