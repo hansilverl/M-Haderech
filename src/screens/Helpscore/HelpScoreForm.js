@@ -65,7 +65,7 @@ const HelpScoreForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="help-score-form">
-            <div className="bordered-container">
+            <div className="bordered-container"> 
                 {questions.map((question) => (
                     <Question 
                         key={question.id} 
