@@ -7,7 +7,7 @@ import Navbar from './components/NavBar/NavBar';
 import Contact from './screens/Contact/Contact';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
 import HelpScoreForm from './components/helpScore/HelpScoreForm';
-import CalculateHelpScore from './components/helpScore/calculateHelpScore'
+import CalculateHelpScore from './components/helpScore/CalculateHelpScore'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -24,6 +24,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/helpScore" element={<HelpScoreForm />} />
+        <Route exact path="/calculateHelpScore" element={<CalculateHelpScore />} />
         <Route path="/admin/*" element={
           <ProtectedRoute>
             <AdminDashboard />

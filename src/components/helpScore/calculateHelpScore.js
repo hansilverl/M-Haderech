@@ -1,7 +1,7 @@
 // src/components/helpScore/CalculateHelpScore.js
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import './calculateHelpScore.css'
+import './CalculateHelpScore.css'
 
 const CalculateHelpScore = () => {
     const location = useLocation()

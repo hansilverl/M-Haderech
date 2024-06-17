@@ -46,7 +46,7 @@ const HelpScoreForm = () => {
         // If all questions are answered, navigate to CalculateHelpScore
         setValidationError(null);
         setSubmitted(true);
-        navigate('/calculate-score', { state: { answers } });
+        navigate('/calculateHelpScore', { state: { answers } })
     }
     
     if (loading) {
