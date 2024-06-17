@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&display=swap');
 body {
-    font-family: 'Tahoma','IBM Plex Sans Hebrew',Arial, Helvetica;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont, 'Tahoma','IBM Plex Sans Hebrew',Arial, Helvetica;
 }
 
 .help-score-form {
-    font-family: 'IBM Plex Sans Hebrew';
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,'IBM Plex Sans Hebrew';
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -40,7 +40,7 @@ body {
 }
 
 .q-table {
-    font-family: 'IBM Plex Sans Hebrew';
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,'IBM Plex Sans Hebrew';
     margin: auto 4%;
     padding: 2%;
     border-collapse: collapse;

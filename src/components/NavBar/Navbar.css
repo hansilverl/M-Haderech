@@ -1,6 +1,8 @@
 /* src/components/Navbar.css */
 
+
 .navbar {
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,Arial, Helvetica, sans-serif;
   background: #9b59b6;
   color: white;
   padding: 1em 0;
