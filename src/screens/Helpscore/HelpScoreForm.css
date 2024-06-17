@@ -119,7 +119,7 @@ body {
 }
 
 .custom-radio:hover {
-    border-color: #e6e5e5;
+    border-color: #a9a9a9;
     cursor: pointer;
 }
 
@@ -155,11 +155,19 @@ body {
     background-color: #a20067;
 }
 
-
 .req_question{
     background-color: #ffdfe080;
-    border: 5px solid #f2f2f2;
+    /* outline to use background as a highlighter by using a border */
+    outline: 7.5px solid #f0f0f0;
+    outline-offset: -7.5px;
 }
+
+/* change the question-text of required questions to red */
+.req_question .question-text {
+    margin-left: 2%;
+
+}
+
 
 .req_question td, .req_question th {
     border: 1px solid #790000; 
@@ -179,6 +187,7 @@ body {
 .error-message {
     color: #790000;
     font-weight: bold;
+    font-size: 14px;
     /*this line should slightly "shake" the error message to draw attention to it*/
     animation: shake 0.3s;
 }
