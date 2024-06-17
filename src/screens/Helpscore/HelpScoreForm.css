@@ -62,8 +62,8 @@ body {
 .q-table td {
     border: 1.5px solid #a9a9a9;
     text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    overflow-wrap: break-word;
 }
 
 .q-table td {
@@ -71,15 +71,16 @@ body {
 }
 
 .q-table td:hover {
-    background-color: #f2f2f2; /* darkens the color of the hovered cell */
+    /* background-color: #f2f2f2;  */
+    background-color: #f1f8ff;
 }
 
 .q-table .selected {
-    background-color: whitesmoke;
+    background-color: #dfefff80;;
 }
 
 .q-table td.selected:hover {
-    background-color: #abb8c3;
+    background-color: #dfefff80;
 }
 
 
@@ -165,6 +166,19 @@ body {
     table-layout: fixed;
 }
 
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-2px) rotate(0deg); }
+    40% { transform: translateX(2px) rotate(0deg); }
+    60% { transform: translateX(-2px) rotate(0deg); }
+    80% { transform: translateX(2px) rotate(0deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+  }
+  
+
 .error-message {
     color: #790000;
+    font-weight: bold;
+    /*this line should slightly "shake" the error message to draw attention to it*/
+    animation: shake 0.3s;
 }

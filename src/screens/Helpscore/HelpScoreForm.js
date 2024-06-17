@@ -10,6 +10,7 @@ const HelpScoreForm = () => {
     const [answers, setAnswers] = useState({})
     const [submitted, setSubmitted] = useState(false)
     const [validationError, setValidationError] = useState(null)
+    const [shake, setShake] = useState(false)
     const navigate = useNavigate()
 
     const handleRadioChange = (questionId, selectedValue) => {
@@ -38,8 +39,9 @@ const HelpScoreForm = () => {
                     questionElement.classList.add('req_question');
                 }
             });
-    
             setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*');
+            setShake(prev => !prev);  // Toggle the shake state to re-trigger the animation
+            
             return;
         }
     
@@ -68,7 +70,7 @@ const HelpScoreForm = () => {
                     />
                 ))}
                 <button type="submit">שליחה</button>
-                {validationError && <p className="error-message">{validationError}</p>}
+                {validationError && <p key={shake} className="error-message">{validationError}</p>}
             </div>
         </form>
     )
