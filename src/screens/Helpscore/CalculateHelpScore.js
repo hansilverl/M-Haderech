@@ -1,4 +1,4 @@
-// src/components/helpScore/CalculateHelpScore.js
+// src/screens/Helpscore/CalculateHelpScore.js
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './CalculateHelpScore.css'

@@ -1,8 +1,8 @@
-// src/components/helpScore/HelpScoreForm.js
+// src/screens/Helpscore/HelpScoreForm.js
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useHelpScore from '../../hooks/useHelpScore'
-import Question from './Question'
+import Question from '../../components/helpScore/Question'
 import './HelpScoreForm.css'
 
 const HelpScoreForm = () => {
@@ -67,7 +67,7 @@ const HelpScoreForm = () => {
                         onRadioChange={(option) => handleRadioChange(question.id, option)}
                     />
                 ))}
-                <button type="submit">Submit</button>
+                <button type="submit">שליחה</button>
                 {validationError && <p className="error-message">{validationError}</p>}
             </div>
         </form>

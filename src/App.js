@@ -6,8 +6,8 @@ import Login from './screens/Login/Login';
 import Navbar from './components/NavBar/NavBar';
 import Contact from './screens/Contact/Contact';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
-import HelpScoreForm from './components/helpScore/HelpScoreForm';
-import CalculateHelpScore from './components/helpScore/CalculateHelpScore'
+import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
+import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
