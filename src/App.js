@@ -7,6 +7,7 @@ import Navbar from './components/NavBar/NavBar';
 import Contact from './screens/Contact/Contact';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
 import HelpScoreForm from './components/helpScore/HelpScoreForm';
+import CalculateHelpScore from './components/helpScore/calculateHelpScore'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
