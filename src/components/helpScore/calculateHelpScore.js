@@ -11,7 +11,7 @@ const CalculateHelpScore = () => {
     useEffect(() => {
         if (!location.state || !location.state.answers) {
             // If there are no answers in the state, navigate back to the form
-            navigate('/help-score-form')
+            navigate('/helpscore')
             return
         }
 
@@ -40,7 +40,7 @@ const CalculateHelpScore = () => {
         <div className="score-container">
             <h1>Your Help Score</h1>
             <p>Your score is: {score}</p>
-            <button onClick={() => navigate('/help-score-form')}>Back to Form</button>
+            <button onClick={() => navigate('/helpscore')}>Back to Form</button>
         </div>
     )
 }
