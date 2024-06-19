@@ -1,7 +1,6 @@
-// src/components/AdminDashboard/Sidebar.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaTachometerAlt, FaRegNewspaper, FaUsers, FaCog, FaBars, FaTimes, FaQuestionCircle, FaSignOutAlt } from 'react-icons/fa';
+import { FaTachometerAlt, FaRegNewspaper, FaUsers, FaCog, FaBars, FaTimes, FaQuestionCircle, FaSignOutAlt, FaHistory } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -59,6 +58,12 @@ const Sidebar = () => {
             <Link to="/admin/miscellaneous" onClick={closeSidebar}>
               <FaCog className="sidebar-icon" />
               <span>שונות</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/history" onClick={closeSidebar}>
+              <FaHistory className="sidebar-icon" />
+              <span>צפייה בהיסטוריית שאלונים</span>
             </Link>
           </li>
           <li>

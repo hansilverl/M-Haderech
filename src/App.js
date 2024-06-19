@@ -7,7 +7,8 @@ import Navbar from './components/NavBar/NavBar';
 import Contact from './screens/Contact/Contact';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
 import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
-import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
+import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore';
+import History from './screens/History/History'; // Import the new History component
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -25,8 +26,13 @@ function App() {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/helpScore" element={<HelpScoreForm />} />
         <Route exact path="/calculateHelpScore" element={<CalculateHelpScore />} />
-        <Route path="/admin/*" element={
+        <Route exact path="/history" element={
           <ProtectedRoute>
+            <History />
+          </ProtectedRoute>
+        } /> {/* Add the protected route for history */}
+        <Route path="/admin/*" element={
+          <ProtectedRoute admin>
             <AdminDashboard />
           </ProtectedRoute>
         } />

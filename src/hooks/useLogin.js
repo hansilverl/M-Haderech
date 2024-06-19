@@ -1,4 +1,3 @@
-// src/hooks/useLogin.js
 import { useState } from 'react';
 import { auth } from '../firebase/config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -9,10 +8,9 @@ export const useLogin = () => {
   const login = async (email, password, navigate) => {
     setError(null);
     try {
-      // login with email and password
+      // Login with email and password
       await signInWithEmailAndPassword(auth, email, password);
-
-      // Redirect to the main page
+      // Navigate to the main page after successful login
       navigate('/');
     } catch (err) {
       setError(err.message);
@@ -20,4 +18,4 @@ export const useLogin = () => {
   };
 
   return { error, login };
-}
+};

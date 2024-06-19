@@ -1,0 +1,106 @@
+/* Main container for the history page */
+.history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items horizontally */
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px; /* Maximum width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    text-align: center;
+  }
+  
+  /* Grid layout for the history entries */
+  .history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Three items per row */
+    gap: 40px; /* Space between items */
+  }
+  
+  /* Styling for each history entry */
+  .history-entry {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px; /* Increase padding for more space inside the box */
+    margin-bottom: 20px;
+    text-align: center; /* Center the text within the entry */
+    background-color: white; /* White background */
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+  }
+  
+  /* Styling for the date */
+  .history-entry h2 {
+    margin-top: 0;
+    font-size: 1.8em; /* Increase font size */
+    font-weight: bold;
+    text-align: center; /* Center the text */
+  }
+  
+  /* Styling for the total score */
+  .history-entry .total-score {
+    font-size: 1.5em; /* Increase font size */
+    margin-bottom: 15px;
+    text-align: center; /* Center the text */
+  }
+  
+  /* Styling for the list of responses */
+  .history-entry ul {
+    list-style-type: none; /* Remove default list style */
+    padding: 0;
+    text-align: right; /* Align the text from right to left */
+  }
+  
+  /* Styling for each response item */
+  .history-entry ul li {
+    margin-bottom: 20px; /* Increase space between question items */
+  }
+  
+  /* Styling for the delete icon */
+  .history-entry .delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer; /* Pointer cursor for the icon */
+  }
+  
+  /* Styling for the search input */
+  .search-input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Styling for error messages */
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  /* Styling for the no-history message */
+  .no-history {
+    font-size: 1.5em;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  /* Styling for the fill questionnaire button */
+  .fill-questionnaire-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* Hover effect for the fill questionnaire button */
+  .fill-questionnaire-button:hover {
+    background-color: #0056b3;
+  }
+  

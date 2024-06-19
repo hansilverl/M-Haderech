@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
@@ -64,6 +63,7 @@ const Navbar = () => {
           {user ? (
             <>
               {isAdmin && <li><Link to="/admin" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
+              <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
               <li><div className="logout-button" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
