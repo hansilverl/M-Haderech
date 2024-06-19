@@ -1,0 +1,47 @@
+/* src/components/AdminUserHistory/AdminUserHistory.css */
+.admin-user-history-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.search-input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.history-entry {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.history-entry h2 {
+  margin-top: 0;
+}
+
+.history-entry ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.history-entry ul li {
+  margin-bottom: 10px;
+}
+
+.admin-dashboard .content {
+  margin-right: 250px; 
+  padding: 20px;
+}
