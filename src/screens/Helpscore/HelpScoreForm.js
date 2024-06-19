@@ -36,6 +36,7 @@ const HelpScoreForm = () => {
                     questionElement.classList.add('req_question');
                 }
             });
+            // validation error is in class component "requiredFieldsErrorMsg"
             setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*');
             setShake(prev => !prev);
             if (errorMessageRef.current) {
@@ -67,7 +68,7 @@ const HelpScoreForm = () => {
                     />
                 ))}
                 <button type="submit">שליחה</button>
-                {validationError && <p key={shake} ref={errorMessageRef} className="error-message">{validationError}</p>}
+                {validationError && <p key={shake} ref={errorMessageRef} className="requiredFieldsErrorMsg">{validationError}</p>}
             </div>
         </form>
     );
