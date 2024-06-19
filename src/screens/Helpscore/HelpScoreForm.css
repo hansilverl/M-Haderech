@@ -155,22 +155,41 @@ body {
     background-color: #a20067;
 }
 
-.req_question{
-    background-color: #ffdfe080;
-    /* outline to use background as a highlighter by using a border */
-    outline: 7.5px solid #f0f0f0;
-    outline-offset: -7.5px;
+/* pseudo element to use as element background: */
+.req_question::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    /* use border as background, should be width of option table */
+    border: 1.5px solid #790000;
+    border-radius: 5px;
+    /* cover the element , until the end of option table , use % to make it responsive */
+    top: 5%;
+    bottom: 7%;
+    left: 5%;
+    right: 3%;
 }
+
+.req_question{
+    position: relative;
+    /* background-color: #ffdfe080;  */
+    /* outline to use background as a highlighter by using a border */
+     /* outline: 7px solid #f0f0f0;
+    outline-offset: -7px; */
+}
+
+
 
 /* change the question-text of required questions to red */
 .req_question .question-text {
     margin-left: 2%;
+    color: #790000;
 
 }
 
 
 .req_question td, .req_question th {
-    border: 1px solid #790000; 
+    border: 1.2px solid #790000;
     table-layout: fixed;
 }
 
