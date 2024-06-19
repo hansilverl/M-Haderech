@@ -1,12 +1,13 @@
 /* src/screens/Helpscore/CalculateHelpScore.css */
 @import url('https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&display=swap');
+
 body {
-    font-family: -apple-system,system-ui,BlinkMacSystemFont, 'Tahoma','IBM Plex Sans Hebrew',Arial, Helvetica;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Tahoma', 'IBM Plex Sans Hebrew', Arial, Helvetica;
 }
 
 .help-score-form {
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,'IBM Plex Sans Hebrew';
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -28,9 +29,14 @@ body {
     width: fit-content;
 }
 
+.q-container {
+    padding: 1% ;
+}
+
 .question-text {
     /* make weight just a bit thicker for accessibility */
-    font-weight: 500;   /*much better, finally!*/
+    font-weight: 500;
+    /*much better, finally!*/
     font-size: 16px;
     margin: auto 4%;
     margin-bottom: 0.7%;
@@ -40,7 +46,7 @@ body {
 }
 
 .q-table {
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,'IBM Plex Sans Hebrew';
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
     margin: auto 4%;
     padding: 2%;
     border-collapse: collapse;
@@ -50,11 +56,13 @@ body {
 }
 
 
-.q-table thead, q.table th { /* the two may be used interchangeably in the context of this page */
+.q-table thead,
+q.table th {
+    /* the two may be used interchangeably in the context of this page */
     background-color: #e6e5e5;
     font-family: sans-serif;
     padding: auto 2.2%;
-    
+
 }
 
 
@@ -67,7 +75,7 @@ body {
 }
 
 .q-table td {
-    padding: 0.4% 0; 
+    padding: 0.4% 0;
 }
 
 .q-table td:hover {
@@ -76,7 +84,8 @@ body {
 }
 
 .q-table .selected {
-    background-color: #dfefff80;;
+    background-color: #dfefff80;
+    ;
 }
 
 .q-table td.selected:hover {
@@ -97,12 +106,12 @@ body {
     border-radius: 50%;
 }
 
-.radio-input:checked + .custom-radio {
+.radio-input:checked+.custom-radio {
     border-color: forestgreen;
 }
 
 
-.radio-input:checked + .custom-radio::after {
+.radio-input:checked+.custom-radio::after {
     transform: translate(-50%, -50%) scale(1);
     content: "✔";
     font-weight: bold;
@@ -129,7 +138,8 @@ body {
     justify-content: center;
 }
 
-.required { /*asterisk for required fields*/
+.required {
+    /*asterisk for required fields*/
     color: #790000;
     margin-left: 4px;
 }
@@ -159,46 +169,66 @@ body {
 .req_question::after {
     content: "";
     position: absolute;
-    z-index: -1;    /* make sure it's behind the element */
+    z-index: -1;
+    /* make sure it's behind the element */
     /* use border as background, should be width of option table */
     border: 1.5px solid #790000;
     border-radius: 5px;
     /* cover the element , until the end of option table , use % to make it responsive */
     top: 4%;
-    bottom: 7%;
+    bottom: 6%;
     left: 5%;
     right: 3%;
 }
 
-.req_question{
+.req_question {
     position: relative;
     /* background-color: #ffdfe080;  */
-    }
+}
 
 
 
 /* change the question-text of required questions to red */
 .req_question .question-text {
-    margin-left: 2%;    /* align the text with table */
+    margin-left: 2%;
+    /* align the text with table */
     color: #790000;
 
 }
 
 
-.req_question td, .req_question th {
+.req_question td,
+.req_question th {
     border: 1.2px solid #790000;
     table-layout: fixed;
 }
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(-2px) rotate(0deg); }
-    40% { transform: translateX(2px) rotate(0deg); }
-    60% { transform: translateX(-2px) rotate(0deg); }
-    80% { transform: translateX(2px) rotate(0deg); }
-    100% { transform: translateX(0) rotate(0deg); }
-  }
-  
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translateX(2px) rotate(0deg);
+    }
+
+    60% {
+        transform: translateX(-2px) rotate(0deg);
+    }
+
+    80% {
+        transform: translateX(2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
 
 .error-message {
     color: #790000;
