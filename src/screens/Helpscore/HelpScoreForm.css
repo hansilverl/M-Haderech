@@ -149,7 +149,7 @@ q.table th {
 .help-score-form button[type="submit"] {
     font-family: 'IBM Plex Sans Hebrew';
     font-weight: bold;
-    background-color: #68478d;
+    background-color: #9b59b6;
     color: white;
     border: none;
     border-radius: 5px;
@@ -172,13 +172,13 @@ q.table th {
     z-index: -1;
     /* make sure it's behind the element */
     /* use border as background, should be width of option table */
-    border: 1.5px solid #790000;
-    border-radius: 5px;
     /* cover the element , until the end of option table , use % to make it responsive */
-    top: 4%;
+    background-color: #ffdfdf80;
+    top: 6%;
     bottom: 6%;
     left: 5%;
     right: 3%;
+    border-radius: 6px;
 }
 
 .req_question {
@@ -230,7 +230,7 @@ q.table th {
 }
 
 
-.error-message {
+.requiredFieldsErrorMsg {
     color: #790000;
     font-weight: bold;
     font-size: 14px;
