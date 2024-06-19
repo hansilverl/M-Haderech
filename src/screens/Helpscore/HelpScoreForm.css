@@ -159,12 +159,12 @@ body {
 .req_question::after {
     content: "";
     position: absolute;
-    z-index: -1;
+    z-index: -1;    /* make sure it's behind the element */
     /* use border as background, should be width of option table */
     border: 1.5px solid #790000;
     border-radius: 5px;
     /* cover the element , until the end of option table , use % to make it responsive */
-    top: 5%;
+    top: 4%;
     bottom: 7%;
     left: 5%;
     right: 3%;
@@ -173,16 +173,13 @@ body {
 .req_question{
     position: relative;
     /* background-color: #ffdfe080;  */
-    /* outline to use background as a highlighter by using a border */
-     /* outline: 7px solid #f0f0f0;
-    outline-offset: -7px; */
-}
+    }
 
 
 
 /* change the question-text of required questions to red */
 .req_question .question-text {
-    margin-left: 2%;
+    margin-left: 2%;    /* align the text with table */
     color: #790000;
 
 }
