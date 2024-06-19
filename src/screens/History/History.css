@@ -11,7 +11,7 @@
 
 .history-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Three items per row */
+  grid-template-columns: 1fr 1fr 1fr 1fr ; /* Three items per row */
   gap: 40px; /* Space between items */
 }
 
