@@ -10,6 +10,7 @@ import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
 import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
+import Posts from './screens/Posts/Posts';
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/helpScore" element={<HelpScoreForm />} />
         <Route exact path="/calculateHelpScore" element={<CalculateHelpScore />} />
+        <Route exact path="/posts" element={<Posts />} />
         <Route path="/admin/*" element={
           <ProtectedRoute>
             <AdminDashboard />
