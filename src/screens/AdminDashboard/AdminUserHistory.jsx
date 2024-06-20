@@ -4,11 +4,12 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import './AdminUserHistory.css';
 
 const AdminUserHistory = () => {
-  const [email, setEmail] = useState(''); // State to store the email input
-  const [history, setHistory] = useState([]); // State to store the fetched history
-  const [error, setError] = useState(null); // State to store any errors
+  const [email, setEmail] = useState('');
+  const [history, setHistory] = useState([]);
+  const [error, setError] = useState(null);
+  const [selectedEntry, setSelectedEntry] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch history whenever the email state changes
   useEffect(() => {
     const fetchHistory = async () => {
       if (email === '') {
@@ -31,7 +32,17 @@ const AdminUserHistory = () => {
     };
 
     fetchHistory();
-  }, [email]); // Dependence array, fetch history when email changes
+  }, [email]);
+
+  const openModal = (entry) => {
+    setSelectedEntry(entry);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedEntry(null);
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="admin-user-history-container">
@@ -41,25 +52,38 @@ const AdminUserHistory = () => {
         placeholder="הזן כתובת אימייל"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className='search-input'
+        className="search-input"
       />
       {error && <p className="error-message">{error}</p>}
-      {history.length === 0 && !error && <p>אין היסטוריה לשאלונים עבור אימייל זה</p>}
-      {history.map((entry, index) => (
-        <div key={index} className="history-entry">
-          <h2>תאריך: {new Date(entry.timestamp.seconds * 1000).toLocaleDateString()}</h2>
-          <p>ציון כולל: {entry.totalScore}</p>
-          <ul>
-            {entry.responses.map((response, idx) => (
-              <li key={idx}>
-                <strong>שאלה:</strong> {response.question}<br />
-                <strong>תשובה נבחרה:</strong> {response.selectedOption}<br />
-                <strong>ציון:</strong> {response.score}
-              </li>
-            ))}
-          </ul>
+      {history.length === 0 && !error && <p className="no-history">אין היסטוריה לשאלונים עבור אימייל זה</p>}
+      <div className="history-grid">
+        {history.map((entry, index) => (
+          <div key={index} className="history-entry">
+            <h2>תאריך: {new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
+            <p className="total-score">ציון כולל: {entry.totalScore}</p>
+            <button onClick={() => openModal(entry)}>הצג פרטים</button>
+          </div>
+        ))}
+      </div>
+      {isModalOpen && selectedEntry && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <h2>תאריך: {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
+            <p>ציון כולל: {selectedEntry.totalScore}</p>
+            <ul>
+              {selectedEntry.responses.map((response, idx) => (
+                <li key={idx}>
+                  <strong>שאלה:</strong> {response.question}<br />
+                  <strong>תשובה נבחרה:</strong> {response.selectedOption}<br />
+                  <strong>ציון:</strong> {response.score}
+                </li>
+              ))}
+            </ul>
+            <button onClick={closeModal}>סגור</button>
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };
