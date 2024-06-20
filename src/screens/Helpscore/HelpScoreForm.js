@@ -1,83 +1,77 @@
-// src/screens/Helpscore/HelpScoreForm.js
-import React, { useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import useHelpScore from '../../hooks/useHelpScore'
-import Question from '../../components/helpScore/Question'
-import './HelpScoreForm.css'
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useHelpScore from '../../hooks/useHelpScore';
+import Question from '../../components/helpScore/Question';
+import './HelpScoreForm.css';
 
 const HelpScoreForm = () => {
-    const { questions, loading, error } = useHelpScore()
-    const [answers, setAnswers] = useState({})
-    const [submitted, setSubmitted] = useState(false)
-    const [validationError, setValidationError] = useState(null)
-    const [shake, setShake] = useState(false)
-    const navigate = useNavigate()
-    const errorMessageRef = useRef(null)
+    const { questions, loading, error } = useHelpScore();
+    const [answers, setAnswers] = useState({});
+    const [validationError, setValidationError] = useState(null);
+    const [shake, setShake] = useState(false);
+    const navigate = useNavigate();
+    const errorMessageRef = useRef(null);
 
     const handleRadioChange = (questionId, selectedValue) => {
         setAnswers(prevAnswers => ({
             ...prevAnswers,
             [questionId]: selectedValue,
-        }))
-    }
+        }));
+    };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-    
-        // Remove the 'req_question' class from all question containers
-        const allQuestions = document.querySelectorAll('.q-container')
+        e.preventDefault();
+
+        const allQuestions = document.querySelectorAll('.q-container');
         allQuestions.forEach(questionElement => {
-            questionElement.classList.remove('req_question')
-        })
-    
-        // Check if all required questions have been answered
-        const unansweredRequiredQuestions = questions.filter(question => question.required && !answers[question.id])
-        
-        if (unansweredRequiredQuestions.length > 0) {   // If there are unanswered required questions
+            questionElement.classList.remove('req_question');
+        });
+
+        const unansweredRequiredQuestions = questions.filter(question => question.required && !answers[question.id]);
+
+        if (unansweredRequiredQuestions.length > 0) {
             unansweredRequiredQuestions.forEach(question => {
-                const questionElement = document.getElementById(`question-${question.id}`).closest('.q-container')
+                const questionElement = document.getElementById(`question-${question.id}`).closest('.q-container');
                 if (questionElement) {
-                    questionElement.classList.add('req_question')
+                    questionElement.classList.add('req_question');
                 }
-            })
-            setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*')
-            setShake(prev => !prev)  // Toggle the shake state to re-trigger the animation
-            // Scroll to the error message
+            });
+            // validation error is in class component "requiredFieldsErrorMsg"
+            setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*');
+            setShake(prev => !prev);
             if (errorMessageRef.current) {
-                errorMessageRef.current.scrollIntoView({ behavior: 'smooth' })
+                errorMessageRef.current.scrollIntoView({ behavior: 'smooth' });
             }
-            return
+            return;
         }
-    
-        // If all questions are answered, navigate to CalculateHelpScore
-        setValidationError(null)
-        setSubmitted(true)
-        navigate('/calculateHelpScore', { state: { answers } })
-    }
-    
+
+        setValidationError(null);
+        navigate('/calculateHelpScore', { state: { answers } });
+    };
+
     if (loading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>
+        return <div>Error: {error.message}</div>;
     }
 
     return (
         <form onSubmit={handleSubmit} className="help-score-form">
-            <div className="bordered-container"> 
+            <div className="bordered-container">
                 {questions.map((question) => (
-                    <Question 
-                        key={question.id} 
-                        question={question} 
+                    <Question
+                        key={question.id}
+                        question={question}
                         onRadioChange={(option) => handleRadioChange(question.id, option)}
                     />
                 ))}
                 <button type="submit">שליחה</button>
-                {validationError && <p key={shake} ref={errorMessageRef} className="error-message">{validationError}</p>}
+                {validationError && <p key={shake} ref={errorMessageRef} className="requiredFieldsErrorMsg">{validationError}</p>}
             </div>
         </form>
-    )
-}
+    );
+};
 
-export default HelpScoreForm
+export default HelpScoreForm;

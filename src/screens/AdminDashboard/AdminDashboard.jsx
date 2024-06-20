@@ -9,6 +9,7 @@ import Sidebar from '../../components/AdminDashboard/Sidebar';
 import Statistics from './Statistics';
 import QuestionnaireManagement from './QuestionnaireManagement';
 import Miscellaneous  from './Miscellaneous';
+import AdminUserHistory from './AdminUserHistory';
 
 const AdminDashboard = () => {
   const questionnaireId = "help-score"; // Change this to your actual questionnaire ID
@@ -24,6 +25,7 @@ const AdminDashboard = () => {
           <Route exact path="statistics" element={<Statistics />} />
           <Route exact path="questionnaire" element={<QuestionnaireManagement questionnaireId={questionnaireId} />} />
           <Route exact path="miscellaneous" element={<Miscellaneous  />} />
+          <Route exact path="history" element={<AdminUserHistory />} />
         </Routes>
       </div>
     </div>

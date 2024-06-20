@@ -1,0 +1,104 @@
+.history-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three items per row */
+  gap: 40px; /* Space between items */
+}
+
+.history-entry {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px; /* Increase padding for more space inside the box */
+  margin-bottom: 20px;
+  text-align: center; /* Center the text within the entry */
+  background-color: white; /* White background */
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+}
+
+.history-entry h2 {
+  margin-top: 0;
+  font-size: 1.8em; /* Increase font size */
+  font-weight: bold;
+  text-align: center;
+}
+
+.history-entry .total-score {
+  font-size: 1.5em; /* Increase font size */
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.history-entry ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: right; /* Align the text from right to left */
+}
+
+.history-entry ul li {
+  margin-bottom: 20px; /* Increase space between question items */
+}
+
+.history-entry .delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.search-input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.no-history {
+  font-size: 1.5em;
+  color: #888;
+  margin-top: 20px;
+}
+
+.fill-questionnaire-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.fill-questionnaire-button:hover {
+  background-color: #0056b3;
+}
+
+.graph-container {
+  width: 100%; 
+  margin-top: 40px;
+  padding-bottom: 80px; /* Add more padding to increase space between legend and graph */
+  margin: 0 auto; /* Center the container */
+}
+
+.trend-message {
+  margin-top: 10px;
+  margin-bottom: 20px; /* Adjust margin to position trend message properly */
+}
