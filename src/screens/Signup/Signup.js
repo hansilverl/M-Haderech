@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignup } from '../../hooks/useSignup';
+import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation'; // Import the custom hook
 import './Signup.css';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { error, signup } = useSignup();
+  const translateErrorToHebrew = useFirebaseErrorTranslation(); // Use the custom hook
+  const [signupError, setSignupError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (error) {
+      setSignupError(translateErrorToHebrew(error));
+    }
+  }, [error, translateErrorToHebrew]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signup(email, password, navigate, true);
+    try {
+      await signup(email, password, navigate, true);
+    } catch (error) {
+      setSignupError(translateErrorToHebrew(error.code));
+    }
   };
 
   return (
@@ -37,7 +50,7 @@ export default function Signup() {
           />
         </label>
         <button type="submit">הרשמה</button>
-        {error && <p>{error}</p>}
+        {signupError && <p>{signupError}</p>}
       </form>
     </div>
   );
