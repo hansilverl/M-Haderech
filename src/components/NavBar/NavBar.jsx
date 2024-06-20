@@ -62,9 +62,10 @@ const Navbar = () => {
           {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
           {user ? (
             <>
-              {isAdmin && <li><Link to="/admin" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
               <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
-              <li><div className="logout-button" onClick={handleLogout}>התנתקות</div></li>
+              <div className="space"></div>
+              {isAdmin && <li><Link to="/admin" className="admin-logout" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
+              <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
             <li><Link to="/login" onClick={() => setIsOpen(false)}>התחברות</Link></li>

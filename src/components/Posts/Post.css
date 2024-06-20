@@ -36,8 +36,8 @@
     border: none;
     padding: 0.5em 1em;
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
+    border-radius: 10px;
+    font-size: 14px;
   }
   
   .post-button:hover {

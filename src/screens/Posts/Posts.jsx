@@ -27,7 +27,19 @@ const Posts = () => {
       title: 'פוסט 4',
       date: '02/06/2024',
       description: 'תיאור של פוסט 4'
-    }
+    },
+    {
+      image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+      title: 'פוסט 3',
+      date: '02/06/2024',
+      description: 'תיאור של פוסט 3'
+    },
+    {
+      image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+      title: 'פוסט 3',
+      date: '02/06/2024',
+      description: 'תיאור של פוסט 3'
+    },
   ];
 
   return (
