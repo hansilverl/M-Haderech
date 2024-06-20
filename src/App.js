@@ -13,8 +13,8 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 function App() {
-	const location = useLocation()
-	const isAdminRoute = location.pathname.startsWith('/admin')
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
     <div className="App">
@@ -42,9 +42,9 @@ function App() {
 }
 
 const AppWrapper = () => (
-	<Router>
-		<App />
-	</Router>
-)
+  <Router>
+    <App />
+  </Router>
+);
 
-export default AppWrapper
+export default AppWrapper;
