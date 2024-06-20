@@ -28,7 +28,7 @@ export const useSignup = () => {
       
       return true; // Indicate success
     } catch (err) {
-      setError(err.message);
+      setError(err.code);
       return false; // Indicate failure
     }
   };

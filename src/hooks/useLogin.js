@@ -13,7 +13,7 @@ export const useLogin = () => {
       // Navigate to the main page after successful login
       navigate('/');
     } catch (err) {
-      setError(err.message);
+      setError(err.code);
     }
   };
 
