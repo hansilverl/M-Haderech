@@ -29,18 +29,21 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       try {
         const questionCollection = collection(db, 'Questionnaire');
         const questionSnapshot = await getDocs(questionCollection);
-        const questionList = questionSnapshot.docs.map(questionDoc => ({
-          id: questionDoc.id,
-          question: questionDoc.data().q,
-          required: questionDoc.data().required || false,
-          answers: Object.entries(questionDoc.data())
-            .filter(([key, value]) => key !== 'q' && key !== 'required')
-            .map(([key, value]) => ({
-              id: key,
-              text: value,
-              score: parseInt(key, 10),
-            })),
-        }));
+        const questionList = questionSnapshot.docs.map(questionDoc => {
+          const data = questionDoc.data();
+          return {
+            id: questionDoc.id,
+            question: data.q,
+            required: data.required || false,
+            answers: Object.entries(data)
+              .filter(([key, value]) => key !== 'q' && key !== 'required')
+              .map(([key, value]) => ({
+                id: key,
+                text: value,
+                score: parseInt(key, 10),
+              })),
+          };
+        });
         setQuestions(questionList);
         setLoading(false);
       } catch (err) {
@@ -51,6 +54,11 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
     fetchQuestions();
   }, [questionnaireId]);
+
+  const handleFirestoreError = (error) => {
+    console.error('Firebase error: ', error);
+    alert('שגיאה בפעולת Firestore.');
+  };
 
   const handleDeleteQuestion = async (questionId) => {
     setDeleteConfirmIsOpen(true);
@@ -64,8 +72,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       setDeleteConfirmIsOpen(false);
       alert('השאלה נמחקה בהצלחה.');
     } catch (error) {
-      console.error('שגיאה במחיקת השאלה: ', error);
-      alert('שגיאה במחיקת השאלה.');
+      handleFirestoreError(error);
     }
   };
 
@@ -77,24 +84,32 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
   const confirmDeleteAnswer = async () => {
     const { questionId, answerId } = selectedAnswer;
     try {
-      const questionDoc = doc(db, 'Questionnaire', questionId);
-      const questionData = (await getDoc(questionDoc)).data();
+      const questionDocRef = doc(db, 'Questionnaire', questionId);
+      const questionDoc = await getDoc(questionDocRef);
+      const questionData = questionDoc.data();
+
+      // Remove the answer from the question data
       delete questionData[answerId];
-      await updateDoc(questionDoc, questionData);
-      setQuestions(questions.map(question => {
-        if (question.id === questionId) {
-          return {
-            ...question,
-            answers: question.answers.filter(answer => answer.id !== answerId)
-          };
-        }
-        return question;
-      }));
+
+      // Update the document in Firestore
+      await updateDoc(questionDocRef, questionData);
+
+      // Update the local state
+      setQuestions(prevQuestions =>
+        prevQuestions.map(question =>
+          question.id === questionId
+            ? {
+                ...question,
+                answers: question.answers.filter(answer => answer.id !== answerId)
+              }
+            : question
+        )
+      );
+
       setDeleteConfirmIsOpen(false);
       alert('התשובה נמחקה בהצלחה.');
     } catch (error) {
-      console.error('שגיאה במחיקת התשובה: ', error);
-      alert('שגיאה במחיקת התשובה.');
+      handleFirestoreError(error);
     }
   };
 
@@ -102,58 +117,59 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     setCurrentText(question.question);
     setIsRequired(question.required || false);
     setSelectedQuestion(question.id);
+    setSelectedAnswer(null); // Ensure no answer is selected
     setEditModalIsOpen(true);
   };
 
   const confirmEditQuestion = async () => {
     try {
-      const questionDoc = doc(db, 'Questionnaire', selectedQuestion);
-      await updateDoc(questionDoc, { q: currentText, required: isRequired });
-      setQuestions(questions.map(question => {
-        if (question.id === selectedQuestion) {
-          return { ...question, question: currentText, required: isRequired };
-        }
-        return question;
-      }));
+      const questionDocRef = doc(db, 'Questionnaire', selectedQuestion);
+      await updateDoc(questionDocRef, { q: currentText, required: isRequired });
+      setQuestions(prevQuestions =>
+        prevQuestions.map(question =>
+          question.id === selectedQuestion
+            ? { ...question, question: currentText, required: isRequired }
+            : question
+        )
+      );
       setEditModalIsOpen(false);
       alert('השאלה עודכנה בהצלחה.');
     } catch (error) {
-      console.error('שגיאה בעריכת השאלה: ', error);
-      alert('שגיאה בעריכת השאלה.');
+      handleFirestoreError(error);
     }
   };
 
-  const handleEditAnswer = (answer) => {
+  const handleEditAnswer = (question, answer) => {
+    setSelectedQuestion(question);
     setCurrentText(answer.text);
     setCurrentScore(answer.score);
-    setSelectedAnswer(answer);
+    setSelectedAnswer({ questionId: question.id, answerId: answer.id });
     setEditModalIsOpen(true);
   };
 
   const confirmEditAnswer = async () => {
     const { questionId, answerId } = selectedAnswer;
     try {
-      const questionDoc = doc(db, 'Questionnaire', questionId);
-      await updateDoc(questionDoc, { [answerId]: currentText });
-      setQuestions(questions.map(question => {
-        if (question.id === questionId) {
-          return {
-            ...question,
-            answers: question.answers.map(answer => {
-              if (answer.id === answerId) {
-                return { ...answer, text: currentText, score: currentScore };
+      const questionDocRef = doc(db, 'Questionnaire', questionId);
+      await updateDoc(questionDocRef, { [answerId]: currentText });
+      setQuestions(prevQuestions =>
+        prevQuestions.map(question =>
+          question.id === questionId
+            ? {
+                ...question,
+                answers: question.answers.map(answer =>
+                  answer.id === answerId
+                    ? { ...answer, text: currentText, score: currentScore }
+                    : answer
+                )
               }
-              return answer;
-            })
-          };
-        }
-        return question;
-      }));
+            : question
+        )
+      );
       setEditModalIsOpen(false);
       alert('התשובה עודכנה בהצלחה.');
     } catch (error) {
-      console.error('שגיאה בעריכת התשובה: ', error);
-      alert('שגיאה בעריכת התשובה.');
+      handleFirestoreError(error);
     }
   };
 
@@ -170,22 +186,23 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
   const handleSaveAnswer = async (questionId) => {
     if (newAnswerText && newAnswerScore) {
       try {
-        const questionDoc = doc(db, 'Questionnaire', questionId);
-        await updateDoc(questionDoc, { [newAnswerScore]: newAnswerText });
-        setQuestions(questions.map(question => {
-          if (question.id === questionId) {
-            return {
-              ...question,
-              answers: [...question.answers, { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }]
-            };
-          }
-          return question;
-        }));
+        const questionDocRef = doc(db, 'Questionnaire', questionId);
+        await updateDoc(questionDocRef, { [newAnswerScore]: newAnswerText });
+        setQuestions(prevQuestions =>
+          prevQuestions.map(question =>
+            question.id === questionId
+              ? {
+                  ...question,
+                  answers: [...question.answers, { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }]
+                }
+              : question
+          )
+        );
         setNewAnswerText('');
         setNewAnswerScore('');
+        alert('התשובה נוספה בהצלחה.');
       } catch (error) {
-        console.error('שגיאה בהוספת תשובה: ', error);
-        alert('שגיאה בהוספת תשובה.');
+        handleFirestoreError(error);
       }
     }
   };
@@ -197,11 +214,18 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
   const confirmAddQuestion = async () => {
     try {
       const questionCollection = collection(db, 'Questionnaire');
-      const questionCount = questions.length + 1;
-      const newQuestionDoc = doc(db, 'Questionnaire', `q${questionCount}`);
-      await setDoc(newQuestionDoc, { q: newQuestionText, required: isRequired });
+      const questionSnapshot = await getDocs(questionCollection);
+      const highestQuestionNumber = questionSnapshot.docs.reduce((max, doc) => {
+        const docId = doc.id;
+        const questionNumber = parseInt(docId.replace('q', ''), 10);
+        return questionNumber > max ? questionNumber : max;
+      }, 0);
+      const newQuestionNumber = highestQuestionNumber + 1;
+      const newQuestionDocId = `q${newQuestionNumber}`;
+      const newQuestionDocRef = doc(db, 'Questionnaire', newQuestionDocId);
+      await setDoc(newQuestionDocRef, { q: newQuestionText, required: isRequired });
       const newQuestion = {
-        id: newQuestionDoc.id,
+        id: newQuestionDocId,
         question: newQuestionText,
         required: isRequired,
         answers: []
@@ -212,8 +236,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       setNewQuestionModalIsOpen(false);
       alert('השאלה נוספה בהצלחה.');
     } catch (error) {
-      console.error('שגיאה בהוספת שאלה: ', error);
-      alert('שגיאה בהוספת שאלה.');
+      handleFirestoreError(error);
     }
   };
 
@@ -250,14 +273,14 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           <div className="modal-content">
             <h2>{selectedQuestion.question}</h2>
             <ul>
-              {selectedQuestion.answers.map(answer => (
+              {(selectedQuestion.answers || []).map(answer => (
                 <li key={answer.id}>
                   {answer.text} (ניקוד: {answer.score})
                   <div className="actions">
                     <button
                       className="button edit-button"
                       title="ערוך תשובה"
-                      onClick={() => handleEditAnswer({ questionId: selectedQuestion.id, answerId: answer.id, text: answer.text, score: answer.score })}
+                      onClick={() => handleEditAnswer(selectedQuestion, answer)}
                     >
                       ערוך
                     </button>
@@ -302,12 +325,26 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             value={currentText}
             onChange={(e) => setCurrentText(e.target.value)}
           />
-          <input
-            type="number"
-            placeholder="ניקוד"
-            value={currentScore}
-            onChange={(e) => setCurrentScore(e.target.value)}
-          />
+          {selectedAnswer && (
+            <input
+              type="number"
+              placeholder="ניקוד"
+              value={currentScore}
+              onChange={(e) => setCurrentScore(e.target.value)}
+            />
+          )}
+          {selectedQuestion && !selectedAnswer && (
+            <div className="checkbox-container">
+              <label>
+                האם השאלה נדרשת
+                <input
+                  type="checkbox"
+                  checked={isRequired}
+                  onChange={(e) => setIsRequired(e.target.checked)}
+                />
+              </label>
+            </div>
+          )}
           <div className="modal-actions">
             <button onClick={selectedAnswer ? confirmEditAnswer : confirmEditQuestion}>שמור</button>
             <button onClick={() => setEditModalIsOpen(false)}>סגור</button>
