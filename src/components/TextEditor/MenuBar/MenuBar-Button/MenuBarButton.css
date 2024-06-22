@@ -1,0 +1,33 @@
+.syntax-button,
+.syntax-button:hover,
+.use-button {
+	display: inline-block;
+	border-radius: 0cqh;
+	background-color: white;
+	color: black;
+	padding: 0.25rem 0.5rem;
+}
+
+.is-active,
+.is-active:hover,
+.use-button:hover {
+	background-color: #0d0d0d;
+	color: #fff;
+}
+
+.use-button {
+	display: inline-block;
+	border-radius: 0cqh;
+	background-color: white;
+	color: black;
+	padding: 0.25rem 0.5rem;
+}
+
+.syntax-button:disabled,
+.syntax-button:disabled:hover,
+.use-button:disabled,
+.use-button:disabled:hover {
+	opacity: 0.5;
+	background-color: white;
+	color: black;
+}
