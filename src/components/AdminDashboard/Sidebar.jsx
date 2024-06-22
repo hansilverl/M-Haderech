@@ -25,12 +25,6 @@ const Sidebar = () => {
         </div>
         <ul className="sidebar-menu">
           <li>
-            <Link to="/admin/dashboard" onClick={closeSidebar}>
-              <FaTachometerAlt className="sidebar-icon" />
-              <span>לוח מחוונים</span>
-            </Link>
-          </li>
-          <li>
             <Link to="/admin/posts" onClick={closeSidebar}>
               <FaRegNewspaper className="sidebar-icon" />
               <span>פוסטים</span>
@@ -40,12 +34,6 @@ const Sidebar = () => {
             <Link to="/admin/users" onClick={closeSidebar}>
               <FaUsers className="sidebar-icon" />
               <span>משתמשים</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/statistics" onClick={closeSidebar}>
-              <FaUsers className="statistics-icon" />
-              <span>סטטיסטיקות</span>
             </Link>
           </li>
           <li>
