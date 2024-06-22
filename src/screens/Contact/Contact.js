@@ -1,11 +1,35 @@
-// src/pages/Contact/Contact.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../../firebase/config';
+import { doc, getDoc } from 'firebase/firestore';
 import './Contact.css';
 
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [contactInfo, setContactInfo] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const docRef = doc(db, 'miscellaneousUpdated', 'contact');
+        const contactDoc = await getDoc(docRef);
+        if (contactDoc.exists()) {
+          setContactInfo(contactDoc.data());
+        } else {
+          setError('לא נמצאה אינפורמציית קשר.');
+        }
+      } catch (err) {
+        setError('נכשל בטעינת אינפורמציית קשר.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContactInfo();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +72,18 @@ const Contact = () => {
         </label>
         <button type="submit">שליחה</button>
       </form>
+      {loading ? (
+        <p>טוען...</p>
+      ) : error ? (
+        <p>שגיאה: {error}</p>
+      ) : (
+        <div className="contact-info">
+          <h3>פרטי קשר:</h3>
+          {Object.entries(contactInfo).map(([key, value]) => (
+            <p key={key}><strong>{key}:</strong> {value}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
