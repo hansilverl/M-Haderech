@@ -14,17 +14,13 @@ const AnalyticsSection = () => {
   if (loading) return <p>טוען...</p>;
   if (error) return <p>שגיאה: {error}</p>;
 
-  // Extract the data and sort it
-  const sortedData = statistics
-    .map(stat => ({ ...stat, label: 'מספר אמהות שעזרנו להן', value: stat.helped_mothers_amount }))
-    .sort((a, b) => b.value - a.value);
-
+  // Assuming the statistics now has a field `helped_mothers_amount`
   const data = {
-    labels: sortedData.map(stat => stat.label),
+    labels: ['מספר אמהות שעזרנו להן'],
     datasets: [
       {
         label: 'סטטיסטיקות של העמותה',
-        data: sortedData.map(stat => stat.value),
+        data: [statistics.helped_mothers_amount || 0],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
