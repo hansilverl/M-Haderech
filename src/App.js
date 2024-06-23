@@ -10,7 +10,7 @@ import HelpScoreForm from './screens/Helpscore/HelpScoreForm'
 import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
 import History from './screens/History/History' // Import the new History component
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
-import EditPostpage from './screens/EditPostpage/EditPostpage'
+import PostEditpage from './screens/PostEditpage/EditPostpage'
 import './App.css'
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/contact' element={<Contact />} />
 				<Route exact path='/helpScore' element={<HelpScoreForm />} />
-				<Route exact path='/edit' element={<EditPostpage />} />
+				<Route exact path='/edit' element={<PostEditpage />} />
 				<Route exact path='/calculateHelpScore' element={<CalculateHelpScore />} />
 				<Route
 					exact

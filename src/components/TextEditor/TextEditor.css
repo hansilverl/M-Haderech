@@ -111,5 +111,20 @@ body,
 	margin: 0;
 }
 
-#save-btn {
+button {
+	font-family: 'IBM Plex Sans Hebrew';
+	font-weight: bold;
+	background-color: #9b59b6;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	border: 1px solid #650040;
+	box-shadow: none;
+	cursor: pointer;
+	/* percentage values are relative to the parent element */
+	padding: 1% 2%;
+	margin: 2% 0;
+}
+button:hover {
+	background-color: #a20067;
 }

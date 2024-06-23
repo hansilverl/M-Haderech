@@ -1,8 +1,8 @@
 import './TextEditor.css'
 
-import React from 'react'
+import React, { useState } from 'react'
 
-import { useEditor, EditorContent, EditorProvider, useCurrentEditor } from '@tiptap/react'
+import { useEditor, EditorContent } from '@tiptap/react'
 
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
@@ -14,7 +14,10 @@ import TextDirection from 'tiptap-text-direction'
 
 import MenuBar from './MenuBar/MenuBar'
 
-const TextEditor = () => {
+const TextEditor = (props) => {
+	const { postID, initialContent } = props
+	const [editorContent, setEditorContent] = useState('editorContent')
+
 	const extensions = [
 		TextDirection.configure({
 			types: ['heading', 'paragraph', 'orderedList'],
@@ -39,35 +42,27 @@ const TextEditor = () => {
 		}),
 	]
 
-	const content = `
-<h1 style="text-align: center">זה ניסיון</h1>
-<p style="text-align: right">אני כותב דברים</p>
-<ul>
-	<li><p style="text-align: right">עם רשימה</p></li>
-	<li><p style="text-align: right">כזו</p></li>
-</ul>
-<p style="text-align: right">וגם</p>
-<ol>
-	<li><p style="text-align: right">רשימה</p></li>
-	<li><p style="text-align: right">כזו</p></li>
-</ol>
-<p style="text-align: right">
-	ואפשר לעשות כל מיני אפקטים כמו <strong>בולד, </strong><em>על הצד</em>, <u>קו תחתון</u> וגם
-	<s>קו כזה</s>.
-</p>
-<p style="text-align: right">אפשר כמובן לכתוב בעברית, also in English</p>
-<h2 dir="ltr">Also we can type in English</h2>
-<p></p>
+	const content =
+		initialContent ||
+		`
+<h1 style="text-align: center">כותרת משנית</h1>
+<p style="text-align: right">תוכן</p>
 `
-	let html = content
-	const editor = useEditor({ extensions: extensions, content: content })
+
+	const editor = useEditor({
+		extensions: extensions,
+		content: content,
+		onUpdate({ editor }) {
+			setEditorContent(editor.getHTML())
+		},
+	})
 
 	return (
-		<div className='flex-col justify-right'>
+		<div id='text-editor' className='flex-col justify-right'>
 			<MenuBar editor={editor} />
 			<EditorContent editor={editor} />
-			<button id='save-btn' onClick={() => console.log(html)}>
-				save
+			<button type='submit' id='save-btn' onClick={() => console.log(editorContent)}>
+				שמור
 			</button>
 		</div>
 	)

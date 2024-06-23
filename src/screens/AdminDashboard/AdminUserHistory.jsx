@@ -17,7 +17,6 @@ const AdminUserHistory = () => {
         setError(null);
         return;
       }
-
       try {
         const q = query(collection(db, 'QuestionnaireHistory'), where('userEmail', '==', email));
         const querySnapshot = await getDocs(q);

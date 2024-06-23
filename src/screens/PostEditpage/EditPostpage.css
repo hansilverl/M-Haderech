@@ -17,6 +17,12 @@ input {
 	padding: 0.25rem 0.5rem;
 }
 
+h1,
+h2,
+h3 {
+	padding: 0 20px;
+}
+
 .flex-row {
 	display: flex;
 	flex-direction: row;
