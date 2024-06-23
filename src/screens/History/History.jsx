@@ -14,12 +14,22 @@ const History = () => {
   const { user } = useAuthStatus();
   const [error, setError] = useState(null);
   const [trend, setTrend] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
     if (user) {
       const fetchHistory = async () => {
         try {
-          const q = query(collection(db, 'QuestionnaireHistory'), where('userId', '==', user.uid));
+          let q = query(collection(db, 'QuestionnaireHistory'), where('userId', '==', user.uid));
+          if (startDate !== '' && endDate !== '') {
+            q = query(q, where('timestamp', '>=', new Date(startDate)), where('timestamp', '<=', new Date(endDate)));
+          } else if (startDate !== '') {
+            q = query(q, where('timestamp', '>=', new Date(startDate)));
+          } else if (endDate !== '') {
+            q = query(q, where('timestamp', '<=', new Date(endDate)));
+          }
+
           const querySnapshot = await getDocs(q);
           const historyData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -40,7 +50,7 @@ const History = () => {
 
       fetchHistory();
     }
-  }, [user]);
+  }, [user, startDate, endDate]);
 
   useEffect(() => {
     calculateTrend(history);
@@ -109,7 +119,6 @@ const History = () => {
 
   const graphOptions = {
     // Maintain the aspect ratio of the graph
-
     scales: {
       x: {
         type: 'category',
@@ -119,8 +128,6 @@ const History = () => {
       y: {
         beginAtZero: true,
         display: false, // Hide y-axis labels
-        
-
       },
     },
     plugins: {
@@ -181,6 +188,22 @@ const History = () => {
   return (
     <div className="history-container">
       <h1>היסטוריה של השאלונים שלי</h1>
+      <div className="filter-container">
+        <label>תאריך התחלה:</label>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="search-input"
+        />
+        <label>תאריך סיום:</label>
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="search-input"
+        />
+      </div>
       {error && <p className="error-no-history">{error}</p>}
       {history.length === 0 && !error ? (
         <div>
@@ -222,15 +245,15 @@ const History = () => {
               overlayClassName="responses-overlay"
             >
               <h2>תשובות לשאלון מ- {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
-              <ul>
+              <div className="response-list">
                 {selectedEntry.responses.map((response, idx) => (
-                  <li key={idx}>
+                  <div key={idx} className="response-item">
                     <strong>שאלה:</strong> {response.question}<br />
                     <strong>תשובה נבחרה:</strong> {response.selectedOption}<br />
                     <strong>ציון:</strong> {response.score}
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
               <button onClick={closeModal} className="close-modal-button">סגור</button>
             </Modal>
           )}

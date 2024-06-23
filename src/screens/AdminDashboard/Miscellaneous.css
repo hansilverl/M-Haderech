@@ -1,37 +1,43 @@
+/* src/screens/Miscellaneous/Miscellaneous.css */
+
 .miscellaneous {
   padding: 20px;
-  background-color: #f4f7f6;
-  margin-right: 300px; /* Adjust margin to move content to the right */
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin-right: 500px;
+  margin-left: 100px;
 }
 
-.bank-info-item {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto;
+.miscellaneous-content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Allows wrapping of sections */
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section h2 {
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.bank-info-item h2 {
-  margin-bottom: 20px;
-}
-
-.bank-info-item p {
-  text-align: left;
-}
-
-.bank-info-item button {
-  background-color: #27ae60;
+button.update-button {
+  background-color: #3498db;
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-.bank-info-item button:hover {
-  background-color: #2ecc71;
+button.update-button:hover {
+  background-color: #2980b9;
 }
