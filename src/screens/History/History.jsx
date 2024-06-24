@@ -13,7 +13,6 @@ const History = () => {
   const [selectedEntry, setSelectedEntry] = useState(null);
   const { user } = useAuthStatus();
   const [error, setError] = useState(null);
-  const [trend, setTrend] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -33,14 +32,14 @@ const History = () => {
           const querySnapshot = await getDocs(q);
           const historyData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-          // Sort history data by timestamp
-          historyData.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
+          // Sort history data by timestamp for graph (oldest to newest)
+          const sortedHistoryData = [...historyData].sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
 
-          setHistory(historyData);
+          // Set history data sorted by timestamp (newest to oldest) for display
+          const displayHistoryData = [...historyData].sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
+
+          setHistory(displayHistoryData);
           setError(null);
-
-          // Calculate trend
-          calculateTrend(historyData);
         } catch (error) {
           console.error('שגיאה באחזור ההיסטוריה: ', error);
           setError('שגיאה באחזור ההיסטוריה.');
@@ -51,31 +50,6 @@ const History = () => {
       fetchHistory();
     }
   }, [user, startDate, endDate]);
-
-  useEffect(() => {
-    calculateTrend(history);
-  }, [history]);
-
-  const calculateTrend = (data) => {
-    if (data.length > 1) {
-      const halfIndex = Math.floor(data.length / 2);
-      const firstHalfScores = data.slice(0, halfIndex).map(entry => entry.totalScore);
-      const secondHalfScores = data.slice(halfIndex).map(entry => entry.totalScore);
-
-      const avgFirstHalf = firstHalfScores.reduce((acc, score) => acc + score, 0) / firstHalfScores.length;
-      const avgSecondHalf = secondHalfScores.reduce((acc, score) => acc + score, 0) / secondHalfScores.length;
-
-      if (avgSecondHalf > avgFirstHalf) {
-        setTrend('המגמה עולה!');
-      } else if (avgSecondHalf < avgFirstHalf) {
-        setTrend('המגמה יורדת!');
-      } else {
-        setTrend('המגמה יציבה!');
-      }
-    } else {
-      setTrend(null);
-    }
-  };
 
   const handleDelete = async (id) => {
     const confirmation = window.confirm('האם אתה בטוח שברצונך למחוק את ההיסטוריה הזו?');
@@ -99,17 +73,17 @@ const History = () => {
   };
 
   const graphData = {
-    labels: history.map(entry => new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')),
+    labels: history.map(entry => new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')).reverse(),
     datasets: [
       {
         label: 'ציון כולל',
-        data: history.map(entry => entry.totalScore),
-        backgroundColor: history.map(entry => entry.totalScore >= 10 ? '#A4303F' :
-          entry.totalScore >= 5 ? '#F2CD60' :
-          '#2D936C'),
-        borderColor: history.map(entry => entry.totalScore >= 10 ? '#A4303F' :
-          entry.totalScore >= 5 ? '#F2CD60' :
-          '#2D936C'),
+        data: history.map(entry => entry.totalScore).reverse(),
+        backgroundColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
+          entry.totalScore >= 20 ? '#F2CD60' :
+          '#2D936C').reverse(),
+        borderColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
+          entry.totalScore >= 20 ? '#F2CD60' :
+          '#2D936C').reverse(),
         borderWidth: 1,
         categoryPercentage: 0.99,
         barPercentage: 0.99,
@@ -119,6 +93,12 @@ const History = () => {
 
   const graphOptions = {
     // Maintain the aspect ratio of the graph
+    onClick: (e, elements) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        openModal(history[history.length - 1 - index]);
+      }
+    },
     scales: {
       x: {
         type: 'category',
@@ -228,11 +208,6 @@ const History = () => {
           </div>
           <div className="graph-container">
             <h2>התקדמות ציונים</h2>
-            {trend && (
-              <p className="trend-message" style={{ fontWeight: 'bold' }}>
-                {trend}
-              </p>
-            )}
             <p className="graph-description">הגרף מציג את זמן מילוי השאלון לעומת הציון</p>
             <Bar data={graphData} options={graphOptions} />
           </div>
@@ -249,8 +224,8 @@ const History = () => {
                 {selectedEntry.responses.map((response, idx) => (
                   <div key={idx} className="response-item">
                     <strong>שאלה:</strong> {response.question}<br />
-                    <strong>תשובה נבחרה:</strong> {response.selectedOption}<br />
-                    <strong>ציון:</strong> {response.score}
+                    <strong>תשובה נבחרה:</strong> {response.score}<br />
+                    <strong>ציון:</strong> {response.selectedOption}
                   </div>
                 ))}
               </div>
