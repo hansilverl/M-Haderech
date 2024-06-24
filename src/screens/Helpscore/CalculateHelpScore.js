@@ -14,9 +14,9 @@ const CalculateHelpScore = () => {
     const navigate = useNavigate();
     const [score, setScore] = useState(null);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [saveMessage, setSaveMessage] = useState('');
     const { user, loading: authLoading } = useAuthStatus();
     const { login, error: loginError } = useLogin();
 
@@ -59,7 +59,7 @@ const CalculateHelpScore = () => {
                     responses: responseData,
                     totalScore: score,
                 });
-                setSaveMessage('נשמר בהצלחה');
+                setShowSuccessModal(true);
             } catch (error) {
                 console.error('Error saving questionnaire: ', error);
             }
@@ -102,7 +102,6 @@ const CalculateHelpScore = () => {
             <h1>הציון שלך</h1>
             <p>הציון שלך הוא: {score}</p>
             <button onClick={saveHistory}>שמור</button>
-            {saveMessage && <p>{saveMessage}</p>}
             <button onClick={() => navigate('/helpscore')}>חזור לטופס</button>
 
             <Modal
@@ -130,6 +129,20 @@ const CalculateHelpScore = () => {
                     <button onClick={() => setShowLoginModal(false)} className="cancel-button">בטל</button>
                 </div>
                 {loginError && <p className="error-message">{loginError}</p>}
+            </Modal>
+
+            <Modal
+                isOpen={showSuccessModal}
+                onRequestClose={() => setShowSuccessModal(false)}
+                contentLabel="Success Modal"
+                className="Modal"
+                overlayClassName="Overlay"
+            >
+                <h2>נשמר בהצלחה</h2>
+                <div className="button-group">
+                    <button onClick={() => navigate('/history')}>צפה בהיסטוריה</button>
+                    <button onClick={() => navigate('/helpscore')} className="cancel-button">חזור לטופס</button>
+                </div>
             </Modal>
         </div>
     );
