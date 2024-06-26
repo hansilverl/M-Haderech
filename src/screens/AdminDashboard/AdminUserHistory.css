@@ -1,47 +1,166 @@
-/* src/components/AdminUserHistory/AdminUserHistory.css */
 .admin-user-history-container {
   padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin-right: 250px; /* Adjusted margin for sidebar */
+}
+
+.button, .export-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px; /* Added margin space below the button */
+  text-decoration: none; /* Remove underline for CSV link */
+  display: inline-block; /* Ensure it displays like a button */
+}
+
+.button:hover, .export-button:hover {
+  background-color: #2980b9;
+}
+
+.spacer {
+  height: 20px; /* Add space between the button and the question list */
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Maximum of two blocks per row */
+  gap: 20px; /* Gap between blocks */
+}
+
+.history-entry {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Added for positioning icons */
+}
+
+.history-entry h2 {
+  margin-bottom: 10px;
+}
+
+.actions {
+  display: flex; /* Ensure buttons are aligned horizontally */
+  gap: 10px; /* Space between buttons */
+}
+
+.actions .icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.actions .icon:hover {
+  color: #2980b9;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Optional: add a dark background to the overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px; /* Increased padding for spaciousness */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px; /* Adjust width as needed */
+  width: 90%; /* Ensure it doesn't exceed the viewport width */
+  margin: auto;
+  overflow: hidden; /* Ensure content stays within modal */
+}
+
+.modal-content h2 {
+  margin-top: 0;
   text-align: center;
 }
 
-.search-input {
+.response-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.response-item {
+  background-color: #f9f9f9;
   padding: 10px;
-  margin: 10px 0;
-  width: 80%;
-  max-width: 400px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.response-item p {
+  margin: 5px 0;
+}
+
+.modal-close-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-close-button:hover {
+  background-color: #2980b9;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.filter-container label {
+  margin: 5px 0;
+}
+
+.statistics-container {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.question-stats-box {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.question-stats-box h3 {
+  margin-top: 0;
+}
+
+.question-stats-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.question-stats-box ul li {
+  margin-bottom: 10px;
+}
+
+.no-history {
+  font-size: 1.5em;
+  color: #888;
+  margin-top: 20px;
 }
 
 .error-message {
   color: red;
   margin-top: 10px;
-}
-
-.history-entry {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.history-entry h2 {
-  margin-top: 0;
-}
-
-.history-entry ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.history-entry ul li {
-  margin-bottom: 10px;
-}
-
-.admin-dashboard .content {
-  margin-right: 250px; 
-  padding: 20px;
 }

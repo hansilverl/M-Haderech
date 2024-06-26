@@ -1,3 +1,5 @@
+// src/App.js
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './screens/Homepage/Homepage';
@@ -8,8 +10,9 @@ import Contact from './screens/Contact/Contact';
 import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
 import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
 import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore';
-import History from './screens/History/History'; // Import the new History component
+import History from './screens/History/History';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import DonatePage from './screens/DonatePage/DonatePage';
 import './App.css';
 import Posts from './screens/Posts/Posts';
 
@@ -31,8 +34,9 @@ function App() {
           <ProtectedRoute>
             <History />
           </ProtectedRoute>
-        } /> {/* Add the protected route for history */}
+        } />
         <Route exact path="/posts" element={<Posts />} />
+        <Route exact path="/donate" element={<DonatePage />} />
         <Route path="/admin/*" element={
           <ProtectedRoute admin>
             <AdminDashboard />

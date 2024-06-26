@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import { db } from '../../firebase/config';
 import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
@@ -9,26 +10,36 @@ import './History.css';
 
 const History = () => {
   const [history, setHistory] = useState([]);
+  const [selectedEntry, setSelectedEntry] = useState(null);
   const { user } = useAuthStatus();
   const [error, setError] = useState(null);
-  const [trend, setTrend] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
     if (user) {
       const fetchHistory = async () => {
         try {
-          const q = query(collection(db, 'QuestionnaireHistory'), where('userId', '==', user.uid));
+          let q = query(collection(db, 'QuestionnaireHistory'), where('userId', '==', user.uid));
+          if (startDate !== '' && endDate !== '') {
+            q = query(q, where('timestamp', '>=', new Date(startDate)), where('timestamp', '<=', new Date(endDate)));
+          } else if (startDate !== '') {
+            q = query(q, where('timestamp', '>=', new Date(startDate)));
+          } else if (endDate !== '') {
+            q = query(q, where('timestamp', '<=', new Date(endDate)));
+          }
+
           const querySnapshot = await getDocs(q);
           const historyData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-          // Sort history data by timestamp
-          historyData.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
+          // Sort history data by timestamp for graph (oldest to newest)
+          const sortedHistoryData = [...historyData].sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
 
-          setHistory(historyData);
+          // Set history data sorted by timestamp (newest to oldest) for display
+          const displayHistoryData = [...historyData].sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
+
+          setHistory(displayHistoryData);
           setError(null);
-
-          // Calculate trend
-          calculateTrend(historyData);
         } catch (error) {
           console.error('שגיאה באחזור ההיסטוריה: ', error);
           setError('שגיאה באחזור ההיסטוריה.');
@@ -38,32 +49,7 @@ const History = () => {
 
       fetchHistory();
     }
-  }, [user]);
-
-  useEffect(() => {
-    calculateTrend(history);
-  }, [history]);
-
-  const calculateTrend = (data) => {
-    if (data.length > 1) {
-      const halfIndex = Math.floor(data.length / 2);
-      const firstHalfScores = data.slice(0, halfIndex).map(entry => entry.totalScore);
-      const secondHalfScores = data.slice(halfIndex).map(entry => entry.totalScore);
-
-      const avgFirstHalf = firstHalfScores.reduce((acc, score) => acc + score, 0) / firstHalfScores.length;
-      const avgSecondHalf = secondHalfScores.reduce((acc, score) => acc + score, 0) / secondHalfScores.length;
-
-      if (avgSecondHalf > avgFirstHalf) {
-        setTrend('המגמה עולה!');
-      } else if (avgSecondHalf < avgFirstHalf) {
-        setTrend('המגמה יורדת!');
-      } else {
-        setTrend('המגמה יציבה!');
-      }
-    } else {
-      setTrend(null);
-    }
-  };
+  }, [user, startDate, endDate]);
 
   const handleDelete = async (id) => {
     const confirmation = window.confirm('האם אתה בטוח שברצונך למחוק את ההיסטוריה הזו?');
@@ -78,27 +64,46 @@ const History = () => {
     }
   };
 
+  const openModal = (entry) => {
+    setSelectedEntry(entry);
+  };
+
+  const closeModal = () => {
+    setSelectedEntry(null);
+  };
+
   const graphData = {
-    labels: history.map(entry => new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')),
+    labels: history.map(entry => new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')).reverse(),
     datasets: [
       {
         label: 'ציון כולל',
-        data: history.map(entry => entry.totalScore),
-        backgroundColor: history.map(entry => entry.totalScore >= 10 ? 'rgba(255, 0, 0, 0.6)' :
-          entry.totalScore >= 5 ? 'rgba(255, 255, 0, 0.6)' :
-          'rgba(0, 128, 0, 0.6)'),
-        borderColor: history.map(entry => entry.totalScore >= 10 ? 'rgba(255, 0, 0, 1)' :
-          entry.totalScore >= 5 ? 'rgba(255, 255, 0, 1)' :
-          'rgba(0, 128, 0, 1)'),
+        data: history.map(entry => entry.totalScore).reverse(),
+        backgroundColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
+          entry.totalScore >= 20 ? '#F2CD60' :
+          '#2D936C').reverse(),
+        borderColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
+          entry.totalScore >= 20 ? '#F2CD60' :
+          '#2D936C').reverse(),
         borderWidth: 1,
+        categoryPercentage: 0.99,
+        barPercentage: 0.99,
       },
     ],
   };
 
   const graphOptions = {
+    // Maintain the aspect ratio of the graph
+    onClick: (e, elements) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        openModal(history[history.length - 1 - index]);
+      }
+    },
     scales: {
       x: {
         type: 'category',
+        barPercentage: 1.0,
+        categoryPercentage: 1.0,
       },
       y: {
         beginAtZero: true,
@@ -113,25 +118,25 @@ const History = () => {
             const dataset = chart.data.datasets[0];
             return [
               {
-                text: '0-4',
-                fillStyle: 'rgba(0, 128, 0, 0.6)',
-                strokeStyle: 'rgba(0, 128, 0, 1)',
-                lineWidth: 1,
+                text: '0-19',
+                fillStyle: '#2D936C', 
+                strokeStyle: '#2D936C', // Border color for the legend item
+                lineWidth: 1, // Border width for the legend item
                 hidden: false,
                 index: 0,
               },
               {
-                text: '5-9',
-                fillStyle: 'rgba(255, 255, 0, 0.6)',
-                strokeStyle: 'rgba(255, 255, 0, 1)',
+                text: '20-32',  // medium score
+                fillStyle: '#F2CD60',
+                strokeStyle: '#F2CD60',
                 lineWidth: 1,
                 hidden: false,
                 index: 1,
               },
               {
-                text: '10-15',
-                fillStyle: 'rgba(255, 0, 0, 0.6)',
-                strokeStyle: 'rgba(255, 0, 0, 1)',
+                text: '33-60',  // high score
+                fillStyle: '#A4303F',
+                strokeStyle: '#A4303F',
                 lineWidth: 1,
                 hidden: false,
                 index: 2,
@@ -155,7 +160,7 @@ const History = () => {
     layout: {
       padding: {
         top: 20,
-        bottom: 80, // Add more space between the legend and the graph
+        bottom: 80, // Add more space between the legend and the graph        
       },
     },
   };
@@ -163,7 +168,23 @@ const History = () => {
   return (
     <div className="history-container">
       <h1>היסטוריה של השאלונים שלי</h1>
-      {error && <p className="error-message">{error}</p>}
+      <div className="filter-container">
+        <label>תאריך התחלה:</label>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="search-input"
+        />
+        <label>תאריך סיום:</label>
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="search-input"
+        />
+      </div>
+      {error && <p className="error-no-history">{error}</p>}
       {history.length === 0 && !error ? (
         <div>
           <p className="no-history">אין לך היסטוריה</p>
@@ -179,28 +200,38 @@ const History = () => {
                 <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry.id)}>🗑️</span>
                 <h2>{new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
                 <p className="total-score">ציון כולל: {entry.totalScore}</p>
-                <ul>
-                  {entry.responses.map((response, idx) => (
-                    <li key={idx}>
-                      <strong>שאלה:</strong> {response.question}<br />
-                      <strong>תשובה נבחרה:</strong> {response.selectedOption}<br />
-                      <strong>ציון:</strong> {response.score}
-                    </li>
-                  ))}
-                </ul>
+                <button className="toggle-responses-button" onClick={() => openModal(entry)}>
+                  צפיה בתשובות
+                </button>
               </div>
             ))}
           </div>
           <div className="graph-container">
             <h2>התקדמות ציונים</h2>
-            {trend && (
-              <p className="trend-message" style={{ fontWeight: 'bold' }}>
-                {trend}
-              </p>
-            )}
             <p className="graph-description">הגרף מציג את זמן מילוי השאלון לעומת הציון</p>
             <Bar data={graphData} options={graphOptions} />
           </div>
+          {selectedEntry && (
+            <Modal
+              isOpen={!!selectedEntry}
+              onRequestClose={closeModal}
+              contentLabel="Responses Modal"
+              className="responses-modal"
+              overlayClassName="responses-overlay"
+            >
+              <h2>תשובות לשאלון מ- {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
+              <div className="response-list">
+                {selectedEntry.responses.map((response, idx) => (
+                  <div key={idx} className="response-item">
+                    <strong>שאלה:</strong> {response.question}<br />
+                    <strong>תשובה נבחרה:</strong> {response.score}<br />
+                    <strong>ציון:</strong> {response.selectedOption}
+                  </div>
+                ))}
+              </div>
+              <button onClick={closeModal} className="close-modal-button">סגור</button>
+            </Modal>
+          )}
         </>
       )}
     </div>

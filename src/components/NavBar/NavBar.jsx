@@ -58,7 +58,7 @@ const Navbar = () => {
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
           <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
-          <li><a href="#donate" onClick={handleScroll}>לתרומה</a></li>
+          <li><Link to="/donate" onClick={() => setIsOpen(false)}>לתרומה</Link></li>
           {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
           {user ? (
             <>

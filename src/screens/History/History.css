@@ -11,7 +11,7 @@
 
 .history-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Three items per row */
+  grid-template-columns: repeat(4, 1fr); /* Three items per row */
   gap: 40px; /* Space between items */
 }
 
@@ -39,14 +39,76 @@
   text-align: center;
 }
 
-.history-entry ul {
-  list-style-type: none;
-  padding: 0;
-  text-align: right; /* Align the text from right to left */
+.toggle-responses-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-.history-entry ul li {
-  margin-bottom: 20px; /* Increase space between question items */
+.toggle-responses-button:hover {
+  background-color: #0056b3;
+}
+
+.responses-modal {
+  background: white;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.responses-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.responses-modal h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.response-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.response-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: right; /* Align text to the right */
+}
+
+.close-modal-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.close-modal-button:hover {
+  background-color: #0056b3;
 }
 
 .history-entry .delete-icon {
@@ -56,17 +118,8 @@
   cursor: pointer;
 }
 
-.search-input {
-  padding: 10px;
-  margin: 10px 0;
-  width: 80%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.error-message {
-  color: red;
+.error-no-history {
+  color: #790000;
   margin-top: 10px;
 }
 
