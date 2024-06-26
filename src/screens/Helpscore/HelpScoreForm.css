@@ -6,7 +6,20 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Tahoma', 'IBM Plex Sans Hebrew', Arial, Helvetica;
 }
 
-.help-score-form {
+
+.help-score-form::before {
+    content: '';
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f2f2f2; /* Semi-transparent black backdrop */
+    z-index: -1; /* Ensure it is behind the form content */
+}
+
+
+.help-score-form{
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
     display: flex;
     align-items: flex-start;
@@ -16,6 +29,19 @@ body {
     margin: 0 auto;
     padding-top: 10vh;
     padding-bottom: 10vh;
+    position: relative; /* Ensure the form is positioned relative for pseudo-element */
+}
+
+.bordered-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff4b;
+    z-index: -1; /* Ensure it is behind the form content */
+    border-radius: 5px;
 }
 
 .bordered-container {
@@ -27,6 +53,7 @@ body {
     border-radius: 5px;
     padding: 2% 0;
     width: fit-content;
+    position: relative; /* Ensure the form is positioned relative for pseudo-element */
 }
 
 .q-container {
@@ -183,6 +210,15 @@ q.table th {
 .req_question {
     position: relative;
     /* background-color: #ffdfe080;  */
+}
+
+.req_question .radio-input + .custom-radio {
+    /* bit darker shade than the default */
+    border-color:#a9a9a9;
+}
+
+.req_question .radio-input:checked + .custom-radio {
+    border-color: forestgreen;
 }
 
 
