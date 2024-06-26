@@ -1,13 +1,21 @@
 /* src/screens/Helpscore/CalculateHelpScore.css */
+
 .score-container {
-    text-align: center;
-    padding: 20px;
+    text-align:center;
+    padding: 25px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 400px;
-    margin: 50px auto;
-    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 30%;
+    margin: 4% auto;
+    background-color:#f3f3f3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
+
+.unique-background {
+    background-color: #ffffff;
+}
+
 
 .score-container h1 {
     font-size: 24px;
@@ -15,7 +23,7 @@
 }
 
 .score-container p {
-    font-size: 18px;
+    font-size: auto;
     margin-bottom: 20px;
 }
 
@@ -23,15 +31,18 @@
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
-    border: none;
+    background-color: #a20067;
+    border: 1px solid #650040;
     border-radius: 5px;
     cursor: pointer;
-    margin: 10px;
+    margin-top: 4%;
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
+
 .score-container button:hover {
-    background-color: #0056b3;
+    background-color: #9b59b6;
 }
 
 .error-message {
@@ -80,31 +91,14 @@
     border-radius: 5px;
 }
 
-.Modal button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+
+.score-result {
+    font-weight: bold;
+    color: #a20067;
+    font-size: 1.5em;
 }
 
-.Modal button:hover {
-    background-color: #0056b3;
-}
-
-.Modal .cancel-button {
-    background-color: #007bff;
-    margin-left: 10px;
-}
-
-.Modal .cancel-button:hover {
-    background-color: #0056b3;
-}
-
-.Modal .button-group {
-    display: flex;
-    justify-content: space-between;
+.user-score
+{
+    font-size: 1.5em;
 }
