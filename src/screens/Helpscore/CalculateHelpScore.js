@@ -7,7 +7,7 @@ import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore
 import { useLogin } from '../../hooks/useLogin';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); 
+Modal.setAppElement('#root');
 
 const CalculateHelpScore = () => {
     const location = useLocation();
@@ -20,7 +20,6 @@ const CalculateHelpScore = () => {
     const { user, loading: authLoading } = useAuthStatus();
     const { login, error: loginError } = useLogin();
 
-    // Calculate the total score from answers
     const calculateScore = (answers) => {
         let totalScore = 0;
         Object.values(answers).forEach(answer => {
@@ -29,7 +28,6 @@ const CalculateHelpScore = () => {
         return totalScore;
     };
 
-    // Fetch questions from Firestore
     const getQuestions = async () => {
         const querySnapshot = await getDocs(collection(db, 'Questionnaire'));
         const questions = {};
@@ -39,7 +37,6 @@ const CalculateHelpScore = () => {
         return questions;
     };
 
-    // Save the questionnaire history to Firestore
     const saveHistory = useCallback(async () => {
         if (user) {
             try {
@@ -68,7 +65,6 @@ const CalculateHelpScore = () => {
         }
     }, [user, location.state, score]);
 
-    // Calculate the score based on the answers
     useEffect(() => {
         if (!location.state || !location.state.answers) {
             navigate('/helpscore');
@@ -80,7 +76,6 @@ const CalculateHelpScore = () => {
         setScore(calculatedScore);
     }, [location, navigate]);
 
-    // Automatically save history after user logs in
     useEffect(() => {
         if (user && showLoginModal) {
             setShowLoginModal(false);
@@ -88,7 +83,6 @@ const CalculateHelpScore = () => {
         }
     }, [user, showLoginModal, saveHistory]);
 
-    // Handle user login
     const handleLogin = async () => {
         await login(email, password);
     };
@@ -98,11 +92,16 @@ const CalculateHelpScore = () => {
     }
 
     return (
-        <div className="score-container">
-            <h1>הציון שלך</h1>
-            <p>הציון שלך הוא: {score}</p>
-            <button onClick={saveHistory}>שמור</button>
-            <button onClick={() => navigate('/helpscore')}>חזור לטופס</button>
+        <div className="score-container unique-background">
+            <h1>תודה על מילוי השאלון.</h1>
+            <div className="score-result">
+                <p>התוצאה שלך:</p>
+                <div className="user-score">{score}</div>
+            </div>
+            <div className="button-wrapper">
+                <button onClick={saveHistory}>שמור</button>
+                <button onClick={() => navigate('/helpscore')}>חזור לטופס</button>
+            </div>
 
             <Modal
                 isOpen={showLoginModal}

@@ -3,6 +3,8 @@ import React from 'react'
 import usePosts from '../../hooks/usePosts'
 import './PostSection.css'
 import Post from '../Posts/Post'
+import { useNavigate } from 'react-router-dom';
+
 
 const PostsSection = () => {
 	const { posts, loading, error } = usePosts()
@@ -33,27 +35,27 @@ const PostsSection = () => {
 		},
 	]
 
-	return (
-		<section id='posts' className='posts-section'>
-			<div className='posts-header'>
-				<h2>פוסטים</h2>
-				<div className='view-all-button-container'>
-					<button className='view-all-button'>ראה את כל הפוסטים</button>
-				</div>
-			</div>
-			<div className='posts-container'>
-				{posts1.map((post, index) => (
-					<Post
-						key={index}
-						image={post.image}
-						title={post.title}
-						date={post.date}
-						description={post.description}
-					/>
-				))}
-			</div>
-		</section>
-	)
-}
+  return (
+    <section id="posts" className="posts-section">
+      <div className="posts-header">
+        <h2>פוסטים</h2>
+        <div className="view-all-button-container">
+          <button onClick={handleViewAllClick} className="view-all-button">ראה את כל הפוסטים</button>
+        </div>
+      </div>
+      <div className="posts-container">
+        {posts.slice(0, 3).map((post, index) => (
+          <Post
+            key={index}
+            image={post.image}
+            title={post.title}
+            date={post.date}
+            description={post.description}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default PostsSection
