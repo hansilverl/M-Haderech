@@ -1,3 +1,5 @@
+// src/components/NavBar/NavBar.js
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
@@ -5,7 +7,7 @@ import { useAuthStatus } from '../../hooks/useAuthStatus';
 import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
@@ -59,7 +61,7 @@ const Navbar = () => {
           <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><Link to="/donate" onClick={() => setIsOpen(false)}>לתרומה</Link></li>
-          {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
+          {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
           {user ? (
             <>
               <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
@@ -68,7 +70,7 @@ const Navbar = () => {
               <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
-            <li><Link to="/login" onClick={() => setIsOpen(false)}>התחברות</Link></li>
+            <li><span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span></li> 
           )}
         </ul>
       </div>

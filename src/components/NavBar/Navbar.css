@@ -71,6 +71,21 @@
 
 }
 
+.navbar .login-button {
+  background: transparent;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid white; /* Add white border */
+}
+
+.navbar .login-button:hover {
+  background: #555; /* Add a hover effect if needed */
+}
+
 .navbar-menu li a:hover, .logout-button:hover {
   background: #555;
   color: #fff;
