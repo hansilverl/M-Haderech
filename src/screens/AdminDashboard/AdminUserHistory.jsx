@@ -36,6 +36,7 @@ const AdminUserHistory = () => {
 
         const querySnapshot = await getDocs(q);
         const historyData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        historyData.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds); // Sort by timestamp from newest to oldest
         setHistory(historyData);
         calculateAnswerStats(historyData);
         setError(null);
@@ -129,8 +130,8 @@ const AdminUserHistory = () => {
               {selectedEntry.responses.map((response, idx) => (
                 <div key={idx} className="response-item">
                   <p><strong>שאלה:</strong> {response.question}</p>
-                  <p><strong>תשובה נבחרה:</strong> {response.selectedOption}</p>
-                  <p><strong>ציון:</strong> {response.score}</p>
+                  <p><strong>תשובה נבחרה:</strong> {response.score}</p>
+                  <p><strong>ציון:</strong> {response.selectedOption}</p>
                 </div>
               ))}
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, deleteField } from 'firebase/firestore';
 import Modal from 'react-modal';
 import { FaTrashAlt } from 'react-icons/fa';
 import './BankInfo.css';
@@ -84,7 +84,9 @@ const BankInfo = () => {
       setTempBankInfo(updatedTempBankInfo);
 
       const docRef = doc(db, 'miscellaneousUpdated', 'bank_information');
-      await updateDoc(docRef, updatedTempBankInfo);
+      await updateDoc(docRef, {
+        [fieldToDelete]: deleteField()
+      });
 
       setDeleteConfirmIsOpen(false);
       setFieldToDelete(null);

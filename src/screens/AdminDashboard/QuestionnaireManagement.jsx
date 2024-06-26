@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
-import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc, deleteField } from 'firebase/firestore';
 import './QuestionnaireManagement.css';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Modal from 'react-modal';
@@ -88,11 +88,14 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       const questionDoc = await getDoc(questionDocRef);
       const questionData = questionDoc.data();
 
-      // Remove the answer from the question data
-      delete questionData[answerId];
+      // Remove the answer from the question data locally
+      const updatedQuestionData = { ...questionData };
+      delete updatedQuestionData[answerId];
 
       // Update the document in Firestore
-      await updateDoc(questionDocRef, questionData);
+      await updateDoc(questionDocRef, {
+        [answerId]: deleteField()
+      });
 
       // Update the local state
       setQuestions(prevQuestions =>
@@ -142,7 +145,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
   const handleEditAnswer = (question, answer) => {
     setSelectedQuestion(question);
     setCurrentText(answer.text);
-    setCurrentScore(answer.score);
+    setCurrentScore(answer.id); // Set the current score based on the answer ID
     setSelectedAnswer({ questionId: question.id, answerId: answer.id });
     setEditModalIsOpen(true);
   };
@@ -159,7 +162,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                 ...question,
                 answers: question.answers.map(answer =>
                   answer.id === answerId
-                    ? { ...answer, text: currentText, score: currentScore }
+                    ? { ...answer, text: currentText, score: parseInt(currentScore, 10) }
                     : answer
                 )
               }

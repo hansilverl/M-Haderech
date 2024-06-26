@@ -1,20 +1,19 @@
 // src/App.js
 
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
-import HomePage from './screens/Homepage/Homepage'
-import Signup from './screens/Signup/Signup'
-import Login from './screens/Login/Login'
-import Navbar from './components/NavBar/NavBar'
-import Contact from './screens/Contact/Contact'
-import AdminDashboard from './screens/AdminDashboard/AdminDashboard'
-import HelpScoreForm from './screens/Helpscore/HelpScoreForm'
-import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
-import History from './screens/History/History'
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
-import PostEditpage from './screens/PostEditpage/EditPostpage'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import HomePage from './screens/Homepage/Homepage';
+import Signup from './screens/Signup/Signup';
+import Login from './screens/Login/Login';
+import Navbar from './components/NavBar/NavBar';
+import Contact from './screens/Contact/Contact';
+import AdminDashboard from './screens/AdminDashboard/AdminDashboard';
+import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
+import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore';
+import History from './screens/History/History';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import DonatePage from './screens/DonatePage/DonatePage'; // Import the new DonatePage
-import './App.css'
+import './App.css';
 
 function App() {
 	const location = useLocation()
