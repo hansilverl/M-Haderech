@@ -154,21 +154,46 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     const { questionId, answerId } = selectedAnswer;
     try {
       const questionDocRef = doc(db, 'Questionnaire', questionId);
-      await updateDoc(questionDocRef, { [answerId]: currentText });
+      const questionDoc = await getDoc(questionDocRef);
+      const questionData = questionDoc.data();
+  
+      // Check if the new score is different from the current score
+      if (currentScore !== answerId) {
+        // Create a new field with the new score
+        await updateDoc(questionDocRef, { [currentScore]: currentText });
+  
+        // Delete the old field
+        await updateDoc(questionDocRef, { [answerId]: deleteField() });
+      } else {
+        // Update the existing field's value
+        await updateDoc(questionDocRef, { [answerId]: currentText });
+      }
+  
+      // Fetch the updated document
+      const updatedQuestionDoc = await getDoc(questionDocRef);
+      const updatedQuestionData = updatedQuestionDoc.data();
+      const updatedAnswers = Object.entries(updatedQuestionData)
+        .filter(([key, value]) => key !== 'q' && key !== 'required')
+        .map(([key, value]) => ({
+          id: key,
+          text: value,
+          score: parseInt(key, 10),
+        }));
+  
+      // Update the local state
       setQuestions(prevQuestions =>
         prevQuestions.map(question =>
           question.id === questionId
             ? {
                 ...question,
-                answers: question.answers.map(answer =>
-                  answer.id === answerId
-                    ? { ...answer, text: currentText, score: parseInt(currentScore, 10) }
-                    : answer
-                )
+                question: updatedQuestionData.q,
+                required: updatedQuestionData.required,
+                answers: updatedAnswers,
               }
             : question
         )
       );
+  
       setEditModalIsOpen(false);
       alert('התשובה עודכנה בהצלחה.');
     } catch (error) {
