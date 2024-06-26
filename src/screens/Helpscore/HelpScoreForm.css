@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&display=swap');
 
-.help-score-form body {
+body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Tahoma', 'IBM Plex Sans Hebrew', Arial, Helvetica;
 }
 
@@ -18,7 +18,7 @@
     padding-bottom: 10vh;
 }
 
-.help-score-form .bordered-container {
+.bordered-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,15 +29,15 @@
     width: fit-content;
 }
 
-.help-score-form .q-container {
+.q-container {
     padding: 1% ;
 }
 
-.help-score-form .question-text {
+.question-text {
     /* make weight just a bit thicker for accessibility */
     font-weight: 500;
     /*much better, finally!*/
-    font-size: 16px;
+    font-size: auto;
     margin: auto 4%;
     margin-bottom: 0.7%;
     padding: 0.5% 0;
@@ -45,8 +45,7 @@
     text-align: right;
 }
 
-.help-score-form .q-table {
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
+.q-table {
     margin: auto 4%;
     padding: 2%;
     border-collapse: collapse;
@@ -56,48 +55,48 @@
 }
 
 
-.help-score-form .q-table thead,
+.q-table thead,
 q.table th {
     /* the two may be used interchangeably in the context of this page */
     background-color: #e6e5e5;
-    font-family: sans-serif;
     padding: auto 2.2%;
-
 }
 
 
-.help-score-form .q-table th,
+.q-table th,
 .q-table td {
     border: 1.5px solid #a9a9a9;
     text-align: center;
-    /* overflow: hidden; */
-    overflow-wrap: break-word;
+    overflow-wrap:break-word;
+    padding: 0.5% 1%;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
+    font-weight: 450;
 }
 
-.help-score-form .q-table td {
-    padding: 0.4% 0;
+.q-table td {
+    padding: 1% 1%;
 }
 
-.help-score-form .q-table td:hover {
+.q-table td:hover {
     /* background-color: #f2f2f2;  */
     background-color: #f1f8ff;
 }
 
-.help-score-form .q-table .selected {
+.q-table .selected {
     background-color: #dfefff80;
     ;
 }
 
-.help-score-form .q-table td.selected:hover {
+.q-table td.selected:hover {
     background-color: #dfefff80;
 }
 
 
-.help-score-form .radio-input {
+.radio-input {
     display: none;
 }
 
-.help-score-form .custom-radio {
+.custom-radio {
     display: inline-block;
     position: relative;
     width: 0.85em;
@@ -106,12 +105,12 @@ q.table th {
     border-radius: 50%;
 }
 
-.help-score-form .radio-input:checked+.custom-radio {
+.radio-input:checked+.custom-radio {
     border-color: forestgreen;
 }
 
 
-.help-score-form .radio-input:checked+.custom-radio::after {
+.radio-input:checked+.custom-radio::after {
     transform: translate(-50%, -50%) scale(1);
     content: "✔";
     font-weight: bold;
@@ -127,18 +126,18 @@ q.table th {
     font-size: 0.7em;
 }
 
-.help-score-form .custom-radio:hover {
+.custom-radio:hover {
     border-color: #a9a9a9;
     cursor: pointer;
 }
 
-.help-score-form .radio-label {
+.radio-label {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.help-score-form .required {
+.required {
     /*asterisk for required fields*/
     color: #790000;
     margin-left: 4px;
@@ -199,6 +198,7 @@ q.table th {
 
 .req_question td,
 .req_question th {
+
     border: 1.2px solid #790000;
     table-layout: fixed;
 }
