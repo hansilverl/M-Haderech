@@ -6,11 +6,6 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Tahoma', 'IBM Plex Sans Hebrew', Arial, Helvetica;
 }
 
-
-.unique-background {
-    background-color: #f5f5f5;
-}
-
 .help-score-form {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
     display: flex;
@@ -24,8 +19,6 @@ body {
 }
 
 .bordered-container {
-    /* an offwhite background color */
-    background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,12 +65,12 @@ q.table th {
 
 .q-table th,
 .q-table td {
-    border: 1.5px solid #a9a9a9;
+    border: 2px solid #a9a9a9;
     text-align: center;
     overflow-wrap:break-word;
     padding: 0.5% 1%;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
-    font-weight: 505;
+    font-weight: 550;
 }
 
 .q-table td {
@@ -206,7 +199,7 @@ q.table th {
 .req_question td,
 .req_question th {
 
-    border: 1.2px solid #790000;
+    border: 1.59px solid #790000;
     table-layout: fixed;
 }
 
