@@ -1,6 +1,5 @@
 /* src/components/Navbar.css */
 
-
 .navbar {
   font-family: -apple-system,system-ui,BlinkMacSystemFont,Arial, Helvetica, sans-serif;
   background: #9b59b6;
@@ -68,6 +67,8 @@
   transition: background 0.3s, color 0.3s;
   border-radius: 4px;
   cursor: pointer;
+  border-radius: 15px;
+
 }
 
 .navbar-menu li a:hover, .logout-button:hover {
@@ -79,6 +80,15 @@
   display: flex;
   margin-left: auto;
   order: 3;
+}
+
+.space {
+  margin-right: 5cm;
+}
+
+.admin-logout {
+  background-color: #765092; /* Dark violet */
+  border-radius: 15px;
 }
 
 @media (max-width: 768px) {

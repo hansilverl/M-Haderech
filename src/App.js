@@ -12,8 +12,9 @@ import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
 import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore';
 import History from './screens/History/History';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import DonatePage from './screens/DonatePage/DonatePage'; // Import the new DonatePage
+import DonatePage from './screens/DonatePage/DonatePage';
 import './App.css';
+import Posts from './screens/Posts/Posts';
 
 function App() {
   const location = useLocation();
@@ -34,7 +35,8 @@ function App() {
             <History />
           </ProtectedRoute>
         } />
-        <Route exact path="/donate" element={<DonatePage />} /> 
+        <Route exact path="/posts" element={<Posts />} />
+        <Route exact path="/donate" element={<DonatePage />} />
         <Route path="/admin/*" element={
           <ProtectedRoute admin>
             <AdminDashboard />
