@@ -13,38 +13,47 @@ import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore';
 import History from './screens/History/History';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import DonatePage from './screens/DonatePage/DonatePage';
+import Posts from './components/Posts/Posts';
+import PostEditpage from './screens/PostEditpage/PostEditpage';
 import './App.css';
-import Posts from './screens/Posts/Posts';
 
 function App() {
 	const location = useLocation()
 	const isAdminRoute = location.pathname.startsWith('/admin')
 
   return (
-    <div className="App">
-      {!isAdminRoute && <Navbar />}
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/helpScore" element={<HelpScoreForm />} />
-        <Route exact path="/calculateHelpScore" element={<CalculateHelpScore />} />
-        <Route exact path="/history" element={
-          <ProtectedRoute>
-            <History />
-          </ProtectedRoute>
-        } />
-        <Route exact path="/posts" element={<Posts />} />
-        <Route exact path="/donate" element={<DonatePage />} />
-        <Route path="/admin/*" element={
-          <ProtectedRoute admin>
-            <AdminDashboard />
-          </ProtectedRoute>
-        } />
-      </Routes>
-    </div>
-  );
+		<div className='App'>
+			{!isAdminRoute && <Navbar />}
+			<Routes>
+				<Route exact path='/' element={<HomePage />} />
+				<Route exact path='/signup' element={<Signup />} />
+				<Route exact path='/login' element={<Login />} />
+				<Route exact path='/contact' element={<Contact />} />
+				<Route exact path='/helpScore' element={<HelpScoreForm />} />
+				<Route exact path='/calculateHelpScore' element={<CalculateHelpScore />} />
+				<Route exact path='/edit' element={<PostEditpage />} />
+				<Route
+					exact
+					path='/history'
+					element={
+						<ProtectedRoute>
+							<History />
+						</ProtectedRoute>
+					}
+				/>
+				<Route exact path='/posts' element={<Posts />} />
+				<Route exact path='/donate' element={<DonatePage />} />
+				<Route
+					path='/admin/*'
+					element={
+						<ProtectedRoute admin>
+							<AdminDashboard />
+						</ProtectedRoute>
+					}
+				/>
+			</Routes>
+		</div>
+	)
 }
 
 const AppWrapper = () => (

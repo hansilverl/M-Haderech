@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import TextEditor from '../../components/TextEditor/TextEditor'
 import PostTypeSelector from '../../components/PostTypeSelector/PostTypeSelector'
 
-import './EditPostpage.css'
+import './PostEditpage.css'
 
 const PostEditpage = (props) => {
 	const { postID } = props

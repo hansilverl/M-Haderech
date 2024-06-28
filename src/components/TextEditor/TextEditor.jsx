@@ -15,7 +15,6 @@ import TextDirection from 'tiptap-text-direction'
 import MenuBar from './MenuBar/MenuBar'
 
 const TextEditor = (props) => {
-	const { postID, initialContent } = props
 	const [editorContent, setEditorContent] = useState('editorContent')
 
 	const extensions = [
