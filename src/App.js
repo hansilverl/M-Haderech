@@ -1,6 +1,6 @@
 // src/App.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './screens/Homepage/Homepage';
 import Signup from './screens/Signup/Signup';
@@ -15,14 +15,18 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import DonatePage from './screens/DonatePage/DonatePage';
 import './App.css';
 import Posts from './screens/Posts/Posts';
+import { LoginPopup } from './components/LoginPopup/LoginPopup';
 
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const [showLogin, setShowLogin] = useState(false); // State to manage LoginPopup visibility
+
 
   return (
     <div className="App">
-      {!isAdminRoute && <Navbar />}
+      {!isAdminRoute && <Navbar setShowLogin={setShowLogin} />} {/* Pass setShowLogin */}
+      {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/signup" element={<Signup />} />
