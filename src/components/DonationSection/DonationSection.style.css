@@ -38,7 +38,9 @@
   .donation-image {
     flex: 1;
     max-width: 40%;
-    border-radius: 20px;
+    /* border-radius: 20px; */
+    /* align more to the left */
+    margin-left: -10%;
   }
   
 
