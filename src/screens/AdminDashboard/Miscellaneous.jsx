@@ -10,7 +10,7 @@ const Miscellaneous = () => {
     <div className="miscellaneous">
       <h1>שונות</h1>
       <div className="miscellaneous-content">
-        <div className="section">
+        <div className="section-bank">
           <h2>פרטי בנק</h2>
           <BankInfo />
         </div>

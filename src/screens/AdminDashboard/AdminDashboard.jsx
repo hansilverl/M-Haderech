@@ -11,9 +11,11 @@ import Miscellaneous  from './Miscellaneous';
 import AdminUserHistory from './AdminUserHistory';
 
 const AdminDashboard = () => {
+  // display the posts page
 
   return (
     <div className="admin-dashboard" dir="rtl">
+      {/* display post page on this page, regardless of the route */}
       <Sidebar />
       <div className="content" dir="rtl">
         <Routes>
