@@ -1,6 +1,7 @@
 import React from 'react';
 import BankInfo from '../../components/BankInfo/BankInfo';
 import Statistics from '../../components/Statistics/Statistics';
+import AboutInfo from '../../components/About/AboutInfo';
 import Contact from '../../components/Contact/Contact';
 import './Miscellaneous.css';
 
@@ -20,6 +21,10 @@ const Miscellaneous = () => {
         <div className="section">
           <h2>פרטי קשר</h2>
           <Contact />
+        </div>
+        <div className="section">
+          <h2>אודות</h2>
+          <AboutInfo />
         </div>
       </div>
     </div>
