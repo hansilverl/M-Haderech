@@ -43,9 +43,6 @@ const PostsSection = () => {
     <section id="posts" className="posts-section">
       <div className="posts-header">
         <h2>פוסטים</h2>
-        <div className="view-all-button-container">
-          <button onClick={handleViewAllClick} className="view-all-button">ראה את כל הפוסטים</button>
-        </div>
       </div>
       <div className="posts-container">
         {posts.slice(0, 3).map((post, index) => (
@@ -58,6 +55,9 @@ const PostsSection = () => {
           />
         ))}
       </div>
+      <div className="view-all-button-container">
+          <button onClick={handleViewAllClick} className="view-all-button">ראה את כל הפוסטים</button>
+        </div>
     </section>
   );
 };

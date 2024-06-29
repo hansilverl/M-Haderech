@@ -12,6 +12,9 @@ const Navbar = ({ setShowLogin }) => {
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
+  const openPosts = () => {
+    navigate('/posts');
+  };
 
   const handleScroll = (event) => {
     event.preventDefault();
@@ -55,7 +58,7 @@ const Navbar = ({ setShowLogin }) => {
           </Link>
         </div>
         <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-          <li><a href="#posts" onClick={handleScroll}>פוסטים</a></li>
+          <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
           <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 

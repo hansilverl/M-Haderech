@@ -44,7 +44,7 @@ const Posts = () => {
 
   return (
     <div className="posts-screen">
-      <h2>כל הפוסטים</h2>
+      <h2></h2>
       <div className="posts-container">
         {posts.map((post, index) => (
           <Post

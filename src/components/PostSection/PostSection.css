@@ -1,6 +1,7 @@
 .posts-section {
   padding: 2em;
   background: #ffffff;
+  position: relative;
 }
 
 .posts-header {
@@ -18,6 +19,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.view-all-button-container {
+  position: absolute;
+  bottom: 1em; /* Adjust the value to fit your design */
+  left: 1em; /* Adjust the value to fit your design */
 }
 
 .view-all-button {
