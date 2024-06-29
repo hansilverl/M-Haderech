@@ -12,8 +12,7 @@ import HelpScoreForm from './screens/Helpscore/HelpScoreForm';
 import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore';
 import History from './screens/History/History';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import DonatePage from './screens/DonatePage/DonatePage';
-import Posts from './components/Posts/Posts';
+import DonatePage from './screens/DonatePage/DonatePage'; 
 import PostEditpage from './screens/PostEditpage/PostEditpage';
 import './App.css';
 
@@ -41,7 +40,6 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
-				<Route exact path='/posts' element={<Posts />} />
 				<Route exact path='/donate' element={<DonatePage />} />
 				<Route
 					path='/admin/*'

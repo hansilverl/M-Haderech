@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
+import { collection, getDocs, query, where, orderBy , limit } from 'firebase/firestore'
 
-const usePostsDetails = (limit = 3) => {
+const usePostsDetails = (lim = 3) => {
 	const [posts, setPosts] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
@@ -10,12 +11,13 @@ const usePostsDetails = (limit = 3) => {
 		const fetchPosts = async () => {
 			setLoading(true) // Ensure loading state is true at the start of fetch
 			try {
-				const querySnapshot = db
-					.collection('Posts')
-					.where('published', '==', true)
-					.order('date-published', 'desc')
-					.limit(limit)
-					.get()
+				const q = query(
+					collection(db, 'Posts'),
+					orderBy('date-published', 'desc'),
+					where('published', '==', true),
+					limit(lim)
+				)
+				const querySnapshot = await getDocs(q)
 				const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) // Include document ID if needed
 				setPosts(data)
 				setLoading(false)

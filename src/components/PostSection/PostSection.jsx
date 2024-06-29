@@ -22,11 +22,11 @@ const PostsSection = () => {
 				{loading ? (
 					<h2>טוען...</h2>
 				) : ( error ? (
-					<h2>{error}</h2>
+					<p>{error.toString()}</p>
 				) : (
-					posts.slice(0, 3)
-						.map((post, index) => (
+					posts.map((post, index) => (
 							<Post
+								id={post.id}
 								key={index}
 								image={post.image}
 								title={post.title}

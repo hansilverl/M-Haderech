@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { ref, getDownloadURL } from 'firebase/storage'
-
-import { storage } from '../../../firebase/config'
+import React from 'react'
+import useImageUrl from '../../hooks/useImageUrl'
 import './Post.css'
 
 const Post = ({ id, image, title, date, description }) => {
-	const [imageUrl, setImageUrl] = useState('')
-
-	useEffect(() => {
-		const fetchImage = async () => {
-			const imageRef = ref(storage, image)
-			const url = await getDownloadURL(imageRef)
-			setImageUrl(url)
-		}
-
-		fetchImage()
-	}, [])
-
+	const imageUrl = useImageUrl(image)
 	return (
 		<div id={id ? id : ''} className='post'>
 			<img src={imageUrl} alt={title} className='post-image' />
