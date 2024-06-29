@@ -80,6 +80,7 @@
   cursor: pointer;
   transition: 0.3s;
   border: 2px solid white; /* Add white border */
+  
 }
 
 .navbar .login-button:hover {

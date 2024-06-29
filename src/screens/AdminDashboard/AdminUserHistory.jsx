@@ -8,7 +8,6 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
 const AdminUserHistory = () => {
-  const [email, setEmail] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [history, setHistory] = useState([]);
@@ -22,9 +21,6 @@ const AdminUserHistory = () => {
       try {
         let q = collection(db, 'QuestionnaireHistory');
         const conditions = [];
-        if (email !== '') {
-          conditions.push(where('userEmail', '==', email));
-        }
         if (startDate !== '') {
           conditions.push(where('timestamp', '>=', new Date(startDate)));
         }
@@ -48,7 +44,7 @@ const AdminUserHistory = () => {
     };
 
     fetchHistory();
-  }, [email, startDate, endDate]);
+  }, [ startDate, endDate]);
 
   const calculateAnswerStats = (historyData) => {
     const stats = {};
@@ -86,14 +82,6 @@ const AdminUserHistory = () => {
     <div className="admin-user-history-container">
       <h1>צפייה בהיסטוריית שאלונים</h1>
       <div className="filter-container">
-        <label>אימייל:</label>
-        <input
-          type="email"
-          placeholder="הזן כתובת אימייל"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="search-input"
-        />
         <label className="date-label">תאריך התחלה:</label>
         <input
           type="date"
