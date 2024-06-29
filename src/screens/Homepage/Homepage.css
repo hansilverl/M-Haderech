@@ -22,8 +22,7 @@ body {
 
 .header-image {
   width: 100%;
-  height: auto;
-  max-height: 500px; /* Adjust this value to control the image height */
+  height: 35vh; /* Adjust this value to control the height of the header image */
   object-fit: cover;
 }
 
