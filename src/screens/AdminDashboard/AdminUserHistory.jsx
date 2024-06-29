@@ -94,14 +94,15 @@ const AdminUserHistory = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="search-input"
         />
-        <label>תאריך התחלה:</label>
+        <label className="date-label">תאריך התחלה:</label>
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           className="search-input"
         />
-        <label>תאריך סיום (לא כולל):</label>
+        <label className="date-label"
+        >תאריך סיום (לא כולל):</label>
         <input
           type="date"
           value={endDate}

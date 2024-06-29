@@ -169,14 +169,14 @@ const History = () => {
     <div className="history-container">
       <h1>היסטוריה של השאלונים שלי</h1>
       <div className="filter-container">
-        <label>תאריך התחלה:</label>
+        <label className="filter-start-date">תאריך התחלה:</label>
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           className="search-input"
         />
-        <label>תאריך סיום:</label>
+        <label className="filter-end-date" >תאריך סיום:</label>
         <input
           type="date"
           value={endDate}

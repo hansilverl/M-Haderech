@@ -43,7 +43,7 @@
   padding: 10px 20px;
   font-size: 1em;
   color: white;
-  background-color: #007bff;
+  background: #9b59b6;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -51,7 +51,8 @@
 }
 
 .toggle-responses-button:hover {
-  background-color: #0056b3;
+  background: #8e44ad;
+
 }
 
 .responses-modal {
@@ -130,18 +131,17 @@
 }
 
 .fill-questionnaire-button {
-  padding: 10px 20px;
-  font-size: 1em;
+  background: #9b59b6;
   color: white;
-  background-color: #007bff;
   border: none;
-  border-radius: 5px;
+  padding: 0.6em 1em;
   cursor: pointer;
-  margin-top: 10px;
+  border-radius: 10px;
 }
 
 .fill-questionnaire-button:hover {
-  background-color: #0056b3;
+  background: #8e44ad;
+
 }
 
 .graph-container {
@@ -154,4 +154,20 @@
 .trend-message {
   margin-top: 10px;
   margin-bottom: 20px; /* Adjust margin to position trend message properly */
+}
+
+.filter-container {
+  display: flex;
+  /* align items in row */
+  flex-direction: row;
+  justify-content: center;
+  /* space between items */
+  gap: 20px;
+
+}
+
+.history-container .filter-start-date , .history-container .filter-end-date {
+  /* text should be on the same line , currently split into two lines */
+  display: inline-block;
+  /* make text appear on the same line */
 }
