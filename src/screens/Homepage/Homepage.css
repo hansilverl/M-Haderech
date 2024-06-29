@@ -16,6 +16,7 @@ body {
 }
 
 .header-image-container {
+  width: 100vw;
   position: relative;
   text-align: center;
   /* create left margin so left is same as right is with the scroll bar */
@@ -23,7 +24,8 @@ body {
 }
 
 .header-image {
-  width: 100%;
+  /* fit the image to the container */
+  width: 100vw;
   height: 39vh; /* Adjust this value to control the height of the header image */
   object-fit: cover;
   object-position: 100% 66%; /* 60% from the left and 50% from the top */

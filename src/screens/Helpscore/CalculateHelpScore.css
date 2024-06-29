@@ -102,3 +102,21 @@
 {
     font-size: 1.5em;
 }
+
+.button-group {
+    display: flex;
+    justify-content: center;
+
+}
+
+.button-group button {
+    background-color: #9b59b6;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+.button-group button:hover {
+    background-color: #8e44ad;
+}

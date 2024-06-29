@@ -5,7 +5,7 @@
   background: #9b59b6;
   color: white;
   padding: 1em 0;
-  position: sticky;
+  position: sticky; /* Fixed navbar */
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: fit-content;
   margin: 0 auto;
   padding: 0 2em;
 }

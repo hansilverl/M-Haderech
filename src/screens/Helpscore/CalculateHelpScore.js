@@ -20,6 +20,16 @@ const CalculateHelpScore = () => {
     const { user, loading: authLoading } = useAuthStatus();
     const { login, error: loginError } = useLogin();
 
+    const scoreDescription = (score) => {
+        if (score <= 19) {
+            return "ללא\קל"
+        } else if (score <= 32) {
+            return "בינונית"
+        } else {
+            return "קשה"
+        }
+    }
+
     const calculateScore = (answers) => {
         let totalScore = 0;
         Object.values(answers).forEach(answer => {
@@ -98,6 +108,10 @@ const CalculateHelpScore = () => {
                 <p>התוצאה שלך:</p>
                 <div className="user-score">{score}</div>
             </div>
+            <div className="score-description">
+                {/* use scoreDescription function to get the description */}
+                <p>רמת היפרמזיס: {scoreDescription(score)}</p>
+                </div>
             <div className="button-wrapper">
                 <button onClick={saveHistory}>שמור</button>
                 <button onClick={() => navigate('/helpscore')}>חזור לטופס</button>
