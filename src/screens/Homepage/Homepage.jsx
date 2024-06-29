@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../../components/Footer/Footer';
-import './Homepage.css'
+import './Homepage.css';
 import PostsSection from '../../components/PostSection/PostSection';
 import AnalyticsSection from '../../components/AnalyticsSection/AnalyticsSection';
 import DonationSection from '../../components/DonationSection/DonationSection';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase/config';
+import { doc, getDoc } from 'firebase/firestore';
 
 const HomePage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [aboutInfo, setAboutInfo] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAboutInfo = async () => {
+      try {
+        const docRef = doc(db, 'miscellaneousUpdated', 'about'); // Adjust document path as per your Firestore structure
+        const aboutDoc = await getDoc(docRef);
+        if (aboutDoc.exists()) {
+          setAboutInfo(aboutDoc.data().about);
+        } else {
+          setError('לא נמצאה אינפורמציית אודות.');
+        }
+      } catch (err) {
+        setError('נכשל בטעינת אינפורמציית אודות.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAboutInfo();
+  }, []);
 
   const handleFormClick = () => {
-    navigate('/helpScore')
-  }
+    navigate('/helpScore');
+  };
 
   return (
     <div className="homepage" dir="rtl">
@@ -27,7 +52,13 @@ const HomePage = () => {
       <main>
         <section id="about">
           <h2>אודותינו</h2>
-          <p>למידע נוסף על המשימה והערכים שלנו...</p>
+          {loading ? (
+            <p>טוען...</p>
+          ) : error ? (
+            <p>שגיאה: {error}</p>
+          ) : (
+            <p>{aboutInfo}</p>
+          )}
         </section>
         <PostsSection />
         <AnalyticsSection />

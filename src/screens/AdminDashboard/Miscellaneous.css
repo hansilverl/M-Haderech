@@ -1,5 +1,3 @@
-/* src/screens/Miscellaneous/Miscellaneous.css */
-
 .miscellaneous {
   padding: 20px;
   min-height: 100vh;
@@ -21,6 +19,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1 1 250px; /* Flex-grow, flex-shrink, and flex-basis to ensure boxes take equal space and wrap properly */
+  max-width: 300px; /* Optional: limit the maximum width of each box */
+  box-sizing: border-box;
 }
 
 .section h2 {
