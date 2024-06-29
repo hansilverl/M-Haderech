@@ -1,12 +1,12 @@
 import React from 'react'
 
-import usePosts from '../../hooks/usePosts'
+import usePostsDetails from '../../hooks/usePostsDetails'
 import './PostSection.css'
 import Post from '../Post/Post'
 import { useNavigate } from 'react-router-dom'
 
 const PostsSection = () => {
-	const { posts, loading, error } = usePosts()
+	const { posts, loading, error } = usePostsDetails(3)
 
 	return (
 		<section id='posts' className='posts-section'>
