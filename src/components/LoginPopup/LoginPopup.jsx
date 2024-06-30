@@ -6,7 +6,7 @@ import { useSignup } from '../../hooks/useSignup';
 import { auth } from '../../firebase/config';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation';
-import crossButton from '../../assets/cross_icon.png'; // Adjust the path as needed
+import crossButton from '../../assets/cross_icon.png'; 
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
