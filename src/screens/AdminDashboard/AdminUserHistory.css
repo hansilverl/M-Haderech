@@ -1,4 +1,3 @@
-/* src/screens/AdminDashboard/AdminUserHistory.css */
 .admin-user-history-container {
   padding: 20px;
   min-height: 100vh;
@@ -144,13 +143,24 @@
   margin-bottom: 20px;
 }
 
-.date-label {
-  white-space: nowrap;
-}
-
-
 .question-stats-box h3 {
   margin-top: 0;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pie-chart-container {
+  width: 400px;
+  height: 400px;
+  margin-left: auto; /* Centers the pie chart by adding left margin */
+}
+
+.date-label {
+  white-space: nowrap;
 }
 
 .question-stats-box ul {

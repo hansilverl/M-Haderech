@@ -92,7 +92,6 @@ const History = () => {
   };
 
   const graphOptions = {
-    // Maintain the aspect ratio of the graph
     onClick: (e, elements) => {
       if (elements.length > 0) {
         const index = elements[0].index;
@@ -104,10 +103,34 @@ const History = () => {
         type: 'category',
         barPercentage: 1.0,
         categoryPercentage: 1.0,
+        title: {
+          display: true,
+          text: 'זמן מילוי השאלון',
+          font: {
+            size: 16,
+            weight: 'bold',
+          },
+        },
       },
       y: {
         beginAtZero: true,
-        display: false, // Hide y-axis labels
+        display: true, // Show y-axis labels
+        title: {
+          display: true,
+          text: 'ניקוד',
+          font: {
+            size: 16,
+            weight: 'bold',
+          },
+          padding: { bottom: 20 }, // Add some padding for the rotation
+          rotation: 270,
+        },
+        ticks: {
+          display: false, // Hide y-axis ticks
+        },
+        grid: {
+          display: false, // Hide background grid
+        },
       },
     },
     plugins: {
@@ -164,9 +187,16 @@ const History = () => {
       },
     },
   };
+  
+  
 
   return (
     <div className="history-container">
+      <div className="graph-container">
+        <h2>התקדמות ציונים</h2>
+        <p className="graph-description">הגרף מציג את זמן מילוי השאלון לעומת הציון</p>
+        <Bar data={graphData} options={graphOptions} />
+      </div>
       <h1>היסטוריה של השאלונים שלי</h1>
       <div className="filter-container">
         <label className="filter-start-date">תאריך התחלה:</label>
@@ -206,11 +236,6 @@ const History = () => {
               </div>
             ))}
           </div>
-          <div className="graph-container">
-            <h2>התקדמות ציונים</h2>
-            <p className="graph-description">הגרף מציג את זמן מילוי השאלון לעומת הציון</p>
-            <Bar data={graphData} options={graphOptions} />
-          </div>
           {selectedEntry && (
             <Modal
               isOpen={!!selectedEntry}
@@ -235,7 +260,7 @@ const History = () => {
         </>
       )}
     </div>
-  );
+  );  
 };
 
 export default History;
