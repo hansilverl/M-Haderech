@@ -1,29 +1,33 @@
+//src/screens/Signup/Signup.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignup } from '../../hooks/useSignup';
-import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation'; // Import the custom hook
+import useFirebaseErrorTranslation from '../../hooks/useFirebaseErrorTranslation';
 import './Signup.css';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { error, signup } = useSignup();
-  const translateErrorToHebrew = useFirebaseErrorTranslation(); // Use the custom hook
+  const translateErrorToHebrew = useFirebaseErrorTranslation();
   const [signupError, setSignupError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
-      setSignupError(translateErrorToHebrew(error));
+      setSignupError(translateErrorToHebrew(error.code));
     }
   }, [error, translateErrorToHebrew]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(email, password, navigate, true);
-    } catch (error) {
-      setSignupError(translateErrorToHebrew(error.code));
+      const result = await signup(email, password, navigate, true);
+      if (!result) {
+        setSignupError(translateErrorToHebrew(error.code));
+      }
+    } catch (err) {
+      setSignupError(translateErrorToHebrew(err.code));
     }
   };
 

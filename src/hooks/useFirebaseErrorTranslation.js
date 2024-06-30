@@ -45,3 +45,5 @@ export const useFirebaseErrorTranslation = () => {
 
   return translateErrorToHebrew;
 };
+
+export default useFirebaseErrorTranslation;

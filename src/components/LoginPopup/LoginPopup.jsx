@@ -5,7 +5,7 @@ import { useLogin } from '../../hooks/useLogin';
 import { useSignup } from '../../hooks/useSignup';
 import { auth } from '../../firebase/config';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation';
+import useFirebaseErrorTranslation from '../../hooks/useFirebaseErrorTranslation';
 import crossButton from '../../assets/cross_icon.png'; 
 import Modal from 'react-modal';
 
@@ -22,6 +22,11 @@ export const LoginPopup = ({ setShowLogin }) => {
   const [authError, setAuthError] = useState(null);
   const translateErrorToHebrew = useFirebaseErrorTranslation();
   const navigate = useNavigate();
+
+  // Reset authError when switching between login and signup mode
+  useEffect(() => {
+    setAuthError(null);
+  }, [currState]);
 
   useEffect(() => {
     if (loginError || signupError) {
@@ -44,9 +49,11 @@ export const LoginPopup = ({ setShowLogin }) => {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(email, password, navigate, true);
+      const result = await signup(email, password, navigate, true);
       setAuthError(null);
-      setShowLogin(false); // Close the modal only if signup is successful
+      if (result) {
+        setShowLogin(false); // Close the modal only if signup is successful
+      }
     } catch (error) {
       setAuthError(translateErrorToHebrew(error.code));
     }
