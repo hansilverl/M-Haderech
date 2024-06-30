@@ -20,23 +20,34 @@ export const LoginPopup = ({ setShowLogin }) => {
   const { error: loginError, login } = useLogin();
   const { error: signupError, signup } = useSignup();
   const [authError, setAuthError] = useState(null);
+  const [errorDisplayed, setErrorDisplayed] = useState(false);
   const translateErrorToHebrew = useFirebaseErrorTranslation();
   const navigate = useNavigate();
 
   // Reset authError when switching between login and signup mode
   useEffect(() => {
     setAuthError(null);
+    setErrorDisplayed(false); // Reset error display state
   }, [currState]);
 
   useEffect(() => {
-    if (loginError || signupError) {
+    if ((loginError || signupError) && !errorDisplayed) {
       const error = loginError ? loginError : signupError;
       setAuthError(translateErrorToHebrew(error));
+      setErrorDisplayed(true); // Set error displayed to true
     }
-  }, [loginError, signupError, translateErrorToHebrew]);
+  }, [loginError, signupError, translateErrorToHebrew, errorDisplayed]);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setErrorDisplayed(false); // Reset error display state on form submission
+
+    // Custom validation logic
+    if (!email.includes('@')) {
+      setAuthError("האימייל שלך אינו חוקי");
+      return;
+    }
+
     try {
       await login(email, password, navigate);
       setAuthError(null);
@@ -48,6 +59,14 @@ export const LoginPopup = ({ setShowLogin }) => {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+    setErrorDisplayed(false); // Reset error display state on form submission
+
+    // Custom validation logic
+    if (!email.includes('@')) {
+      setAuthError("האימייל שלך אינו חוקי");
+      return;
+    }
+
     try {
       const result = await signup(email, password, navigate, true);
       setAuthError(null);
@@ -73,7 +92,7 @@ export const LoginPopup = ({ setShowLogin }) => {
 
   return (
     <div className='login-popup'>
-      <form className="login-popup-container" onSubmit={currState === "הרשמה" ? handleSignupSubmit : handleLoginSubmit}>
+      <form className="login-popup-container" onSubmit={currState === "הרשמה" ? handleSignupSubmit : handleLoginSubmit} noValidate>
         <div className="login-popup-title">
           <h2>{currState}</h2>
           <img onClick={() => setShowLogin(false)} src={crossButton} alt='close' />
