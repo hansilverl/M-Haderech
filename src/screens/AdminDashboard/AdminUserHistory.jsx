@@ -44,7 +44,7 @@ const AdminUserHistory = () => {
     };
 
     fetchHistory();
-  }, [ startDate, endDate]);
+  }, [startDate, endDate]);
 
   const calculateAnswerStats = (historyData) => {
     const stats = {};
@@ -89,8 +89,7 @@ const AdminUserHistory = () => {
           onChange={(e) => setStartDate(e.target.value)}
           className="search-input"
         />
-        <label className="date-label"
-        >תאריך סיום (לא כולל):</label>
+        <label className="date-label">תאריך סיום (לא כולל):</label>
         <input
           type="date"
           value={endDate}
