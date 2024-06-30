@@ -1,5 +1,3 @@
-// src/components/LoginPopup/LoginPopup.js
-
 import React, { useState, useEffect } from 'react';
 import './LoginPopup.css';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +5,11 @@ import { useLogin } from '../../hooks/useLogin';
 import { useSignup } from '../../hooks/useSignup';
 import { auth } from '../../firebase/config';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation'; // Import the custom hook
+import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation';
 import crossButton from '../../assets/cross_icon.png'; // Adjust the path as needed
 import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 export const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("התחברות");
@@ -20,14 +20,13 @@ export const LoginPopup = ({ setShowLogin }) => {
   const { error: loginError, login } = useLogin();
   const { error: signupError, signup } = useSignup();
   const [authError, setAuthError] = useState(null);
-  const translateErrorToHebrew = useFirebaseErrorTranslation(); // Use the custom hook
+  const translateErrorToHebrew = useFirebaseErrorTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loginError) {
-      setAuthError(translateErrorToHebrew(loginError));
-    } else if (signupError) {
-      setAuthError(translateErrorToHebrew(signupError));
+    if (loginError || signupError) {
+      const error = loginError ? loginError : signupError;
+      setAuthError(translateErrorToHebrew(error.code));
     }
   }, [loginError, signupError, translateErrorToHebrew]);
 
@@ -35,9 +34,11 @@ export const LoginPopup = ({ setShowLogin }) => {
     e.preventDefault();
     try {
       await login(email, password, navigate);
-      setShowLogin(false); 
+      setAuthError(null);
+      setShowLogin(false); // Close the modal only if login is successful
     } catch (error) {
       setAuthError(translateErrorToHebrew(error.code));
+      setShowLogin(true); // Keep the modal open if login fails
     }
   };
 
@@ -45,9 +46,11 @@ export const LoginPopup = ({ setShowLogin }) => {
     e.preventDefault();
     try {
       await signup(email, password, navigate, true);
-      setShowLogin(false); 
+      setAuthError(null);
+      setShowLogin(false); // Close the modal only if signup is successful
     } catch (error) {
       setAuthError(translateErrorToHebrew(error.code));
+      setShowLogin(true); // Keep the modal open if signup fails
     }
   };
 
@@ -58,14 +61,14 @@ export const LoginPopup = ({ setShowLogin }) => {
         setModalIsOpen(false);
       })
       .catch((error) => {
-        console.error("Error object:", error); // Log the entire error object for debugging
+        console.error("Error object:", error);
         alert("אירעה שגיאה בשליחת האימייל: " + translateErrorToHebrew(error.code));
       });
   };
 
   return (
     <div className='login-popup'>
-      <form action="" className="login-popup-container">
+      <form className="login-popup-container" onSubmit={currState === "הרשמה" ? handleSignupSubmit : handleLoginSubmit}>
         <div className="login-popup-title">
           <h2>{currState}</h2>
           <img onClick={() => setShowLogin(false)} src={crossButton} alt='close' />
@@ -86,7 +89,7 @@ export const LoginPopup = ({ setShowLogin }) => {
             value={password}
           />
         </div>
-        <button onClick={currState === "הרשמה" ? handleSignupSubmit : handleLoginSubmit}>
+        <button type="submit">
           {currState === "הרשמה" ? "צור חשבון" : "התחברות"}
         </button>
         {authError && <p>{authError}</p>}
@@ -105,6 +108,7 @@ export const LoginPopup = ({ setShowLogin }) => {
         onRequestClose={() => setModalIsOpen(false)}
         className="modal"
         overlayClassName="modal-overlay"
+        parentSelector={() => document.querySelector('.login-popup')}
       >
         <h2>איפוס סיסמה</h2>
         <label>

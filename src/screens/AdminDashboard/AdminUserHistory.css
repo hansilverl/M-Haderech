@@ -142,6 +142,11 @@
   margin-bottom: 20px;
 }
 
+.date-label {
+  white-space: nowrap;
+}
+
+
 .question-stats-box h3 {
   margin-top: 0;
 }
