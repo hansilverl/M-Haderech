@@ -1,0 +1,64 @@
+/* src/screens/AdminDashboard/AdminExplanation.css */
+.admin-explanation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 20px); /* Full height minus some padding */
+    padding: 20px;
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+  }
+  
+  .admin-explanation {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 40px; /* Increased padding for a bigger box */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px; /* Increased max-width */
+  }
+  
+  .welcome-header {
+    font-size: 3em; /* Increased font size */
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .intro-text {
+    font-size: 1.5em; /* Increased font size */
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+  
+  .category-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.3em; /* Increased font size */
+  }
+  
+  .category-item {
+    margin-bottom: 20px; /* Increased margin for better spacing */
+    padding: 20px; /* Increased padding for a bigger box */
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Needed for the purple strip */
+  }
+  
+  .category-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background-color: #8e44ad; /* Purple color */
+    border-top-left-radius: 5px; /* Match the border-radius of the category item */
+    border-bottom-left-radius: 5px; /* Match the border-radius of the category item */
+  }
+  
+  .category-item strong {
+    color: #8e44ad; /* Change to purple */
+    margin-left: 15px; /* Add padding to avoid overlap with the strip */
+  }
+  
