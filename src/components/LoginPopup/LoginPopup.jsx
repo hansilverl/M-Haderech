@@ -26,7 +26,7 @@ export const LoginPopup = ({ setShowLogin }) => {
   useEffect(() => {
     if (loginError || signupError) {
       const error = loginError ? loginError : signupError;
-      setAuthError(translateErrorToHebrew(error.code));
+      setAuthError(translateErrorToHebrew(error));
     }
   }, [loginError, signupError, translateErrorToHebrew]);
 
@@ -38,7 +38,6 @@ export const LoginPopup = ({ setShowLogin }) => {
       setShowLogin(false); // Close the modal only if login is successful
     } catch (error) {
       setAuthError(translateErrorToHebrew(error.code));
-      setShowLogin(true); // Keep the modal open if login fails
     }
   };
 
@@ -50,7 +49,6 @@ export const LoginPopup = ({ setShowLogin }) => {
       setShowLogin(false); // Close the modal only if signup is successful
     } catch (error) {
       setAuthError(translateErrorToHebrew(error.code));
-      setShowLogin(true); // Keep the modal open if signup fails
     }
   };
 
@@ -92,7 +90,7 @@ export const LoginPopup = ({ setShowLogin }) => {
         <button type="submit">
           {currState === "הרשמה" ? "צור חשבון" : "התחברות"}
         </button>
-        {authError && <p>{authError}</p>}
+        {authError && <p className="error-message">{authError}</p>}
         {currState === "התחברות" ? (
           <>
             <a className="reset-password-link" onClick={() => setModalIsOpen(true)}>איפוס סיסמה</a>

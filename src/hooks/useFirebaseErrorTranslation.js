@@ -13,7 +13,7 @@ export const useFirebaseErrorTranslation = () => {
     'auth/too-many-requests': 'יותר מדי בקשות. נסה שוב מאוחר יותר.',
     'auth/app-deleted': 'האפליקציה נמחקה.',
     'auth/account-exists-with-different-credential': 'חשבון קיים עם פרטי התחברות שונים.',
-    'auth/invalid-credential': 'אימייל או סיסמא לא נכונים.',
+    'auth/invalid-credential': 'טעות במייל או בסיסמא, אנא נסו שוב',
     'auth/invalid-verification-code': 'קוד אימות לא תקין.',
     'auth/invalid-verification-id': 'מזהה אימות לא תקין.',
     'auth/missing-verification-code': 'חסר קוד אימות.',
