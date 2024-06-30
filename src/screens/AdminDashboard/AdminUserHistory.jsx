@@ -1,3 +1,4 @@
+// src/screens/AdminDashboard/AdminUserHistory.jsx
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
 import { collection, query, where, getDocs } from 'firebase/firestore';

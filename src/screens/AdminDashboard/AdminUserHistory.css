@@ -1,3 +1,4 @@
+/* src/screens/AdminDashboard/AdminUserHistory.css */
 .admin-user-history-container {
   padding: 20px;
   min-height: 100vh;
@@ -127,6 +128,7 @@
 
 .filter-container label {
   margin: 5px 0;
+  white-space: nowrap; /* Prevents the text from breaking into multiple lines */
 }
 
 .statistics-container {

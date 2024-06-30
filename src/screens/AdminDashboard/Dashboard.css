@@ -1,7 +1,0 @@
-.dashboard {
-    margin-right: 250px; /* Deja espacio para la barra lateral */
-    padding: 20px;
-    width: calc(100% - 250px); /* Ajusta el ancho del contenido */
-    box-sizing: border-box; /* Incluye el padding en el ancho total */
-  }
-  
