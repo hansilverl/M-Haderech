@@ -19,7 +19,7 @@ const DonationSection = () => {
         <button className="donate-button" onClick={handleDonateClick}>תרמו עכשיו</button>
       </div>
       <div className="donation-image">
-        <img src="https://back.notaria-online.com/wp-content/uploads/2022/11/donacion-de-dinero-a-un-familiar.png" alt="Gráfico de Ejemplo" className="donation-image" />
+        <img src="https://cdn.pixabay.com/photo/2014/05/01/01/43/dandelion-335222_1280.png" alt="donation illustration" className="donation-image" />
       </div>
     </section>
   );

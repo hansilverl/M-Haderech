@@ -1,4 +1,10 @@
 /* General Styles */
+
+.homepage{
+    
+
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -12,19 +18,23 @@ body {
 .header {
   position: relative;
   text-align: center;
-  color: white;
+  color: #333333ba;
 }
 
 .header-image-container {
+  width: 100vw;
   position: relative;
   text-align: center;
+  /* create left margin so left is same as right is with the scroll bar */
+  margin-left: calc(50% - 50vw);
 }
 
 .header-image {
-  width: 100%;
-  height: auto;
-  max-height: 500px; /* Adjust this value to control the image height */
+  /* fit the image to the container */
+  width: 100vw;
+  height: 39vh; /* Adjust this value to control the height of the header image */
   object-fit: cover;
+  object-position: 100% 66%; /* 60% from the left and 50% from the top */
 }
 
 

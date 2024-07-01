@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { CSVLink } from 'react-csv';
+import { Pie } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+import 'chartjs-plugin-datalabels';
 import './AdminUserHistory.css';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
 const AdminUserHistory = () => {
-  const [email, setEmail] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [history, setHistory] = useState([]);
@@ -16,15 +18,26 @@ const AdminUserHistory = () => {
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [answerStats, setAnswerStats] = useState({});
+  const [answers, setAnswers] = useState({});
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      const answersData = {};
+      const questionsSnapshot = await getDocs(collection(db, 'Questionnaire'));
+      questionsSnapshot.forEach(doc => {
+        answersData[doc.id] = doc.data();
+      });
+      setAnswers(answersData);
+    };
+
+    fetchAnswers();
+  }, []);
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         let q = collection(db, 'QuestionnaireHistory');
         const conditions = [];
-        if (email !== '') {
-          conditions.push(where('userEmail', '==', email));
-        }
         if (startDate !== '') {
           conditions.push(where('timestamp', '>=', new Date(startDate)));
         }
@@ -48,7 +61,7 @@ const AdminUserHistory = () => {
     };
 
     fetchHistory();
-  }, [email, startDate, endDate]);
+  }, [startDate, endDate]);
 
   const calculateAnswerStats = (historyData) => {
     const stats = {};
@@ -57,10 +70,11 @@ const AdminUserHistory = () => {
         if (!stats[response.question]) {
           stats[response.question] = {};
         }
-        if (!stats[response.question][response.selectedOption]) {
-          stats[response.question][response.selectedOption] = 0;
+        const answerText = answers[response.question] ? answers[response.question][response.selectedOption] : response.selectedOption;
+        if (!stats[response.question][answerText]) {
+          stats[response.question][answerText] = 0;
         }
-        stats[response.question][response.selectedOption]++;
+        stats[response.question][answerText]++;
       });
     });
     setAnswerStats(stats);
@@ -86,22 +100,14 @@ const AdminUserHistory = () => {
     <div className="admin-user-history-container">
       <h1>צפייה בהיסטוריית שאלונים</h1>
       <div className="filter-container">
-        <label>אימייל:</label>
-        <input
-          type="email"
-          placeholder="הזן כתובת אימייל"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="search-input"
-        />
-        <label>תאריך התחלה:</label>
+        <label className="date-label">תאריך התחלה:</label>
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           className="search-input"
         />
-        <label>תאריך סיום (לא כולל):</label>
+        <label className="date-label">תאריך סיום (לא כולל):</label>
         <input
           type="date"
           value={endDate}
@@ -141,16 +147,74 @@ const AdminUserHistory = () => {
       </Modal>
       <div className="statistics-container">
         <h2>סטטיסטיקות של שאלות (לפי הפילטר שהוכנס):</h2>
-        {Object.keys(answerStats).map(question => (
-          <div key={question} className="question-stats-box">
-            <h3>{question}</h3>
-            <ul>
-              {Object.keys(answerStats[question]).map(option => (
-                <li key={option}>תשובה: {option}, סך הקולות: {answerStats[question][option]}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {Object.keys(answerStats).map(question => {
+          const data = {
+            labels: Object.keys(answerStats[question]),
+            datasets: [
+              {
+                data: Object.values(answerStats[question]),
+                backgroundColor: [
+                  '#FF6384',
+                  '#36A2EB',
+                  '#FFCE56',
+                  '#4BC0C0',
+                  '#9966FF',
+                  '#FF9F40',
+                ],
+              },
+            ],
+          };
+          const options = {
+            plugins: {
+              legend: {
+                display: true,
+                position: 'right',
+                labels: {
+                  usePointStyle: true,
+                  generateLabels: (chart) => {
+                    const dataset = chart.data.datasets[0];
+                    return chart.data.labels.map((label, i) => ({
+                      text: `תשובה מספר ${i + 1} כמות הצבעות ${dataset.data[i]}`,
+                      fillStyle: dataset.backgroundColor[i],
+                      hidden: false,
+                      index: i,
+                    }));
+                  },
+                },
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    const label = context.label || '';
+                    const value = context.raw || '';
+                    return `תשובה: ${label}, כמות הצבעות: ${value}`;
+                  },
+                },
+              },
+              datalabels: {
+                display: false,
+              },
+            },
+            maintainAspectRatio: false,
+            responsive: true,
+            layout: {
+              padding: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+              },
+            },
+          };
+          return (
+            <div key={question} className="question-stats-box">
+              <h3>{question}</h3>
+              <div className="chart-container">
+                <Pie data={data} options={options} />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+// src/components/NavBar/NavBar.js
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
@@ -5,11 +7,14 @@ import { useAuthStatus } from '../../hooks/useAuthStatus';
 import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
+  const openPosts = () => {
+    navigate('/posts');
+  };
 
   const handleScroll = (event) => {
     event.preventDefault();
@@ -53,13 +58,14 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-          <li><a href="#posts" onClick={handleScroll}>פוסטים</a></li>
+          <li><a href="/" onClick={openPosts}>דף הבית</a></li>
+          <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
           <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
-          <li><Link to="/donate" onClick={() => setIsOpen(false)}>לתרומה</Link></li>
-          {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>}
+          <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
+          {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
           {user ? (
             <>
               <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
@@ -68,7 +74,7 @@ const Navbar = () => {
               <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
-            <li><Link to="/login" onClick={() => setIsOpen(false)}>התחברות</Link></li>
+            <li><span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span></li> 
           )}
         </ul>
       </div>

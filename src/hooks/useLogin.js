@@ -14,6 +14,7 @@ export const useLogin = () => {
       navigate('/');
     } catch (err) {
       setError(err.code);
+      throw err; // Add this to throw the error to be caught in the component
     }
   };
 

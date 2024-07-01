@@ -27,7 +27,8 @@
 
 .history-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Maximum of two blocks per row */
+  /* Adjust grid columns based on screen size, maximum 3 columns */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px; /* Gap between blocks */
 }
 
@@ -119,13 +120,14 @@
 
 .filter-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   margin-bottom: 20px;
 }
 
 .filter-container label {
   margin: 5px 0;
+  white-space: nowrap; /* Prevents the text from breaking into multiple lines */
 }
 
 .statistics-container {
@@ -143,6 +145,22 @@
 
 .question-stats-box h3 {
   margin-top: 0;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pie-chart-container {
+  width: 400px;
+  height: 400px;
+  margin-left: auto; /* Centers the pie chart by adding left margin */
+}
+
+.date-label {
+  white-space: nowrap;
 }
 
 .question-stats-box ul {

@@ -1,3 +1,4 @@
+// src/hooks/useSignup.js
 import { useState } from 'react';
 import { auth, db } from '../firebase/config';
 import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';

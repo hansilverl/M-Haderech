@@ -5,7 +5,7 @@
   background: #9b59b6;
   color: white;
   padding: 1em 0;
-  position: sticky;
+  position: sticky; /* Fixed navbar */
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: fit-content;
   margin: 0 auto;
   padding: 0 2em;
 }
@@ -53,7 +53,7 @@
 }
 
 .navbar-menu li {
-  margin-left: 2em;
+  margin-left: 15px;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -71,6 +71,22 @@
 
 }
 
+.navbar .login-button {
+  background: transparent;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid white; /* Add white border */
+  
+}
+
+.navbar .login-button:hover {
+  background: #555; /* Add a hover effect if needed */
+}
+
 .navbar-menu li a:hover, .logout-button:hover {
   background: #555;
   color: #fff;
@@ -83,7 +99,7 @@
 }
 
 .space {
-  margin-right: 5cm;
+  margin-right: 80px;
 }
 
 .admin-logout {
@@ -91,22 +107,31 @@
   border-radius: 15px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1172px) {
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
   }
 
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+
   .navbar-menu {
     flex-direction: column;
-    width: 100%;
+    width: 80%;
     display: none;
     position: absolute;
     top: 60px;
-    left: 0;
+    right: 0;
     background: #9b59b6;
     padding: 1em 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    z-index: 999;
   }
 
   .navbar-menu.active {
@@ -114,17 +139,13 @@
   }
 
   .navbar-menu li {
-    margin: 0;
     width: 100%;
   }
 
   .navbar-menu li a {
     display: block;
-    text-align: center;
-  }
-
-  .hamburger {
-    display: block;
+    text-align: right;
+    padding-right: 20px;
   }
 
   .hamburger.open div:nth-child(1) {
