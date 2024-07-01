@@ -99,7 +99,7 @@
 }
 
 .space {
-  margin-right: 5cm;
+  margin-right: 80px;
 }
 
 .admin-logout {
@@ -107,22 +107,31 @@
   border-radius: 15px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1172px) {
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
   }
 
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+
   .navbar-menu {
     flex-direction: column;
-    width: 100%;
+    width: 80%;
     display: none;
     position: absolute;
     top: 60px;
-    left: 0;
+    right: 0;
     background: #9b59b6;
     padding: 1em 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    z-index: 999;
   }
 
   .navbar-menu.active {
@@ -130,17 +139,13 @@
   }
 
   .navbar-menu li {
-    margin: 0;
     width: 100%;
   }
 
   .navbar-menu li a {
     display: block;
-    text-align: center;
-  }
-
-  .hamburger {
-    display: block;
+    text-align: right;
+    padding-right: 20px;
   }
 
   .hamburger.open div:nth-child(1) {
