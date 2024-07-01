@@ -58,12 +58,13 @@ const Navbar = ({ setShowLogin }) => {
           </Link>
         </div>
         <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+          <li><a href="/" onClick={openPosts}>דף הבית</a></li>
           <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
           <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
-          <li><Link to="/donate" onClick={() => setIsOpen(false)}>לתרומה</Link></li>
+          <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
           {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
           {user ? (
             <>
