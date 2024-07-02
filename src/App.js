@@ -17,6 +17,7 @@ import PostEditpage from './screens/PostEditpage/PostEditpage';
 import './App.css';
 import Posts from './screens/Posts/Posts';
 import { LoginPopup } from './components/LoginPopup/LoginPopup';
+import PostDetails, { Post } from './screens/PostDetails/PostDetails';
 
 function App() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
+        <Route path="/posts/:id" element={<PostDetails />} /> {/* Route for detail of post */}
 				<Route exact path='/donate' element={<DonatePage />} />
 				<Route
 					path='/admin/*'
