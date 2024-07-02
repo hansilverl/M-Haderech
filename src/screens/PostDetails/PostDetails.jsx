@@ -15,8 +15,6 @@ const PostDetails = () => {
 	const { id } = useParams()
 	const { post, loading, error } = usePostDetails(id)
 
-	console.log('post', post)
-
 	const handleOpenPdf = () => {
 		window.open(post.contentFile, '_blank')
 	}

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
 function PdfViewer({ pdfFile }) {
-  console.log('pdfFile', pdfFile);
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
 
