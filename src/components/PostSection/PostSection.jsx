@@ -5,12 +5,13 @@ import Post from '../Posts/Post'
 
 import usePostsDetails from '../../hooks/usePostsDetails'
 
-const handleViewAllClick = () => {
-  useNavigate('/posts')
-}
 const PostsSection = () => {
 	const { posts, loading, error } = usePostsDetails(3)
+	const navigate = useNavigate()
 
+	const handleViewAllClick = () => {
+		navigate('/posts')
+	}
 	return (
 		<section id='posts' className='posts-section'>
 			<div className='posts-header'>

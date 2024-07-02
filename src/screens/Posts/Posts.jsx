@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from '../../components/Post/Post';
+import Post from '../../components/Posts/Post';
 import usePostsDetails from '../../hooks/usePostsDetails';
 import './Posts.css';
 
