@@ -2,13 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './PostSection.css'
 import Post from '../Posts/Post'
-import React from 'react'
 
 import usePostsDetails from '../../hooks/usePostsDetails'
-import './PostSection.css'
-import Post from '../Post/Post'
-import { useNavigate } from 'react-router-dom'
 
+const handleViewAllClick = () => {
+  useNavigate('/posts')
+}
 const PostsSection = () => {
 	const { posts, loading, error } = usePostsDetails(3)
 
