@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import './PostDetails.css'
 import PdfViewer from '../../components/PdfViewer/PdfViewer'
@@ -15,9 +15,7 @@ const PostDetails = () => {
 	const { id } = useParams()
 	const { post, loading, error } = usePostDetails(id)
 
-	if (!post) {
-		return <div>Loading...</div>
-	}
+	console.log('post', post)
 
 	const handleOpenPdf = () => {
 		window.open(post.contentFile, '_blank')
@@ -25,29 +23,33 @@ const PostDetails = () => {
 
 	return (
 		<div className='post-details'>
-			{loading && <div>Loading...</div>}
-			{error && <div>Error: {error}</div>}
-
-			<h1>{post.title}</h1>
-			<p>
-				<strong>תאריך פרסום:</strong> {post.date}
-			</p>
-			<div className='image-container'>
-				<img src={post.image} alt={post.title} style={{ width: '100%', height: 'auto' }} />
-			</div>
-			<p>
-				<strong>תיאור:</strong> {post.description}
-			</p>
-			{post.type === 'pdf' ? (
-				<>
-					<button onClick={handleOpenPdf} className='pdf-button'>
-						<img src={pdfIcon} alt='Open PDF' />
-					</button>
-
-					<PdfViewer pdfFile={post.contentFile} />
-				</>
+			{loading ? (
+				<p>טוען...</p>
+			) : error ? (
+				<p>{error}</p>
 			) : (
-				<div className='tiptap' dangerouslySetInnerHTML={{ __html: post.contentHTML }} />
+				<>
+					<h1>{post.title}</h1>
+					<p>
+						<strong>תאריך פרסום:</strong> {post.date}
+					</p>
+					<div className='image-container'>
+						<img src={post.image} alt={post.title} style={{ width: '100%', height: 'auto' }} />
+					</div>
+					<p>
+						<strong>תיאור:</strong> {post.description}
+					</p>
+					{post.type === 'pdf' ? (
+						<>
+							<button onClick={handleOpenPdf} className='pdf-button'>
+								<img src={pdfIcon} alt='Open PDF' />
+							</button>
+							<PdfViewer pdfFile={post.contentFile} />
+						</>
+					) : (
+						<div className='tiptap' dangerouslySetInnerHTML={{ __html: post.contentHTML }} />
+					)}
+				</>
 			)}
 		</div>
 	)

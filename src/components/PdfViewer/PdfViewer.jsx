@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
-function PdfViewer() {
+function PdfViewer({ pdfFile }) {
+  console.log('pdfFile', pdfFile);
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -14,9 +15,9 @@ function PdfViewer() {
       <p>
          עמוד {pageNumber} מ {numPages}
      </p>
-      <Document file="https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+      <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
         {Array.apply(null, Array(numPages)).map((x,i) => i+1).map((page) => {
-            return(<Page pageNumber={page} renderTextLayer={false} renderAnnotationLayer={false} />)
+            return(<Page key={page} pageNumber={page} renderTextLayer={false} renderAnnotationLayer={false} />)
         })}
       </Document>
     </div>

@@ -19,12 +19,10 @@ const usePostsDetails = (lim = 3) => {
 
 			const querySnapshot = await getDocs(q)
 			const rawData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-			console.log(rawData)
 			const fixedData = []
 			for (const post of rawData) {
 				fixedData.push(await convertDocToFrontEnd(post))
 			}
-			console.log(fixedData)
 			setPosts(fixedData)
 		} catch (error) {
 			console.error('Error fetching posts: ', error) // Log error for debugging
