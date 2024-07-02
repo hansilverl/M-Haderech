@@ -1,0 +1,114 @@
+/* Base styles for the post details container */
+.post-details {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Style for the headings within the post details */
+  .post-details h1 {
+    color: #333;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  
+  .post-details img {
+    width: 50%;
+    max-width: 35%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .post-details .image-container {
+    text-align: right; /* Right aligns the content (the img element) */
+    background-color: transparent;
+    border: none
+  }
+  
+  /* Styling for the paragraph elements */
+  .post-details p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: right;
+  }
+  
+  /* Specific style for the date to make it less prominent */
+  .post-details p strong {
+    color: #333;
+    margin-right: 5px;
+  }
+  
+  /* Styles for the links to make them stand out */
+  .post-details a {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  /* Hover effect for links */
+  .post-details a:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional styling for HTML content in the editor type post */
+  .post-details div {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 768px) {
+    .post-details {
+      padding: 15px;
+    }
+  
+    .post-details h1 {
+      font-size: 24px;
+    }
+  
+    .post-details p {
+      font-size: 14px;
+    }
+  
+    .post-details a {
+      padding: 8px 16px;
+    }
+  }
+  
+  /* Style for the PDF button in the post details */
+.post-details .pdf-button {
+    border: none;
+    background-color: transparent; /* No background for a cleaner look */
+    cursor: pointer; /* Cursor changes to pointer to indicate clickable */
+    padding: 5px; /* Padding to increase the clickable area */
+    display: inline-flex; /* Aligns the icon image properly */
+    align-items: right; /* Center the icon vertically */
+    justify-content: center; /* Center the icon horizontally */
+  }
+  
+  .post-details .pdf-button img {
+    width: 8%; /* Fixed size for consistency */
+    height: 8%;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
+  }
+  
+  .post-details .pdf-button:hover img {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+  }
+
