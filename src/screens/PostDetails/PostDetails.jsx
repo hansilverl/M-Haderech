@@ -11,41 +11,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	import.meta.url
 ).toString()
 
-const fetchPostDetails = (id) => {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			// Example of how to switch between the two types
-			const postDetails =
-				id % 2 === 0
-					? {
-							id: id,
-							image:
-								'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
-							title: 'מידע ותמיכה לנשים המתמודדות עם היפראמזיס בהריון',
-							date: '29 ביוני 2024',
-							description:
-								'ברוכות הבאות לפוסט שיעזור לכן להבין ולהתמודד עם היפראמזיס במהלך ההריון. היפראמזיס הינו מצב בו נשים חוות בחילות והקאות קשות במהלך ההריון, דבר שיכול לסכן את האם והעובר. כאן תמצאו יעוץ רפואי מקצועי, מידע על אפשרויות תמיכה כלכלית למימון תרופות, והמלצות למניעת סיכונים לאם ולעובר.',
-							type: 'pdf',
-							contentFile: 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf',
-					  }
-					: {
-							id: id,
-							image:
-								'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
-							title: 'מידע ותמיכה לנשים המתמודדות עם היפראמזיס בהריון ',
-							date: '30 ביוני 2024',
-							description:
-								'ברוכות הבאות לפוסט שיעזור לכן להבין ולהתמודד עם היפראמזיס במהלך ההריון. היפראמזיס הינו מצב בו נשים חוות בחילות והקאות קשות במהלך ההריון, דבר שיכול לסכן את האם והעובר. כאן תמצאו יעוץ רפואי מקצועי, מידע על אפשרויות תמיכה כלכלית למימון תרופות, והמלצות למניעת סיכונים לאם ולעובר.',
-							type: 'editor',
-							contentHtml:
-								'<p> מודדות עם היפראמזיס דורשת ידע והבנה של התסמינים והטיפולים הזמינים. ראשית, חשוב לזהות את הסימפטומים במוקדם ולפנות לייעוץ רפואי. ביקור אצל הרופא יכול לסייע בהתאמת תכנית טיפול המתאימה לצרכיך, כולל תרופות שיכולות לשפר את איכות חייך ולהקל על התסמינים.מודדות עם היפראמזיס דורשת ידע והבנה של התסמינים והטיפולים הזמינים. ראשית, חשוב לזהות את הסימפטומים במוקדם ולפנות לייעוץ רפואי. ביקור אצל הרופא יכול לסייע בהתאמת תכנית טיפול המתאימה לצרכיך, כולל תרופות שיכולות לשפר את איכות חייך ולהקל על התסמינים.התמודדות עם היפראמזיס דורשת ידע והבנה של התסמינים והטיפולים הזמינים. ראשית, חשוב לזהות את הסימפטומים במוקדם ולפנות לייעוץ רפואי. ביקור אצל הרופא יכול לסייע בהתאמת תכנית טיפול המתאימה לצרכיך, כולל תרופות שיכולות לשפר את איכות חייך ולהקל על התסמינים.</p>',
-					  }
-
-			resolve(postDetails)
-		}, 1000)
-	})
-}
-
 const PostDetails = () => {
 	const { id } = useParams()
 	const { post, loading, error } = usePostDetails(id)
@@ -82,7 +47,7 @@ const PostDetails = () => {
 					<PdfViewer pdfFile={post.contentFile} />
 				</>
 			) : (
-				<div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+				<div className='tiptap' dangerouslySetInnerHTML={{ __html: post.contentHTML }} />
 			)}
 		</div>
 	)

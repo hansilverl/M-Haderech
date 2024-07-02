@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { db } from '../firebase/config'
-import { storage, collection, doc, getDoc } from 'firebase/firestore'
+import { db, storage } from '../firebase/config'
+import { doc, getDoc } from 'firebase/firestore'
 import { getDownloadURL, ref } from 'firebase/storage'
 
 const fetchResourceURL = async (resource) => {
@@ -14,30 +14,28 @@ const fetchResourceURL = async (resource) => {
 	}
 	return null
 }
-const convertDocToFrontEnd = async (docSnapshot) => {
-	const docData = docSnapshot.data()
+const convertDocToFrontEnd = async (rawData) => {
 	const res = {
-		id: docSnapshot.id,
-		image: docData['image'],
-		title: docData['title'],
-		datePublished: docData['date-published'],
-		dateAdded: docData['date-added'],
-		description: docData['description'],
-		type: docData['type'],
-		contentFile: docData['content-file'],
-		published: docData['published'],
-		contentHTML: docData['content-html'],
+		id: rawData.id,
+		image: await fetchResourceURL(rawData['image']),
+		title: rawData['title'],
+		datePublished: rawData['date-published'],
+		dateAdded: rawData['date-added'],
+		description: rawData['description'],
+		type: rawData['type'],
+		published: rawData['published'],
+		contentFile: await fetchResourceURL(rawData['content-file']),
+		contentHTML: rawData['content-html'],
 	}
-	res.image = await fetchResourceURL(res.image)
-	res.contentFile = await fetchResourceURL(res.contentFile)
 	return res
 }
+
 const usePostDetails = (documentID) => {
 	const [post, setPost] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
-	const fetchPosts = async () => {
+	const fetchPost = async (documentID) => {
 		try {
 			if (!documentID) {
 				setLoading(false)
@@ -50,7 +48,7 @@ const usePostDetails = (documentID) => {
 				setPost(null)
 				throw new Error('Post not found')
 			}
-			const res = await convertDocToFrontEnd(docSnapshot)
+			const res = await convertDocToFrontEnd({ id: docSnapshot.id, ...docSnapshot.data() })
 			setPost(res)
 		} catch (error) {
 			console.error('Error fetching posts: ', error) // Log error for debugging
@@ -61,8 +59,8 @@ const usePostDetails = (documentID) => {
 	}
 
 	useEffect(() => {
-		fetchPosts()
-	}, [])
+		fetchPost(documentID)
+	}, [documentID])
 
 	return { post, loading, error }
 }

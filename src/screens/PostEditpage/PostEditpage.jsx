@@ -13,7 +13,6 @@ const PostEditpage = (props) => {
 		const value = e.target.value
 		if (!value) return
 		setPostType(value)
-		console.log(postType)
 	}
 
 	const checkPostID = (postID) => {

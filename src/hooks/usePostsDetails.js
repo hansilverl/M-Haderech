@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
 import { convertDocToFrontEnd } from '../hooks/usePostDetails'
 import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore'
-import { getDownloadURL, ref } from 'firebase/storage'
-
 
 const usePostsDetails = (lim = 3) => {
 	const [posts, setPosts] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
-	const fetchPosts = async () => {
+	const fetchPosts = async (lim) => {
 		try {
 			const q = query(
 				collection(db, 'Posts'),
@@ -20,11 +18,13 @@ const usePostsDetails = (lim = 3) => {
 			)
 
 			const querySnapshot = await getDocs(q)
-			const rawData = querySnapshot.docs.map((doc) => ({id: doc.id, ... doc.data}))
+			const rawData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+			console.log(rawData)
 			const fixedData = []
 			for (const post of rawData) {
 				fixedData.push(await convertDocToFrontEnd(post))
 			}
+			console.log(fixedData)
 			setPosts(fixedData)
 		} catch (error) {
 			console.error('Error fetching posts: ', error) // Log error for debugging
@@ -34,8 +34,8 @@ const usePostsDetails = (lim = 3) => {
 	}
 
 	useEffect(() => {
-		fetchPosts()
-	}, [])
+		fetchPosts(lim)
+	}, [lim])
 
 	return { posts, loading, error }
 }
