@@ -16,7 +16,8 @@ import DonatePage from './screens/DonatePage/DonatePage';
 import './App.css';
 import Posts from './screens/Posts/Posts';
 import { LoginPopup } from './components/LoginPopup/LoginPopup';
-import PostDetails, { Post } from './screens/PostDetails/PostDetails';
+import PostDetails from './screens/PostDetails/PostDetails';
+import TextEditor from './components/TextEditor/TextEditor';
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function App() {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/helpScore" element={<HelpScoreForm />} />
         <Route exact path="/calculateHelpScore" element={<CalculateHelpScore />} />
+        <Route exact path="/edit/:id" element={<TextEditor />} />
         <Route exact path="/history" element={
           <ProtectedRoute>
             <History />

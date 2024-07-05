@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import pdfIcon from '../../assets/pdf-file.png';  // Asegúrate de que la ruta al archivo es correcta
-import './Post.css';
-
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import pdfIcon from '../../assets/pdf-file.png' // Asegúrate de que la ruta al archivo es correcta
+import './Post.css'
 
 const Post = ({ id, image, title, date, description, type, contentFile }) => {
-  const navigate = useNavigate();
-  const [hovered, setHovered] = useState(false);
+	const navigate = useNavigate()
+	const [hovered, setHovered] = useState(false)
 
-  const handleViewPost = () => {
-    navigate(`/posts/${id}`);  // Navega a la página de detalles del post
-  };
+	const handleViewPost = () => {
+		navigate(`/posts/${id}`) // Navega a la página de detalles del post
+	}
 
-  return (
+	return !id ? null : (
 		<div className='post'>
 			<img src={image} alt={title} className='post-image' />
 			<h3 className='post-title'>{title}</h3>
@@ -37,6 +36,6 @@ const Post = ({ id, image, title, date, description, type, contentFile }) => {
 			</button>
 		</div>
 	)
-};
+}
 
-export default Post;
+export default Post

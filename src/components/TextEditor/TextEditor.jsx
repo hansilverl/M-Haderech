@@ -14,7 +14,7 @@ import TextDirection from 'tiptap-text-direction'
 
 import MenuBar from './MenuBar/MenuBar'
 
-const TextEditor = (props) => {
+const TextEditor = ({ initialContent }) => {
 	const [editorContent, setEditorContent] = useState('editorContent')
 
 	const extensions = [
@@ -41,9 +41,9 @@ const TextEditor = (props) => {
 		}),
 	]
 
-	const content =
-		
-		`
+	const content = initialContent
+		? initialContent
+		: `
 <h1 style="text-align: center">כותרת משנית</h1>
 <p style="text-align: right">תוכן</p>
 `

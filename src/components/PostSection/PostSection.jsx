@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import './PostSection.css'
 import Post from '../Posts/Post'
 
-import usePostsDetails from '../../hooks/usePostsDetails'
+import usePostsGetMultiple from '../../hooks/usePostsGetMultiple'
 
 const PostsSection = () => {
-	const { posts, loading, error } = usePostsDetails(3)
+	const { postsGetMultiple, loadingGetMultiple, errorGetMultiple } = usePostsGetMultiple(3)
 	const navigate = useNavigate()
 
 	const handleViewAllClick = () => {
@@ -18,12 +18,12 @@ const PostsSection = () => {
 				<h2>פוסטים</h2>
 			</div>
 			<div className='posts-container'>
-				{loading ? (
+				{loadingGetMultiple ? (
 					<h2>טוען...</h2>
-				) : error ? (
-					<p>{error.toString()}</p>
+				) : errorGetMultiple ? (
+					<p>{errorGetMultiple.toString()}</p>
 				) : (
-					posts.map((post, index) => (
+					postsGetMultiple.map((post, index) => (
 						<Post
 							key={index}
 							id={post.id}

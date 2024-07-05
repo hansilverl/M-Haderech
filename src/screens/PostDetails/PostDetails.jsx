@@ -4,7 +4,7 @@ import './PostDetails.css'
 import PdfViewer from '../../components/PdfViewer/PdfViewer'
 import { pdfjs } from 'react-pdf'
 import pdfIcon from '../../assets/pdf-file.png'
-import usePostDetails from '../../hooks/usePostDetails'
+import usePostGet from '../../hooks/usePostGet'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -13,39 +13,44 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const PostDetails = () => {
 	const { id } = useParams()
-	const { post, loading, error } = usePostDetails(id)
+	const { postGet, loadingGet, errorGet, postGetHandler } = usePostGet()
 
+	if (id && !postGet && !loadingGet && !errorGet) postGetHandler(id)
 	const handleOpenPdf = () => {
-		window.open(post.contentFile, '_blank')
+		window.open(postGet.contentFile, '_blank')
 	}
 
 	return (
 		<div className='post-details'>
-			{loading ? (
+			{loadingGet ? (
 				<p>טוען...</p>
-			) : error ? (
-				<p>{error}</p>
+			) : errorGet ? (
+				<p>{errorGet}</p>
 			) : (
 				<>
-					<h1>{post.title}</h1>
+					<h1>{postGet.title}</h1>
 					<p>
-						<strong>תאריך פרסום:</strong> {post.date}
+						<strong>תאריך פרסום:</strong> {postGet.date}
 					</p>
 					<div className='image-container'>
-						<img src={post.image} alt={post.title} style={{ width: '100%', height: 'auto' }} />
+						<img
+							src={postGet.image}
+							alt={postGet.title}
+							style={{ width: '100%', height: 'auto' }}
+						/>
 					</div>
 					<p>
-						<strong>תיאור:</strong> {post.description}
+						<strong>תיאור:</strong> {postGet.description}
 					</p>
-					{post.type === 'pdf' ? (
+					{postGet.type === 'pdf' ? (
 						<>
 							<button onClick={handleOpenPdf} className='pdf-button'>
 								<img src={pdfIcon} alt='Open PDF' />
 							</button>
-							<PdfViewer pdfFile={post.contentFile} />
+							<PdfViewer pdfFile={postGet.contentFile} />
 						</>
 					) : (
-						<div className='tiptap' dangerouslySetInnerHTML={{ __html: post.contentHTML }} />
+						<div className='tiptap' dangerouslySetInnerHTML={{ __html: postGet.contentHTML }} />
 					)}
 				</>
 			)}
