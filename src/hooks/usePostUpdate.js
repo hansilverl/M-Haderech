@@ -4,7 +4,6 @@ import { doc, setDoc, collection } from 'firebase/firestore'
 
 const postUpdateFunction = async (documentID, postChanges) => {
 	if (!postChanges) throw new Error('No post provided!')
-	console.log(documentID, postChanges)
 	const postsCollection = collection(db, 'Posts')
 	const docRef = doc(postsCollection, documentID)
 	await setDoc(docRef, postChanges, { merge: true })

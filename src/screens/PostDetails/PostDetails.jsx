@@ -27,7 +27,6 @@ const PostDetails = () => {
 		window.open(postGet.contentUrl, '_blank')
 	}
 
-	console.log('postGet', postGet);
 	return (
 		<div className='post-details'>
 			{loadingGet ? (

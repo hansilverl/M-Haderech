@@ -7,7 +7,6 @@ const postsFetchByQuery = async (query) => {
 	const rawData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
 	const posts = []
 	for (const post of rawData) {
-		console.log(post);
 		await addFileUrls(post)
 		posts.push(post)
 	}

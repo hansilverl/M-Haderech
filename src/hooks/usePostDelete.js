@@ -35,7 +35,6 @@ const usePostDelete = (documentID) => {
 	const [errorDelete, setErrorDelete] = useState(null)
 
 	const postDeleteHandler = async () => {
-		console.log('deleting', documentID)
 		setLoadingDelete(true)
 		try {
 			const p = await postDeleteFunction(documentID)

@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 
 const PostAdmin = ({ id, post, setRefresh }) => {
 	const { imagePath, title, date, description, type, contentFile, published, datePublished } = post
-	console.log(id)
 	const { postDelete, postDeleteHandler } = usePostDelete(id)
 	const { postUpdate, postUpdateHandler } = usePostUpdate(id)
 

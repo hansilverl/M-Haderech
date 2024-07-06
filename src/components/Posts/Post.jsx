@@ -7,7 +7,6 @@ const Post = ({ id, imageUrl, title, date, description, type, contentFile }) => 
 	const navigate = useNavigate()
 	const [hovered, setHovered] = useState(false)
 
-	console.log(imageUrl);
 	const handleViewPost = () => {
 		navigate(`/posts/${id}`) // Navega a la página de detalles del post
 	}
