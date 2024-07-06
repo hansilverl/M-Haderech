@@ -6,7 +6,7 @@ import { serverTimestamp } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 
 const PostAdmin = ({ id, post, setRefresh }) => {
-	const { imagePath, title, date, description, type, contentFile, published, datePublished } = post
+	const { imageUrl, title, date, description, type, contentFile, published, datePublished } = post
 	const { postDelete, postDeleteHandler } = usePostDelete(id)
 	const { postUpdate, postUpdateHandler } = usePostUpdate(id)
 
@@ -55,7 +55,7 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 		<div className='post-admin'>
 			<Post
 				id={id}
-				imagePath={imagePath}
+				imageUrl={imageUrl}
 				title={title}
 				date={date}
 				description={description}

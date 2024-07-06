@@ -13,7 +13,7 @@ const Post = ({ id, imageUrl, title, date, description, type, contentFile }) => 
 
 	return !id ? null : (
 		<div className='post'>
-			<img src={imageUrl} alt={title} className='post-image' />
+			{!imageUrl ? null : <img src={imageUrl} alt={title} className='post-image' />}
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{date}</p>
 			<p className='post-description'>{description}</p>
