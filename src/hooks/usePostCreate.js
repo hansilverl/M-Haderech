@@ -1,34 +1,40 @@
 import { useState } from 'react'
-import { db, storage } from '../firebase/config'
-import { addDoc, serverTimestamp } from 'firebase/firestore'
-import { ref, deleteObject } from 'firebase/storage'
+import { db } from '../firebase/config'
+import { addDoc, serverTimestamp, collection } from 'firebase/firestore'
+
+const frontEndToDocDict = {
+	image: 'image',
+	title: 'title',
+	datePublished: 'date-published',
+	dateAdded: 'date-added',
+	description: 'description',
+	type: 'type',
+	published: 'published',
+	contentFile: 'content-file',
+	contentHTML: 'content-html',
+}
 
 const createEmptyPost = async () => {
 	const res = {
 		image: null,
-		title: '',
+		title: 'כותרת ראשונית',
 		datePublished: null,
 		dateAdded: serverTimestamp(),
 		description: 'תיאור הפוסט',
-		type: null,
+		type: 'editor',
 		published: false,
 		contentFile: null,
-		contentHTML: null,
+		contentHTML: '',
 	}
 	return res
 }
 
 const convertFrontEndToDoc = async (rawData) => {
-	const res = {
-		image: rawData.image,
-		title: rawData.title,
-		'date-published': rawData.datePublished,
-		'date-added': rawData.dateAdded,
-		description: rawData.description,
-		type: rawData.type,
-		published: rawData.published,
-		'content-file': rawData.contentFile,
-		'content-html': rawData.contentHTML,
+	const res = {}
+	const keys = Object.keys(frontEndToDocDict)
+	for (const key of keys) {
+		if (rawData[key] === null || rawData[key] === undefined) continue
+		res[frontEndToDocDict[key]] = rawData[key]
 	}
 	return res
 }
@@ -36,13 +42,15 @@ const convertFrontEndToDoc = async (rawData) => {
 const postCreateNew = async () => {
 	const post = await createEmptyPost()
 	const newPost = await convertFrontEndToDoc(post)
-	const docRef = await addDoc(db, 'Posts', newPost)
+	console.log('newPost', newPost)
+	const collectionRef = collection(db, 'Posts')
+	const docRef = await addDoc(collectionRef, newPost)
 	const docID = docRef.id
 	return docID
 }
 
 const usePostCreate = () => {
-	const [postCreateID, setPostCreate] = useState(null)
+	const [postCreateID, setPostCreateID] = useState(null)
 	const [loadingCreate, setLoadingCreate] = useState(false)
 	const [errorCreate, setErrorCreate] = useState(null)
 
@@ -51,11 +59,11 @@ const usePostCreate = () => {
 		setErrorCreate(null)
 		try {
 			const docID = await postCreateNew()
-			setPostCreate(docID)
+			setPostCreateID(docID)
 		} catch (error) {
 			console.error('Error creating post: ', error)
 			setErrorCreate(error)
-			setPostCreate(null)
+			setPostCreateID(null)
 		}
 		setLoadingCreate(false)
 	}

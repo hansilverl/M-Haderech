@@ -11,11 +11,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	import.meta.url
 ).toString()
 
+const formatDate = (timestamp) => {
+	if (!timestamp) return ''
+	const date = new Date(timestamp.seconds * 1000) // Convert Firestore timestamp to JavaScript Date object
+	return date.toLocaleDateString('en-US') // Adjust the locale as needed
+}
 const PostDetails = () => {
 	const { id } = useParams()
 	const { postGet, loadingGet, errorGet, postGetHandler } = usePostGet()
 
 	if (id && !postGet && !loadingGet && !errorGet) postGetHandler(id)
+	console.log('postGet', postGet)
 	const handleOpenPdf = () => {
 		window.open(postGet.contentFile, '_blank')
 	}
@@ -26,19 +32,23 @@ const PostDetails = () => {
 				<p>טוען...</p>
 			) : errorGet ? (
 				<p>{errorGet}</p>
+			) : !postGet ? (
+				<p>הפוסט לא נמצא</p>
 			) : (
 				<>
 					<h1>{postGet.title}</h1>
 					<p>
-						<strong>תאריך פרסום:</strong> {postGet.date}
+						<strong>תאריך פרסום:</strong> {formatDate(postGet.dateAdded)}
 					</p>
-					<div className='image-container'>
-						<img
-							src={postGet.image}
-							alt={postGet.title}
-							style={{ width: '100%', height: 'auto' }}
-						/>
-					</div>
+					{!postGet?.image ? null : (
+						<div className='image-container'>
+							<img
+								src={postGet.image}
+								alt={'לא נמצאה תמונה'}
+								style={{ width: '100%', height: 'auto' }}
+							/>
+						</div>
+					)}
 					<p>
 						<strong>תיאור:</strong> {postGet.description}
 					</p>

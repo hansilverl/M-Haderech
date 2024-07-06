@@ -14,7 +14,7 @@ import TextDirection from 'tiptap-text-direction'
 
 import MenuBar from './MenuBar/MenuBar'
 
-const TextEditor = ({ initialContent }) => {
+const TextEditor = ({ initialContent, setCurrContent }) => {
 	const [editorContent, setEditorContent] = useState('editorContent')
 
 	const extensions = [
@@ -53,6 +53,7 @@ const TextEditor = ({ initialContent }) => {
 		content: content,
 		onUpdate({ editor }) {
 			setEditorContent(editor.getHTML())
+			setCurrContent(editor.getHTML())
 		},
 	})
 
@@ -60,9 +61,6 @@ const TextEditor = ({ initialContent }) => {
 		<div id='text-editor' className='flex-col justify-right'>
 			<MenuBar editor={editor} />
 			<EditorContent editor={editor} />
-			<button type='submit' id='save-btn' onClick={() => console.log(editorContent)}>
-				שמור
-			</button>
 		</div>
 	)
 }

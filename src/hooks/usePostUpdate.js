@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { db, storage } from '../firebase/config'
-import { doc, deleteDoc, getDoc, addDoc, getDocs, query, limit, setDoc } from 'firebase/firestore'
-import { ref, deleteObject } from 'firebase/storage'
+import { db } from '../firebase/config'
+import { doc, getDoc, setDoc, collection } from 'firebase/firestore'
 import { convertFrontEndToDoc } from './usePostCreate'
 
-
-const postUpdate = async (documentID, post) => {
+const postUpdateFunction = async (documentID, post) => {
 	if (!post) throw new Error('No post provided!')
-	const newPost = await convertFrontEndToDoc(post)
-	const docRef = await getDoc(db, 'Posts', documentID)
-	await setDoc(docRef, newPost, { merge: true })
+	const postChanges = await convertFrontEndToDoc(post)
+	const postsCollection = collection(db, 'Posts')
+	const docRef = doc(postsCollection, documentID) 
+	await setDoc(docRef, postChanges, { merge: true })
 	return documentID
 }
 
@@ -21,9 +20,9 @@ const usePostUpdate = () => {
 	const postUpdateHandler = async (documentID, newPost) => {
 		setLoadingUpdate(true)
 		setErrorUpdate(null)
-
 		try {
-			const p = await postUpdate(documentID, newPost)
+			if (newPost?.id) delete newPost.id
+			const p = await postUpdateFunction(documentID, newPost)
 			setPostUpdate(p)
 		} catch (error) {
 			console.error('Error updating posts: ', error) // Log error for debugging
@@ -33,7 +32,7 @@ const usePostUpdate = () => {
 		setLoadingUpdate(false)
 	}
 
-	return [postUpdate, loadingUpdate, errorUpdate, postUpdateHandler]
+	return { postUpdate, loadingUpdate, errorUpdate, postUpdateHandler }
 }
 
 export default usePostUpdate

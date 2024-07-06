@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { db, storage } from '../firebase/config'
-import { doc, deleteDoc, getDoc, addDoc, getDocs, query, limit } from 'firebase/firestore'
+import { doc, deleteDoc, collection } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
 
 import { postGetFromDB } from './usePostGet'
-
 
 const deleteObjectByReference = async (ref) => {
 	if (!ref) return
@@ -24,15 +23,15 @@ const deleteDocByReference = async (ref) => {
 	}
 }
 
-const postDelete = async (documentID) => {
+const postDeleteFunction = async (documentID) => {
 	if (!documentID) throw new Error('No document ID provided!')
-	const docRef = doc(db, 'Posts', documentID)
+	const postsCollection = collection(db, 'Posts')
+	const docRef = doc(postsCollection, documentID)
 	const post = await postGetFromDB(documentID)
 	if (!post) throw new Error('Post not found')
 
 	const contentRef = post.contentFile ? ref(storage, post.contentFile) : null
 	const imageRef = post.image ? ref(storage, post.image) : null
-	console.log(post['content-file'], post['image'])
 
 	await deleteObjectByReference(contentRef)
 	await deleteObjectByReference(imageRef)
@@ -41,27 +40,27 @@ const postDelete = async (documentID) => {
 	return post
 }
 
-const usePostDelete = (documentID) => {
-	const [post, setPost] = useState(null)
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState(null)
+const usePostDelete = () => {
+	const [postDelete, setPostDelete] = useState(null)
+	const [loadingDelete, setLoadingDelete] = useState(false)
+	const [errorDelete, setErrorDelete] = useState(null)
 
 	const postDeleteHandler = async (documentID) => {
-		setLoading(true)
-		setError(null)
+		console.log('deleting', documentID);
+		setLoadingDelete(true)
 		try {
-			const p = await postDelete(documentID)
-			setPost(p)
+			const p = await postDeleteFunction(documentID)
+			setPostDelete(p)
 		} catch (error) {
 			console.error('Error deleting posts: ', error) // Log error for debugging
-			setError(error)
-			setPost(null)
+			setErrorDelete(error)
+			setPostDelete(null)
 		}
-		setLoading(false)
-		return post
+		setLoadingDelete(false)
+		return postDelete
 	}
 
-	return { post, loading, error, postDeleteHandler }
+	return { postDelete, loadingDelete, errorDelete, postDeleteHandler }
 }
 
 export default usePostDelete

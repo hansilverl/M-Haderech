@@ -1,31 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Posts.css'
 import PostAdmin from '../../components/PostAdmin/PostAdmin'
 import usePostsGetAdmin from '../../hooks/usePostsGetAdmin'
-
+import usePostCreate from '../../hooks/usePostCreate'
+import { useNavigate } from 'react-router-dom'
 
 const Posts = () => {
-	const { posts, loading, error } = usePostsGetAdmin(20)
+	const { postsGetAdmin, loadingGetAdmin, errorGetAdmin, postsGetAdminHandler } =
+		usePostsGetAdmin(20)
+	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)
+	const { postCreateID, loadingCreate, errorCreate, postCreateHandler } = usePostCreate()
+	const [needToReload, setNeedToReload] = useState(true)
+
+	const navigate = useNavigate()
+	const addPostHandler = async (e) => {
+		setCreateButtonDisabled(true)
+		await postCreateHandler()
+	}
+
+	if (needToReload) {
+		setNeedToReload(false)
+		postsGetAdminHandler(20)
+	}
+
+	if (postCreateID) {
+		navigate(`/edit/${postCreateID}`)
+	}
 
 	return (
 		<>
-      <button>הוספת פוסט</button>
-			{loading ? (
+			<button onClick={addPostHandler} disabled={isCreateButtonDisabled}>
+				הוספת פוסט
+			</button>
+			{loadingGetAdmin ? (
 				<h2>טוען...</h2>
-			) : error ? (
-				<p>{error.toString()}</p>
+			) : errorGetAdmin ? (
+				<p>{errorGetAdmin.toString()}</p>
 			) : (
 				<div className='posts-container'>
-					{posts.map((post, index) => (
+					{postsGetAdmin.map((post, index) => (
 						<PostAdmin
 							key={index}
 							id={post.id}
-							image={post.image}
-							title={post.title}
-							date={post.date}
-							description={post.description}
-							type={post.type}
-							contentFile={post.contentFile}
+							post={post}
+							setRefresh={setNeedToReload}
 						/>
 					))}
 				</div>

@@ -1,8 +1,20 @@
 import { useState } from 'react'
 import { db, storage } from '../firebase/config'
-import { doc, getDoc } from 'firebase/firestore'
+import { collection, doc, getDoc } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
 
+const docToFrontEndDict = {
+	id: 'id',
+	image: 'image',
+	title: 'title',
+	'date-published': 'datePublished',
+	'date-added': 'dateAdded',
+	description: 'description',
+	type: 'type',
+	published: 'published',
+	'content-file': 'contentFile',
+	'content-html': 'contentHTML',
+}
 const fetchResourceURL = async (resource) => {
 	if (!resource) return null
 	try {
@@ -15,27 +27,24 @@ const fetchResourceURL = async (resource) => {
 	return null
 }
 const convertDocToFrontEnd = async (rawData) => {
-	const res = {
-		id: rawData.id,
-		image: await fetchResourceURL(rawData['image']),
-		title: rawData['title'],
-		datePublished: rawData['date-published'],
-		dateAdded: rawData['date-added'],
-		description: rawData['description'],
-		type: rawData['type'],
-		published: rawData['published'],
-		contentFile: await fetchResourceURL(rawData['content-file']),
-		contentHTML: rawData['content-html'],
+	const res = {}
+	const keys = Object.keys(docToFrontEndDict)
+	for (const key of keys) {
+		if (rawData[key]) {
+			res[docToFrontEndDict[key]] = rawData[key]
+		}
 	}
 	return res
 }
 
 const postGetFromDB = async (documentID) => {
 	if (!documentID) throw new Error('No document ID provided!')
-	const docRef = doc(db, 'Posts', documentID)
+	const collectionRef = collection(db, 'Posts')
+	const docRef = doc(collectionRef, documentID)
 	const docSnapshot = await getDoc(docRef)
-	if (docSnapshot.exists()) throw new Error('Post not found')
-	return await convertDocToFrontEnd({ id: docSnapshot.id, ...docSnapshot.data() })
+	if (!docSnapshot.exists()) throw new Error('Post not found')
+	const res = await convertDocToFrontEnd({ id: docSnapshot.id, ...docSnapshot.data() })
+	return res
 }
 
 const usePostGet = () => {

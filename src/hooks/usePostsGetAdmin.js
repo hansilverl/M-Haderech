@@ -22,11 +22,7 @@ const usePostsGetAdmin = (lim = 3) => {
 		return postsGetAdmin
 	}
 
-	useEffect(() => {
-		postsGetAdminHandler(lim)
-	}, [lim])
-
-	return { postsGetAdmin, loadingGetAdmin, errorGetAdmin }
+	return { postsGetAdmin, loadingGetAdmin, errorGetAdmin, postsGetAdminHandler }
 }
 
 export default usePostsGetAdmin

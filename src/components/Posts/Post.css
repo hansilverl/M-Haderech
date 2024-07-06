@@ -4,6 +4,7 @@
   padding: 1em;
   text-align: right;
   max-width: 300px;
+  min-width: 200px;
   margin: 1em;
   background-color: rgb(243, 243, 243);
   display: flex;
