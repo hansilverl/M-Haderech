@@ -3,16 +3,8 @@ import { db, storage } from '../firebase/config'
 import { doc, deleteDoc, collection } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
 
+import {  deleteObjectByFilePath } from './useResourceManagement'
 import { postGetFromDB } from './usePostGet'
-
-const deleteObjectByReference = async (ref) => {
-	if (!ref) return
-	try {
-		await deleteObject(ref)
-	} catch (error) {
-		console.error('Error deleting object: ', error)
-	}
-}
 
 const deleteDocByReference = async (ref) => {
 	if (!ref) return
@@ -30,23 +22,20 @@ const postDeleteFunction = async (documentID) => {
 	const post = await postGetFromDB(documentID)
 	if (!post) throw new Error('Post not found')
 
-	const contentRef = post.contentFile ? ref(storage, post.contentFile) : null
-	const imageRef = post.image ? ref(storage, post.image) : null
-
-	await deleteObjectByReference(contentRef)
-	await deleteObjectByReference(imageRef)
+	await deleteObjectByFilePath(post.contentFile)
+	await deleteObjectByFilePath(post.imageUrl)
 	await deleteDocByReference(docRef)
 
 	return post
 }
 
-const usePostDelete = () => {
+const usePostDelete = (documentID) => {
 	const [postDelete, setPostDelete] = useState(null)
 	const [loadingDelete, setLoadingDelete] = useState(false)
 	const [errorDelete, setErrorDelete] = useState(null)
 
-	const postDeleteHandler = async (documentID) => {
-		console.log('deleting', documentID);
+	const postDeleteHandler = async () => {
+		console.log('deleting', documentID)
 		setLoadingDelete(true)
 		try {
 			const p = await postDeleteFunction(documentID)

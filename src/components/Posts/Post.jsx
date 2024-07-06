@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import pdfIcon from '../../assets/pdf-file.png' // Asegúrate de que la ruta al archivo es correcta
 import './Post.css'
 
-const Post = ({ id, image, title, date, description, type, contentFile, setStateParent}) => {
+const Post = ({ id, imageUrl, title, date, description, type, contentFile }) => {
 	const navigate = useNavigate()
 	const [hovered, setHovered] = useState(false)
 
+	console.log(imageUrl);
 	const handleViewPost = () => {
 		navigate(`/posts/${id}`) // Navega a la página de detalles del post
 	}
 
 	return !id ? null : (
 		<div className='post'>
-			<img src={image} alt={title} className='post-image' />
+			<img src={imageUrl} alt={title} className='post-image' />
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{date}</p>
 			<p className='post-description'>{description}</p>

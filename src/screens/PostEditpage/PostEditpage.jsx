@@ -10,22 +10,24 @@ import usePostUpdate from '../../hooks/usePostUpdate'
 import usePostDelete from '../../hooks/usePostDelete'
 import { useNavigate } from 'react-router-dom'
 import { serverTimestamp } from 'firebase/firestore'
+import PostResourceInput from '../../components/PostResourceInput/PostResourceInput'
 
 const PostEditPageComp = ({ postID, post, setRefresh }) => {
-	const { postUpdate, loadingUpdate, errorUpdate, postUpdateHandler } = usePostUpdate()
-	const { postDelete, loadingDelete, errorDelete, postDeleteHandler } = usePostDelete()
+	const { loadingUpdate, postUpdateHandler } = usePostUpdate(postID)
+	const { postDelete, loadingDelete, postDeleteHandler } = usePostDelete(postID)
 
 	const [type, setPostType] = useState(post.type ? post.type : 'editor')
 	const [title, setTitle] = useState(post.title ? post.title : '')
 	const [description, setDescription] = useState(post.description ? post.description : '')
 	const [contentHTML, setContentHTML] = useState(post.content ? post.content : '')
 	const [isPublished, setIsPublished] = useState(post.published ? post.published : false)
+	const [imagePath, setImagePath] = useState(post.imageUrl ? post.imageUrl : '')
+	const [imageUrl, setImageUrl] = useState(post.imageUrl ? post.imageUrl : '')
+	const [contentFilePath, setContentFilePath] = useState(post.contentFile ? post.contentFile : '')
+	const [contentUrl, setContentFileUrl] = useState(post.contentUrl ? post.contentUrl : '')
+	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
+
 	const navigate = useNavigate()
-
-	useEffect(() => {
-		if (postDelete) navigate('/admin/posts')
-	}, [postDelete, navigate])
-
 	const selectPostType = (e) => {
 		const value = e.target.value
 		if (!value) return
@@ -33,22 +35,26 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	}
 
 	const getNewPost = () => {
-		const publishedTimestamp = post?.datePublished ? post.datePublished : serverTimestamp()
+		const newPublishDate = post?.datePublished ? post.datePublished : serverTimestamp()
 		const newPost = {
 			title,
 			description,
 			contentHTML,
-			type: type,
+			type,
 			published: isPublished,
+			imagePath: imagePath,
+			contentFile: contentFilePath,
 		}
 
-		if (isPublished) newPost['datePublished'] = publishedTimestamp
+		if ((isPublished && datePublished === null) || datePublished === undefined) {
+			newPost['datePublished'] = newPublishDate
+			setDatePublished(newPublishDate)
+		}
 		return newPost
 	}
 	const handleSave = async () => {
 		const postAdditions = getNewPost()
-		console.log(postAdditions)
-		await postUpdateHandler(postID, postAdditions)
+		await postUpdateHandler(postAdditions)
 		if (setRefresh) setRefresh(true)
 	}
 
@@ -60,6 +66,13 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	const handleDelete = async () => {
 		await postDeleteHandler(postID)
 	}
+	useEffect(() => {
+		handleSave()
+	}, [imagePath, contentFilePath, isPublished])
+
+	useEffect(() => {
+		if (postDelete) navigate('/admin/posts')
+	}, [postDelete, navigate])
 
 	return (
 		<div id='edit-post-page' className='flex-col'>
@@ -85,19 +98,33 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<div className='flex-row'>
-						<h3>תמונה ראשית:</h3>
-						<input type='file' placeholder='תמונה' readOnly={true} />
-					</div>
+					<PostResourceInput
+						path={imagePath}
+						setPath={setImagePath}
+						url={imageUrl}
+						setUrl={setImageUrl}
+						type='image'
+						title='תמונה'
+					/>
 					<div className='flex-row'>
 						<PostTypeSelector selectFunction={selectPostType} />
 					</div>
-					<div id='post-contents' className='flex-col'>
+					<div id='post-contents'>
 						<h2>תוכן הפוסט:</h2>
-						{type === 'editor' && (
+						{type === 'editor' ? (
 							<TextEditor initialContent={contentHTML} setCurrContent={setContentHTML} />
+						) : type === 'file' ? (
+							<PostResourceInput
+								path={contentFilePath}
+								setPath={setContentFilePath}
+								url={contentUrl}
+								setUrl={setContentFileUrl}
+								type='pdf'
+								title='קובץ PDF'
+							/>
+						) : (
+							<div>לא נבחר סוג פוסט</div>
 						)}
-						{type === 'file' && <input type='file' />}
 					</div>
 					<div className='flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>

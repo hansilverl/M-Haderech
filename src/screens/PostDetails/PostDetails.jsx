@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import './PostDetails.css'
 import PdfViewer from '../../components/PdfViewer/PdfViewer'
 import { pdfjs } from 'react-pdf'
 import pdfIcon from '../../assets/pdf-file.png'
 import usePostGet from '../../hooks/usePostGet'
+import { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -21,11 +22,12 @@ const PostDetails = () => {
 	const { postGet, loadingGet, errorGet, postGetHandler } = usePostGet()
 
 	if (id && !postGet && !loadingGet && !errorGet) postGetHandler(id)
-	console.log('postGet', postGet)
+
 	const handleOpenPdf = () => {
-		window.open(postGet.contentFile, '_blank')
+		window.open(postGet.contentUrl, '_blank')
 	}
 
+	console.log('postGet', postGet);
 	return (
 		<div className='post-details'>
 			{loadingGet ? (
@@ -40,10 +42,10 @@ const PostDetails = () => {
 					<p>
 						<strong>תאריך פרסום:</strong> {formatDate(postGet.dateAdded)}
 					</p>
-					{!postGet?.image ? null : (
+					{!postGet?.imageUrl ? null : (
 						<div className='image-container'>
 							<img
-								src={postGet.image}
+								src={postGet?.imageUrl}
 								alt={'לא נמצאה תמונה'}
 								style={{ width: '100%', height: 'auto' }}
 							/>
@@ -52,12 +54,12 @@ const PostDetails = () => {
 					<p>
 						<strong>תיאור:</strong> {postGet.description}
 					</p>
-					{postGet.type === 'pdf' ? (
+					{postGet.type === 'file' ? (
 						<>
 							<button onClick={handleOpenPdf} className='pdf-button'>
 								<img src={pdfIcon} alt='Open PDF' />
 							</button>
-							<PdfViewer pdfFile={postGet.contentFile} />
+							<PdfViewer pdfFile={postGet.contentUrl} />
 						</>
 					) : (
 						<div className='tiptap' dangerouslySetInnerHTML={{ __html: postGet.contentHTML }} />

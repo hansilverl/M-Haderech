@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import { db } from '../firebase/config'
-import { doc, getDoc, setDoc, collection } from 'firebase/firestore'
-import { convertFrontEndToDoc } from './usePostCreate'
+import { doc, setDoc, collection } from 'firebase/firestore'
 
-const postUpdateFunction = async (documentID, post) => {
-	if (!post) throw new Error('No post provided!')
-	const postChanges = await convertFrontEndToDoc(post)
+const postUpdateFunction = async (documentID, postChanges) => {
+	if (!postChanges) throw new Error('No post provided!')
+	console.log(documentID, postChanges)
 	const postsCollection = collection(db, 'Posts')
-	const docRef = doc(postsCollection, documentID) 
+	const docRef = doc(postsCollection, documentID)
 	await setDoc(docRef, postChanges, { merge: true })
 	return documentID
 }
 
-const usePostUpdate = () => {
+const usePostUpdate = (documentID) => {
 	const [postUpdate, setPostUpdate] = useState(null)
 	const [loadingUpdate, setLoadingUpdate] = useState(false)
 	const [errorUpdate, setErrorUpdate] = useState(null)
 
-	const postUpdateHandler = async (documentID, newPost) => {
+	const postUpdateHandler = async (newPost) => {
+		if(!documentID) return
 		setLoadingUpdate(true)
 		setErrorUpdate(null)
 		try {

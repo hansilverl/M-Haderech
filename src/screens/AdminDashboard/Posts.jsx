@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Posts.css'
 import PostAdmin from '../../components/PostAdmin/PostAdmin'
 import usePostsGetAdmin from '../../hooks/usePostsGetAdmin'
@@ -23,9 +23,11 @@ const Posts = () => {
 		postsGetAdminHandler(20)
 	}
 
-	if (postCreateID) {
-		navigate(`/edit/${postCreateID}`)
-	}
+	useEffect (() => {
+		if (postCreateID) {
+			navigate(`/edit/${postCreateID}`)
+		}
+	} , [postCreateID])
 
 	return (
 		<>

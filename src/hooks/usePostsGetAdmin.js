@@ -11,7 +11,7 @@ const usePostsGetAdmin = (lim = 3) => {
 	const postsGetAdminHandler = async (lim) => {
 		setLoading(true)
 		try {
-			const q = query(collection(db, 'Posts'), orderBy('date-added', 'desc'), limit(lim))
+			const q = query(collection(db, 'Posts'), orderBy('dateAdded', 'desc'), limit(lim))
 			const postsFetched = await postsFetchByQuery(q)
 			setPosts(postsFetched)
 		} catch (error) {
@@ -26,3 +26,4 @@ const usePostsGetAdmin = (lim = 3) => {
 }
 
 export default usePostsGetAdmin
+

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
-import { collection, query, where, orderBy, limit , getDocs} from 'firebase/firestore'
-
-import { convertDocToFrontEnd } from './usePostGet'
-
+import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore'
+import { addFileUrls } from './usePostGet'
 const postsFetchByQuery = async (query) => {
 	const querySnapshot = await getDocs(query)
 	const rawData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
 	const posts = []
 	for (const post of rawData) {
-		posts.push(await convertDocToFrontEnd(post))
+		console.log(post);
+		await addFileUrls(post)
+		posts.push(post)
 	}
 	return posts
 }
@@ -22,11 +22,12 @@ const usePostsGetMultiple = (lim = 3) => {
 		try {
 			const q = query(
 				collection(db, 'Posts'),
-				orderBy('date-published', 'desc'),
+				orderBy('datePublished', 'desc'),
 				where('published', '==', true),
 				limit(lim)
 			)
 			const fetchedPosts = await postsFetchByQuery(q)
+
 			setPosts(fetchedPosts)
 		} catch (error) {
 			console.error('Error fetching posts: ', error) // Log error for debugging

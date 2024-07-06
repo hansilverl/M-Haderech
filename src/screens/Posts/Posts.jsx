@@ -19,7 +19,7 @@ const Posts = () => {
 						<Post
 							key={index}
 							id={post.id}
-							image={post.image}
+							imagePath={post.imagePath}
 							title={post.title}
 							date={post.date}
 							description={post.description}

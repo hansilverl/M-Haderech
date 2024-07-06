@@ -27,12 +27,12 @@ const PostsSection = () => {
 						<Post
 							key={index}
 							id={post.id}
-							image={post.image}
+							imageUrl={post.imageUrl}
 							title={post.title}
 							date={post.date}
 							description={post.description}
 							type={post.type}
-							contentFile={post.contentFile}
+							contentFile={post.contentFileUrl}
 							published={post.published}
 						/>
 					))

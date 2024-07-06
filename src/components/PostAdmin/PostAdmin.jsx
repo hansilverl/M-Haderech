@@ -3,25 +3,36 @@ import { useNavigate } from 'react-router-dom'
 import usePostDelete from '../../hooks/usePostDelete'
 import usePostUpdate from '../../hooks/usePostUpdate'
 import { serverTimestamp } from 'firebase/firestore'
+import { useState, useEffect } from 'react'
 
 const PostAdmin = ({ id, post, setRefresh }) => {
-	const { image, title, date, description, type, contentFile, published, datePublished } = post
-	const { postDeleteHandler } = usePostDelete()
-	const { postUpdate, postUpdateHandler } = usePostUpdate()
+	const { imagePath, title, date, description, type, contentFile, published, datePublished } = post
+	console.log(id)
+	const { postDelete, postDeleteHandler } = usePostDelete(id)
+	const { postUpdate, postUpdateHandler } = usePostUpdate(id)
 
-	const deletePostButton = () => {
-		postDeleteHandler(id)
-		if (setRefresh) setRefresh(true)
+	const [isPublished, setPublished] = useState(published ? true : false)
+
+	const deletePostButton = async () => {
+		await postDeleteHandler()
 	}
 
 	const togglePublished = async () => {
-		const newPostPublished = published === null || published === undefined ? true : !published
-		const newPost = { published: newPostPublished }
-		if (newPostPublished && !datePublished) newPost['datePublished'] = serverTimestamp()
-
-		await postUpdateHandler(id, newPost)
-		setRefresh(true)
+		setPublished(!isPublished)
 	}
+
+	useEffect(() => {
+		const publish = async () => {
+			const newPost = { published: isPublished }
+			if (isPublished && !datePublished) newPost['datePublished'] = serverTimestamp()
+			await postUpdateHandler(newPost)
+		}
+		if (published != isPublished) publish()
+	}, [isPublished])
+
+	useEffect(() => {
+		if (postDelete) setRefresh(true)
+	}, [postDelete, isPublished])
 
 	const navigate = useNavigate(`/edit/${id}`)
 	const AdminBar = () => {
@@ -33,7 +44,7 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 				<button onClick={deletePostButton} className='admin-button'>
 					מחק
 				</button>
-				{!published ? (
+				{!isPublished ? (
 					<button onClick={togglePublished}>פרסם</button>
 				) : (
 					<button onClick={togglePublished}>בטל פרסום</button>
@@ -45,7 +56,7 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 		<div className='post-admin'>
 			<Post
 				id={id}
-				image={image}
+				imagePath={imagePath}
 				title={title}
 				date={date}
 				description={description}
