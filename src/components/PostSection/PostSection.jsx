@@ -32,7 +32,7 @@ const PostsSection = () => {
 							date={post.date}
 							description={post.description}
 							type={post.type}
-							contentFile={post.contentFileUrl}
+							contentUrl={post.contentUrl}
 							published={post.published}
 						/>
 					))

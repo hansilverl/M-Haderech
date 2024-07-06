@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import pdfIcon from '../../assets/pdf-file.png' // Asegúrate de que la ruta al archivo es correcta
 import './Post.css'
 
-const Post = ({ id, imageUrl, title, date, description, type, contentFile }) => {
+const Post = ({ id, imageUrl, title, date, description, type, contentUrl }) => {
 	const navigate = useNavigate()
 	const [hovered, setHovered] = useState(false)
 
@@ -18,12 +18,12 @@ const Post = ({ id, imageUrl, title, date, description, type, contentFile }) => 
 			<p className='post-date'>{date}</p>
 			<p className='post-description'>{description}</p>
 
-			{type === 'pdf' && contentFile && (
+			{type === 'file' && contentUrl && (
 				<button
 					className='post-pdf-button'
 					onMouseEnter={() => setHovered(true)}
 					onMouseLeave={() => setHovered(false)}
-					onClick={() => window.open(contentFile, '_blank')}>
+					onClick={() => window.open(contentUrl, '_blank')}>
 					{hovered ? (
 						'See PDF'
 					) : (
