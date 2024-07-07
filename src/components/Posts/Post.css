@@ -48,12 +48,11 @@
 }
 
 .post-button:hover {
-  background: #0056b3;
+  background: #653a76;
 }
 
 .post-pdf-button {
   background: transparent;
-  color: white;
   border: none;
   padding: 0.5em 1em;
   cursor: pointer;
@@ -73,8 +72,7 @@
   height: 24px;  
 }
 
+/* Prevent background change on hover */
 .post-pdf-button:hover {
-  background-color: #0056b3;
-  font-size: 13px;
-  max-width: 30%;
+  background: transparent;
 }

@@ -1,6 +1,4 @@
 /* Basic editor styles */
-/* .tiptap {} */
-
 html,
 body,
 #root {
@@ -30,11 +28,13 @@ body,
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	padding: 10px;
+	padding: 20px;
 	border-top: 1px solid grey;
 	border-radius: 1rem;
 	background: white;
-	min-height: 100px;
+	min-height: 300px; /* Increased height for a bigger input area */
+	min-width: 350px;
+	max-width: 800px;
 	width: 100%;
 	background-color: #f0f0f0;
 	color: #333;
@@ -93,14 +93,19 @@ body,
 	border-top: 2px solid #0d0d0d;
 	margin: 2rem 0;
 }
+
 .menu-bar {
-	/* margin: 7px; */
 	display: flex;
-	flex-direction: column;
-	justify-content: right;
-	align-items: right;
-	max-width: 600px;
-	margin: 1rem 2rem;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 10px;
+	background: #f7f8fa;
+	padding: 10px;
+	border-radius: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sub-menu-bar {
@@ -112,7 +117,7 @@ body,
 }
 
 button {
-	font-family: 'IBM Plex Sans Hebrew';
+	font-family: 'IBM Plex Sans Hebrew', sans-serif;
 	font-weight: bold;
 	background-color: #9b59b6;
 	color: white;
@@ -121,10 +126,12 @@ button {
 	border: 1px solid #650040;
 	box-shadow: none;
 	cursor: pointer;
-	/* percentage values are relative to the parent element */
-	padding: 1% 2%;
-	margin: 2% 0;
+	padding: 10px 20px;
+	margin: 5px;
+	transition: background-color 0.3s, transform 0.3s;
 }
+
 button:hover {
 	background-color: #a20067;
+	transform: translateY(-2px);
 }

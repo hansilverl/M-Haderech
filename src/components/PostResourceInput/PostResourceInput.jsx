@@ -1,55 +1,52 @@
-import React, { useEffect, useState } from 'react'
-
-import useResourceManagement, { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
+import React, { useEffect, useState } from 'react';
+import useResourceManagement, { getDownloadURLFromPath } from '../../hooks/useResourceManagement';
+import './PostResourceInput.css';
 
 const PostResourceInput = (props) => {
-	const { path, setPath, url, setUrl, type, title } = props
+	const { path, setPath, url, setUrl, type, title } = props;
 	const { resourcePath, loadingResourcePath, errorResourcePath, deleteResource, uploadResource } =
-		useResourceManagement(path)
+		useResourceManagement(path);
 
-	const [currentFile, setCurrentFile] = useState(undefined)
+	const [currentFile, setCurrentFile] = useState(undefined);
 
 	const deleteResourceHandler = () => {
-		deleteResource()
-	}
+		deleteResource();
+	};
 
 	const uploadResourceHandler = () => {
-		if (!currentFile) return
-		if (path) deleteResource()
-		uploadResource(currentFile, type)
-	}
+		if (!currentFile) return;
+		if (path) deleteResource();
+		uploadResource(currentFile, type);
+	};
 
 	useEffect(() => {
 		const setAll = async () => {
-			const newUrl = await getDownloadURLFromPath(resourcePath)
-			setPath(resourcePath)
-			setUrl(newUrl)
-		}
-		setAll()
-	}, [resourcePath])
+			const newUrl = await getDownloadURLFromPath(resourcePath);
+			setPath(resourcePath);
+			setUrl(newUrl);
+		};
+		setAll();
+	}, [resourcePath]);
 
 	return (
-		<div className='flex-row'>
-			<h3>{title}:</h3>
+		<div className="resource-input">
+			<h3 className='title'>{title}:</h3>
 			{!path ? (
-				<input type='file' onChange={(e) => setCurrentFile(e.target.files[0])} />
+				<div className="file-input">
+					<input type="file" onChange={(e) => setCurrentFile(e.target.files[0])} />
+					<button onClick={uploadResourceHandler} className="upload-button">העלה</button>
+				</div>
 			) : (
-				<div className='flex-row'>
-					<h3>קיים כבר קובץ</h3>
-					<a href={url}>ניתן לראות כאן</a>
+				<div className="file-info">
+					<h5>קיים כבר קובץ</h5>
+					<a href={url} target="_blank" rel="noopener noreferrer">ניתן לראות כאן</a>
+					<button onClick={deleteResourceHandler} className="delete-button-input">מחק</button>
 				</div>
 			)}
-			{loadingResourcePath ? (
-				<div>Loading...</div>
-			) : errorResourcePath ? (
-				<div>Error: {errorResourcePath.toString()}</div>
-			) : resourcePath ? (
-				<button onClick={deleteResourceHandler}>מחק</button>
-			) : (
-				<button onClick={uploadResourceHandler}>העלה</button>
-			)}
+			{loadingResourcePath && <div className="status-message">Loading...</div>}
+			{errorResourcePath && <div className="status-message error">Error: {errorResourcePath.toString()}</div>}
 		</div>
-	)
-}
+	);
+};
 
-export default PostResourceInput
+export default PostResourceInput;

@@ -14,7 +14,9 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 	const [isPublished, setPublished] = useState(published ? true : false);
 
 	const deletePostButton = async () => {
-		await postDeleteHandler();
+		if (window.confirm('Are you sure you want to delete this post?')) {
+			await postDeleteHandler();
+		}
 	};
 
 	const togglePublished = async () => {
@@ -60,15 +62,17 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 
 	return (
 		<div className="post-admin">
-			<Post
-				id={id}
-				imageUrl={imageUrl}
-				title={title}
-				date={date}
-				description={description}
-				type={type}
-				contentUrl={contentUrl}
-			/>
+			<div className="post-content">
+				<Post
+					id={id}
+					imageUrl={imageUrl}
+					title={title}
+					date={date}
+					description={description}
+					type={type}
+					contentUrl={contentUrl}
+				/>
+			</div>
 			<AdminBar id={id} />
 		</div>
 	);

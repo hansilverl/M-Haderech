@@ -35,24 +35,22 @@ const Posts = () => {
                     הוספת פוסט
                 </button>
             </div>
-            <div className="content">
-                {loadingGetAdmin ? (
-                    <div className="loading">טוען...</div>
-                ) : errorGetAdmin ? (
-                    <div className="error">{errorGetAdmin.toString()}</div>
-                ) : (
-                    <div className="posts-container">
-                        {postsGetAdmin.map((post, index) => (
-                            <PostAdmin
-                                key={index}
-                                id={post.id}
-                                post={post}
-                                setRefresh={setNeedToReload}
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
+            {loadingGetAdmin ? (
+                <div className="loading">טוען...</div>
+            ) : errorGetAdmin ? (
+                <div className="error">{errorGetAdmin.toString()}</div>
+            ) : (
+                <div className="posts-container">
+                    {postsGetAdmin.map((post, index) => (
+                        <PostAdmin
+                            key={index}
+                            id={post.id}
+                            post={post}
+                            setRefresh={setNeedToReload}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
