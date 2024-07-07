@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, deleteField } from 'firebase/firestore';
 import Modal from 'react-modal';
+import { FaTrashAlt } from 'react-icons/fa';
 import './Statistics.css';
 
 Modal.setAppElement('#root');
@@ -12,6 +13,10 @@ const Statistics = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [deleteConfirmIsOpen, setDeleteConfirmIsOpen] = useState(false);
+  const [fieldToDelete, setFieldToDelete] = useState(null);
+  const [newField, setNewField] = useState('');
+  const [newFieldValue, setNewFieldValue] = useState('');
 
   useEffect(() => {
     const fetchStatistics = async () => {
@@ -59,14 +64,50 @@ const Statistics = () => {
     }
   };
 
+  const handleAddField = () => {
+    if (newField && newFieldValue) {
+      setTempStatistics((prevStats) => ({ ...prevStats, [newField]: newFieldValue }));
+      setNewField('');
+      setNewFieldValue('');
+    }
+  };
+
+  const handleDeleteField = (fieldKey) => {
+    setFieldToDelete(fieldKey);
+    setDeleteConfirmIsOpen(true);
+  };
+
+  const confirmDeleteField = async () => {
+    try {
+      const updatedTempStatistics = { ...tempStatistics };
+      delete updatedTempStatistics[fieldToDelete];
+      setTempStatistics(updatedTempStatistics);
+
+      const statsDoc = doc(db, 'miscellaneousUpdated', 'statistics');
+      await updateDoc(statsDoc, {
+        [fieldToDelete]: deleteField()
+      });
+
+      setDeleteConfirmIsOpen(false);
+      setFieldToDelete(null);
+      setStatistics(updatedTempStatistics);
+      alert('השדה נמחק בהצלחה.');
+    } catch (error) {
+      alert('שגיאה במחיקת השדה.');
+    }
+  };
+
   if (loading) return <p>טוען...</p>;
   if (error) return <p>שגיאה: {error}</p>;
 
   return (
     <div className="stat-item">
       <div className="stat-label">
-        <p>מספר אמהות שעזרנו להן</p>
-        <p>{statistics.helped_mothers_amount}</p>
+        {statistics && Object.entries(statistics).map(([key, value]) => (
+          <div key={key} className="stat-field">
+            <p><strong>{key}:</strong> {value}</p>
+          </div>
+        ))}
       </div>
       <button className="update-button" onClick={openModal}>עדכן</button>
 
@@ -78,21 +119,58 @@ const Statistics = () => {
       >
         <h2>עדכון סטטיסטיקות</h2>
         <form>
-          <div className="modal-field">
-            <label>
-              מספר אמהות שעזרנו להן:
-              <input
-                type="text"
-                name="helped_mothers_amount"
-                value={tempStatistics.helped_mothers_amount || ''}
-                onChange={handleChange}
-              />
-            </label>
+          {tempStatistics && Object.entries(tempStatistics).map(([key, value]) => (
+            <div key={key} className="modal-field">
+              <label>
+                {key}:
+                <input
+                  type="text"
+                  name={key}
+                  value={value}
+                  onChange={handleChange}
+                />
+              </label>
+              <FaTrashAlt className="delete-icon" onClick={() => handleDeleteField(key)} />
+            </div>
+          ))}
+          <div className="new-field">
+            <h3>הוסף שדה חדש</h3>
+            <input
+              type="text"
+              placeholder="שם השדה"
+              value={newField}
+              onChange={(e) => setNewField(e.target.value)}
+              className="wide-input"
+            />
+            <input
+              type="text"
+              placeholder="תוכן השדה"
+              value={newFieldValue}
+              onChange={(e) => setNewFieldValue(e.target.value)}
+              className="wide-input"
+            />
+            <div className="add-field-button">
+              <button type="button" onClick={handleAddField}>הוסף שדה</button>
+            </div>
           </div>
         </form>
         <div className="modal-actions">
           <button onClick={handleSave}>שמור</button>
           <button onClick={closeModal}>בטל</button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={deleteConfirmIsOpen}
+        onRequestClose={() => setDeleteConfirmIsOpen(false)}
+        overlayClassName="modal-overlay"
+        className="modal-content"
+      >
+        <h2>אישור מחיקה</h2>
+        <p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
+        <div className="modal-actions">
+          <button onClick={confirmDeleteField}>מחק</button>
+          <button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
         </div>
       </Modal>
     </div>
