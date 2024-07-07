@@ -1,3 +1,5 @@
+/* AdminUserHistory.css */
+
 .admin-user-history-container {
   padding: 20px;
   min-height: 100vh;
@@ -42,6 +44,16 @@
 
 .history-entry h2 {
   margin-bottom: 10px;
+}
+
+.icon {
+  font-size: 1.5em;
+  color: #9b59b6;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #8e44ad;
 }
 
 .actions {
