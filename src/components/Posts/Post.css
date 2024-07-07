@@ -42,8 +42,8 @@
   padding: 0.5em 1em;
   cursor: pointer;
   border-radius: 10px;
-  font-size: 14px;
-  max-width: 30%; /* Adjust the width to fill the container */
+  font-size: 11px;
+  max-width: 40%; /* Adjust the width to fill the container */
   margin-top: auto; /* This pushes the button to the bottom */
 }
 
