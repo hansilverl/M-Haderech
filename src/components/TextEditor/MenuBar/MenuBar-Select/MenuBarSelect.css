@@ -1,0 +1,10 @@
+select,
+option {
+	display: inline-block;
+	border-radius: 0cqh;
+	background-color: white;
+	color: black;
+	padding: 0.25rem 0.5rem;
+	padding: 1% 2%;
+	margin: 2% 0;
+}

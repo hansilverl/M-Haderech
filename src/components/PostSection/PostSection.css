@@ -2,6 +2,7 @@
   padding: 2em;
   background: #ffffff;
   position: relative;
+  min-height: 500px;
 }
 
 .posts-header {
@@ -41,4 +42,21 @@
 
 .view-all-button:hover {
   background: #8e44ad;
+}
+
+/* Media query for phone responsive design */
+@media (max-width: 768px) {
+  .posts-section {
+    min-height: 500px;
+  }
+
+  .posts-container {
+    justify-content: center;
+  }
+
+  .view-all-button-container {
+    position: static;
+    text-align: center;
+    margin-top: 1em;
+  }
 }

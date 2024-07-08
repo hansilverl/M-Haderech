@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaTachometerAlt, FaRegNewspaper, FaUsers, FaCog, FaBars, FaTimes, FaQuestionCircle, FaSignOutAlt, FaHistory } from 'react-icons/fa';
+import { FaRegNewspaper, FaUsers, FaQuestionCircle, FaCog, FaBars, FaTimes, FaSignOutAlt, FaHistory } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar = () => {

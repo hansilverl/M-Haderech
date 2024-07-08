@@ -1,0 +1,96 @@
+.resource-input {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 20px 0;
+	padding: 10px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.title {
+	text-align: right;
+	font-size: 16px;
+}
+
+.resource-input h3 {
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.file-input,
+.file-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.file-input {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.file-input input[type='file'] {
+	margin-right: 10px; /* Add some space between the input and the button */
+}
+
+.upload-button {
+	background-color: #60c879;
+	color: white;
+	border: none;
+	padding: 7px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+}
+
+.upload-button:hover {
+	background-color: #218838;
+	transform: translateY(-2px);
+}
+
+.file-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 10px; /* Add space between file-info and previous content */
+}
+
+.file-info h4 {
+	margin-right: 10px; /* Add space between the text and the link */
+}
+
+.file-info a {
+	color: #007bff;
+	text-decoration: none;
+	margin-right: 10px; /* Add space between the link and the button */
+}
+
+.file-info a:hover {
+	text-decoration: underline;
+}
+
+.delete-button-input {
+	background-color: #d44242;
+	color: white;
+	border: none;
+	padding: 6px 13px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.delete-button-input:hover {
+	background-color: #9b2323;
+	transform: translateY(-2px);
+}
+
+.status-message {
+	color: #555;
+	margin-top: 10px;
+}
+
+.status-message.error {
+	color: #d44242;
+}

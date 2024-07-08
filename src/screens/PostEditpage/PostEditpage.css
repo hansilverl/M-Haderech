@@ -1,0 +1,158 @@
+/* General styles remain unchanged */
+html,
+body,
+#root {
+	height: 100%; /* Ensures the root element takes up full height */
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #f7f8fa;
+	margin: 0;
+	padding: 0;
+}
+
+select,
+option,
+input {
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background-color: white;
+	color: black;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem 0;
+	font-size: 16px;
+	flex: 1; /* Make the input take up remaining space */
+	max-width: 30%;
+}
+
+input:focus,
+select:focus,
+option:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+h1,
+h2,
+h3 {
+	padding: 0 20px;
+	color: #333;
+	text-align: center;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	padding: 10px 20px;
+	margin-bottom: 10px;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 20px;
+}
+
+#edit-post-page {
+	background: white;
+	border: 1px solid #dee2e6;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	max-width: 950px;
+	width: 100%;
+	margin: 20px auto;
+	padding: 20px;
+}
+
+.title-content{
+	text-align: right;
+}
+
+#post-contents {
+	width: 100%;
+	margin-top: 20px;
+	padding: 20px;
+	border: 1px solid #dee2e6;
+	border-radius: 8px;
+	background: #fff;
+}
+
+button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	margin: 10px;
+	font-size: 16px;
+}
+
+button:hover {
+	background-color: #0056b3;
+	transform: translateY(-2px);
+}
+
+button:disabled {
+	background-color: #a0a0a0;
+	cursor: not-allowed;
+}
+
+/* Specific button styles */
+.delete-button {
+	background-color: #dc3545;
+}
+
+.delete-button:hover {
+	background-color: #c82333;
+}
+
+.publish-button {
+	background-color: #60c879;
+}
+
+.publish-button:hover {
+	background-color: #218838;
+}
+
+.unpublish-button {
+	background-color: #d44242;
+}
+
+.unpublish-button:hover {
+	background-color: #9b2323;
+}
+
+.input-label {
+	width: 150px;
+	text-align: right;
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+@media (max-width: 768px) {
+	.flex-row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	
+	.input-label {
+		width: 100%;
+		text-align: left;
+		margin-bottom: 5px;
+	}
+	
+	button {
+		width: 100%;
+		margin: 10px 0;
+	}
+}

@@ -1,0 +1,54 @@
+.menu-bar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 10px;
+	/* background: #f7f8fa; */
+	padding: 10px;
+	border-radius: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	max-width: 800px; /* Ensure the menu bar does not get too wide */
+}
+
+.sub-menu-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 5px 0;
+}
+
+button {
+	font-family: 'IBM Plex Sans Hebrew', sans-serif;
+	font-weight: bold;
+	background-color: #9b59b6;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	box-shadow: none;
+	cursor: pointer;
+	padding: 5px 10px; /* Smaller padding for smaller buttons */
+	margin: 5px;
+	transition: background-color 0.3s, transform 0.3s;
+	font-size: 14px; /* Smaller font size for buttons */
+}
+
+button:hover {
+	background-color: #a20067;
+	transform: translateY(-2px);
+}
+
+button:disabled {
+	background-color: #a0a0a0;
+	cursor: not-allowed;
+}
+
+.menu-bar-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 5px;
+}
