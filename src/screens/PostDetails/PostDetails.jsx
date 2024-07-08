@@ -17,7 +17,7 @@ const fetchPostDetails = (id) => {
       // Example of how to switch between the two types
       const postDetails = (id % 2 === 0) ? {
         id: id,
-        image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+        image: 'https://cdn.pixabay.com/photo/2020/07/08/08/07/daisy-5383056_1280.jpg',
         title: 'מידע ותמיכה לנשים המתמודדות עם היפראמזיס בהריון',
         date: '29 ביוני 2024',
         description: 'ברוכות הבאות לפוסט שיעזור לכן להבין ולהתמודד עם היפראמזיס במהלך ההריון. היפראמזיס הינו מצב בו נשים חוות בחילות והקאות קשות במהלך ההריון, דבר שיכול לסכן את האם והעובר. כאן תמצאו יעוץ רפואי מקצועי, מידע על אפשרויות תמיכה כלכלית למימון תרופות, והמלצות למניעת סיכונים לאם ולעובר.',
@@ -25,7 +25,7 @@ const fetchPostDetails = (id) => {
         contentFile: 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
       } : {
         id: id,
-        image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+        image: 'https://cdn.pixabay.com/photo/2020/07/08/08/07/daisy-5383056_1280.jpg',
         title: 'מידע ותמיכה לנשים המתמודדות עם היפראמזיס בהריון ',
         date: '30 ביוני 2024',
         description: 'ברוכות הבאות לפוסט שיעזור לכן להבין ולהתמודד עם היפראמזיס במהלך ההריון. היפראמזיס הינו מצב בו נשים חוות בחילות והקאות קשות במהלך ההריון, דבר שיכול לסכן את האם והעובר. כאן תמצאו יעוץ רפואי מקצועי, מידע על אפשרויות תמיכה כלכלית למימון תרופות, והמלצות למניעת סיכונים לאם ולעובר.',

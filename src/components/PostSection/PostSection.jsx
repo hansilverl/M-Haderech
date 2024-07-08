@@ -9,7 +9,7 @@ const PostsSection = () => {
   const posts = [
     {
       id: 1,
-      image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+      image: 'https://cdn.pixabay.com/photo/2020/07/08/08/07/daisy-5383056_1280.jpg',
       title: 'פוסט 1',
       date: '29 de junio de 2024',
       description: 'תיאור של פוסט 1',
@@ -19,7 +19,7 @@ const PostsSection = () => {
     },
     {
       id: 2,
-      image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+      image: 'https://cdn.pixabay.com/photo/2020/07/08/08/07/daisy-5383056_1280.jpg',
       title: 'פוסט 2',
       date: '29 de junio de 2024',
       description: 'תיאור של פוסט 2',
@@ -29,7 +29,7 @@ const PostsSection = () => {
     },
     {
       id: 3,
-      image: 'https://assets1.farmaciasanpablo.com.mx/landings/_blog/bebes/230125-10cuidadosEmbarazada/10-cuidados-que-debe-tener-una-mujer-embarazada.jpg',
+      image: 'https://cdn.pixabay.com/photo/2020/07/08/08/07/daisy-5383056_1280.jpg',
       title: 'פוסט 3',
       date: '29 de junio de 2024',
       description: 'תיאור של פוסט 3',
