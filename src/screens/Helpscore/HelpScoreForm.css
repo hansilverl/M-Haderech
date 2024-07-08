@@ -295,9 +295,12 @@ body {
     }
 
     .bordered-container {
+        width: 100%;
         padding: 1%;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        padding-left: 2.39em;
     }
 
     .option-vert {
@@ -336,6 +339,7 @@ body {
     }
 
     .q-table tr {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         display: block;
         margin-bottom: 1rem;
         border: 1px solid #a9a9a9;
@@ -375,5 +379,20 @@ body {
     }
 
     /* pseudo element to use as element background: */
-
+    .req_question::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        /* make sure it's behind the element */
+        /* use border as background, should be width of option table */
+        /* cover the element , until the end of option table , use % to make it responsive */
+        background-color: #ffdfdf80;
+        top: -0.05em;
+        bottom: 1em;
+        left: -1em;
+        right: 4%;
+        border-radius: 6px;
+        padding: 0.5rem;
+        padding-left: 1rem;
+    }
 }
