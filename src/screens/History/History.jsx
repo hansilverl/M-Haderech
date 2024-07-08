@@ -18,6 +18,8 @@ const History = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [tooltip, setTooltip] = useState({ show: false, x: 0, y: 0 });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [entryToDelete, setEntryToDelete] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -54,17 +56,27 @@ const History = () => {
     }
   }, [user, startDate, endDate]);
 
-  const handleDelete = async (id) => {
-    const confirmation = window.confirm('האם אתה בטוח שברצונך למחוק את ההיסטוריה הזו?');
-    if (confirmation) {
+  const confirmDelete = async () => {
+    if (entryToDelete) {
       try {
-        await deleteDoc(doc(db, 'QuestionnaireHistory', id));
-        setHistory(history.filter(item => item.id !== id));
+        await deleteDoc(doc(db, 'QuestionnaireHistory', entryToDelete.id));
+        setHistory(history.filter(item => item.id !== entryToDelete.id));
+        closeDeleteModal();
       } catch (error) {
         console.error('שגיאה במחיקת ההיסטוריה: ', error);
         alert('שגיאה במחיקת ההיסטוריה.');
       }
     }
+  };
+
+  const handleDelete = (entry) => {
+    setEntryToDelete(entry);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setEntryToDelete(null);
+    setIsDeleteModalOpen(false);
   };
 
   const openModal = (entry) => {
@@ -145,7 +157,7 @@ const History = () => {
             return [
               {
                 text: '0-19',
-                fillStyle: '#2D936C', 
+                fillStyle: '#2D936C',
                 strokeStyle: '#2D936C', // Border color for the legend item
                 lineWidth: 1, // Border width for the legend item
                 hidden: false,
@@ -219,7 +231,7 @@ const History = () => {
           onChange={(e) => setStartDate(e.target.value)}
           className="search-input"
         />
-        <label className="filter-end-date" >תאריך סיום:</label>
+        <label className="filter-end-date">תאריך סיום:</label>
         <input
           type="date"
           value={endDate}
@@ -240,7 +252,7 @@ const History = () => {
           <div className="history-grid">
             {history.map((entry, index) => (
               <div key={index} className="history-entry">
-                <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry.id)}>
+                <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry)}>
                   <FontAwesomeIcon icon={faTrashAlt} />
                 </span>
                 <h2>{new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
@@ -276,6 +288,22 @@ const History = () => {
                 ))}
               </div>
               <button onClick={closeModal} className="close-modal-button">סגור</button>
+            </Modal>
+          )}
+          {isDeleteModalOpen && (
+            <Modal
+              isOpen={isDeleteModalOpen}
+              onRequestClose={closeDeleteModal}
+              contentLabel="Confirm Delete Modal"
+              className="responses-modal"
+              overlayClassName="responses-overlay"
+            >
+              <h2>אישור מחיקה</h2>
+              <p>האם את בטוחה שברצונך למחוק את ההיסטוריה הזו?</p>
+              <div className="confirmation-modal-buttons">
+                <button onClick={confirmDelete} className="confirm-button">אישור</button>
+                <button onClick={closeDeleteModal} className="cancel-button">ביטול</button>
+              </div>
             </Modal>
           )}
           {tooltip.show && (
