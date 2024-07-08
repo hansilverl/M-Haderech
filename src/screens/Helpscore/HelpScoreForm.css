@@ -9,17 +9,20 @@ body {
 
 .help-score-form::before {
     content: '';
-    position: fixed; /* Fixed position to cover the entire viewport */
+    position: fixed;
+    /* Fixed position to cover the entire viewport */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #f2f2f2; /* Semi-transparent black backdrop */
-    z-index: -1; /* Ensure it is behind the form content */
+    background-color: #f2f2f2;
+    /* Semi-transparent black backdrop */
+    z-index: -1;
+    /* Ensure it is behind the form content */
 }
 
 
-.help-score-form{
+.help-score-form {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
     display: flex;
     align-items: flex-start;
@@ -27,9 +30,10 @@ body {
     width: auto;
     max-width: 70%;
     margin: 0 auto;
-    padding-top: 10vh;
+    padding-top: 4vh;
     padding-bottom: 10vh;
-    position: relative; /* Ensure the form is positioned relative for pseudo-element */
+    position: relative;
+    /* Ensure the form is positioned relative for pseudo-element */
 }
 
 .bordered-container::before {
@@ -40,7 +44,8 @@ body {
     right: 0;
     bottom: 0;
     background-color: #ffffff4b;
-    z-index: -1; /* Ensure it is behind the form content */
+    z-index: -1;
+    /* Ensure it is behind the form content */
     border-radius: 5px;
 }
 
@@ -49,30 +54,43 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid #a9a9a9;
-    border-radius: 5px;
+    border: 1.56px solid #a9a9a9cf;
     padding: 2% 0;
-    width: fit-content;
-    position: relative; /* Ensure the form is positioned relative for pseudo-element */
+    width: 100%;
+    position: relative;
+    /* Ensure the form is positioned relative for pseudo-element */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .q-container {
-    padding: 1% ;
+    width: 100%;
+    padding: 1%;
+    word-wrap: break-word;
 }
 
 .question-text {
     /* make weight just a bit thicker for accessibility */
     font-weight: 500;
-    /*much better, finally!*/
-    font-size: auto;
+    font-size: 1em;
     margin: auto 4%;
     margin-bottom: 0.7%;
     padding: 0.5% 0;
     color: #333;
     text-align: right;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 90%;
+    max-width: 90%;
+    /* Limit the width to ensure it doesn't overtake the container */
+    box-sizing: border-box;
+
 }
 
 .q-table {
+    display: table;
     margin: auto 4%;
     padding: 2%;
     border-collapse: collapse;
@@ -81,23 +99,21 @@ body {
     margin-bottom: 2%;
 }
 
-
 .q-table thead,
-q.table th {
+.q-table th {
     /* the two may be used interchangeably in the context of this page */
     background-color: #e6e5e5;
     padding: auto 2.2%;
 }
 
-
 .q-table th,
 .q-table td {
-    border: 2px solid #a9a9a9;
+    border: 1.5px solid #a9a9a9;
     text-align: center;
-    overflow-wrap:break-word;
+    word-wrap: break-word;
     padding: 0.5% 1%;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
-    font-weight: 550;
+    font-weight: 500;
 }
 
 .q-table td {
@@ -111,13 +127,11 @@ q.table th {
 
 .q-table .selected {
     background-color: #dfefff80;
-    ;
 }
 
 .q-table td.selected:hover {
     background-color: #dfefff80;
 }
-
 
 .radio-input {
     display: none;
@@ -128,14 +142,17 @@ q.table th {
     position: relative;
     width: 0.85em;
     height: 0.85em;
+    min-width: 0.85em;
+    /* must be set to prevent the radio button from shrinking */
     border: 2px solid #ccc;
     border-radius: 50%;
+    background-color: #cccccc59;
+    box-shadow: inset 0 0 0 1px #fff;
 }
 
 .radio-input:checked+.custom-radio {
     border-color: forestgreen;
 }
-
 
 .radio-input:checked+.custom-radio::after {
     transform: translate(-50%, -50%) scale(1);
@@ -146,7 +163,7 @@ q.table th {
     display: block;
     position: absolute;
     /* aligns the checkmark to the center of the radio button */
-    top: 50%;
+    top: 48%;
     left: 50%;
     /* moves the checkmark to the center of the radio button */
     transform: translate(-50%, -50%);
@@ -169,8 +186,6 @@ q.table th {
     color: #790000;
     margin-left: 4px;
 }
-
-
 
 .help-score-form button[type="submit"] {
     font-family: 'IBM Plex Sans Hebrew';
@@ -212,29 +227,24 @@ q.table th {
     /* background-color: #ffdfe080;  */
 }
 
-.req_question .radio-input + .custom-radio {
+.req_question .radio-input+.custom-radio {
     /* bit darker shade than the default */
-    border-color:#a9a9a9;
+    border-color: #a9a9a9;
 }
 
-.req_question .radio-input:checked + .custom-radio {
+.req_question .radio-input:checked+.custom-radio {
     border-color: forestgreen;
 }
-
-
 
 /* change the question-text of required questions to red */
 .req_question .question-text {
     margin-left: 2%;
     /* align the text with table */
     color: #790000;
-
 }
-
 
 .req_question td,
 .req_question th {
-
     border: 1.59px solid #790000;
     table-layout: fixed;
 }
@@ -265,11 +275,105 @@ q.table th {
     }
 }
 
-
 .requiredFieldsErrorMsg {
     color: #790000;
     font-weight: bold;
     font-size: 14px;
     /*this line should slightly "shake" the error message to draw attention to it*/
     animation: shake 0.3s;
+}
+
+.option-vert {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+
+    .help-score-form {
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+    }
+
+    .bordered-container {
+        padding: 1%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .option-vert {
+        display: block !important;
+    }
+
+    .q-container {
+        /* justify-content: right;
+        align-items: right; */
+        width: 100%;
+        /* Ensure full width for proper alignment */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Align to the right within the container */
+    }
+
+    .question-text {
+        width: 90%;
+        /* like the table */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        flex-wrap: wrap;
+        
+    }
+
+    .q-table {
+        display: inline-block;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        /* align-self: right; */
+    }
+
+    .q-table thead {
+        display: none;
+    }
+
+    .q-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #a9a9a9;
+        border-bottom: none;
+        width: 60vw;
+    }
+
+    .q-table td {
+        display: flex;
+        align-items: right;
+        padding: 0.5rem;
+        border: 1px solid #a9a9a9;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid #a9a9a9;
+    }
+
+    .radio-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .custom-radio {
+        margin-left: 1rem;
+        width: 0.85em;
+        min-width: 0.85em;
+        height: 0.85em;
+        min-height: 0.85em;
+        border: 2px solid #ccc;
+    }
+
+    .option-text {
+        margin-left: 1rem;
+        display: inline-block;
+        /* margin-right: auto; */
+        overflow-wrap: break-word;
+    }
+
+    /* pseudo element to use as element background: */
+
 }
