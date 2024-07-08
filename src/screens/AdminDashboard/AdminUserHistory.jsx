@@ -120,9 +120,9 @@ const AdminUserHistory = () => {
       <CSVLink data={csvData} filename="history.csv" className="export-button">יצא ל-CSV</CSVLink>
       {error && <p className="error-message">{error}</p>}
       {history.length === 0 && !error && <p className="no-history">אין היסטוריה לשאלונים עבור אימייל זה</p>}
-      
+      <p>סה"כ רשומות היסטוריה: {history.length}</p>
       <div className="statistics-container">
-        <h2>סטטיסטיקות של שאלות (לפי הפילטר שהוכנס):</h2>
+        <h2>סטטיסטיקות של שאלות (לפי תאריכים נבחרים):</h2>
         {Object.keys(answerStats).map(question => {
           const data = {
             labels: Object.keys(answerStats[question]),
@@ -186,7 +186,9 @@ const AdminUserHistory = () => {
             <div key={question} className="question-stats-box">
               <h3>{question}</h3>
               <div className="chart-container">
-                <Pie data={data} options={options} />
+                <div className="pie-chart-container">
+                  <Pie data={data} options={options} />
+                </div>
               </div>
             </div>
           );
