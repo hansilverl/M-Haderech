@@ -1,3 +1,5 @@
+/* src/components/Navbar.css */
+
 .navbar {
   font-family: -apple-system,system-ui,BlinkMacSystemFont,Arial, Helvetica, sans-serif;
   background: #9b59b6;
@@ -66,6 +68,7 @@
   border-radius: 4px;
   cursor: pointer;
   border-radius: 15px;
+
 }
 
 .navbar .login-button {
@@ -77,6 +80,7 @@
   cursor: pointer;
   transition: 0.3s;
   border: 2px solid white; /* Add white border */
+  
 }
 
 .navbar .login-button:hover {
@@ -154,25 +158,5 @@
 
   .hamburger.open div:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    padding: 0.5em 0; /* Reduce padding on smaller screens */
-  }
-
-  .navbar-logo img {
-    height: 60px; /* Reduce logo size on smaller screens */
-  }
-
-  .navbar-menu li a, .logout-button {
-    font-size: 0.9em; /* Slightly reduce font size on smaller screens */
-    padding: 0.4em 0.8em; /* Reduce padding */
-  }
-
-  .navbar .login-button {
-    padding: 8px 20px; /* Adjust padding for login button */
-    font-size: 0.9em; /* Reduce font size for login button */
   }
 }

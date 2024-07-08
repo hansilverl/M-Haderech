@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
+import { FaUniversity, FaLink, FaPhone } from 'react-icons/fa';
 import './DonatePage.css';
 
 const DonatePage = () => {

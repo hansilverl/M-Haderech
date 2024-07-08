@@ -1,5 +1,4 @@
 // src/components/helpScore/Question.js
-
 import React, { useState } from 'react';
 
 const OptionHeaders = ({ options }) => (
@@ -32,7 +31,6 @@ const OptionCells = ({ options, selectedOption, handleRadioChange, name }) => (
                             className="radio-input"
                         />
                         <span className="custom-radio"></span>
-                        <span className="option-vert">{options[option]}</span>
                     </label>
                 </td>
             ))}
@@ -56,11 +54,11 @@ const Question = ({ question, onRadioChange }) => {
             </p>
             <table className="q-table">
                 <OptionHeaders options={options} />
-                <OptionCells
-                    options={options}
-                    selectedOption={selectedOption}
-                    handleRadioChange={handleRadioChange}
-                    name={id}
+                <OptionCells 
+                    options={options} 
+                    selectedOption={selectedOption} 
+                    handleRadioChange={handleRadioChange} 
+                    name={id} 
                 />
             </table>
         </div>
