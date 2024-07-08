@@ -2,17 +2,13 @@
 .users {
   margin-right: 250px; /* Leave space for the sidebar */
   padding: 20px;
-  width: calc(60% - 250px); /* Adjust content width to 70% */
+  width: calc(100% - 250px); /* Adjust content width */
   box-sizing: border-box; /* Include padding in total width */
   background-color: #f4f7f6;
   min-height: 100vh; /* Ensure content occupies the full screen height */
 }
 
 .users h1 {
-  margin-bottom: 20px;
-}
-
-.users p {
   margin-bottom: 20px;
 }
 

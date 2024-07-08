@@ -1,10 +1,3 @@
-/* General Styles */
-
-.homepage{
-    
-
-}
-
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -13,38 +6,38 @@ body {
   text-align: right; /* Align text to the right */
   background-color: #f0f0f0;
   color: #333;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 .header {
+  width: 100vw;
   position: relative;
   text-align: center;
   color: #333333ba;
 }
 
 .header-image-container {
-  width: 100vw;
+  width: 100%;
+  overflow: hidden; /* Prevent overflow */
   position: relative;
   text-align: center;
-  /* create left margin so left is same as right is with the scroll bar */
-  margin-left: calc(50% - 50vw);
 }
 
 .header-image {
-  /* fit the image to the container */
-  width: 100vw;
-  height: 39vh; /* Adjust this value to control the height of the header image */
+  width: 100%;
+  height: 39vh;
   object-fit: cover;
-  object-position: 100% 66%; /* 60% from the left and 50% from the top */
+  object-position: 100% 66%;
 }
 
-
 .header-text {
-    position: absolute;
-    top: 50%;
-    right: 2%; /* Adjust this value to control the distance from the right edge */
-    transform: translateY(-50%);
-    text-align: right;
-  }
+  position: absolute;
+  top: 50%;
+  right: 2%; /* Adjust this value to control the distance from the right edge */
+  transform: translateY(-50%);
+  text-align: right;
+}
+
 .header-text h1 {
   font-size: 2.5em;
   margin: 0;
@@ -81,7 +74,7 @@ body {
 }
 
 .donate-button:hover {
-  background: #8e44ad; /* Un tono ligeramente más oscuro para el efecto hover */
+  background: #8e44ad; /* A slightly darker tone for hover effect */
 }
 
 main {

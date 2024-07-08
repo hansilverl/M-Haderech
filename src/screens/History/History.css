@@ -1,3 +1,5 @@
+/* Miscellaneous.css */
+
 .history-container {
   display: flex;
   flex-direction: column;
@@ -42,15 +44,19 @@
   text-align: center;
 }
 
-.toggle-responses-icon {
-  font-size: 1.5em;
-  color: #9b59b6;
+.toggle-responses-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background: #9b59b6;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  position: relative;
+  margin-top: 10px;
 }
 
-.toggle-responses-icon:hover {
-  color: #8e44ad;
+.toggle-responses-button:hover {
+  background: #8e44ad;
 }
 
 .responses-modal {
@@ -148,13 +154,6 @@
   margin: 0 auto; /* Center the container */
 }
 
-.graph-background {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .trend-message {
   margin-top: 10px;
   margin-bottom: 20px; /* Adjust margin to position trend message properly */
@@ -169,15 +168,4 @@
 
 .history-container .filter-start-date, .history-container .filter-end-date {
   display: inline-block;
-}
-
-.custom-tooltip {
-  position: fixed;
-  background-color: #000;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  white-space: nowrap;
-  z-index: 1000;
-  pointer-events: none;
 }

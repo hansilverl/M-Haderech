@@ -5,8 +5,6 @@ import { CSVLink } from 'react-csv';
 import { Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 import './AdminUserHistory.css';
 import Modal from 'react-modal';
 
@@ -120,9 +118,35 @@ const AdminUserHistory = () => {
       <CSVLink data={csvData} filename="history.csv" className="export-button">יצא ל-CSV</CSVLink>
       {error && <p className="error-message">{error}</p>}
       {history.length === 0 && !error && <p className="no-history">אין היסטוריה לשאלונים עבור אימייל זה</p>}
-      <p>סה"כ רשומות היסטוריה: {history.length}</p>
+      <div className="history-grid">
+        {history.map((entry, index) => (
+          <div key={index} className="history-entry">
+            <h2>תאריך: {new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
+            <p className="total-score">ציון כולל: {entry.totalScore}</p>
+            <button onClick={() => openModal(entry)}>הצג פרטים</button>
+          </div>
+        ))}
+      </div>
+      <Modal isOpen={isModalOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
+        {selectedEntry && (
+          <div>
+            <h2>תאריך: {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
+            <p>ציון כולל: {selectedEntry.totalScore}</p>
+            <div className="response-list">
+              {selectedEntry.responses.map((response, idx) => (
+                <div key={idx} className="response-item">
+                  <p><strong>שאלה:</strong> {response.question}</p>
+                  <p><strong>תשובה נבחרה:</strong> {response.score}</p>
+                  <p><strong>ציון:</strong> {response.selectedOption}</p>
+                </div>
+              ))}
+            </div>
+            <button onClick={closeModal} className="modal-close-button">סגור</button>
+          </div>
+        )}
+      </Modal>
       <div className="statistics-container">
-        <h2>סטטיסטיקות של שאלות (לפי תאריכים נבחרים):</h2>
+        <h2>סטטיסטיקות של שאלות (לפי הפילטר שהוכנס):</h2>
         {Object.keys(answerStats).map(question => {
           const data = {
             labels: Object.keys(answerStats[question]),
@@ -186,47 +210,12 @@ const AdminUserHistory = () => {
             <div key={question} className="question-stats-box">
               <h3>{question}</h3>
               <div className="chart-container">
-                <div className="pie-chart-container">
-                  <Pie data={data} options={options} />
-                </div>
+                <Pie data={data} options={options} />
               </div>
             </div>
           );
         })}
       </div>
-      
-      <div className="history-grid">
-        {history.map((entry, index) => (
-          <div key={index} className="history-entry">
-            <h2>תאריך: {new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
-            <p className="total-score">ציון כולל: {entry.totalScore}</p>
-            <span
-              className="icon"
-              onClick={() => openModal(entry)}
-            >
-              <FontAwesomeIcon icon={faEye} />
-            </span>
-          </div>
-        ))}
-      </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
-        {selectedEntry && (
-          <div>
-            <h2>תאריך: {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
-            <p>ציון כולל: {selectedEntry.totalScore}</p>
-            <div className="response-list">
-              {selectedEntry.responses.map((response, idx) => (
-                <div key={idx} className="response-item">
-                  <p><strong>שאלה:</strong> {response.question}</p>
-                  <p><strong>תשובה נבחרה:</strong> {response.score}</p>
-                  <p><strong>ציון:</strong> {response.selectedOption}</p>
-                </div>
-              ))}
-            </div>
-            <button onClick={closeModal} className="modal-close-button">סגור</button>
-          </div>
-        )}
-      </Modal>
     </div>
   );
 };

@@ -1,8 +1,9 @@
+// src/screens/AdminDashboard/Users.jsx
 import React, { useState, useEffect } from 'react';
 import './Users.css';
-import { FaKey } from 'react-icons/fa';
+import { FaTrashAlt, FaKey } from 'react-icons/fa';
 import { db, auth } from '../../firebase/config'; 
-import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { sendPasswordResetEmail } from 'firebase/auth';
 
 const Users = () => {
@@ -19,6 +20,20 @@ const Users = () => {
 
     fetchUsers();
   }, []);
+
+  const handleDelete = async (id, email) => {
+    const confirmation = window.confirm(`האם אתה בטוח שברצונך למחוק את המשתמש ${email}?`);
+    if (confirmation) {
+      try {
+        await deleteDoc(doc(db, 'users', id));
+        setUsers(users.filter(user => user.id !== id));
+        alert(`המשתמש ${id} נמחק בהצלחה`);
+      } catch (error) {
+        console.error('Error deleting user: ', error);
+        alert(`שגיאה במחיקת המשתמש: ${error.message}`);
+      }
+    }
+  };
 
   const handleResetPassword = async (email) => {
     try {
@@ -46,7 +61,6 @@ const Users = () => {
   return (
     <div className='users'>
       <h1>משתמשים</h1>
-      <p>מספר משתמשים רשומים: {users.length}</p> {/* Display the number of registered users */}
       <input
         type="text"
         placeholder="חפש משתמש לפי אימייל"
@@ -74,6 +88,7 @@ const Users = () => {
                 />
               </td>
               <td>
+                <button title="מחק משתמש" onClick={() => handleDelete(user.id, user.email)}><FaTrashAlt style={{ color: 'black' }} /></button>
                 <button title="איפוס סיסמה" onClick={() => handleResetPassword(user.email)}><FaKey style={{ color: 'black' }} /></button>
               </td>
             </tr>
