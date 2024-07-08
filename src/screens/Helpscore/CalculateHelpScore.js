@@ -5,7 +5,6 @@ import { useAuthStatus } from '../../hooks/useAuthStatus';
 import { db } from '../../firebase/config';
 import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore';
 import { useLogin } from '../../hooks/useLogin';
-import useFirebaseErrorTranslation from '../../hooks/useFirebaseErrorTranslation';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
@@ -18,10 +17,8 @@ const CalculateHelpScore = () => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [formError, setFormError] = useState('');
     const { user, loading: authLoading } = useAuthStatus();
     const { login, error: loginError } = useLogin();
-    const translateErrorToHebrew = useFirebaseErrorTranslation();
 
     const scoreDescription = (score) => {
         if (score <= 19) {
@@ -97,16 +94,7 @@ const CalculateHelpScore = () => {
     }, [user, showLoginModal, saveHistory]);
 
     const handleLogin = async () => {
-        if (!email || !password) {
-            setFormError('יש למלא את כל השדות.');
-            return;
-        }
-
-        try {
-            await login(email, password);
-        } catch (error) {
-            setFormError(translateErrorToHebrew(error.code));
-        }
+        await login(email, password);
     };
 
     if (score === null || authLoading) {
@@ -121,8 +109,9 @@ const CalculateHelpScore = () => {
                 <div className="user-score">{score}</div>
             </div>
             <div className="score-description">
+                {/* use scoreDescription function to get the description */}
                 <p>רמת היפרמזיס: {scoreDescription(score)}</p>
-            </div>
+                </div>
             <div className="button-wrapper">
                 <button onClick={saveHistory}>שמור</button>
                 <button onClick={() => navigate('/helpscore')}>חזור לטופס</button>
@@ -141,22 +130,18 @@ const CalculateHelpScore = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="אימייל"
-                    required
-                    data-error-message="יש למלא אימייל."
                 />
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="סיסמה"
-                    required
-                    data-error-message="יש למלא סיסמה."
                 />
                 <div className="button-group">
                     <button onClick={handleLogin}>התחבר</button>
                     <button onClick={() => setShowLoginModal(false)} className="cancel-button">בטל</button>
                 </div>
-                {formError && <p className="error-message">{formError}</p>}
+                {loginError && <p className="error-message">{loginError}</p>}
             </Modal>
 
             <Modal

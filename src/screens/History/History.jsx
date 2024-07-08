@@ -6,8 +6,6 @@ import { useAuthStatus } from '../../hooks/useAuthStatus';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import './History.css';
 
 const History = () => {
@@ -17,7 +15,6 @@ const History = () => {
   const [error, setError] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [tooltip, setTooltip] = useState({ show: false, x: 0, y: 0 });
 
   useEffect(() => {
     if (user) {
@@ -190,25 +187,15 @@ const History = () => {
       },
     },
   };
-
-  const handleMouseEnter = (e) => {
-    const x = e.clientX + 10;
-    const y = e.clientY + 10;
-    setTooltip({ show: true, x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setTooltip({ show: false, x: 0, y: 0 });
-  };
+  
+  
 
   return (
     <div className="history-container">
       <div className="graph-container">
         <h2>התקדמות ציונים</h2>
         <p className="graph-description">הגרף מציג את זמן מילוי השאלון לעומת הציון</p>
-        <div className="graph-background">
-          <Bar data={graphData} options={graphOptions} />
-        </div>
+        <Bar data={graphData} options={graphOptions} />
       </div>
       <h1>היסטוריה של השאלונים שלי</h1>
       <div className="filter-container">
@@ -240,20 +227,12 @@ const History = () => {
           <div className="history-grid">
             {history.map((entry, index) => (
               <div key={index} className="history-entry">
-                <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry.id)}>
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </span>
+                <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry.id)}>🗑️</span>
                 <h2>{new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
                 <p className="total-score">ציון כולל: {entry.totalScore}</p>
-                <span
-                  className="toggle-responses-icon"
-                  onClick={() => openModal(entry)}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseMove={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <FontAwesomeIcon icon={faEye} />
-                </span>
+                <button className="toggle-responses-button" onClick={() => openModal(entry)}>
+                  צפיה בתשובות
+                </button>
               </div>
             ))}
           </div>
@@ -278,15 +257,10 @@ const History = () => {
               <button onClick={closeModal} className="close-modal-button">סגור</button>
             </Modal>
           )}
-          {tooltip.show && (
-            <div className="custom-tooltip" style={{ top: tooltip.y, left: tooltip.x }}>
-              צפייה בתשובות
-            </div>
-          )}
         </>
       )}
     </div>
-  );
+  );  
 };
 
 export default History;
