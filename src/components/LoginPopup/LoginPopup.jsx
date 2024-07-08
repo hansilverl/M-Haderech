@@ -11,12 +11,15 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
+const emailDomains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com', 'icloud.com'];
+
 export const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("התחברות");
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
+  const [emailSuggestions, setEmailSuggestions] = useState([]);
   const { error: loginError, login } = useLogin();
   const { error: signupError, signup } = useSignup();
   const [authError, setAuthError] = useState(null);
@@ -34,6 +37,27 @@ export const LoginPopup = ({ setShowLogin }) => {
       setAuthError(translateErrorToHebrew(error));
     }
   }, [loginError, signupError, translateErrorToHebrew]);
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    if (value.includes('@')) {
+      const [localPart, domainPart] = value.split('@');
+      if (domainPart) {
+        setEmailSuggestions(emailDomains.filter(domain => domain.startsWith(domainPart)));
+      } else {
+        setEmailSuggestions(emailDomains);
+      }
+    } else {
+      setEmailSuggestions([]);
+    }
+  };
+
+  const handleEmailSelect = (suggestion) => {
+    setEmail(email.split('@')[0] + '@' + suggestion);
+    setEmailSuggestions([]);
+  };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -83,9 +107,18 @@ export const LoginPopup = ({ setShowLogin }) => {
             required
             type="email"
             placeholder="האימייל שלך"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             value={email}
           />
+          {emailSuggestions.length > 0 && (
+            <ul className="email-suggestions">
+              {emailSuggestions.map((suggestion, index) => (
+                <li key={index} onClick={() => handleEmailSelect(suggestion)}>
+                  {email.split('@')[0]}@{suggestion}
+                </li>
+              ))}
+            </ul>
+          )}
           <input
             required
             type="password"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../../components/Footer/Footer';
 import './Homepage.css';
 import PostsSection from '../../components/PostSection/PostSection';
@@ -13,6 +13,8 @@ const HomePage = () => {
   const [aboutInfo, setAboutInfo] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [analyticsInView, setAnalyticsInView] = useState(false);
+  const analyticsRef = useRef(null);
 
   useEffect(() => {
     const fetchAboutInfo = async () => {
@@ -32,6 +34,28 @@ const HomePage = () => {
     };
 
     fetchAboutInfo();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnalyticsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (analyticsRef.current) {
+      observer.observe(analyticsRef.current);
+    }
+
+    return () => {
+      if (observer && observer.disconnect) {
+        observer.disconnect();
+      }
+    };
   }, []);
 
   const handleFormClick = () => {
@@ -61,7 +85,9 @@ const HomePage = () => {
           )}
         </section>
         <PostsSection />
-        <AnalyticsSection />
+        <div ref={analyticsRef}>
+          <AnalyticsSection animate={analyticsInView} />
+        </div>
         <DonationSection />
       </main>
       <Footer />
