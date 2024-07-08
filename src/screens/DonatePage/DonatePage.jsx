@@ -6,7 +6,8 @@ import './DonatePage.css';
 
 const DonatePage = () => {
   const [bankInfo, setBankInfo] = useState(null);
-  const [donationLink, setDonationLink] = useState('');
+  const [donationLinkHebrew, setDonationLinkHebrew] = useState('');
+  const [donationLinkEnglish, setDonationLinkEnglish] = useState('');
   const [donationNumber, setDonationNumber] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +32,8 @@ const DonatePage = () => {
         const docRef = doc(db, 'miscellaneousUpdated', 'donate_link');
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setDonationLink(docSnap.data().link);
+          setDonationLinkHebrew(docSnap.data().link_hebrew);
+          setDonationLinkEnglish(docSnap.data().link_english);
         } else {
           setError('לא נמצא קישור תרומה.');
         }
@@ -76,8 +78,9 @@ const DonatePage = () => {
         <div className="info-box">
           <FaLink className="info-icon" />
           <h2>קישור לתרומה דרך האינטרנט</h2>
-          <h4>ניתן לתרום דרך הקישור הבא:</h4>
-          <p> <a href={donationLink} target="_blank" rel="noopener noreferrer">{donationLink}</a></p>
+          <h4>ניתן לתרום דרך הקישורים הבאים:</h4>
+          <p> <a href={donationLinkHebrew} target="_blank" rel="noopener noreferrer">תרומה בעברית</a></p>
+          <p> <a href={donationLinkEnglish} target="_blank" rel="noopener noreferrer">Donate in English</a></p>
         </div>
         <div className="info-box">
           <FaUniversity className="info-icon" />
