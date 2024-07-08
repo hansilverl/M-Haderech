@@ -29,7 +29,7 @@ const Miscellaneous = () => {
           <AboutInfo />
         </div>
         <div className="section">
-          <h2>קישור תרומה</h2>
+          <h2>קישורי תרומה</h2>
           <DonationLink />
         </div>
         <div className="section">

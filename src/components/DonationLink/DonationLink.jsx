@@ -1,4 +1,3 @@
-// src/components/DonationLink/DonationLink.js
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -8,8 +7,10 @@ import './DonationLink.css';
 Modal.setAppElement('#root');
 
 const DonationLink = () => {
-  const [donationLink, setDonationLink] = useState('');
-  const [tempDonationLink, setTempDonationLink] = useState('');
+  const [donationLinkHebrew, setDonationLinkHebrew] = useState('');
+  const [donationLinkEnglish, setDonationLinkEnglish] = useState('');
+  const [tempDonationLinkHebrew, setTempDonationLinkHebrew] = useState('');
+  const [tempDonationLinkEnglish, setTempDonationLinkEnglish] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -20,7 +21,8 @@ const DonationLink = () => {
         const docRef = doc(db, 'miscellaneousUpdated', 'donate_link');
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setDonationLink(docSnap.data().link);
+          setDonationLinkHebrew(docSnap.data().link_hebrew);
+          setDonationLinkEnglish(docSnap.data().link_english);
         } else {
           setError('לא נמצא קישור תרומה.');
         }
@@ -35,7 +37,8 @@ const DonationLink = () => {
   }, []);
 
   const openModal = () => {
-    setTempDonationLink(donationLink);
+    setTempDonationLinkHebrew(donationLinkHebrew);
+    setTempDonationLinkEnglish(donationLinkEnglish);
     setModalIsOpen(true);
   };
 
@@ -43,15 +46,23 @@ const DonationLink = () => {
     setModalIsOpen(false);
   };
 
-  const handleChange = (e) => {
-    setTempDonationLink(e.target.value);
+  const handleChangeHebrew = (e) => {
+    setTempDonationLinkHebrew(e.target.value);
+  };
+
+  const handleChangeEnglish = (e) => {
+    setTempDonationLinkEnglish(e.target.value);
   };
 
   const handleSave = async () => {
     try {
       const docRef = doc(db, 'miscellaneousUpdated', 'donate_link');
-      await updateDoc(docRef, { link: tempDonationLink });
-      setDonationLink(tempDonationLink);
+      await updateDoc(docRef, {
+        link_hebrew: tempDonationLinkHebrew,
+        link_english: tempDonationLinkEnglish
+      });
+      setDonationLinkHebrew(tempDonationLinkHebrew);
+      setDonationLinkEnglish(tempDonationLinkEnglish);
       closeModal();
       alert('קישור תרומה עודכן בהצלחה.');
     } catch (error) {
@@ -65,7 +76,9 @@ const DonationLink = () => {
   return (
     <div className="donation-link">
       <div className="donation-link-content">
-        <p><strong>קישור תרומה:</strong> {donationLink}</p>
+        <p><strong>קישור תרומה בעברית:</strong> {donationLinkHebrew}</p>
+        <br></br>
+        <p><strong>קישור תרומה באנגלית:</strong> {donationLinkEnglish}</p>
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 
@@ -75,15 +88,25 @@ const DonationLink = () => {
         overlayClassName="modal-overlay"
         className="modal-content"
       >
-        <h2>עדכון קישור תרומה</h2>
+        <h2>עדכון קישורי תרומה</h2>
         <form>
           <div className="modal-field">
             <label>
-              קישור:
+              קישור בעברית:
               <input
                 type="text"
-                value={tempDonationLink}
-                onChange={handleChange}
+                value={tempDonationLinkHebrew}
+                onChange={handleChangeHebrew}
+              />
+            </label>
+          </div>
+          <div className="modal-field">
+            <label>
+              קישור באנגלית:
+              <input
+                type="text"
+                value={tempDonationLinkEnglish}
+                onChange={handleChangeEnglish}
               />
             </label>
           </div>
