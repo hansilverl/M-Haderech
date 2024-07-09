@@ -13,6 +13,8 @@
   }
   
   .donation-text h2 {
+    align-self: right;
+    text-align: right;
     font-size: 2em;
     margin-bottom: 1em;
   }
