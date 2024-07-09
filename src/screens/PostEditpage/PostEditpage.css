@@ -12,7 +12,7 @@ html {
 
 select,
 option,
-input {
+input[type='text']{	/*type text assures that we only take text inputs from the current page, instead of all inputs on the website*/
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	background-color: white;
