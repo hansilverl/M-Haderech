@@ -107,10 +107,11 @@
   border-radius: 15px;
 }
 
-@media (max-width: 1172px) {
+@media (max-width: 768px) {
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
+    height: 10vh;
   }
 
   .hamburger {
