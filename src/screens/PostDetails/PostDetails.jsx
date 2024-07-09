@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import './PostDetails.css'
 import PdfViewer from '../../components/PdfViewer/PdfViewer'
 import { pdfjs } from 'react-pdf'
 import pdfIcon from '../../assets/pdf-file.png'
-import usePostGet from '../../hooks/usePostGet'
-import { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
+import usePostsGet from '../../hooks/usePostsGet'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -17,14 +16,13 @@ const formatDate = (timestamp) => {
 	const date = new Date(timestamp.seconds * 1000) // Convert Firestore timestamp to JavaScript Date object
 	return date.toLocaleDateString('en-US') // Adjust the locale as needed
 }
+
 const PostDetails = () => {
 	const { id } = useParams()
-	const { postGet, loadingGet, errorGet, postGetHandler } = usePostGet()
-
-	if (id && !postGet && !loadingGet && !errorGet) postGetHandler(id)
+	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
 
 	const handleOpenPdf = () => {
-		window.open(postGet.contentUrl, '_blank')
+		window.open(postsGet.contentUrl, '_blank')
 	}
 
 	return (
@@ -32,36 +30,36 @@ const PostDetails = () => {
 			{loadingGet ? (
 				<p>טוען...</p>
 			) : errorGet ? (
-				<p>{errorGet}</p>
-			) : !postGet ? (
+				<p>{errorGet.toString()}</p>
+			) : !postsGet ? (
 				<p>הפוסט לא נמצא</p>
 			) : (
 				<>
-					<h1>{postGet.title}</h1>
+					<h1>{postsGet.title}</h1>
 					<p>
-						<strong>תאריך פרסום:</strong> {formatDate(postGet.dateAdded)}
+						<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
 					</p>
-					{!postGet?.imageUrl ? null : (
+					{!postsGet?.imageUrl ? null : (
 						<div className='image-container'>
 							<img
-								src={postGet?.imageUrl}
+								src={postsGet.imageUrl}
 								alt={'לא נמצאה תמונה'}
 								style={{ width: '100%', height: 'auto' }}
 							/>
 						</div>
 					)}
 					<p>
-						<strong>תיאור:</strong> {postGet.description}
+						<strong>תיאור:</strong> {postsGet.description}
 					</p>
-					{postGet.type === 'file' ? (
+					{postsGet.type === 'file' ? (
 						<>
 							<button onClick={handleOpenPdf} className='pdf-button'>
 								<img src={pdfIcon} alt='Open PDF' />
 							</button>
-							<PdfViewer pdfFile={postGet.contentUrl} />
+							<PdfViewer pdfFile={postsGet.contentUrl} />
 						</>
 					) : (
-						<div className='tiptap' dangerouslySetInnerHTML={{ __html: postGet.contentHTML }} />
+						<div className='tiptap' dangerouslySetInnerHTML={{ __html: postsGet.contentHTML }} />
 					)}
 				</>
 			)}

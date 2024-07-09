@@ -24,6 +24,7 @@ const PostResourceInput = (props) => {
 			const newUrl = await getDownloadURLFromPath(resourcePath);
 			setPath(resourcePath);
 			setUrl(newUrl);
+			console.log(resourcePath, newUrl);
 		};
 		setAll();
 	}, [resourcePath]);

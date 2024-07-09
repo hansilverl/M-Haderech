@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { db } from '../firebase/config'
 import { addDoc, serverTimestamp, collection } from 'firebase/firestore'
-import { convertFrontEndToDoc } from './usePostGet'
 
 const createEmptyPost = async () => {
 	const res = {

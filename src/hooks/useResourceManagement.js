@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { storage } from '../firebase/config'
-import { ref, deleteObject, uploadBytes ,getDownloadURL} from 'firebase/storage'
+import { ref, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 const getDownloadURLFromPath = async (path) => {
 	if (!path) return
@@ -58,6 +58,7 @@ const useResourceManagement = (initialPath = null) => {
 		try {
 			setErrorResourcePath(null)
 			const filePath = await uploadFile(file, fileType)
+			console.log(filePath);
 			setResourcePath(filePath)
 		} catch (error) {
 			setErrorResourcePath(error)
