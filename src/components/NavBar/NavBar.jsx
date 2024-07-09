@@ -1,11 +1,11 @@
-// src/components/NavBar/NavBar.js
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({ setShowLogin }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +65,6 @@ const Navbar = ({ setShowLogin }) => {
           <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
-          {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
           {user ? (
             <>
               <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
@@ -74,7 +73,12 @@ const Navbar = ({ setShowLogin }) => {
               <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
-            <li><span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span></li> 
+            <li>
+              <div className="login-button" onClick={() => setShowLogin(true)}>
+                <FontAwesomeIcon icon={faRightToBracket} style={{color: "#ffffff"}} />
+                <div>התחברות</div>
+              </div>
+            </li>
           )}
         </ul>
       </div>

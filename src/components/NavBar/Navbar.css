@@ -10,6 +10,7 @@
   width: 100%;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.3em;
 }
 
 .navbar-container {
@@ -159,5 +160,11 @@
 
   .hamburger.open div:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .navbar-logo{
+    /* for small screens - align center */
+    justify-self: center;
+    flex-grow: 1;
   }
 }
