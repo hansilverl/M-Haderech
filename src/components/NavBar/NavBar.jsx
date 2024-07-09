@@ -5,7 +5,7 @@ import { useAuthStatus } from '../../hooks/useAuthStatus';
 import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 
 const Navbar = ({ setShowLogin }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +62,7 @@ const Navbar = ({ setShowLogin }) => {
           <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
+          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
           {user ? (
@@ -74,9 +74,9 @@ const Navbar = ({ setShowLogin }) => {
             </>
           ) : (
             <li>
-              <div className="login-button" onClick={() => setShowLogin(true)}>
-                <FontAwesomeIcon icon={faRightToBracket} style={{color: "#ffffff"}} />
-                <div>התחברות</div>
+              <div className="login-button" title='התחברות' onClick={() => setShowLogin(true)}>
+                <FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff", fontSize: "24px" }} />                
+                <div className="logText">התחברות</div>
               </div>
             </li>
           )}
