@@ -129,7 +129,8 @@
   border-radius: 15px;
 }
 
-@media (max-width: 768px) {
+/* for screens smaller than half of the desktop screen(1200px) */
+@media (max-width : 1200px) {
   .navbar {
     display: flex;
     flex-direction: column;
@@ -151,10 +152,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -2em;
   }
 
   .navbar-logo img {
-    height: 80px;
+    height: 90px;
     /* center the logo */
 
 
