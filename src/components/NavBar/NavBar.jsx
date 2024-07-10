@@ -46,16 +46,16 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <nav className="navbar">
+              <div className="navbar-logo">
+          <Link to="/">
+            <img src={logo} alt="Em Haderech Logo" />
+          </Link>
+        </div>
       <div className="navbar-container">
         <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <div />
           <div />
           <div />
-        </div>
-        <div className="navbar-logo">
-          <Link to="/">
-            <img src={logo} alt="Em Haderech Logo" />
-          </Link>
         </div>
         <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
           <li><a href="/" onClick={openPosts}>דף הבית</a></li>
@@ -74,7 +74,7 @@ const Navbar = ({ setShowLogin }) => {
               <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
-            <li><span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span></li> 
+            <span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span>
           )}
         </ul>
       </div>

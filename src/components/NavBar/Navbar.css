@@ -8,8 +8,9 @@
   position: sticky; /* Fixed navbar */
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1000;  /* Make sure it stays on top */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
 }
 
 .navbar-container {
@@ -19,10 +20,14 @@
   max-width: fit-content;
   margin: 0 auto;
   padding: 0 2em;
+  font-size: 1.1em;
 }
 
 .navbar-logo {
-  order: 1;
+  flex-direction: flex-end;
+  order: -1;
+  display: flex;
+  margin-right: 3em;
 }
 
 .navbar-logo img {
@@ -72,14 +77,19 @@
 }
 
 .navbar .login-button {
-  background: transparent;
+  background: white;
+  display: inline-block;
+  padding: 0.5em 1em;
+
   font-size: 16px;
-  color: #ffffff;
-  padding: 10px 30px;
-  border-radius: 50px;
+  color: #9b59b6;
+  /* border-radius: 50px; */
   cursor: pointer;
   transition: 0.3s;
   border: 2px solid white; /* Add white border */
+  order:1;
+  margin-right: 4em;
+  font-weight: bold;
   
 }
 
@@ -108,10 +118,30 @@
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
-    height: 10vh;
+    width: 100%;
+  }
+  .navbar-logo {
+    align-self: center;
+    /* center the logo */
+    order: 1;
+    flex-grow: 1; /* grow make the logo take the remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-logo img {
+    height: 4em;
+    /* center the logo */
+    
+
   }
 
   .hamburger {
@@ -120,10 +150,14 @@
     right: 20px;
     top: 20px;
   }
-
+  .navbar-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
   .navbar-menu {
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     display: none;
     position: absolute;
     top: 60px;
