@@ -38,8 +38,8 @@ const ResourceInput = (props) => {
 	}, [resourcePath])
 
 	return (
-		<div className='resource-input'>
-			<h3 className='title'>{title}:</h3>
+		<div className='main-flex-row resource-input'>
+			<h3 className='title'>קובץ {title}:</h3>
 			{!errorResourcePath ? null : (
 				<h2 className='status-message error'>שגיאה: {errorResourcePath.toString()}</h2>
 			)}

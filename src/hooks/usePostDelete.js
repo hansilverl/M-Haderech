@@ -41,7 +41,7 @@ const usePostDelete = (documentID) => {
 			setPostDelete(p)
 		} catch (error) {
 			console.error('Error deleting posts: ', error) // Log error for debugging
-			setErrorDelete(error)
+			setErrorDelete(error.message)
 			setPostDelete(null)
 		}
 		setLoadingDelete(false)

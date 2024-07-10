@@ -35,7 +35,7 @@ const usePostCreate = () => {
 			setPostCreateID(docID)
 		} catch (error) {
 			console.error('Error creating post: ', error)
-			setErrorCreate(error)
+			setErrorCreate(error.message)
 			setPostCreateID(null)
 		}
 		setLoadingCreate(false)

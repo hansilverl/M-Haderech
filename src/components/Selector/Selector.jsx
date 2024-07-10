@@ -12,7 +12,7 @@ const Selector = (props) => {
 	}, [currentValueIndex])
 
 	return (
-		<div className='flex-row selector'>
+		<div className='main-flex-row selector'>
 			<label htmlFor='post-type' className='input-label'>
 				{name}:
 			</label>

@@ -58,7 +58,7 @@ const usePostsGet = (query) => {
 			setPosts(fetchedPosts)
 		} catch (error) {
 			console.error('Error fetching posts: ', error) // Log error for debugging
-			setError(error)
+			setError(error.message)
 		}
 		setLoading(false)
 	}

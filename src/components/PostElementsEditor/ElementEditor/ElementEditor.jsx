@@ -88,6 +88,7 @@ const ElementEditor = (props) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					style={{ ...provided.draggableProps.style }}>
+						
 					<div className='main-flex-row'>
 						<span {...provided.dragHandleProps} className='drag-handle'>
 							<FaGripLines />
@@ -104,7 +105,7 @@ const ElementEditor = (props) => {
 						<button onClick={onDeleteElement}>מחק</button>
 					</div>
 
-					<div className='element-editor'>
+					<div className='element-editor main-flex-row'>
 						{!displayEditor ? null : (
 							<>
 								<ElementComp
