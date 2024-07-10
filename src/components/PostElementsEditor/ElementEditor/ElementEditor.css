@@ -1,16 +1,15 @@
 .draggable-post-element {
 	user-select: none;
-	padding: 16px;
-	margin: 0 0 8px 0;
-	min-height: 50px;
+	padding: 0px;
+	margin: 0 0 0px 0;
 	background-color: #fff;
 	color: #333;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 }
 
 .drag-handle {
   cursor: grab;
-  padding: 4px;
+  padding: 2px;
 }

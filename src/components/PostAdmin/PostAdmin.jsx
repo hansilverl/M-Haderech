@@ -64,13 +64,7 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 		<div className="post-admin">
 			<div className="post-content">
 				<Post
-					id={id}
-					imageUrl={imageUrl}
-					title={title}
-					date={date}
-					description={description}
-					type={type}
-					contentUrl={contentUrl}
+					article={post}
 				/>
 			</div>
 			<AdminBar id={id} />

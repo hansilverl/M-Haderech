@@ -21,14 +21,7 @@ const Posts = () => {
 					{postsGet.map((post, index) => (
 						<Post
 							key={index}
-							id={post.id}
-							imagePath={post.imagePath}
-							title={post.title}
-							date={post.date}
-							description={post.description}
-							type={post.type}
-							contentFile={post.contentFile}
-							published={post.published}
+							article={post}
 						/>
 					))}
 				</div>

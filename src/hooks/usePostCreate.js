@@ -8,11 +8,8 @@ const createEmptyPost = async () => {
 		datePublished: null,
 		dateAdded: serverTimestamp(),
 		description: 'תיאור הפוסט',
-		type: 'editor',
 		published: false,
-		contentHTML: '',
-		contentFile: null,
-		imagePath: null,
+		elements: [],
 	}
 	return res
 }

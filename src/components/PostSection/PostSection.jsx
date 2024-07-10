@@ -31,14 +31,7 @@ const PostsSection = () => {
 					postsGet.map((post, index) => (
 						<Post
 							key={index}
-							id={post.id}
-							imageUrl={post.imageUrl}
-							title={post.title}
-							date={post.date}
-							description={post.description}
-							type={post.type}
-							contentUrl={post.contentUrl}
-							published={post.published}
+							article={post}
 						/>
 					))
 				)}

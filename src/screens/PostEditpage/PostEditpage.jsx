@@ -10,24 +10,22 @@ import { serverTimestamp } from 'firebase/firestore'
 import usePostsGet from '../../hooks/usePostsGet'
 import usePostUpdate from '../../hooks/usePostUpdate'
 import usePostDelete from '../../hooks/usePostDelete'
-import PostResourceInput from '../../components/PostResourceInput/PostResourceInput'
+import ResourceInput from '../../components/ResourceInput/ResourceInput'
 
 import './PostEditpage.css'
+import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
 const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	const { loadingUpdate, postUpdateHandler } = usePostUpdate(postID)
 	const { postDelete, loadingDelete, postDeleteHandler } = usePostDelete(postID)
 
-	const [contentType, setContentType] = useState(post.contentType ? post.contentType : 'editor')
-	const [postType, setPostType] = useState(post.postType ? post.postType : 'post')
+	const [articleType, setPostType] = useState(post.articleType ? post.articleType : 'article')
 	const [title, setTitle] = useState(post.title ? post.title : '')
 	const [description, setDescription] = useState(post.description ? post.description : '')
-	const [contentHTML, setContentHTML] = useState(post.content ? post.content : '')
 	const [published, setPublished] = useState(post.published ? post.published : false)
-	const [imagePath, setImagePath] = useState(post.imagePath ? post.imagePath : '')
-	const [imageUrl, setImageUrl] = useState(post.imageUrl ? post.imageUrl : '')
-	const [contentFile, setContentFile] = useState(post.contentFile ? post.contentFile : '')
-	const [contentUrl, setContentFileUrl] = useState(post.contentUrl ? post.contentUrl : '')
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
+	const [dateAdded, setDateAdded] = useState(post.dateAdded ? post.dateAdded : serverTimestamp())
+	const [elements, setElements] = useState(post.elements ? post.elements : [])
+	const [save, setSave] = useState(false)
 
 	const [saveButtonText, setSaveButtonText] = useState('שמור')
 	const navigate = useNavigate()
@@ -36,13 +34,11 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 		const newPost = {
 			title,
 			description,
-			contentHTML,
-			postType,
-			contentType,
+			articleType,
 			published,
-			imagePath,
-			contentFile,
 			datePublished,
+			dateAdded,
+			elements,
 		}
 
 		for (const key in newPost) {
@@ -65,6 +61,7 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 			setDatePublished(serverTimestamp())
 		}
 		setPublished(!published)
+		setSave(true)
 		await handleSave()
 	}
 
@@ -76,20 +73,23 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	}
 
 	useEffect(() => {
-		handleSave()
-	}, [imagePath, contentFile, published])
+		if(save){
+			handleSave()
+			setSave(false)
+		} 
+	}, [save])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
 	}, [postDelete, navigate])
 
 	return (
-		<div id='edit-post-page' className='flex-col'>
+		<div id='edit-post-page' className='main-flex-col'>
 			{!post ? (
 				<h1>הפוסט לא נמצא</h1>
 			) : (
 				<>
-					<div className='flex-row'>
+					<div className='main-flex-row'>
 						<label className='input-label'>כותרת הפוסט:</label>
 						<input
 							type='text'
@@ -98,7 +98,7 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</div>
-					<div className='flex-row'>
+					<div className='main-flex-row'>
 						<label className='input-label'>תיאור הפוסט:</label>
 						<input
 							type='text'
@@ -107,52 +107,23 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<PostResourceInput
-						path={imagePath}
-						setPath={setImagePath}
-						url={imageUrl}
-						setUrl={setImageUrl}
-						type='image'
-						title='תמונה'
-					/>
-					<div className='flex-row'>
-						<Selector
-							id='content-type'
-							name='סוג הפוסט'
-							value={contentType}
-							selectFunction={setContentType}
-							optionValues={['editor', 'file']}
-							optionNames={['עורך', 'קובץ']}
-						/>
-					</div>
-					<div className='flex-row'>
+					<div className='main-flex-row'>
 						<Selector
 							id='post-type'
 							name='סוג הפוסט (פוסט או כנס)'
-							value={postType}
+							value={articleType}
 							selectFunction={setPostType}
 							optionValues={['post', 'convention']}
 							optionNames={['פוסט', 'כנס']}
 						/>
 					</div>
-					<div id='post-contents'>
-						<h2 className='title-content'>תוכן הפוסט:</h2>
-						{contentType === 'editor' ? (
-							<TextEditor initialContent={contentHTML} setCurrContent={setContentHTML} />
-						) : contentType === 'file' ? (
-							<PostResourceInput
-								path={contentFile}
-								setPath={setContentFile}
-								url={contentUrl}
-								setUrl={setContentFileUrl}
-								type='pdf'
-								title='קובץ PDF'
-							/>
-						) : (
-							<div>לא נבחר סוג פוסט</div>
-						)}
-					</div>
-					<div className='flex-row'>
+					<ElementsEditor
+						id='elements-editor'
+						elements={elements}
+						setElements={setElements}
+						setSave={setSave}
+					/>
+					<div className='main-flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
