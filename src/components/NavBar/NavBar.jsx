@@ -46,11 +46,11 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <nav className="navbar">
-              <div className="navbar-logo">
-          <Link to="/">
-            <img src={logo} alt="Em Haderech Logo" />
-          </Link>
-        </div>
+      <div className="navbar-logo">
+        <Link to="/">
+          <img src={logo} alt="Em Haderech Logo" />
+        </Link>
+      </div>
       <div className="navbar-container">
         <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <div />
@@ -62,21 +62,23 @@ const Navbar = ({ setShowLogin }) => {
           <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
+          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
-          {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
-          {user ? (
-            <>
-              <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
-              <div className="space"></div>
-              {isAdmin && <li><Link to="/admin" className="admin-logout" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
-              <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
-            </>
-          ) : (
-            <span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span>
-          )}
         </ul>
+      </div>
+      {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
+       <div className='login-wrapper'>
+        {user ? (
+        <>
+          <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
+          <div className="space"></div>
+          {isAdmin && <li><Link to="/admin" className="admin-logout" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
+          <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
+        </>
+      ) : (
+        <span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span>
+      )}
       </div>
     </nav>
   );

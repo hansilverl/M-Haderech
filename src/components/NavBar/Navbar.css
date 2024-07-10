@@ -1,14 +1,16 @@
 /* src/components/Navbar.css */
 
 .navbar {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,Arial, Helvetica, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
   background: #9b59b6;
   color: white;
   padding: 1em 0;
-  position: sticky; /* Fixed navbar */
+  position: sticky;
+  /* Fixed navbar */
   top: 0;
   width: 100%;
-  z-index: 1000;  /* Make sure it stays on top */
+  z-index: 1000;
+  /* Make sure it stays on top */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
 }
@@ -63,7 +65,8 @@
   align-items: center;
 }
 
-.navbar-menu li a, .logout-button {
+.navbar-menu li a,
+.logout-button {
   color: white;
   text-decoration: none;
   font-size: 1em;
@@ -75,28 +78,37 @@
 
 }
 
-.navbar .login-button {
-  background: white;
-  display: inline-block;
-  padding: 0.5em 1em;
+.navbar .login-wrapper {
+  margin-left: 2.2em;
+  margin-top: 0.1em;
+  display: flex;
+  align-items: center;
+}
 
+.navbar .login-button {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #f5f5f5;
+  border-radius: 10px;
   font-size: 16px;
-  color: #9b59b6;
-  /* border-radius: 50px; */
+  /*underline the text*/
+  /* text-decoration: underline ; */
+  color: #f5f5f5;
+  /* bring to center */
   cursor: pointer;
-  transition: 0.3s;
-  border: 2px solid white; /* Add white border */
-  order:1;
-  margin-right: 4em;
-  font-weight: bold;
-  
+  font-weight: 550;
+
 }
 
 .navbar .login-button:hover {
-  background: #555; /* Add a hover effect if needed */
+  background: #f5f5f5;
+  color: #9b59b6;
 }
 
-.navbar-menu li a:hover, .logout-button:hover {
+.navbar-menu li a:hover,
+.logout-button:hover {
   background: #555;
   color: #fff;
 }
@@ -112,7 +124,8 @@
 }
 
 .admin-logout {
-  background-color: #765092; /* Dark violet */
+  background-color: #765092;
+  /* Dark violet */
   border-radius: 15px;
 }
 
@@ -122,25 +135,48 @@
     flex-direction: column;
     align-items: center;
   }
+
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
   }
+
   .navbar-logo {
     align-self: center;
     /* center the logo */
     order: 1;
-    flex-grow: 1; /* grow make the logo take the remaining space */
+    flex-grow: 1;
+    /* grow make the logo take the remaining space */
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .navbar-logo img {
-    height: 4em;
-    /* center the logo */
-    
 
+  .navbar-logo img {
+    height: 80px;
+    /* center the logo */
+
+
+  }
+
+  .navbar .login-wrapper {
+    /* keep in center left corner */
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin-left: 1em;
+    /* bring to center */
+  }
+
+  .login-button {
+    justify-content: center;
+    justify-self: top;
+    flex-direction: column;
+    align-self: center;
   }
 
   .hamburger {
@@ -149,11 +185,13 @@
     right: 20px;
     top: 20px;
   }
+
   .navbar-right {
     width: 100%;
     display: flex;
     justify-content: flex-end;
   }
+
   .navbar-menu {
     flex-direction: column;
     width: 100%;
