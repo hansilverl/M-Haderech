@@ -1,11 +1,11 @@
+// src/components/NavBar/NavBar.js
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 
 const Navbar = ({ setShowLogin }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,9 +62,10 @@ const Navbar = ({ setShowLogin }) => {
           <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
+          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li> 
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
           <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
+          {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
           {user ? (
             <>
               <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
@@ -73,12 +74,7 @@ const Navbar = ({ setShowLogin }) => {
               <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
             </>
           ) : (
-            <li>
-              <div className="login-button" title='התחברות' onClick={() => setShowLogin(true)}>
-                <FontAwesomeIcon icon={faCircleUser} style={{ color: "#ffffff", fontSize: "24px" }} />                
-                <div className="logText">התחברות</div>
-              </div>
-            </li>
+            <li><span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span></li> 
           )}
         </ul>
       </div>

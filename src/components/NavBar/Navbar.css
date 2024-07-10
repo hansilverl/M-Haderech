@@ -7,35 +7,26 @@
   padding: 1em 0;
   position: sticky; /* Fixed navbar */
   top: 0;
-  width: 100vw;
-  height: 10vh;
+  width: 100%;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 1.1em;
-  direction: rtl; /* Set the navbar direction to RTL */
 }
 
 .navbar-container {
   display: flex;
-  flex-direction: flex-end;
-  justify-content: space-evenly;
-  align-items: right;
-  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  max-width: fit-content;
   margin: 0 auto;
   padding: 0 2em;
-  flex-flow: row nowrap;
 }
 
 .navbar-logo {
-  margin-right: 2em;
-  /* align in right corner: */
   order: 1;
-  margin-left: auto;
 }
 
 .navbar-logo img {
-  height: 5em;
-  position: sticky;
+  height: 100px;
 }
 
 .hamburger {
@@ -53,21 +44,19 @@
 
 .navbar-menu {
   list-style: none;
-  /* padding: 0;
-  margin: 0; */
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-grow: 1;
+  justify-content: flex-end;
   order: 2;
 }
 
 .navbar-menu li {
-  white-space: wrap;
+  margin-left: 15px;
+  white-space: nowrap;
   display: flex;
   align-items: center;
-  /* justify-content: right; */
-  margin-right: 1em;
-  padding: 0.5em 1em;
-  flex-flow: row wrap;
 }
 
 .navbar-menu li a, .logout-button {
@@ -83,32 +72,30 @@
 }
 
 .navbar .login-button {
-  margin-bottom: 0.7em;
   background: transparent;
+  font-size: 16px;
   color: #ffffff;
   padding: 10px 30px;
   border-radius: 50px;
   cursor: pointer;
-  transition: 0.3s;  
-  flex-direction: flex-start;
-  margin-right: 2em;
-}
-
-.logText {
-  font-size: 0.8em;
+  transition: 0.3s;
+  border: 2px solid white; /* Add white border */
+  
 }
 
 .navbar .login-button:hover {
   background: #555; /* Add a hover effect if needed */
 }
 
-.navbar .user-icon{
-  width: 40px;
-}
-
 .navbar-menu li a:hover, .logout-button:hover {
   background: #555;
   color: #fff;
+}
+
+.navbar-end {
+  display: flex;
+  margin-left: auto;
+  order: 3;
 }
 
 .space {
@@ -120,7 +107,7 @@
   border-radius: 15px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
@@ -159,7 +146,7 @@
   .navbar-menu li a {
     display: block;
     text-align: right;
-    /* padding-right: 20px; */
+    padding-right: 20px;
   }
 
   .hamburger.open div:nth-child(1) {
@@ -172,12 +159,5 @@
 
   .hamburger.open div:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  .navbar-logo{
-    /* for small screens - align center */
-    justify-self: center;
-    margin-right: 0;
-    flex-grow: 1;
   }
 }
