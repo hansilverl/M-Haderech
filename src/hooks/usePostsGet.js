@@ -72,7 +72,7 @@ const usePostsGet = (query) => {
 const queryGetPublishedPosts = (lim = 3) => {
 	return query(
 		collection(db, collectionNames.posts),
-		where('postType', '==', 'post'),
+		where('articleType', '==', 'post'),
 		where('published', '==', true),
 		orderBy('datePublished', 'desc'),
 		limit(lim)
@@ -81,8 +81,8 @@ const queryGetPublishedPosts = (lim = 3) => {
 const queryGetPublishedConventions = (lim = 3) => {
 	return query(
 		collection(db, collectionNames.conventions),
+		where('articleType', '==', 'convention'),
 		where('published', '==', true),
-		where('postType', '==', 'convention'),
 		orderBy('datePublished', 'desc'),
 		limit(lim)
 	)

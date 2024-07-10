@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import TextEditor from '../../components/TextEditor/TextEditor'
 import Selector from '../../components/Selector/Selector'
 
 import { useParams } from 'react-router-dom'
@@ -10,7 +9,6 @@ import { serverTimestamp } from 'firebase/firestore'
 import usePostsGet from '../../hooks/usePostsGet'
 import usePostUpdate from '../../hooks/usePostUpdate'
 import usePostDelete from '../../hooks/usePostDelete'
-import ResourceInput from '../../components/ResourceInput/ResourceInput'
 
 import './PostEditpage.css'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
@@ -23,7 +21,6 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	const [description, setDescription] = useState(post.description ? post.description : '')
 	const [published, setPublished] = useState(post.published ? post.published : false)
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
-	const [dateAdded, setDateAdded] = useState(post.dateAdded ? post.dateAdded : serverTimestamp())
 	const [elements, setElements] = useState(post.elements ? post.elements : [])
 	const [save, setSave] = useState(false)
 
@@ -37,7 +34,6 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 			articleType,
 			published,
 			datePublished,
-			dateAdded,
 			elements,
 		}
 
@@ -51,7 +47,6 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	const handleSave = async () => {
 		const postAdditions = getNewPost()
 		await postUpdateHandler(postAdditions)
-		if (setRefresh) setRefresh(true)
 		setSaveButtonText('נשמר בהצלחה')
 		setTimeout(() => setSaveButtonText('שמור'), 3000)
 	}
@@ -61,7 +56,6 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 			setDatePublished(serverTimestamp())
 		}
 		setPublished(!published)
-		setSave(true)
 		await handleSave()
 	}
 
@@ -73,11 +67,11 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	}
 
 	useEffect(() => {
-		if(save){
+		if (save) {
 			handleSave()
 			setSave(false)
-		} 
-	}, [save])
+		}
+	}, [save, elements])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
@@ -152,7 +146,10 @@ const PostEditPage = () => {
 	const [refresh, setRefresh] = useState(false)
 
 	useEffect(() => {
-		if (refresh) postsGetHandler()
+		if (refresh) {
+			postsGetHandler()
+			setRefresh(false)
+		}
 	}, [refresh])
 
 	return loadingGet ? (

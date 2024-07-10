@@ -13,3 +13,15 @@
   cursor: grab;
   padding: 2px;
 }
+
+.element-editor-header {
+	border: #333 solid 1px;
+	border-radius: 5px;
+	background-color: aqua;
+}
+
+.element-editor-container {
+	border: #333 solid 1px;
+	border-radius: 5px;
+	background-color: aquamarine;
+}

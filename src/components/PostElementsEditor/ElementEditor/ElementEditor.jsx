@@ -8,8 +8,8 @@ import TextEditor from '../../TextEditor/TextEditor'
 import ResourceInput from '../../ResourceInput/ResourceInput'
 import { deleteObjectByFilePath } from '../../../hooks/useResourceManagement'
 
-const typeValues = ['text', 'image', 'video', 'audio', 'compressed']
-const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מקווץ']
+const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'compressed']
+const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'מקווץ']
 
 const ElementComp = (props) => {
 	const { type, content, setContent, resourcePath, setResourcePath } = props
@@ -39,15 +39,18 @@ const ElementEditor = (props) => {
 	const [resourcePath, setResourcePath] = useState(
 		element?.resourcePath ? element.resourcePath : ''
 	)
-
-	const [displayEditor, setDisplayEditor] = useState(true)
+	const [displayEditor, setDisplayEditor] = useState(
+		element?.displayEditor === false ? element.displayEditor : true
+	)
 
 	const onUpdateElement = () => {
 		const newElement = {
 			type,
 			content,
 			resourcePath,
+			displayEditor,
 		}
+
 		setElements((elements) => {
 			const newElements = [...elements]
 			newElements[index] = newElement
@@ -70,26 +73,26 @@ const ElementEditor = (props) => {
 		setDisplayEditor(!displayEditor)
 	}
 
-	useEffect(() => {
-		if (
-			type !== element.type ||
-			content !== element.content ||
-			resourcePath !== element.resourcePath
-		) {
-			onUpdateElement()
-		}
-	}, [type, content, resourcePath])
+	// useEffect(() => {
+	// 	if (
+	// 		type !== element.type ||
+	// 		content !== element.content ||
+	// 		resourcePath !== element.resourcePath ||
+	// 		displayEditor !== element.displayEditor
+	// 	) {
+	// 		onUpdateElement()
+	// 	}
+	// }, [type, content, resourcePath, displayEditor])
 
 	return (
-		<Draggable className='draggable-post-element' draggableId={`drag-${index}`} index={index}>
+		<Draggable draggableId={`drag-${index}`} index={index}>
 			{(provided) => (
 				<div
 					className='draggable-post-element main-flex-col'
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					style={{ ...provided.draggableProps.style }}>
-						
-					<div className='main-flex-row'>
+					<div className='element-editor-header main-flex-row'>
 						<span {...provided.dragHandleProps} className='drag-handle'>
 							<FaGripLines />
 						</span>
@@ -105,7 +108,7 @@ const ElementEditor = (props) => {
 						<button onClick={onDeleteElement}>מחק</button>
 					</div>
 
-					<div className='element-editor main-flex-row'>
+					<div className='element-editor-container main-flex-row'>
 						{!displayEditor ? null : (
 							<>
 								<ElementComp

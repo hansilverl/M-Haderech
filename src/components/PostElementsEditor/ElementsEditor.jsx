@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import ElementEditor from './ElementEditor/ElementEditor'
 
@@ -10,10 +10,12 @@ const ElementsEditor = (props) => {
 			return
 		}
 
-		const reorderedElements = Array.from(elements)
-		const [removed] = reorderedElements.splice(result.source.index, 1)
-		reorderedElements.splice(result.destination.index, 0, removed)
-		setElements(reorderedElements)
+		setElements((elem) => {
+			const reorderedElements = Array.from(elem)
+			const [removed] = reorderedElements.splice(result.source.index, 1)
+			reorderedElements.splice(result.destination.index, 0, removed)
+			return reorderedElements
+		})
 	}
 
 	const onAddElement = () => {
@@ -21,12 +23,13 @@ const ElementsEditor = (props) => {
 			type: 'text',
 			content: '',
 			resourcePath: '',
+			displayEditor: true,
 		}
-		setElements((elements) => [...elements, newElement])
+		setElements((elem) => [...elem, newElement])
 	}
 
 	return (
-		<DragDropContext id={`context-${id}`} className='elements-editor' onDragEnd={onDragEnd}>
+		<DragDropContext id={`context-${id}`} onDragEnd={onDragEnd}>
 			<Droppable droppableId={`droppable-${id}`}>
 				{(provided) => (
 					<div {...provided.droppableProps} ref={provided.innerRef}>
