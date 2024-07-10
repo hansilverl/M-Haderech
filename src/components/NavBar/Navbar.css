@@ -103,8 +103,8 @@
 }
 
 .navbar .login-button:hover {
-  background: #f5f5f5;
-  color: #9b59b6;
+  box-shadow: 0 0 5px #f5f5f5;
+  color: #f5f5f5;
 }
 
 .navbar-menu li a:hover,
