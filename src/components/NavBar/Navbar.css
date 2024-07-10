@@ -130,7 +130,7 @@
 }
 
 /* for screens smaller than half of the desktop screen(1200px) */
-@media (max-width : 1200px) {
+@media (max-width : 1024px) {
   .navbar {
     display: flex;
     flex-direction: column;
