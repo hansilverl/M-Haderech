@@ -117,3 +117,7 @@
 .reset-password-link:hover {
     color: #555;
 }
+
+.switcher {
+    font-size: 1.1em;
+}

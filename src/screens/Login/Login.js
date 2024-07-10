@@ -56,6 +56,7 @@ export default function Login() {
             <input
               required
               type="email"
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
@@ -65,6 +66,7 @@ export default function Login() {
             <input
               required
               type="password"
+              name="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
@@ -85,6 +87,7 @@ export default function Login() {
             <span>אימייל:</span>
             <input
               type="email"
+              name="resetEmail"
               value={resetEmail}
               onChange={(e) => setResetEmail(e.target.value)}
             />

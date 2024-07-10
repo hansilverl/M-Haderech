@@ -165,8 +165,8 @@ body {
     display: block;
     position: absolute;
     /* aligns the checkmark to the center of the radio button */
-    top: 50%;
-    left: 50%;
+    top: 0.5em;
+    left: 0.6em;
     /* moves the checkmark to the center of the radio button */
     transform: translate(-50%, -50%);
     font-size: 0.7em;
