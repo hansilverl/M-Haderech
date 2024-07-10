@@ -1,17 +1,19 @@
-// src/components/NavBar/NavBar.js
-
+/*src/components/NavBar/NavBar.jsx*/
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
 
 const Navbar = ({ setShowLogin }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
+
   const openPosts = () => {
     navigate('/posts');
   };
@@ -30,17 +32,17 @@ const Navbar = ({ setShowLogin }) => {
 
     // Close the menu on mobile after clicking a link
     if (window.innerWidth <= 768) {
-      setIsOpen(false);
+      setDropdownOpen(false);
     }
   };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setDropdownOpen(!dropdownOpen);
   };
 
   const handleLogout = () => {
     logout();
-    setIsOpen(false);
+    setDropdownOpen(false);
     navigate('/');
   };
 
@@ -52,33 +54,49 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
       </div>
       <div className="navbar-container">
-        <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
+        <div className={`hamburger ${dropdownOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <div />
           <div />
           <div />
         </div>
-        <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+        <ul className={`navbar-menu ${dropdownOpen ? 'active' : ''}`}>
           <li><a href="/" onClick={openPosts}>דף הבית</a></li>
           <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setIsOpen(false)}>מילוי שאלון</Link></li>
-          <li><Link to="/contact" onClick={() => setIsOpen(false)}>צור קשר</Link></li>
-          <li><Link to="/donate" onClick={() => setIsOpen(false)}>תרומה</Link></li>
+          <li><Link to="/helpScore" onClick={() => setDropdownOpen(false)}>מילוי שאלון</Link></li>
+          <li><Link to="/contact" onClick={() => setDropdownOpen(false)}>צור קשר</Link></li>
+          <li><Link to="/donate" onClick={() => setDropdownOpen(false)}>תרומה</Link></li>
         </ul>
       </div>
-      {/* {!user && <li><Link to="/signup" onClick={() => setIsOpen(false)}>הרשמה</Link></li>} */}
-       <div className='login-wrapper'>
+      <div className="login-wrapper">
         {user ? (
-        <>
-          <li><Link to="/history" onClick={() => setIsOpen(false)}>היסטוריה</Link></li>
-          <div className="space"></div>
-          {isAdmin && <li><Link to="/admin" className="admin-logout" onClick={() => setIsOpen(false)}>ניהול</Link></li>}
-          <li><div className="logout-button admin-logout" onClick={handleLogout}>התנתקות</div></li>
-        </>
-      ) : (
-        <span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span>
-      )}
+          <div
+            className="user-icon"
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            <div className="user-disp">
+            <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff" }} className="user-svg" />
+            <desc className="user-desc"
+            > איזור אישי</desc>
+            </div>
+            {dropdownOpen && (
+              <div className="dropdown-menu">
+                <Link to="/history" onClick={() => setDropdownOpen(false)}>היסטוריה</Link>
+                <hr class="solid"></hr>
+                <Link to="/changePassword" onClick={() => setDropdownOpen(false)}>החלפת סיסמא</Link>
+                <hr class="solid"></hr>
+                {isAdmin && <Link to="/admin" onClick={() => setDropdownOpen(false)}>ניהול</Link>}
+                <hr class="solid"></hr>
+                <div className="logout-button" onClick={handleLogout}>התנתקות</div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span>
+        )}
       </div>
     </nav>
   );
