@@ -139,6 +139,7 @@ const CalculateHelpScore = () => {
                 <input
                     type="email"
                     value={email}
+                    name="email"
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="אימייל"
                     required
@@ -146,6 +147,7 @@ const CalculateHelpScore = () => {
                 />
                 <input
                     type="password"
+                    name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="סיסמה"

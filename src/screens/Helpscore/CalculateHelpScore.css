@@ -106,15 +106,18 @@
 .button-group {
     display: flex;
     justify-content: center;
+    font-weight: normal;
 
 }
 
 .button-group button {
+    font: -apple-system, BlinkMacSystemFont;
     background-color: #9b59b6;
     border-radius: 5px;
     color: white;
     padding: 10px 20px;
-    margin: 0 10px;
+    margin: 10px 10px;
+    font-weight: 550;
 }
 
 .button-group button:hover {
