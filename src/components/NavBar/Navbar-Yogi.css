@@ -1,0 +1,168 @@
+/* src/components/Navbar.css */
+
+.navbar {
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,Arial, Helvetica, sans-serif;
+  background: #9b59b6;
+  color: white;
+  padding: 1em 0;
+  position: sticky; /* Fixed navbar */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.3em;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: fit-content;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+.navbar-logo {
+  order: 1;
+}
+
+.navbar-logo img {
+  height: 100px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px;
+  transition: 0.4s;
+}
+
+.navbar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  order: 2;
+}
+
+.navbar-menu li {
+  margin-left: 15px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu li a, .logout-button {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 4px;
+  cursor: pointer;
+  border-radius: 15px;
+
+}
+
+.navbar .login-button {
+  background: transparent;
+  font-size: 1em;
+  color: #ffffff;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;  
+}
+
+.navbar .login-button:hover {
+  background: #555; /* Add a hover effect if needed */
+}
+
+.navbar-menu li a:hover, .logout-button:hover {
+  background: #555;
+  color: #fff;
+}
+
+.navbar-end {
+  display: flex;
+  margin-left: auto;
+  order: 3;
+}
+
+.space {
+  margin-right: 80px;
+}
+
+.admin-logout {
+  background-color: #765092; /* Dark violet */
+  border-radius: 15px;
+}
+
+@media (max-width: 1024px) {
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10vh;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    width: 80%;
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #9b59b6;
+    padding: 1em 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    z-index: 999;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .navbar-menu li {
+    width: 100%;
+  }
+
+  .navbar-menu li a {
+    display: block;
+    text-align: right;
+    padding-right: 20px;
+  }
+
+  .hamburger.open div:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .hamburger.open div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open div:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .navbar-logo{
+    /* for small screens - align center */
+    justify-self: center;
+    flex-grow: 1;
+  }
+}
