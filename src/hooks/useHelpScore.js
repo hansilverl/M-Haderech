@@ -15,12 +15,8 @@ const useHelpScore = () => {
                 const querySnapshot = await getDocs(collection(db, 'Questionnaire'));
                 const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })); // Include document ID if needed
 
-                // Sort questions by numeric order of their IDs
-                data.sort((a, b) => {
-                    const idA = parseInt(a.id.replace('q', ''), 10);
-                    const idB = parseInt(b.id.replace('q', ''), 10);
-                    return idA - idB;
-                });
+                // Sort questions by the numeric 'order' field
+                data.sort((a, b) => a.order - b.order);
 
                 setQuestions(data);
                 setLoading(false);
