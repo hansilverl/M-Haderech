@@ -1,4 +1,3 @@
-/*src/components/NavBar/NavBar.jsx*/
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
@@ -9,7 +8,8 @@ import './Navbar.css';
 import logo from '../../assets/logo_white.png'; // Import the logo image
 
 const Navbar = ({ setShowLogin }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
@@ -32,17 +32,21 @@ const Navbar = ({ setShowLogin }) => {
 
     // Close the menu on mobile after clicking a link
     if (window.innerWidth <= 768) {
-      setDropdownOpen(false);
+      setNavbarOpen(false);
     }
   };
 
-  const toggleMenu = () => {
-    setDropdownOpen(!dropdownOpen);
+  const toggleNavbarMenu = () => {
+    setNavbarOpen(!navbarOpen);
+  };
+
+  const toggleUserDropdown = () => {
+    setUserDropdownOpen(!userDropdownOpen);
   };
 
   const handleLogout = () => {
     logout();
-    setDropdownOpen(false);
+    setUserDropdownOpen(false);
     navigate('/');
   };
 
@@ -54,43 +58,38 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
       </div>
       <div className="navbar-container">
-        <div className={`hamburger ${dropdownOpen ? 'open' : ''}`} onClick={toggleMenu}>
+        <div className={`hamburger ${navbarOpen ? 'open' : ''}`} onClick={toggleNavbarMenu}>
           <div />
           <div />
           <div />
         </div>
-        <ul className={`navbar-menu ${dropdownOpen ? 'active' : ''}`}>
+        <ul className={`navbar-menu ${navbarOpen ? 'active' : ''}`}>
           <li><a href="/" onClick={openPosts}>דף הבית</a></li>
           <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
           <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
           <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setDropdownOpen(false)}>מילוי שאלון</Link></li>
-          <li><Link to="/contact" onClick={() => setDropdownOpen(false)}>צור קשר</Link></li>
-          <li><Link to="/donate" onClick={() => setDropdownOpen(false)}>תרומה</Link></li>
+          <li><Link to="/helpScore" onClick={() => setNavbarOpen(false)}>מילוי שאלון</Link></li>
+          <li><Link to="/contact" onClick={() => setNavbarOpen(false)}>צור קשר</Link></li>
+          <li><Link to="/donate" onClick={() => setNavbarOpen(false)}>תרומה</Link></li>
         </ul>
       </div>
       <div className="login-wrapper">
         {user ? (
           <div
             className="user-icon"
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
-            onClick={() => setDropdownOpen(!dropdownOpen)}
+            onMouseEnter={() => setUserDropdownOpen(true)}
+            onMouseLeave={() => setUserDropdownOpen(false)}
+            onClick={toggleUserDropdown}
           >
             <div className="user-disp">
               <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff" }} className="user-svg" />
-              <desc className="user-desc"
-              > איזור אישי</desc>
+              <div className="user-desc">איזור אישי</div>
             </div>
-            {dropdownOpen && (
+            {userDropdownOpen && (
               <div className="dropdown-menu">
-                <Link to="/history" onClick={() => setDropdownOpen(false)}>היסטוריה</Link>
-                <hr class="solid"></hr>
-                <Link to="/changePassword" onClick={() => setDropdownOpen(false)}>איפוס סיסמא</Link>
-                <hr class="solid"></hr>
-                {isAdmin && <Link to="/admin" onClick={() => setDropdownOpen(false)}>ניהול</Link>}
-                {/* add hr if admin */}
-                {isAdmin && <hr class="solid"></hr>}
+                <Link to="/history" onClick={() => setUserDropdownOpen(false)}>היסטוריה</Link>
+                <Link to="/changePassword" onClick={() => setUserDropdownOpen(false)}>איפוס סיסמא</Link>
+                {isAdmin && <Link to="/admin" onClick={() => setUserDropdownOpen(false)}>ניהול</Link>}
                 <div className="logout-button" onClick={handleLogout}>התנתקות</div>
               </div>
             )}
