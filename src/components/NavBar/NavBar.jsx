@@ -5,14 +5,23 @@ import { useLogout } from '../../hooks/useLogout';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { auth } from '../../firebase/config';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import Modal from 'react-modal';
 import './Navbar.css';
-import logo from '../../assets/logo_white.png'; // Import the logo image
+import logo from '../../assets/logo_white.png';
+import { useFirebaseErrorTranslation } from '../../hooks/useFirebaseErrorTranslation'; 
+
+Modal.setAppElement('#root'); 
 
 const Navbar = ({ setShowLogin }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
+  const translateErrorToHebrew = useFirebaseErrorTranslation(); 
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,7 +41,6 @@ const Navbar = ({ setShowLogin }) => {
       });
     }
 
-    // Close the menu on mobile after clicking a link
     if (window.innerWidth <= 768) {
       setNavbarOpen(false);
     }
@@ -50,6 +58,18 @@ const Navbar = ({ setShowLogin }) => {
     logout();
     setUserDropdownOpen(false);
     navigate('/');
+  };
+
+  const handleResetPassword = () => {
+    sendPasswordResetEmail(auth, resetEmail)
+      .then(() => {
+        alert("אימייל לאיפוס סיסמה נשלח אליך.");
+        setModalIsOpen(false);
+      })
+      .catch((error) => {
+        console.error("Error object:", error); 
+        alert("אירעה שגיאה בשליחת האימייל: " + translateErrorToHebrew(error.code));
+      });
   };
 
   const isActive = (path) => {
@@ -95,7 +115,7 @@ const Navbar = ({ setShowLogin }) => {
               <div className="dropdown-menu">
                 <FontAwesomeIcon icon="fa-regular fa-clock-rotate-left" style={{ color: "#ffffff", }} />
                 <Link to="/history" onClick={() => setUserDropdownOpen(false)}>היסטוריה</Link>
-                <Link to="/changePassword" onClick={() => setUserDropdownOpen(false)}>איפוס סיסמא</Link>
+                <Link onClick={() => setModalIsOpen(true)}>איפוס סיסמא</Link>
                 {isAdmin && <Link to="/admin" onClick={() => setUserDropdownOpen(false)}>ניהול</Link>}
                 <div className="logout-button" onClick={handleLogout}>התנתקות</div>
               </div>
@@ -105,6 +125,26 @@ const Navbar = ({ setShowLogin }) => {
           <span className="login-button" onClick={() => setShowLogin(true)}>התחברות</span>
         )}
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h2>איפוס סיסמה</h2>
+        <label>
+          <span>אימייל:</span>
+          <input
+            type="email"
+            name="resetEmail"
+            value={resetEmail}
+            onChange={(e) => setResetEmail(e.target.value)}
+          />
+        </label>
+        <button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
+        <button onClick={() => setModalIsOpen(false)}>סגור</button>
+      </Modal>
     </nav>
   );
 };
