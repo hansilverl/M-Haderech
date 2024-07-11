@@ -1,9 +1,11 @@
+// src/pages/HomePage/HomePage.js
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../../components/Footer/Footer';
 import './Homepage.css';
 import PostsSection from '../../components/PostSection/PostSection';
 import AnalyticsSection from '../../components/AnalyticsSection/AnalyticsSection';
 import DonationSection from '../../components/DonationSection/DonationSection';
+import NewsletterLink from '../../components/NewsletterLink/NewsletterLink'; // Import the NewsletterLink component
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -19,7 +21,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAboutInfo = async () => {
       try {
-        const docRef = doc(db, 'miscellaneousUpdated', 'about'); // Adjust document path as per your Firestore structure
+        const docRef = doc(db, 'miscellaneousUpdated', 'about');
         const aboutDoc = await getDoc(docRef);
         if (aboutDoc.exists()) {
           setAboutInfo(aboutDoc.data().about);
@@ -88,6 +90,7 @@ const HomePage = () => {
         <div ref={analyticsRef}>
           <AnalyticsSection animate={analyticsInView} />
         </div>
+        <NewsletterLink /> 
         <DonationSection />
       </main>
       <Footer />

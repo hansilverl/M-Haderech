@@ -1,3 +1,4 @@
+// src/pages/Miscellaneous/Miscellaneous.js
 import React from 'react';
 import BankInfo from '../../components/BankInfo/BankInfo';
 import Statistics from '../../components/Statistics/Statistics';
@@ -5,6 +6,7 @@ import AboutInfo from '../../components/About/AboutInfo';
 import Contact from '../../components/Contact/Contact';
 import DonationLink from '../../components/DonationLink/DonationLink';
 import DonationNumber from '../../components/DonationNumber/DonationNumber'; 
+import NewsletterLinkAdmin from '../AdminDashboard/NewsletterLinkAdmin'; // Import the NewsletterLinkAdmin component
 import './Miscellaneous.css';
 
 const Miscellaneous = () => {
@@ -35,6 +37,10 @@ const Miscellaneous = () => {
         <div className="section">
           <h2>מספר תרומה</h2>
           <DonationNumber />
+        </div>
+        <div className="section">
+          <h2>ניוזלטר</h2>
+          <NewsletterLinkAdmin />
         </div>
       </div>
     </div>

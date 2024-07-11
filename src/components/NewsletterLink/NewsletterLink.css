@@ -1,0 +1,38 @@
+/* src/components/NewsletterLink/NewsletterLink.css */
+
+.newsletter-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    background: #ffffff;
+    margin-bottom: 2em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .newsletter-text {
+    flex: 1;
+    text-align: right;
+    padding-right: 2em;
+  }
+  
+  .newsletter-text h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+  
+  .newsletter-text p {
+    font-size: 1.2em;
+  }
+  
+  .newsletter-text a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .newsletter-text a:hover {
+    text-decoration: underline;
+  }
+  
