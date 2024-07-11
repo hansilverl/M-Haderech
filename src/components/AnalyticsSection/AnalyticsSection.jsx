@@ -18,13 +18,11 @@ const AnalyticsSection = ({ animate }) => {
     <section id="analytics" className="analytics-section">
       <div className="analytics-text">
         <h2>נתונים של העמותה</h2>
-        <p>כאן ניתן לראות את נתונים שלנו לאורך החודשים האחרונים...</p>
       </div>
       <div className="analytics-numbers">
         {sortedStatistics.map(([key, value]) => (
           key !== 'id' && (
             <div key={key} className="analytics-number">
-              <h3>{key}</h3>
               {animate && (
                 <CountUp
                   start={0}
@@ -34,6 +32,7 @@ const AnalyticsSection = ({ animate }) => {
                   className="countup-number"
                 />
               )}
+              <h3>{key}</h3>
             </div>
           )
         ))}
