@@ -13,11 +13,13 @@ import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
 import History from './screens/History/History'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import DonatePage from './screens/DonatePage/DonatePage'
-import './App.css'
 import Posts from './screens/Posts/Posts'
 import { LoginPopup } from './components/LoginPopup/LoginPopup'
 import PostDetails from './screens/PostDetails/PostDetails'
 import PostEditpage from './screens/PostEditpage/PostEditpage'
+
+import 'normalize.css'
+import './App.css'
 
 function App() {
 	const location = useLocation()
