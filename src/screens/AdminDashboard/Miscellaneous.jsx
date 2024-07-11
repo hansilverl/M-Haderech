@@ -5,8 +5,9 @@ import Statistics from '../../components/Statistics/Statistics';
 import AboutInfo from '../../components/About/AboutInfo';
 import Contact from '../../components/Contact/Contact';
 import DonationLink from '../../components/DonationLink/DonationLink';
-import DonationNumber from '../../components/DonationNumber/DonationNumber'; 
-import NewsletterLinkAdmin from '../AdminDashboard/NewsletterLinkAdmin'; // Import the NewsletterLinkAdmin component
+import DonationNumber from '../../components/DonationNumber/DonationNumber';
+import NewsletterLinkAdmin from '../AdminDashboard/NewsletterLinkAdmin';
+import DonateTitleAdmin from '../AdminDashboard/DonateTitleAdmin';
 import './Miscellaneous.css';
 
 const Miscellaneous = () => {
@@ -39,8 +40,12 @@ const Miscellaneous = () => {
           <DonationNumber />
         </div>
         <div className="section">
-          <h2>ניוזלטר</h2>
+          <h2>קישור לניוזלטר</h2>
           <NewsletterLinkAdmin />
+        </div>
+        <div className="section">
+          <h2>כותרת ותת כותרת לעמוד תרומה</h2>
+          <DonateTitleAdmin /> 
         </div>
       </div>
     </div>

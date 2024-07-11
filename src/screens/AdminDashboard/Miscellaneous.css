@@ -3,10 +3,9 @@
 .miscellaneous {
   padding: 20px;
   min-height: 100vh;
-  align-items: center;  
-  /* need to adjust right margin with nav bar */
+  align-items: center;
   margin-right: 250px; /* Adjusted margin for sidebar */
-    margin-left: auto;
+  margin-left: auto;
   max-width: auto;
   display: flex;
   flex-direction: column;
@@ -27,45 +26,35 @@
   flex-wrap: wrap; /* Allows wrapping of sections */
 }
 
-.section , .section-bank{
+.section {
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  flex: 1 1 250px; /* Flex-grow, flex-shrink, and flex-basis to ensure boxes take equal space and wrap properly */
-  max-width: 300px; /* Optional: limit the maximum width of each box */
+  flex: 1 1 300px; /* Flex-grow, flex-shrink, and flex-basis to ensure boxes take equal space and wrap properly */
+  max-width: 300px; /* Limit the maximum width of each box */
   box-sizing: border-box;
-  background: #fff; /* Optional: add background color to sections */
+  background: #fff; /* Background color for sections */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.section-bank {
-  text-align: right;
-  align-content: flex-end;
-}
-
-
-
-.section h2 .section-bank h2  {
+.section h2 {
   text-align: center;
   margin-bottom: 10px;
-
 }
-
 
 button.update-button {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 10px;
   display: block;
   margin: 0 auto;
   padding: 10px 20px;
+  margin-top: 10px;
 }
 
 button.update-button:hover {
