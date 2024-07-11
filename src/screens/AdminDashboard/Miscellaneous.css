@@ -18,12 +18,13 @@
 }
 
 .miscellaneous-content {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ensure a maximum of 5 boxes per row */
+  grid-gap: 20px;
   justify-content: center;
   align-items: flex-start;
-  flex-wrap: wrap; /* Allows wrapping of sections */
+  width: 100%;
+  max-width: 1200px; /* Optional: Limit the maximum width of the grid */
 }
 
 .section {
@@ -31,8 +32,6 @@
   flex-direction: column;
   align-items: center;
   align-content: center;
-  flex: 1 1 300px; /* Flex-grow, flex-shrink, and flex-basis to ensure boxes take equal space and wrap properly */
-  max-width: 300px; /* Limit the maximum width of each box */
   box-sizing: border-box;
   background: #fff; /* Background color for sections */
   padding: 20px;

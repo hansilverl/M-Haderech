@@ -92,7 +92,7 @@ const Navbar = ({ setShowLogin }) => {
         <ul className={`navbar-menu ${navbarOpen ? 'active' : ''}`}>
           <li><Link to="/" className={isActive('/')}>דף הבית</Link></li>
           <li><Link to="/posts" className={isActive('/posts')}>פוסטים</Link></li>
-          <li><a href="#about" onClick={handleScroll} className={isActive('#about')}>קצת עלינו</a></li>
+          <li><Link to="/about" className={isActive('/about')}>קצת עלינו</Link></li>
           <li><a href="#donate" onClick={handleScroll} className={isActive('#donate')}>כנסים</a></li>
           <li><Link to="/helpScore" onClick={() => setNavbarOpen(false)} className={isActive('/helpScore')}>מילוי שאלון</Link></li>
           <li><Link to="/contact" onClick={() => setNavbarOpen(false)} className={isActive('/contact')}>צור קשר</Link></li>
