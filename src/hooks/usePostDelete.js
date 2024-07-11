@@ -3,8 +3,8 @@ import { db, storage } from '../firebase/config'
 import { doc, deleteDoc, collection } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
 
-import {  deleteObjectByFilePath } from './useResourceManagement'
-import { postGetFromDB } from './usePostGet'
+import { deleteObjectByFilePath } from './useResourceManagement'
+import { postsFetchByQuery } from './usePostsGet'
 
 const deleteDocByReference = async (ref) => {
 	if (!ref) return
@@ -19,7 +19,7 @@ const postDeleteFunction = async (documentID) => {
 	if (!documentID) throw new Error('No document ID provided!')
 	const postsCollection = collection(db, 'Posts')
 	const docRef = doc(postsCollection, documentID)
-	const post = await postGetFromDB(documentID)
+	const post = await postsFetchByQuery(documentID)
 	if (!post) throw new Error('Post not found')
 
 	await deleteObjectByFilePath(post.contentFile)
@@ -41,7 +41,7 @@ const usePostDelete = (documentID) => {
 			setPostDelete(p)
 		} catch (error) {
 			console.error('Error deleting posts: ', error) // Log error for debugging
-			setErrorDelete(error)
+			setErrorDelete(error.message)
 			setPostDelete(null)
 		}
 		setLoadingDelete(false)

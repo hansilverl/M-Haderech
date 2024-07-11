@@ -1,6 +1,6 @@
-import './MenuBar.css';
+import './MenuBar.css'
 
-import React from 'react';
+import React from 'react'
 
 import {
 	FaBold,
@@ -15,18 +15,18 @@ import {
 	FaAlignCenter,
 	FaAlignRight,
 	FaAlignJustify,
-} from 'react-icons/fa';
+} from 'react-icons/fa'
 
-import { MdOutlineFormatTextdirectionRToL, MdFormatTextdirectionLToR } from 'react-icons/md';
+import { MdOutlineFormatTextdirectionRToL, MdFormatTextdirectionLToR } from 'react-icons/md'
 
-import MenuBarButton from './MenuBar-Button/MenuBarButton';
-import MenuBarSelect from './MenuBar-Select/MenuBarSelect';
+import MenuBarButton from './MenuBar-Button/MenuBarButton'
+import MenuBarSelect from './MenuBar-Select/MenuBarSelect'
 
 const MenuBar = (props) => {
-	const { editor } = props;
+	const { editor } = props
 
 	if (!editor) {
-		return null;
+		return null
 	}
 
 	return (
@@ -39,13 +39,11 @@ const MenuBar = (props) => {
 					content={<FaRedo />}
 				/>
 				<MenuBarButton
-					className='use-button'
+					className='menu-bar-button use-button'
 					editorFunc={'redo'}
 					editor={editor}
 					content={<FaUndo />}
 				/>
-			</div>
-			<div className='sub-menu-bar'>
 				<MenuBarButton
 					isActiveArg='bold'
 					editorFunc={'toggleBold'}
@@ -127,7 +125,7 @@ const MenuBar = (props) => {
 				<MenuBarSelect editor={editor} />
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default MenuBar;
+export default MenuBar

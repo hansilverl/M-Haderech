@@ -25,7 +25,7 @@ const usePostUpdate = (documentID) => {
 			setPostUpdate(p)
 		} catch (error) {
 			console.error('Error updating posts: ', error) // Log error for debugging
-			setErrorUpdate(error)
+			setErrorUpdate(error.message)
 			setPostUpdate(null)
 		}
 		setLoadingUpdate(false)

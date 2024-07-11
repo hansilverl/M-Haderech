@@ -8,7 +8,7 @@ const MenuBarButton = (props) => {
 		<button
 			onClick={() => editor.chain().focus()[editorFunc](editorFuncArg).run()}
 			disabled={!editor.can().chain().focus()[editorFunc](editorFuncArg).run()}
-			className={`${className} ${editor.isActive(isActiveArg) ? 'is-active' : ''}`}>
+			className={`menu-bar-button ${className} ${editor.isActive(isActiveArg) ? 'is-active' : ''}`}>
 			{content}
 		</button>
 	)

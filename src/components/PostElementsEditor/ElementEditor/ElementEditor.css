@@ -1,0 +1,27 @@
+.draggable-post-element {
+	user-select: none;
+	padding: 0px;
+	margin: 0 0 0px 0;
+	background-color: #fff;
+	color: #333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.drag-handle {
+  cursor: grab;
+  padding: 2px;
+}
+
+.element-editor-header {
+	border: #333 solid 1px;
+	border-radius: 5px;
+	background-color: aqua;
+}
+
+.element-editor-container {
+	border: #333 solid 1px;
+	border-radius: 5px;
+	background-color: aquamarine;
+}
