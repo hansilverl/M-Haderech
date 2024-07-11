@@ -78,18 +78,19 @@ const Navbar = ({ setShowLogin }) => {
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             <div className="user-disp">
-            <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff" }} className="user-svg" />
-            <desc className="user-desc"
-            > איזור אישי</desc>
+              <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff" }} className="user-svg" />
+              <desc className="user-desc"
+              > איזור אישי</desc>
             </div>
             {dropdownOpen && (
               <div className="dropdown-menu">
                 <Link to="/history" onClick={() => setDropdownOpen(false)}>היסטוריה</Link>
                 <hr class="solid"></hr>
-                <Link to="/changePassword" onClick={() => setDropdownOpen(false)}>החלפת סיסמא</Link>
+                <Link to="/changePassword" onClick={() => setDropdownOpen(false)}>איפוס סיסמא</Link>
                 <hr class="solid"></hr>
                 {isAdmin && <Link to="/admin" onClick={() => setDropdownOpen(false)}>ניהול</Link>}
-                <hr class="solid"></hr>
+                {/* add hr if admin */}
+                {isAdmin && <hr class="solid"></hr>}
                 <div className="logout-button" onClick={handleLogout}>התנתקות</div>
               </div>
             )}
