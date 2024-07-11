@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import Selector from '../../components/Selector/Selector'
 
@@ -12,17 +12,17 @@ import usePostDelete from '../../hooks/usePostDelete'
 
 import './PostEditpage.css'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
-const PostEditPageComp = ({ postID, post, setRefresh }) => {
+const PostEditPageComp = ({ postID, post }) => {
 	const { loadingUpdate, postUpdateHandler } = usePostUpdate(postID)
 	const { postDelete, loadingDelete, postDeleteHandler } = usePostDelete(postID)
 
+	const setSaveTimeout = useRef(null)
 	const [articleType, setPostType] = useState(post.articleType ? post.articleType : 'article')
 	const [title, setTitle] = useState(post.title ? post.title : '')
 	const [description, setDescription] = useState(post.description ? post.description : '')
 	const [published, setPublished] = useState(post.published ? post.published : false)
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
 	const [elements, setElements] = useState(post.elements ? post.elements : [])
-	const [save, setSave] = useState(false)
 
 	const [saveButtonText, setSaveButtonText] = useState('שמור')
 	const navigate = useNavigate()
@@ -45,6 +45,9 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	}
 
 	const handleSave = async () => {
+		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
+		setSaveTimeout.current = null
+
 		const postAdditions = getNewPost()
 		await postUpdateHandler(postAdditions)
 		setSaveButtonText('נשמר בהצלחה')
@@ -67,11 +70,11 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 	}
 
 	useEffect(() => {
-		if (save) {
+		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
+		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
-			setSave(false)
-		}
-	}, [save, elements])
+		}, 2000)
+	}, [elements])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
@@ -111,12 +114,7 @@ const PostEditPageComp = ({ postID, post, setRefresh }) => {
 							optionNames={['פוסט', 'כנס']}
 						/>
 					</div>
-					<ElementsEditor
-						id='elements-editor'
-						elements={elements}
-						setElements={setElements}
-						setSave={setSave}
-					/>
+					<ElementsEditor id='elements-editor' elements={elements} setElements={setElements} />
 					<div className='main-flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>
 							{saveButtonText}
