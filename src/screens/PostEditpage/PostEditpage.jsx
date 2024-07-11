@@ -154,7 +154,7 @@ const PostEditPage = () => {
 			postsGetHandler()
 			setRefresh(false)
 		}
-	}, [refresh])
+	}, [refresh, postsGetHandler])
 
 	return loadingGet ? (
 		<h2>טוען...</h2>
