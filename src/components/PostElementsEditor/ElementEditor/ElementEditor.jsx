@@ -73,16 +73,16 @@ const ElementEditor = (props) => {
 		setDisplayEditor(!displayEditor)
 	}
 
-	// useEffect(() => {
-	// 	if (
-	// 		type !== element.type ||
-	// 		content !== element.content ||
-	// 		resourcePath !== element.resourcePath ||
-	// 		displayEditor !== element.displayEditor
-	// 	) {
-	// 		onUpdateElement()
-	// 	}
-	// }, [type, content, resourcePath, displayEditor])
+	useEffect(() => {
+		if (
+			type !== element.type ||
+			content !== element.content ||
+			resourcePath !== element.resourcePath ||
+			displayEditor !== element.displayEditor
+		) {
+			onUpdateElement()
+		}
+	}, [type, content, resourcePath, displayEditor])
 
 	return (
 		<Draggable draggableId={`drag-${index}`} index={index}>

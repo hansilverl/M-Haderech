@@ -43,9 +43,11 @@ const PostDetails = () => {
 					<p>
 						<strong>תיאור:</strong> {postsGet.description}
 					</p>
-					{postsGet?.elements.map((element) => (
-						<ElementPresentor element={element} />
-					))}
+					<div>
+						{postsGet?.elements.map((element, index) => (
+							<ElementPresentor key={`element-${index}`} element={element} />
+						))}
+					</div>
 				</>
 			)}
 		</div>

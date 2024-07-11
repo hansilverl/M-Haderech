@@ -4,12 +4,11 @@ import { getDownloadURLFromPath } from './useResourceManagement'
 import { collection, query, where, orderBy, limit, getDocs, getDoc, doc } from 'firebase/firestore'
 
 const addFileUrls = async (post) => {
-	if (post?.contentFile) {
-		post.contentUrl = await getDownloadURLFromPath(post.contentFile)
-	}
-
-	if (post?.imagePath) {
-		post.imageUrl = await getDownloadURLFromPath(post.imagePath)
+	const { elements } = post
+	for (const element of elements) {
+		if (element.resourcePath) {
+			element.resourceUrl = await getDownloadURLFromPath(element.resourcePath)
+		}
 	}
 }
 

@@ -16,6 +16,8 @@ const ElementsEditor = (props) => {
 			reorderedElements.splice(result.destination.index, 0, removed)
 			return reorderedElements
 		})
+
+		setSave(true)
 	}
 
 	const onAddElement = () => {
