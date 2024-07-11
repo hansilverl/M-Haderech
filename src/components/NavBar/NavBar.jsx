@@ -1,5 +1,6 @@
+// src/components/NavBar/NavBar.jsx
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +14,7 @@ const Navbar = ({ setShowLogin }) => {
   const { logout } = useLogout();
   const { user, isAdmin } = useAuthStatus();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const openPosts = () => {
     navigate('/posts');
@@ -50,6 +52,10 @@ const Navbar = ({ setShowLogin }) => {
     navigate('/');
   };
 
+  const isActive = (path) => {
+    return location.pathname === path ? 'active-link' : '';
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
@@ -64,13 +70,13 @@ const Navbar = ({ setShowLogin }) => {
           <div />
         </div>
         <ul className={`navbar-menu ${navbarOpen ? 'active' : ''}`}>
-          <li><a href="/" onClick={openPosts}>דף הבית</a></li>
-          <li><a href="/posts" onClick={openPosts}>פוסטים</a></li>
-          <li><a href="#about" onClick={handleScroll}>קצת עלינו</a></li>
-          <li><a href="#donate" onClick={handleScroll}>כנסים</a></li>
-          <li><Link to="/helpScore" onClick={() => setNavbarOpen(false)}>מילוי שאלון</Link></li>
-          <li><Link to="/contact" onClick={() => setNavbarOpen(false)}>צור קשר</Link></li>
-          <li><Link to="/donate" onClick={() => setNavbarOpen(false)}>תרומה</Link></li>
+          <li><Link to="/" className={isActive('/')}>דף הבית</Link></li>
+          <li><Link to="/posts" className={isActive('/posts')}>פוסטים</Link></li>
+          <li><a href="#about" onClick={handleScroll} className={isActive('#about')}>קצת עלינו</a></li>
+          <li><a href="#donate" onClick={handleScroll} className={isActive('#donate')}>כנסים</a></li>
+          <li><Link to="/helpScore" onClick={() => setNavbarOpen(false)} className={isActive('/helpScore')}>מילוי שאלון</Link></li>
+          <li><Link to="/contact" onClick={() => setNavbarOpen(false)} className={isActive('/contact')}>צור קשר</Link></li>
+          <li><Link to="/donate" onClick={() => setNavbarOpen(false)} className={isActive('/donate')}>תרומה</Link></li>
         </ul>
       </div>
       <div className="login-wrapper">
