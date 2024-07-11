@@ -17,6 +17,7 @@ import Posts from './screens/Posts/Posts'
 import { LoginPopup } from './components/LoginPopup/LoginPopup'
 import PostDetails from './screens/PostDetails/PostDetails'
 import PostEditpage from './screens/PostEditpage/PostEditpage'
+import AboutFull from './screens/AboutFull/AboutFull'
 
 import 'normalize.css'
 import './App.css'
@@ -32,6 +33,7 @@ function App() {
 			{showLogin && <LoginPopup setShowLogin={setShowLogin} />}
 			<Routes>
 				<Route exact path='/' element={<HomePage />} />
+				<Route exact path='/about' element={<AboutFull />} />
 				<Route exact path='/signup' element={<Signup />} />
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/contact' element={<Contact />} />

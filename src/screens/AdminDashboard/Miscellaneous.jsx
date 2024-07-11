@@ -8,6 +8,7 @@ import DonationLink from '../../components/DonationLink/DonationLink';
 import DonationNumber from '../../components/DonationNumber/DonationNumber';
 import NewsletterLinkAdmin from '../AdminDashboard/NewsletterLinkAdmin';
 import DonateTitleAdmin from '../AdminDashboard/DonateTitleAdmin';
+import AboutFullAdmin from '../AdminDashboard/AboutFullAdmin';
 import './Miscellaneous.css';
 
 const Miscellaneous = () => {
@@ -30,6 +31,10 @@ const Miscellaneous = () => {
         <div className="section">
           <h2>אודות</h2>
           <AboutInfo />
+        </div>
+        <div className="section">
+          <h2>קצת עלינו</h2>
+          <AboutFullAdmin />
         </div>
         <div className="section">
           <h2>קישורי תרומה</h2>
