@@ -1,9 +1,11 @@
+// src/screens/AdminDashboard/QuestionnaireManagement.jsx
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc, deleteField } from 'firebase/firestore';
 import './QuestionnaireManagement.css';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Modal from 'react-modal';
+import { FaTrashAlt, FaEdit, FaTimes } from 'react-icons/fa';
+
 
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
@@ -156,19 +158,19 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       const questionDocRef = doc(db, 'Questionnaire', questionId);
       const questionDoc = await getDoc(questionDocRef);
       const questionData = questionDoc.data();
-  
+
       // Check if the new score is different from the current score
       if (currentScore !== answerId) {
         // Create a new field with the new score
         await updateDoc(questionDocRef, { [currentScore]: currentText });
-  
+
         // Delete the old field
         await updateDoc(questionDocRef, { [answerId]: deleteField() });
       } else {
         // Update the existing field's value
         await updateDoc(questionDocRef, { [answerId]: currentText });
       }
-  
+
       // Fetch the updated document
       const updatedQuestionDoc = await getDoc(questionDocRef);
       const updatedQuestionData = updatedQuestionDoc.data();
@@ -179,7 +181,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           text: value,
           score: parseInt(key, 10),
         }));
-  
+
       // Update the local state
       setQuestions(prevQuestions =>
         prevQuestions.map(question =>
@@ -193,7 +195,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             : question
         )
       );
-  
+
       setEditModalIsOpen(false);
       alert('התשובה עודכנה בהצלחה.');
     } catch (error) {
@@ -280,18 +282,13 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           <div key={question.id} className="question-item">
             <h2>{question.question}</h2>
             <div className="actions">
-              <FaEdit
-                className="icon"
-                title="ערוך שאלה"
-                onClick={() => handleEditQuestion(question)}
-              />
               <FaTrashAlt
-                className="icon"
+                className="icon trash-icon"
                 title="מחק שאלה"
                 onClick={() => handleDeleteQuestion(question.id)}
               />
             </div>
-            <button onClick={() => openModal(question)}>ערוך תשובות</button>
+            <button onClick={() => openModal(question)}>עריכה</button>
           </div>
         ))}
       </div>
@@ -299,7 +296,15 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         {selectedQuestion && (
           <div className="modal-content">
-            <h2>{selectedQuestion.question}</h2>
+            <div className="question-header">
+              <h2>{selectedQuestion.question}</h2>
+              <FaEdit
+                className="icon"
+                title="ערוך שאלה"
+                onClick={() => handleEditQuestion(selectedQuestion)}
+              />
+          <FaTimes className="close-button" title="סגור" onClick={closeModal} />
+            </div>
             <ul>
               {(selectedQuestion.answers || []).map(answer => (
                 <li key={answer.id}>

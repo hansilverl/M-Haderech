@@ -1,8 +1,7 @@
+/* src/screens/AdminDashboard/QuestionnaireManagement.css */
 .questionnaire-management {
-  padding: 20px;
-  min-height: 100vh;
-  box-sizing: border-box;
-  margin-right: 250px; /* Adjusted margin for sidebar */
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .button {
@@ -34,6 +33,7 @@
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
   position: relative; /* Added for positioning icons */
 }
 
@@ -111,4 +111,38 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.question-header {
+  /* align under icon */
+  margin-top: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.trash-icon
+{
+  cursor: pointer;
+  color: red;
+  /*bottom right corner */
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+
+}
+.question-header .icon {
+  cursor: pointer;
+  color: black;
+
+}
+
+.close-button {
+  /* display top corner */
+  position: absolute;
+  top: -1.3em;
+  right: -1.3em;
+  cursor: pointer;
+
 }
