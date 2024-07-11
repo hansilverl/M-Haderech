@@ -25,7 +25,7 @@ const CalculateHelpScore = () => {
 
     const scoreDescription = (score) => {
         if (score <= 19) {
-            return "ללא\קל"
+            return "ללא\\קל"
         } else if (score <= 32) {
             return "בינונית"
         } else {
