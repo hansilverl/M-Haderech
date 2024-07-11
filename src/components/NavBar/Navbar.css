@@ -60,6 +60,8 @@
   background-color: #f5f5f5;
   color: #765092;
   border-radius: 5px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 
@@ -181,8 +183,8 @@
   display: none;
   position: absolute;
   top: 100%;
-  max-width: 160%;
-  min-width: 160%;
+  max-width: 190%;
+  min-width: 190%;
   margin-top: -0.9em; /* cover desc */
   background-color: #f5f5f5;
   /* border: 1px solid #ccc; */
@@ -194,6 +196,7 @@
 .dropdown-menu a,
 .dropdown-menu
 {
+  margin: 0.5em auto;
   border-bottom: 1px solid #ccc;
 }
 
@@ -268,7 +271,7 @@
     align-items: center;
     justify-content: center;
     justify-self: center;
-    margin-left: 1em;
+    margin-left: 1.4em;
   }
 
   .login-button {
