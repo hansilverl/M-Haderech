@@ -59,7 +59,6 @@ const PostEditPageComp = ({ postID, post }) => {
 			setDatePublished(serverTimestamp())
 		}
 		setPublished(!published)
-		await handleSave()
 	}
 
 	const handleDelete = async () => {
@@ -73,15 +72,15 @@ const PostEditPageComp = ({ postID, post }) => {
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
-		}, 2000)
-	}, [elements])
+		}, 300)
+	}, [elements, published])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
 	}, [postDelete, navigate])
 
 	return (
-		<div id='edit-post-page' className='main-flex-col'>
+		<div  className='edit-post-page main-flex-col'>
 			{!post ? (
 				<h1>הפוסט לא נמצא</h1>
 			) : (

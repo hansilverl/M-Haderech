@@ -34,7 +34,7 @@ const ElementComp = (props) => {
 }
 
 const ElementEditor = (props) => {
-	const { element, deleteHandler, updateElement } = props
+	const { element, deleteElement, updateElement } = props
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 		id: element?.id,
 	})
@@ -48,7 +48,7 @@ const ElementEditor = (props) => {
 
 	const onDeleteElement = () => {
 		if (resourcePath && resourcePath !== '') deleteObjectByFilePath(resourcePath)
-		deleteHandler(elem.id)
+		deleteElement(elem.id)
 	}
 
 	const toggleDisplayEditor = () => {
@@ -67,13 +67,14 @@ const ElementEditor = (props) => {
 				newElem.displayEditor = displayEditor
 				return newElem
 			})
-
 		}
 
 		if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
+			
 		autoSaveTimeout.current = setTimeout(() => {
 			onUpdateElement()
 		}, 2000)
+
 	}, [type, content, resourcePath, displayEditor])
 
 	useEffect(() => {

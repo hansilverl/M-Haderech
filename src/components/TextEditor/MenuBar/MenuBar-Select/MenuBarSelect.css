@@ -1,5 +1,5 @@
-select,
-option {
+.menu-bar-select select,
+.menu-bar-select option {
 	display: inline-block;
 	border-radius: 0cqh;
 	background-color: white;

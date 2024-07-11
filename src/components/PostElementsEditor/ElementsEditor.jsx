@@ -32,6 +32,7 @@ const ElementsEditor = (props) => {
 			internalIndex: id,
 			id: `draggable-item-${id}`,
 		}
+
 		setElements([...elements, newElement])
 	}
 
@@ -88,6 +89,10 @@ const ElementsEditor = (props) => {
 		setElements(newElements)
 	}
 
+	useEffect(() => {
+		console.log(elements)
+	}, [elements])
+
 	return (
 		<>
 			<DndContext
@@ -103,7 +108,7 @@ const ElementsEditor = (props) => {
 								index={index}
 								element={element}
 								updateElement={updateElement}
-								deleteHandler={deleteElement}
+								deleteElement={deleteElement}
 							/>
 						)
 					})}
