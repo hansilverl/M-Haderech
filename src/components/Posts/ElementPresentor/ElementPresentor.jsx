@@ -23,56 +23,63 @@ const TextElementPresentor = (props) => {
 }
 
 const ImageElementPresentor = (props) => {
-	const { resourcePath } = props
-	return <img src={resourcePath} alt={'לא נמצאה תמונה'} />
+	const { resourceUrl } = props
+	return <img src={resourceUrl} alt={'לא נמצאה תמונה'} />
 }
 
 const VideoElementPresentor = (props) => {
-	const { resourcePath } = props
-	return resourcePath ? <video controls src={resourcePath} /> : <h3>לא נמצא סרטון</h3>
+	const { resourceUrl } = props
+	return resourceUrl ? <video controls src={resourceUrl} /> : <h3>לא נמצא סרטון</h3>
 }
 
 const AudioElementPresentor = (props) => {
-	const { resourcePath } = props
-	return resourcePath ? <audio controls src={resourcePath} /> : <h3>לא נמצא קובץ שמע</h3>
+	const { resourceUrl } = props
+	return resourceUrl ? <audio controls src={resourceUrl} /> : <h3>לא נמצא קובץ שמע</h3>
 }
 
 const PdfElementPresentor = (props) => {
-	const { resourcePath } = props
+	const { resourceUrl, last } = props
 	return (
 		<>
-			<button onClick={() => handleOpenPdf(resourcePath)} className='pdf-button'>
+			<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
 				<img src={pdfIcon} alt='Open PDF' />
 			</button>
-			<PdfViewer pdfFile={resourcePath} />
+			{last && <PdfViewer pdfFile={resourceUrl} />}
 		</>
 	)
 }
 
 const CompressedElementPresentor = (props) => {
-	const { resourcePath } = props
-	return <embed src={resourcePath} />
+	const { resourceUrl } = props
+	return <embed src={resourceUrl} />
 }
 
-const ElementPresentor = ({ element }) => {
-	const { type, content, resourcePath, present } = element
-
-	if (!present) return null
+const ElementPicker = ({ element }) => {
+	const { type, content, resourceUrl , last} = element
+	console.log(element)
 	switch (type) {
 		case 'text':
 			return <TextElementPresentor content={content} />
 		case 'image':
-			return <ImageElementPresentor resourcePath={resourcePath} />
+			return <ImageElementPresentor resourceUrl={resourceUrl} />
 		case 'video':
-			return <VideoElementPresentor resourcePath={resourcePath} />
+			return <VideoElementPresentor resourceUrl={resourceUrl} />
 		case 'audio':
-			return <AudioElementPresentor resourcePath={resourcePath} />
+			return <AudioElementPresentor resourceUrl={resourceUrl} />
 		case 'pdf':
-			return <PdfElementPresentor resourcePath={resourcePath} />
+			return <PdfElementPresentor resourceUrl={resourceUrl} last={last} />
 		case 'compressed':
-			return <CompressedElementPresentor resourcePath={resourcePath} />
+			return <CompressedElementPresentor resourceUrl={resourceUrl} />
 		default:
 			return null
 	}
+}
+
+const ElementPresentor = ({ element }) => {
+	return (
+		<div>
+			<ElementPicker element={element} />
+		</div>
+	)
 }
 export default ElementPresentor
