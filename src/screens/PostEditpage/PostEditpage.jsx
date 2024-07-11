@@ -1,168 +1,156 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-import TextEditor from '../../components/TextEditor/TextEditor';
-import PostTypeSelector from '../../components/PostTypeSelector/PostTypeSelector';
+import Selector from '../../components/Selector/Selector'
 
-import './PostEditpage.css';
-import { useParams } from 'react-router-dom';
-import usePostGet from '../../hooks/usePostGet';
-import usePostUpdate from '../../hooks/usePostUpdate';
-import usePostDelete from '../../hooks/usePostDelete';
-import { useNavigate } from 'react-router-dom';
-import { serverTimestamp } from 'firebase/firestore';
-import PostResourceInput from '../../components/PostResourceInput/PostResourceInput';
+import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { serverTimestamp } from 'firebase/firestore'
 
+import usePostsGet from '../../hooks/usePostsGet'
+import usePostUpdate from '../../hooks/usePostUpdate'
+import usePostDelete from '../../hooks/usePostDelete'
+
+import './PostEditpage.css'
+import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
 const PostEditPageComp = ({ postID, post, setRefresh }) => {
-	const { loadingUpdate, postUpdateHandler } = usePostUpdate(postID);
-	const { postDelete, loadingDelete, postDeleteHandler } = usePostDelete(postID);
+	const { loadingUpdate, postUpdateHandler } = usePostUpdate(postID)
+	const { postDelete, loadingDelete, postDeleteHandler } = usePostDelete(postID)
 
-	const [type, setPostType] = useState(post.type ? post.type : 'editor');
-	const [title, setTitle] = useState(post.title ? post.title : '');
-	const [description, setDescription] = useState(post.description ? post.description : '');
-	const [contentHTML, setContentHTML] = useState(post.content ? post.content : '');
-	const [isPublished, setIsPublished] = useState(post.published ? post.published : false);
-	const [imagePath, setImagePath] = useState(post.imageUrl ? post.imageUrl : '');
-	const [imageUrl, setImageUrl] = useState(post.imageUrl ? post.imageUrl : '');
-	const [contentFilePath, setContentFilePath] = useState(post.contentFile ? post.contentFile : '');
-	const [contentUrl, setContentFileUrl] = useState(post.contentUrl ? post.contentUrl : '');
-	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null);
+	const [articleType, setPostType] = useState(post.articleType ? post.articleType : 'article')
+	const [title, setTitle] = useState(post.title ? post.title : '')
+	const [description, setDescription] = useState(post.description ? post.description : '')
+	const [published, setPublished] = useState(post.published ? post.published : false)
+	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
+	const [elements, setElements] = useState(post.elements ? post.elements : [])
+	const [save, setSave] = useState(false)
 
-	const [saveButtonText, setSaveButtonText] = useState('שמור');
-
-	const navigate = useNavigate();
-	const selectPostType = (e) => {
-		const value = e.target.value;
-		if (!value) return;
-		setPostType(value);
-	};
+	const [saveButtonText, setSaveButtonText] = useState('שמור')
+	const navigate = useNavigate()
 
 	const getNewPost = () => {
-		const newPublishDate = post?.datePublished ? post.datePublished : serverTimestamp();
 		const newPost = {
 			title,
 			description,
-			contentHTML,
-			type,
-			published: isPublished,
-			imagePath: imagePath,
-			contentFile: contentFilePath,
-		};
-
-		if ((isPublished && datePublished === null) || datePublished === undefined) {
-			newPost['datePublished'] = newPublishDate;
-			setDatePublished(newPublishDate);
+			articleType,
+			published,
+			datePublished,
+			elements,
 		}
-		return newPost;
-	};
+
+		for (const key in newPost) {
+			if (!newPost[key] && newPost[key] !== false) delete newPost[key]
+		}
+
+		return newPost
+	}
 
 	const handleSave = async () => {
-		const postAdditions = getNewPost();
-		await postUpdateHandler(postAdditions);
-		if (setRefresh) setRefresh(true);
-		setSaveButtonText('שמור בהצלחה');
-		setTimeout(() => setSaveButtonText('שמור'), 3000);
-	};
+		const postAdditions = getNewPost()
+		await postUpdateHandler(postAdditions)
+		setSaveButtonText('נשמר בהצלחה')
+		setTimeout(() => setSaveButtonText('שמור'), 3000)
+	}
 
 	const togglePublished = async () => {
-		setIsPublished(!isPublished);
-		await handleSave();
-	};
+		if (!published && !datePublished) {
+			setDatePublished(serverTimestamp())
+		}
+		setPublished(!published)
+		await handleSave()
+	}
 
 	const handleDelete = async () => {
-		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את הפוסט?');
+		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את הפוסט?')
 		if (confirmDelete) {
-			await postDeleteHandler(postID);
+			await postDeleteHandler(postID)
 		}
-	};
+	}
 
 	useEffect(() => {
-		handleSave();
-	}, [imagePath, contentFilePath, isPublished]);
+		if (save) {
+			handleSave()
+			setSave(false)
+		}
+	}, [save, elements])
 
 	useEffect(() => {
-		if (postDelete) navigate('/admin/posts');
-	}, [postDelete, navigate]);
+		if (postDelete) navigate('/admin/posts')
+	}, [postDelete, navigate])
 
 	return (
-		<div id="edit-post-page" className="flex-col">
+		<div id='edit-post-page' className='main-flex-col'>
 			{!post ? (
 				<h1>הפוסט לא נמצא</h1>
 			) : (
 				<>
-					<div className="flex-row">
-						<label className="input-label">כותרת הפוסט:</label>
+					<div className='main-flex-row'>
+						<label className='input-label'>כותרת הפוסט:</label>
 						<input
-							type="text"
-							placeholder="כותרת"
+							type='text'
+							placeholder='כותרת'
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</div>
-					<div className="flex-row">
-						<label className="input-label">תיאור הפוסט:</label>
+					<div className='main-flex-row'>
+						<label className='input-label'>תיאור הפוסט:</label>
 						<input
-							type="text"
-							placeholder="תיאור"
+							type='text'
+							placeholder='תיאור'
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<PostResourceInput
-						path={imagePath}
-						setPath={setImagePath}
-						url={imageUrl}
-						setUrl={setImageUrl}
-						type="image"
-						title="תמונה"
+					<div className='main-flex-row'>
+						<Selector
+							id='post-type'
+							name='סוג הפוסט (פוסט או כנס)'
+							value={articleType}
+							selectFunction={setPostType}
+							optionValues={['post', 'convention']}
+							optionNames={['פוסט', 'כנס']}
+						/>
+					</div>
+					<ElementsEditor
+						id='elements-editor'
+						elements={elements}
+						setElements={setElements}
+						setSave={setSave}
 					/>
-					<div className="flex-row">
-						<PostTypeSelector selectFunction={selectPostType} />
-					</div>
-					<div id="post-contents">
-						<h2 className='title-content'>תוכן הפוסט:</h2>
-						{type === 'editor' ? (
-							<TextEditor initialContent={contentHTML} setCurrContent={setContentHTML} />
-						) : type === 'file' ? (
-							<PostResourceInput
-								path={contentFilePath}
-								setPath={setContentFilePath}
-								url={contentUrl}
-								setUrl={setContentFileUrl}
-								type="pdf"
-								title="קובץ PDF"
-							/>
-						) : (
-							<div>לא נבחר סוג פוסט</div>
-						)}
-					</div>
-					<div className="flex-row">
+					<div className='main-flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
-						<button onClick={handleDelete} disabled={loadingDelete} className="delete-button">
+						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
 							מחק
 						</button>
-						{!isPublished ? (
-							<button onClick={togglePublished} className="publish-button">פרסם</button>
+						{!published ? (
+							<button onClick={togglePublished} className='publish-button'>
+								פרסם
+							</button>
 						) : (
-							<button onClick={togglePublished} className="unpublish-button">בטל פרסום</button>
+							<button onClick={togglePublished} className='unpublish-button'>
+								בטל פרסום
+							</button>
 						)}
 					</div>
 				</>
 			)}
 		</div>
-	);
-};
+	)
+}
 
 const PostEditPage = () => {
-	const { id: postID } = useParams();
-	const { postGet, loadingGet, errorGet, postGetHandler } = usePostGet();
-	const [refresh, setRefresh] = useState(true);
+	const { id: postID } = useParams()
+	const { postsGet, loadingGet, errorGet, postsGetHandler } = usePostsGet(postID)
+	const [refresh, setRefresh] = useState(false)
 
-	if (refresh && postID && !postGet && !loadingGet && !errorGet) {
-		setRefresh(false);
-		postGetHandler(postID);
-	}
+	useEffect(() => {
+		if (refresh) {
+			postsGetHandler()
+			setRefresh(false)
+		}
+	}, [refresh])
 
 	return loadingGet ? (
 		<h2>טוען...</h2>
@@ -171,12 +159,11 @@ const PostEditPage = () => {
 			<h2>הפוסט לא נמצא</h2>
 			<p>{errorGet.toString()}</p>
 		</>
-	) : postGet ? (
-		<PostEditPageComp postID={postID} post={postGet} setRefresh={setRefresh} />
+	) : postsGet ? (
+		<PostEditPageComp postID={postID} post={postsGet} setRefresh={setRefresh} />
 	) : (
 		<h2>הפוסט לא נמצא</h2>
-	);
-};
+	)
+}
 
-export default PostEditPage;
-
+export default PostEditPage

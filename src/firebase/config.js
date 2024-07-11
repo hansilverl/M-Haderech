@@ -22,6 +22,16 @@ const db = getFirestore()
 // Init Firebase auth
 const auth = getAuth()
 
+// Init Firebase storage
 const storage = getStorage(app)
 
-export { db, auth, storage }
+// Collection names
+const collectionNames = {
+	posts: 'Posts',
+	users: 'Users',
+	questionnaire: 'Questionnaire',
+	miscellaneous: 'miscellaneous',
+	questionnaireHistory: 'questionnaireHistory',
+}
+
+export { db, auth, storage, collectionNames }

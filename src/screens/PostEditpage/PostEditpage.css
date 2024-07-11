@@ -40,25 +40,6 @@ h3 {
 	text-align: center;
 }
 
-.flex-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	padding: 10px 20px;
-	margin-bottom: 10px;
-}
-
-.flex-col {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	padding: 20px;
-}
-
 #edit-post-page {
 	background: white;
 	border: 1px solid #dee2e6;

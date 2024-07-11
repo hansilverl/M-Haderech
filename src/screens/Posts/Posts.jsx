@@ -1,31 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Post from '../../components/Posts/Post'
-import usePostsGetMultiple from '../../hooks/usePostsGetMultiple'
+import usePostsGet, { queryGetPublishedPosts } from '../../hooks/usePostsGet'
 import './Posts.css'
 
 const Posts = () => {
-	const { postsGetMultiple, loadingGetMultiple, errorGetMultiple } = usePostsGetMultiple(20)
+	const query = queryGetPublishedPosts(20)
+	const { postsGet, loadingGet, errorGet } = usePostsGet(query)
 
 	return (
 		<div className='posts-screen'>
 			<h2></h2>
-			{loadingGetMultiple ? (
+			{loadingGet ? (
 				<h2>טוען...</h2>
-			) : errorGetMultiple ? (
-				<p>{errorGetMultiple.toString()}</p>
+			) : errorGet ? (
+				<h2>{errorGet.toString()}</h2>
+			) : !postsGet ? (
+				<h2>הפוסטים לא נמצאו</h2>
 			) : (
 				<div className='posts-container'>
-					{postsGetMultiple.map((post, index) => (
+					{postsGet.map((post, index) => (
 						<Post
 							key={index}
-							id={post.id}
-							imagePath={post.imagePath}
-							title={post.title}
-							date={post.date}
-							description={post.description}
-							type={post.type}
-							contentFile={post.contentFile}
-							published={post.published}
+							article={post}
 						/>
 					))}
 				</div>

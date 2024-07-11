@@ -15,7 +15,8 @@ import TextDirection from 'tiptap-text-direction'
 import MenuBar from './MenuBar/MenuBar'
 
 const TextEditor = ({ initialContent, setCurrContent }) => {
-	const [editorContent, setEditorContent] = useState('editorContent')
+	const [content, setContent] = useState(initialContent)
+	const [saveTimeout, setSaveTimeout] = useState(null)
 
 	const extensions = [
 		TextDirection.configure({
@@ -41,20 +42,21 @@ const TextEditor = ({ initialContent, setCurrContent }) => {
 		}),
 	]
 
-	const content = initialContent
-		? initialContent
-		: `
-<h1 style="text-align: center">כותרת משנית</h1>
-<p style="text-align: right">תוכן</p>
-`
+	const onUpdate = ({ editor }) => {
+		setContent(editor.getHTML())
+		if (saveTimeout) clearTimeout(saveTimeout)
+		const timeout = setTimeout(() => {
+			setTimeout(() => {
+				setCurrContent(content)
+			}, 3000)
+		})
+		setSaveTimeout(timeout)
+	}
 
 	const editor = useEditor({
 		extensions: extensions,
 		content: content,
-		onUpdate({ editor }) {
-			setEditorContent(editor.getHTML())
-			setCurrContent(editor.getHTML())
-		},
+		onUpdate,
 	})
 
 	return (

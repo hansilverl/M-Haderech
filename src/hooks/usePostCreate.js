@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { db } from '../firebase/config'
 import { addDoc, serverTimestamp, collection } from 'firebase/firestore'
-import { convertFrontEndToDoc } from './usePostGet'
 
 const createEmptyPost = async () => {
 	const res = {
@@ -9,11 +8,8 @@ const createEmptyPost = async () => {
 		datePublished: null,
 		dateAdded: serverTimestamp(),
 		description: 'תיאור הפוסט',
-		type: 'editor',
 		published: false,
-		contentHTML: '',
-		contentFile: null,
-		imagePath: null,
+		elements: [],
 	}
 	return res
 }
@@ -39,7 +35,7 @@ const usePostCreate = () => {
 			setPostCreateID(docID)
 		} catch (error) {
 			console.error('Error creating post: ', error)
-			setErrorCreate(error)
+			setErrorCreate(error.message)
 			setPostCreateID(null)
 		}
 		setLoadingCreate(false)

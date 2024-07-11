@@ -1,10 +1,36 @@
 import { useState } from 'react'
 
 import { storage } from '../firebase/config'
-import { ref, deleteObject, uploadBytes ,getDownloadURL} from 'firebase/storage'
+import { ref, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage'
 
+const allowedFileTypes = {
+	image: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'],
+	video: ['video/mp4', 'video/avi', 'video/mkv'],
+	audio: ['audio/mpeg', 'audio/wav', 'audio/webm', 'audio/mp3', 'audio/aac'],
+	pdf: ['application/pdf'],
+	compressed: ['application/x-rar-compressed', 'application/zip', 'application/x-zip-compressed'],
+}
+
+const allowedFileExtensions = {
+	image: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+	video: ['mp4', 'avi', 'mkv'],
+	audio: ['mp3', 'wav', 'webm', 'aac'],
+	pdf: ['pdf'],
+	compressed: ['rar', 'zip', '7z'],
+}
+
+const getSafeDateTimeForFileName = () => {
+	const now = new Date()
+	const year = now.getFullYear()
+	const month = (now.getMonth() + 1).toString().padStart(2, '0')
+	const day = now.getDate().toString().padStart(2, '0')
+	const hours = now.getHours().toString().padStart(2, '0')
+	const minutes = now.getMinutes().toString().padStart(2, '0')
+	const seconds = now.getSeconds().toString().padStart(2, '0')
+	return `${year}.${month}.${day}_${hours}:${minutes}:${seconds}`
+}
 const getDownloadURLFromPath = async (path) => {
-	if (!path) return
+	if (!path) return null
 	try {
 		const storageRef = ref(storage, path)
 		const url = await getDownloadURL(storageRef)
@@ -12,6 +38,7 @@ const getDownloadURLFromPath = async (path) => {
 	} catch (error) {
 		console.error('Error getting download URL: ', error)
 	}
+	return ''
 }
 
 const deleteObjectByFilePath = async (url) => {
@@ -24,14 +51,32 @@ const deleteObjectByFilePath = async (url) => {
 	}
 }
 
-const uploadFile = async (file, fileType) => {
-	if (fileType !== 'image' && fileType !== 'pdf') throw new Error('Invalid file type')
-	const date = Date.now()
-	const filePath = `${fileType}s/${date}_${file.name}`
+const uploadFile = async (file, type) => {
+	if (!file) throw new Error('לא נבחר קובץ')
+
+	const allowedType = allowedFileTypes[type]
+	const allowedExtension = allowedFileExtensions[type]
+	if (!allowedType || !allowedExtension) throw new Error('לא נבחר סוג קובץ אפשרי')
+
+	const fileType = file.type
+	const fileExtension = file.name.split('.').pop()
+
+	if (!allowedType.includes(fileType)) throw new Error('סוג קובץ לא תואם למבוקש')
+	if (!allowedExtension.includes(fileExtension)) throw new Error('סוג קובץ לא תואם למבוקש')
+
+	const date = getSafeDateTimeForFileName()
+	const filePath = `${type}s/${date}_${file.name}`
 	const storageRef = ref(storage, filePath)
 
 	await uploadBytes(storageRef, file)
 	return filePath
+}
+
+const downloadFile = async (filePath) => {
+	if (!filePath) throw new Error('Invalid file path')
+	const url = await getDownloadURLFromPath(filePath)
+
+	window.open(url, '_blank')
 }
 
 const useResourceManagement = (initialPath = null) => {
@@ -47,21 +92,35 @@ const useResourceManagement = (initialPath = null) => {
 			await deleteObjectByFilePath(resourcePath)
 			setResourcePath(null)
 		} catch (error) {
-			setErrorResourcePath(error)
+			setErrorResourcePath(error.message)
 			console.error('Error deleting object: ', error)
 		}
 		setLoadingResourcePath(false)
 	}
 
-	const uploadResource = async (file, fileType) => {
+	const uploadResource = async (file, type) => {
 		setLoadingResourcePath(true)
 		try {
 			setErrorResourcePath(null)
-			const filePath = await uploadFile(file, fileType)
+			const filePath = await uploadFile(file, type)
+			console.log(filePath)
 			setResourcePath(filePath)
 		} catch (error) {
-			setErrorResourcePath(error)
+			setErrorResourcePath(error.message)
 			console.error('Error uploading resource: ', error)
+		}
+		setLoadingResourcePath(false)
+	}
+
+	const downloadResource = async () => {
+		if (!resourcePath) return
+		setLoadingResourcePath(true)
+		try {
+			setErrorResourcePath(null)
+			await downloadFile(resourcePath)
+		} catch (error) {
+			setErrorResourcePath(error.message)
+			console.error('Error downloading resource: ', error)
 		}
 		setLoadingResourcePath(false)
 	}
@@ -72,6 +131,7 @@ const useResourceManagement = (initialPath = null) => {
 		errorResourcePath,
 		deleteResource,
 		uploadResource,
+		downloadResource,
 	}
 }
 
