@@ -54,7 +54,7 @@ const MenuBarSelect = (props) => {
 	}
 
 	return (
-		<select onChange={onFontSizeChange} className='editor-button'>
+		<select onChange={onFontSizeChange} className='.menu-bar-select editor-button'>
 			<option value='h5' style={{ fontSize: `${getFontSize('h5')}` }}>
 				קטן מאוד
 			</option>

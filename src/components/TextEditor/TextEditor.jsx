@@ -14,10 +14,7 @@ import TextDirection from 'tiptap-text-direction'
 
 import MenuBar from './MenuBar/MenuBar'
 
-const TextEditor = ({ initialContent, setCurrContent }) => {
-	const [content, setContent] = useState(initialContent)
-	const [saveTimeout, setSaveTimeout] = useState(null)
-
+const TextEditor = ({ content, setContent }) => {
 	const extensions = [
 		TextDirection.configure({
 			types: ['heading', 'paragraph', 'orderedList'],
@@ -44,13 +41,6 @@ const TextEditor = ({ initialContent, setCurrContent }) => {
 
 	const onUpdate = ({ editor }) => {
 		setContent(editor.getHTML())
-		if (saveTimeout) clearTimeout(saveTimeout)
-		const timeout = setTimeout(() => {
-			setTimeout(() => {
-				setCurrContent(content)
-			}, 3000)
-		})
-		setSaveTimeout(timeout)
 	}
 
 	const editor = useEditor({

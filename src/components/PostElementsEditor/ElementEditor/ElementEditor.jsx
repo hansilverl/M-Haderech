@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { Draggable } from '@hello-pangea/dnd'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaGripLines } from 'react-icons/fa'
-import Selector from '../../Selector/Selector'
 
-import './ElementEditor.css'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
+import Selector from '../../Selector/Selector'
 import TextEditor from '../../TextEditor/TextEditor'
 import ResourceInput from '../../ResourceInput/ResourceInput'
 import { deleteObjectByFilePath } from '../../../hooks/useResourceManagement'
+import './ElementEditor.css'
 
-const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'compressed']
-const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'מקווץ']
+const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'other']
+const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'אחר']
 
 const ElementComp = (props) => {
 	const { type, content, setContent, resourcePath, setResourcePath } = props
@@ -19,7 +21,7 @@ const ElementComp = (props) => {
 		return <h2>שגיאה בטעינת עורך האלמנט</h2>
 	}
 	if (type === 'text') {
-		return <TextEditor initialContent={content} setCurrContent={setContent} />
+		return <TextEditor content={content} setContent={setContent} />
 	}
 	return (
 		<ResourceInput
@@ -32,99 +34,87 @@ const ElementComp = (props) => {
 }
 
 const ElementEditor = (props) => {
-	const { index, element, setElements, setSave } = props
+	const { element, deleteElement, updateElement } = props
+	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+		id: element?.id,
+	})
 
-	const [type, setType] = useState(element?.type ? element.type : 'text')
-	const [content, setContent] = useState(element?.content ? element.content : '')
-	const [resourcePath, setResourcePath] = useState(
-		element?.resourcePath ? element.resourcePath : ''
-	)
-	const [displayEditor, setDisplayEditor] = useState(
-		element?.displayEditor === false ? element.displayEditor : true
-	)
-
-	const onUpdateElement = () => {
-		const newElement = {
-			type,
-			content,
-			resourcePath,
-			displayEditor,
-		}
-
-		setElements((elements) => {
-			const newElements = [...elements]
-			newElements[index] = newElement
-			return newElements
-		})
-
-		setSave(true)
-	}
+	const autoSaveTimeout = useRef(null)
+	const [elem, setElement] = useState(element)
+	const [type, setType] = useState(elem.type)
+	const [content, setContent] = useState(elem.content)
+	const [resourcePath, setResourcePath] = useState(elem.resourcePath)
+	const [displayEditor, setDisplayEditor] = useState(elem.displayEditor)
 
 	const onDeleteElement = () => {
 		if (resourcePath && resourcePath !== '') deleteObjectByFilePath(resourcePath)
-		setElements((elements) => {
-			const newElements = [...elements]
-			newElements.splice(index, 1)
-			return newElements
-		})
+		deleteElement(elem.id)
 	}
 
-	const handleHideEditor = () => {
+	const toggleDisplayEditor = () => {
 		setDisplayEditor(!displayEditor)
 	}
 
 	useEffect(() => {
-		if (
-			type !== element.type ||
-			content !== element.content ||
-			resourcePath !== element.resourcePath ||
-			displayEditor !== element.displayEditor
-		) {
-			onUpdateElement()
+		const onUpdateElement = () => {
+			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
+			autoSaveTimeout.current = null
+			setElement((elem) => {
+				const newElem = { ...elem }
+				newElem.type = type
+				newElem.content = content
+				newElem.resourcePath = resourcePath
+				newElem.displayEditor = displayEditor
+				return newElem
+			})
 		}
+
+		if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
+			
+		autoSaveTimeout.current = setTimeout(() => {
+			onUpdateElement()
+		}, 2000)
+
 	}, [type, content, resourcePath, displayEditor])
 
-	return (
-		<Draggable draggableId={`drag-${index}`} index={index}>
-			{(provided) => (
-				<div
-					className='draggable-post-element main-flex-col'
-					ref={provided.innerRef}
-					{...provided.draggableProps}
-					style={{ ...provided.draggableProps.style }}>
-					<div className='element-editor-header main-flex-row'>
-						<span {...provided.dragHandleProps} className='drag-handle'>
-							<FaGripLines />
-						</span>
-						<Selector
-							id={`element-${index}-type-selector`}
-							selectFunction={setType}
-							optionValues={typeValues}
-							optionNames={typeNames}
-							currentValue={type}
-							disabled={resourcePath && resourcePath !== '' ? true : false}
-						/>
-						<button onClick={handleHideEditor}>{displayEditor ? 'הסתר' : 'הצג'}</button>
-						<button onClick={onDeleteElement}>מחק</button>
-					</div>
+	useEffect(() => {
+		updateElement(elem)
+	}, [elem])
 
-					<div className='element-editor-container main-flex-row'>
-						{!displayEditor ? null : (
-							<>
-								<ElementComp
-									type={type}
-									content={content}
-									resourcePath={resourcePath}
-									setContent={setContent}
-									setResourcePath={setResourcePath}
-									setElements={setElements}
-								/>
-							</>
-						)}
-					</div>
-				</div>
-			)}
-		</Draggable>
+	const style = {
+		transform: CSS.Transform.toString(transform),
+		transition,
+	}
+
+	return (
+		<div ref={setNodeRef} style={style} {...attributes}>
+			<div className='element-editor-header main-flex-row'>
+				<span className='drag-handle' {...listeners}>
+					☰
+				</span>
+				<Selector
+					selectFunction={setType}
+					optionValues={typeValues}
+					optionNames={typeNames}
+					currentValue={type}
+					disabled={resourcePath && resourcePath !== '' ? true : false}
+				/>
+				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'}</button>
+				<button onClick={onDeleteElement}>מחק</button>
+			</div>
+
+			<div className='element-editor-container'>
+				{!displayEditor ? null : (
+					<ElementComp
+						type={type}
+						content={content}
+						resourcePath={resourcePath}
+						setContent={setContent}
+						setResourcePath={setResourcePath}
+					/>
+				)}
+			</div>
+		</div>
 	)
 }
 
