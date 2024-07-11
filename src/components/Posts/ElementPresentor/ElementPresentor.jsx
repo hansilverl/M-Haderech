@@ -24,7 +24,7 @@ const TextElementPresentor = (props) => {
 
 const ImageElementPresentor = (props) => {
 	const { resourceUrl } = props
-	return <img src={resourceUrl} alt={'לא נמצאה תמונה'} />
+	return <img className='element-image' src={resourceUrl} alt={'לא נמצאה תמונה'} />
 }
 
 const VideoElementPresentor = (props) => {
