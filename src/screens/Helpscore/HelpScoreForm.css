@@ -159,6 +159,7 @@ body {
 .radio-input:checked+.custom-radio::after {
     transform: translate(-50%, -50%) scale(1.2);    /* slightly larger than the radio button */
     content: "✔";
+    font-size: 0.5em;
     font-weight: bold;
     border-radius: 50%;
     color: forestgreen;
