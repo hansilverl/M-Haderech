@@ -106,6 +106,7 @@ export const LoginPopup = ({ setShowLogin }) => {
           <input
             required
             type="email"
+            name="email"
             placeholder="האימייל שלך"
             onChange={handleEmailChange}
             value={email}
@@ -122,6 +123,7 @@ export const LoginPopup = ({ setShowLogin }) => {
           <input
             required
             type="password"
+            name="password"
             placeholder="סיסמה"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
@@ -134,10 +136,10 @@ export const LoginPopup = ({ setShowLogin }) => {
         {currState === "התחברות" ? (
           <>
             <a className="reset-password-link" onClick={() => setModalIsOpen(true)}>איפוס סיסמה</a>
-            <p>אין לך חשבון? <span onClick={() => setCurrState("הרשמה")}>לחץ כאן</span></p>
+            <p className='switcher' >אין לך חשבון? <span onClick={() => setCurrState("הרשמה")}>לחץ כאן</span></p>
           </>
         ) : (
-          <p>כבר יש לך חשבון? <span onClick={() => setCurrState("התחברות")}>התחבר כאן</span></p>
+          <p className='switcher'>כבר יש לך חשבון? <span onClick={() => setCurrState("התחברות")}>התחבר כאן</span></p>
         )}
       </form>
 
@@ -153,6 +155,7 @@ export const LoginPopup = ({ setShowLogin }) => {
           <span>אימייל:</span>
           <input
             type="email"
+            name="resetEmail"
             value={resetEmail}
             onChange={(e) => setResetEmail(e.target.value)}
           />
