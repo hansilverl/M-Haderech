@@ -93,6 +93,7 @@ const Navbar = ({ setShowLogin }) => {
             </div>
             {userDropdownOpen && (
               <div className="dropdown-menu">
+                <FontAwesomeIcon icon="fa-regular fa-clock-rotate-left" style={{ color: "#ffffff", }} />
                 <Link to="/history" onClick={() => setUserDropdownOpen(false)}>היסטוריה</Link>
                 <Link to="/changePassword" onClick={() => setUserDropdownOpen(false)}>איפוס סיסמא</Link>
                 {isAdmin && <Link to="/admin" onClick={() => setUserDropdownOpen(false)}>ניהול</Link>}
