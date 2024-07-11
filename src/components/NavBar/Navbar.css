@@ -192,6 +192,12 @@
 }
 
 .dropdown-menu a,
+.dropdown-menu
+{
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-menu a,
 .dropdown-menu  .logout-button{
   display: block;
   padding: 5px 10px;
@@ -207,6 +213,12 @@
   border-bottom: 1px solid #ccc;
 }
 
+.dropdown-menu .icon-option{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .logout-button {
   margin-bottom: 0.5em;
@@ -330,7 +342,8 @@
 
   .dropdown-menu {
     margin-top: 0;
-    max-width: min-content;
+    max-width: max-content;
+    text-align: center;
   }
 
 
