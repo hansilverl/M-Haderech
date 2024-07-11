@@ -1,3 +1,4 @@
+// src/pages/DonatePage/DonatePage.jsx
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,6 +10,8 @@ const DonatePage = () => {
   const [donationLinkHebrew, setDonationLinkHebrew] = useState('');
   const [donationLinkEnglish, setDonationLinkEnglish] = useState('');
   const [donationNumber, setDonationNumber] = useState('');
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -56,11 +59,27 @@ const DonatePage = () => {
       }
     };
 
+    const fetchTitleAndSubtitle = async () => {
+      try {
+        const docRef = doc(db, 'miscellaneousUpdated', 'donate_title');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setTitle(docSnap.data().title);
+          setSubtitle(docSnap.data().subtitle);
+        } else {
+          setError('לא נמצא כותרת לעמוד תרומה.');
+        }
+      } catch (err) {
+        setError('נכשל בטעינת כותרת לעמוד תרומה.');
+      }
+    };
+
     const fetchData = async () => {
       setLoading(true);
       await fetchBankInfo();
       await fetchDonationLink();
       await fetchDonationNumber();
+      await fetchTitleAndSubtitle();
       setLoading(false);
     };
 
@@ -72,15 +91,15 @@ const DonatePage = () => {
 
   return (
     <div className="donate-page">
-      <h1>עמוד תרומה</h1>
-      <p>כאן תוכלו לבצע את התרומה שלכם.</p>
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
       <div className="info-container">
         <div className="info-box">
           <FaLink className="info-icon" />
           <h2>קישור לתרומה דרך האינטרנט</h2>
           <h4>ניתן לתרום דרך הקישורים הבאים:</h4>
-          <p> <a href={donationLinkHebrew} target="_blank" rel="noopener noreferrer">תרומה בעברית</a></p>
-          <p> <a href={donationLinkEnglish} target="_blank" rel="noopener noreferrer">Donate in English</a></p>
+          <p><a href={donationLinkHebrew} target="_blank" rel="noopener noreferrer">תרומה בעברית</a></p>
+          <p><a href={donationLinkEnglish} target="_blank" rel="noopener noreferrer">Donate in English</a></p>
         </div>
         <div className="info-box">
           <FaUniversity className="info-icon" />
