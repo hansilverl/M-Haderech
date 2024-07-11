@@ -21,6 +21,7 @@ import AboutFull from './screens/AboutFull/AboutFull'
 
 import 'normalize.css'
 import './App.css'
+import Convention from './screens/Conventions/Convention'
 
 function App() {
 	const location = useLocation()
@@ -52,6 +53,7 @@ function App() {
 				<Route exact path='/posts' element={<Posts />} />
 				<Route path='/posts/:id' element={<PostDetails />} /> {/* Route for detail of post */}
 				<Route exact path='/donate' element={<DonatePage />} />
+				<Route exact path='/convention' element={<Convention />} />
 				<Route
 					path='/admin/*'
 					element={

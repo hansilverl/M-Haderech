@@ -68,6 +68,10 @@ const PostEditPageComp = ({ postID, post }) => {
 		}
 	}
 
+	const handleBack = () => {
+		navigate(-1) // Go back to the previous page
+	}
+
 	useEffect(() => {
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = setTimeout(() => {
@@ -130,6 +134,9 @@ const PostEditPageComp = ({ postID, post }) => {
 								בטל פרסום
 							</button>
 						)}
+						<button onClick={handleBack} className='back-button'>
+							חזור
+						</button>
 					</div>
 				</>
 			)}
