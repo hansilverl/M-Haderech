@@ -1,0 +1,20 @@
+.text-editor-menu-bar {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: fit-content;
+	margin: 0px;
+	padding: 10px;
+	background-color: #f3f3f3;
+}
+
+.text-editor-menu-bar .sub-menu-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: fit-content;
+	margin: 0px;
+	padding: 0px;
+}

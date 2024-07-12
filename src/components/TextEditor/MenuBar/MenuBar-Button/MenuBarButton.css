@@ -1,18 +1,19 @@
-.text-editor-menu-bar .text-editor-text-editor-menu-bar-button {
+.text-editor-menu-bar .text-editor-menu-bar-button {
 	font-weight: bold;
 	align-items: center;
 	justify-content: center;
 	background-color: #9b59b6;
 	color: white;
-	border: none;
 	border-radius: 10px;
 	box-shadow: none;
 	cursor: pointer;
-	padding: 0px; /* Smaller padding for smaller buttons */
-	margin: 0px 0px;
+
+	border: #0d0d0d solid 1px;
 	transition: background-color 0.3s, transform 0.3s;
 	font-size: 16px; /* Smaller font size for buttons */
-	margin: 0 0px;
+	padding: 0.25rem 0.5rem;
+	margin: 1px;
+	border: #525252 solid 1px;
 }
 
 .text-editor-menu-bar .text-editor-menu-bar-button:hover {
@@ -31,8 +32,6 @@
 	border-radius: 0cqh;
 	background-color: white;
 	color: black;
-	padding: 0.25rem 0.5rem;
-	border: 0px;
 }
 
 .text-editor-menu-bar .is-active,
@@ -43,10 +42,8 @@
 }
 
 .menu-bar .use-button {
-	border-radius: 0cqh;
 	background-color: white;
 	color: black;
-	padding: 0.25rem 0.5rem;
 }
 
 .menu-bar .syntax-button:disabled,

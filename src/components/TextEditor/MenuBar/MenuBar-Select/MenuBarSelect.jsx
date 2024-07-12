@@ -1,4 +1,5 @@
 import './MenuBarSelect.css'
+import Select from 'react-select'
 
 const getFontSize = (elementType) => {
 	// Create a temporary h1 element
@@ -14,64 +15,57 @@ const getFontSize = (elementType) => {
 	return fontSize
 }
 
-const MenuBarSelect = (props) => {
+const MenuBarSelectSize = (props) => {
 	const { editor } = props
+
+	const options = []
+	for (let i = 12; i <= 50; i += 2) {
+		options.push({ value: i, label: `${i}px` })
+	}
 
 	if (!editor) return null
 
-	const onFontSizeChange = (e) => {
-		if (!editor) return null
+	const setFontSize = (size) => {
+		if(!size) return
+		editor.chain().focus().setFontSize(size).run()
+	}
 
-		const attributes = editor.getAttributes(editor.state.selection.$anchor.node().type.name)
-		const fontSize = e.target.value
-		for (let i = 1; i <= 6; i++) {
-			if (editor.isActive('heading', { level: 1 }))
-				editor.chain().focus().toggleHeading({ level: 1 }).run()
-		}
-		editor.chain().focus().setParagraph().run()
+	const unsetFontSize = () => {
+		editor.chain().focus().unsetFontSize().run()
+	}
 
-		switch (fontSize) {
-			case 'h5':
-				editor.chain().focus().toggleHeading({ level: 5 }).run()
-				break
-			case 'h4':
-				editor.chain().focus().toggleHeading({ level: 4 }).run()
-				break
-			case 'h3':
-				editor.chain().focus().toggleHeading({ level: 3 }).run()
-				break
-			case 'h2':
-				editor.chain().focus().toggleHeading({ level: 2 }).run()
-				break
-			case 'h1':
-				editor.chain().focus().toggleHeading({ level: 1 }).run()
-				break
-		}
+	const getFontSize = () => {
+		const attrs = editor.getAttributes('textStyle')
+		return attrs.fontSize
+	}
 
-		if (attributes?.textAlign) {
-			editor.chain().focus().setTextAlign(attributes.textAlign).run()
-		}
+	const handleChange = (newValue, actionMeta) => {
+		setFontSize(newValue?.value)
+	}
+
+	const handleInputChange = (inputValue, actionMeta) => {
+		console.group('Input Changed')
+		console.log(inputValue)
+		console.log(`action: ${actionMeta.action}`)
+		console.groupEnd()
 	}
 
 	return (
-		<select onChange={onFontSizeChange} className='menu-bar-select'>
-			<option className='menu-bar-option' value='h5' style={{ fontSize: `${getFontSize('h5')}` }}>
-				קטן מאוד
-			</option>
-			<option className='menu-bar-option' value='p' style={{ fontSize: `${getFontSize('p')}` }}>
-				קטן
-			</option>
-			<option className='menu-bar-option' value='h3' style={{ fontSize: `${getFontSize('h3')}` }}>
-				בינוני
-			</option>
-			<option className='menu-bar-option' value='h2' style={{ fontSize: `${getFontSize('h2')}` }}>
-				גדול
-			</option>
-			<option className='menu-bar-option' value='h1' style={{ fontSize: `${getFontSize('h1')}` }}>
-				ענק
-			</option>
-		</select>
+		<div className='menu-bar-select-container'>
+			<label>גודל גופן:</label>
+			<Select
+				options={options}
+				value={getFontSize() || 'גודל גופן'}
+				onChange={handleChange}
+				onInputChange={handleInputChange}
+				isClearable={true}
+				isSearchable={true}
+				isDisabled={false}
+				placeholder='בחר גודל גופן'
+
+			/>
+		</div>
 	)
 }
 
-export default MenuBarSelect
+export default MenuBarSelectSize

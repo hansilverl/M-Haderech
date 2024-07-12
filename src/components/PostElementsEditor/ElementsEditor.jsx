@@ -18,6 +18,8 @@ import {
 } from '@dnd-kit/sortable'
 import ElementEditor from './ElementEditor/ElementEditor'
 
+import { deleteObjectByFilePath } from '../../hooks/useResourceManagement'
+
 const ElementsEditor = (props) => {
 	const { elements, setElements } = props
 	const [dragging, setDragging] = useState(false)
@@ -46,10 +48,16 @@ const ElementsEditor = (props) => {
 	}
 
 	const deleteElement = (element) => {
-		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את הפוסט?')
-		if (!confirmDelete) return
+		console.log('deleteElement', element)
+		const resourcePath = element.resourcePath
+		if (resourcePath && resourcePath !== '') deleteObjectByFilePath(resourcePath)
 
-		const index = elements.findIndex((elem) => elem.id === element.id)
+		console.log(elements)
+		const index = elements.findIndex((elem) => {
+			console.log(elem.id, element.id)
+			return elem.id === element.id
+		})
+		console.log('index', index)
 		if (index < 0) return
 
 		const newElements = [...elements]

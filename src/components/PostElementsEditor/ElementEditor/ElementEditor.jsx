@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaGripLines } from 'react-icons/fa'
-
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
 import Selector from '../../Selector/Selector'
 import TextEditor from '../../TextEditor/TextEditor'
 import ResourceInput from '../../ResourceInput/ResourceInput'
-import { deleteObjectByFilePath } from '../../../hooks/useResourceManagement'
+import GeneralModal from '../../Modals/GeneralModal'
+
 import './ElementEditor.css'
 
 const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'other']
 const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'אחר']
 
-const ElementComp = (props) => {
+const ElementEditorComp = (props) => {
 	const { type, content, setContent, resourcePath, setResourcePath } = props
 
 	const index = typeValues.indexOf(type)
@@ -35,11 +35,9 @@ const ElementComp = (props) => {
 
 const ElementEditor = (props) => {
 	const { element, deleteElement, updateElement, forceHideEditor } = props
-	const { attributes, listeners, setNodeRef, transform, transition } = useSortable(
-		{
-			id: element?.id,
-		}
-	)
+	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+		id: element?.id,
+	})
 
 	const autoSaveTimeout = useRef(null)
 	const [elem, setElement] = useState(element)
@@ -48,9 +46,11 @@ const ElementEditor = (props) => {
 	const [resourcePath, setResourcePath] = useState(elem.resourcePath)
 	const [displayEditor, setDisplayEditor] = useState(elem.displayEditor)
 
+	const [isModalActive, setIsModalActive] = useState(false)
+
 	const onDeleteElement = () => {
-		if (resourcePath && resourcePath !== '') deleteObjectByFilePath(resourcePath)
-		deleteElement(elem.id)
+		setIsModalActive(false)
+		deleteElement(element)
 	}
 
 	const toggleDisplayEditor = () => {
@@ -102,12 +102,11 @@ const ElementEditor = (props) => {
 					disabled={resourcePath && resourcePath !== '' ? true : false}
 				/>
 				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'}</button>
-				<button onClick={onDeleteElement}>מחק</button>
+				<button onClick={() => setIsModalActive(true)}>מחק</button>
 			</div>
-
 			<div className='element-editor-container' display={displayEditor ? 'block' : 'none'}>
 				{!displayEditor || forceHideEditor ? null : (
-					<ElementComp
+					<ElementEditorComp
 						type={type}
 						content={content}
 						resourcePath={resourcePath}
@@ -116,6 +115,17 @@ const ElementEditor = (props) => {
 					/>
 				)}
 			</div>
+			<GeneralModal
+				isOpen={isModalActive}
+				onRequestClose={() => setIsModalActive(false)}
+				title='האם אתה בטוח למחוק רכיב זה?'
+				confirmName='מחק'
+				cancelName='ביטול'
+				handleCancel={() => setIsModalActive(false)}
+				handleConfirm={() => onDeleteElement()}>
+					<h3>לא יהיה ניתן לשחזר את הרכיב או התוכן שלו</h3>
+					<h3>האם אתה בטוח שברצונך להמשיך?</h3>
+				</GeneralModal>
 		</div>
 	)
 }

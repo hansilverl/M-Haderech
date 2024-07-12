@@ -11,8 +11,9 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
 import TextDirection from 'tiptap-text-direction'
+import TiptapFontSize from './TipTapFontSize'
 
-import MenuBar from './MenuBar/MenuBar'
+import TextEditorToolBar from './MenuBar/TextEditorToolBar'
 
 const TextEditor = ({ content, setContent }) => {
 	const extensions = [
@@ -26,7 +27,7 @@ const TextEditor = ({ content, setContent }) => {
 		}),
 		Underline,
 		Color.configure({ types: [TextStyle.name, ListItem.name] }),
-		TextStyle.configure({ types: [ListItem.name] }),
+		// TextStyle.configure({ types: [ListItem.name] }),
 		StarterKit.configure({
 			bulletList: {
 				keepMarks: true,
@@ -37,6 +38,8 @@ const TextEditor = ({ content, setContent }) => {
 				keepAttributes: false,
 			},
 		}),
+		TextStyle.extend(),
+		TiptapFontSize,
 	]
 
 	const onUpdate = ({ editor }) => {
@@ -50,8 +53,8 @@ const TextEditor = ({ content, setContent }) => {
 	})
 
 	return (
-		<div class='editor-container' className='flex-col justify-right'>
-			<MenuBar editor={editor} />
+		<div className='editor-container'>
+			<TextEditorToolBar editor={editor} />
 			<EditorContent editor={editor} />
 		</div>
 	)
