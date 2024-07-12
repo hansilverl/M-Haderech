@@ -34,10 +34,12 @@ const ElementComp = (props) => {
 }
 
 const ElementEditor = (props) => {
-	const { element, deleteElement, updateElement } = props
-	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-		id: element?.id,
-	})
+	const { element, deleteElement, updateElement, forceHideEditor } = props
+	const { attributes, listeners, setNodeRef, transform, transition } = useSortable(
+		{
+			id: element?.id,
+		}
+	)
 
 	const autoSaveTimeout = useRef(null)
 	const [elem, setElement] = useState(element)
@@ -70,11 +72,10 @@ const ElementEditor = (props) => {
 		}
 
 		if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
-			
+
 		autoSaveTimeout.current = setTimeout(() => {
 			onUpdateElement()
-		}, 2000)
-
+		}, 1000)
 	}, [type, content, resourcePath, displayEditor])
 
 	useEffect(() => {
@@ -97,14 +98,15 @@ const ElementEditor = (props) => {
 					optionValues={typeValues}
 					optionNames={typeNames}
 					currentValue={type}
+					name='סוג הרכיב'
 					disabled={resourcePath && resourcePath !== '' ? true : false}
 				/>
 				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'}</button>
 				<button onClick={onDeleteElement}>מחק</button>
 			</div>
 
-			<div className='element-editor-container'>
-				{!displayEditor ? null : (
+			<div className='element-editor-container' display={displayEditor ? 'block' : 'none'}>
+				{!displayEditor || forceHideEditor ? null : (
 					<ElementComp
 						type={type}
 						content={content}

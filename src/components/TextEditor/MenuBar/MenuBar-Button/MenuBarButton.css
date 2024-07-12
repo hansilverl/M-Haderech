@@ -1,7 +1,33 @@
-.menu-bar-button .syntax-button,
-.menu-bar-button .syntax-button:hover,
-.menu-bar-button .use-button {
-	display: inline-block;
+.text-editor-menu-bar .text-editor-text-editor-menu-bar-button {
+	font-weight: bold;
+	align-items: center;
+	justify-content: center;
+	background-color: #9b59b6;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	box-shadow: none;
+	cursor: pointer;
+	padding: 0px; /* Smaller padding for smaller buttons */
+	margin: 0px 0px;
+	transition: background-color 0.3s, transform 0.3s;
+	font-size: 16px; /* Smaller font size for buttons */
+	margin: 0 0px;
+}
+
+.text-editor-menu-bar .text-editor-menu-bar-button:hover {
+	background-color: #a20067;
+	transform: translateY(-2px);
+}
+
+.text-editor-menu-bar .text-editor-menu-bar-button:disabled {
+	background-color: #a0a0a0;
+	cursor: not-allowed;
+}
+
+.text-editor-menu-bar .syntax-button,
+.text-editor-menu-bar .syntax-button:hover,
+.text-editor-menu-bar .use-button {
 	border-radius: 0cqh;
 	background-color: white;
 	color: black;
@@ -9,25 +35,24 @@
 	border: 0px;
 }
 
-.menu-bar-button .is-active,
-.menu-bar-button .is-active:hover,
-.menu-bar-button .use-button:hover {
+.text-editor-menu-bar .is-active,
+.text-editor-menu-bar .is-active:hover,
+.text-editor-menu-bar .use-button:hover {
 	background-color: #0d0d0d;
 	color: #fff;
 }
 
-.menu-bar-button .use-button {
-	display: inline-block;
+.menu-bar .use-button {
 	border-radius: 0cqh;
 	background-color: white;
 	color: black;
 	padding: 0.25rem 0.5rem;
 }
 
-.menu-bar-button .syntax-button:disabled,
-.menu-bar-button .syntax-button:disabled:hover,
-.menu-bar-button .use-button:disabled,
-.menu-bar-button .use-button:disabled:hover {
+.menu-bar .syntax-button:disabled,
+.menu-bar .syntax-button:disabled:hover,
+.menu-bar .use-button:disabled,
+.menu-bar .use-button:disabled:hover {
 	opacity: 0.5;
 	background-color: white;
 	color: black;

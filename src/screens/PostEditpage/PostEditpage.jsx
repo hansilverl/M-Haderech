@@ -117,7 +117,7 @@ const PostEditPageComp = ({ postID, post }) => {
 							optionNames={['פוסט', 'כנס']}
 						/>
 					</div>
-					<ElementsEditor id='elements-editor' elements={elements} setElements={setElements} />
+					<ElementsEditor elements={elements} setElements={setElements} />
 					<div className='main-flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>
 							{saveButtonText}

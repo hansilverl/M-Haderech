@@ -39,12 +39,13 @@ const AudioElementPresentor = (props) => {
 
 const PdfElementPresentor = (props) => {
 	const { resourceUrl, last } = props
+
 	return (
 		<>
 			<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
 				<img src={pdfIcon} alt='Open PDF' />
 			</button>
-			{last && <PdfViewer pdfFile={resourceUrl} />}
+			<PdfViewer pdfFile={resourceUrl} />
 		</>
 	)
 }
@@ -55,8 +56,7 @@ const CompressedElementPresentor = (props) => {
 }
 
 const ElementPicker = ({ element }) => {
-	const { type, content, resourceUrl , last} = element
-	console.log(element)
+	const { type, content, resourceUrl } = element
 	switch (type) {
 		case 'text':
 			return <TextElementPresentor content={content} />
@@ -67,7 +67,7 @@ const ElementPicker = ({ element }) => {
 		case 'audio':
 			return <AudioElementPresentor resourceUrl={resourceUrl} />
 		case 'pdf':
-			return <PdfElementPresentor resourceUrl={resourceUrl} last={last} />
+			return <PdfElementPresentor resourceUrl={resourceUrl} />
 		case 'compressed':
 			return <CompressedElementPresentor resourceUrl={resourceUrl} />
 		default:

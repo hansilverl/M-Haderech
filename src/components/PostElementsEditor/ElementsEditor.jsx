@@ -1,3 +1,5 @@
+import './ElementsEditor.css'
+
 import React, { useEffect, useState } from 'react'
 import {
 	DndContext,
@@ -18,7 +20,7 @@ import ElementEditor from './ElementEditor/ElementEditor'
 
 const ElementsEditor = (props) => {
 	const { elements, setElements } = props
-	const [originalDisplay, setOriginalDisplay] = useState({})
+	const [dragging, setDragging] = useState(false)
 
 	const createElement = () => {
 		let id = 0
@@ -64,28 +66,20 @@ const ElementsEditor = (props) => {
 	)
 
 	const handleDragStart = (event) => {
-		const newOriginalDisplay = {}
-		const newElements = elements.map((element) => {
-			newOriginalDisplay[element.id] = element.displayEditor
-			return { ...element, displayEditor: false }
-		})
-		setOriginalDisplay(newOriginalDisplay)
-		setElements(newElements)
+		setDragging(true)
 	}
 
 	const handleDragEnd = (event) => {
 		const { active, over } = event
-		const newElements = elements.map((element) => {
-			const originalValue = originalDisplay[element.id]
-			return { ...element, displayEditor: originalValue }
-		})
 
 		if (!over || active.id === over.id) return
+		const newElements = [...elements]
 		const oldIndex = newElements.findIndex((elem) => elem.id === active.id)
 		const newIndex = newElements.findIndex((elem) => elem.id === over.id)
 
 		const item = newElements.splice(oldIndex, 1)[0]
 		newElements.splice(newIndex, 0, item)
+		setDragging(false)
 		setElements(newElements)
 	}
 
@@ -94,7 +88,7 @@ const ElementsEditor = (props) => {
 	}, [elements])
 
 	return (
-		<>
+		<div className='elements-editor-container'>
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCenter}
@@ -109,13 +103,14 @@ const ElementsEditor = (props) => {
 								element={element}
 								updateElement={updateElement}
 								deleteElement={deleteElement}
+								forceHideEditor={dragging}
 							/>
 						)
 					})}
 				</SortableContext>
 			</DndContext>
 			<button onClick={createElement}>הוסף</button>
-		</>
+		</div>
 	)
 }
 

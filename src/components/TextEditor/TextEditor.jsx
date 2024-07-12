@@ -1,6 +1,6 @@
 import './TextEditor.css'
 
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useEditor, EditorContent } from '@tiptap/react'
 
@@ -50,7 +50,7 @@ const TextEditor = ({ content, setContent }) => {
 	})
 
 	return (
-		<div id='text-editor' className='flex-col justify-right'>
+		<div class='editor-container' className='flex-col justify-right'>
 			<MenuBar editor={editor} />
 			<EditorContent editor={editor} />
 		</div>

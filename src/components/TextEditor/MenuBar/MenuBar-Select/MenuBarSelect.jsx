@@ -54,20 +54,20 @@ const MenuBarSelect = (props) => {
 	}
 
 	return (
-		<select onChange={onFontSizeChange} className='.menu-bar-select editor-button'>
-			<option value='h5' style={{ fontSize: `${getFontSize('h5')}` }}>
+		<select onChange={onFontSizeChange} className='menu-bar-select'>
+			<option className='menu-bar-option' value='h5' style={{ fontSize: `${getFontSize('h5')}` }}>
 				קטן מאוד
 			</option>
-			<option value='p' style={{ fontSize: `${getFontSize('p')}` }}>
+			<option className='menu-bar-option' value='p' style={{ fontSize: `${getFontSize('p')}` }}>
 				קטן
 			</option>
-			<option value='h3' style={{ fontSize: `${getFontSize('h3')}` }}>
+			<option className='menu-bar-option' value='h3' style={{ fontSize: `${getFontSize('h3')}` }}>
 				בינוני
 			</option>
-			<option value='h2' style={{ fontSize: `${getFontSize('h2')}` }}>
+			<option className='menu-bar-option' value='h2' style={{ fontSize: `${getFontSize('h2')}` }}>
 				גדול
 			</option>
-			<option value='h1' style={{ fontSize: `${getFontSize('h1')}` }}>
+			<option className='menu-bar-option' value='h1' style={{ fontSize: `${getFontSize('h1')}` }}>
 				ענק
 			</option>
 		</select>

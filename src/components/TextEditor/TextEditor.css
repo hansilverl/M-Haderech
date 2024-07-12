@@ -1,20 +1,13 @@
 .tiptap {
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-
-	padding: 20px;
 	border-top: 1px solid grey;
+	
 	border-radius: 1rem;
 	background: white;
 	min-height: 300px; /* Increased height for a bigger input area */
-	min-width: 350px;
-	max-width: 800px;
-	width: 100%;
 	background-color: #f0f0f0;
 	color: #333;
-	text-align: left;
+	margin: 10px;
+
 }
 
 .tiptap:focus {
@@ -30,7 +23,6 @@
 .tiptap ol {
 	padding: 0 2rem;
 	margin: 0 2rem;
-	text-align: left;
 }
 
 .tiptap ul,
@@ -70,44 +62,6 @@
 	margin: 2rem 0;
 }
 
-.menu-bar {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-	align-items: center;
-	width: 100%;
-	margin-bottom: 10px;
-	background: #f7f8fa;
-	padding: 10px;
-	border-radius: 1rem;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sub-menu-bar {
-	display: flex;
-	flex-direction: row;
-	justify-content: right;
+.editor-container {
 	width: fit-content;
-	margin: 0;
-}
-
-.text-editor button {
-	font-family: 'IBM Plex Sans Hebrew', sans-serif;
-	font-weight: bold;
-	background-color: #9b59b6;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	border: 1px solid #650040;
-	box-shadow: none;
-	cursor: pointer;
-	padding: 10px 20px;
-	margin: 5px;
-	transition: background-color 0.3s, transform 0.3s;
-}
-
-.text-editor button:hover {
-	background-color: #a20067;
-	transform: translateY(-2px);
 }

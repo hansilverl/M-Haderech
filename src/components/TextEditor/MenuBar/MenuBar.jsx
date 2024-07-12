@@ -30,100 +30,110 @@ const MenuBar = (props) => {
 	}
 
 	return (
-		<div className='menu-bar' editor={editor}>
-			<div className='sub-menu-bar'>
-				<MenuBarButton
-					className='use-button'
-					editorFunc={'undo'}
-					editor={editor}
-					content={<FaRedo />}
-				/>
-				<MenuBarButton
-					className='menu-bar-button use-button'
-					editorFunc={'redo'}
-					editor={editor}
-					content={<FaUndo />}
-				/>
-				<MenuBarButton
-					isActiveArg='bold'
-					editorFunc={'toggleBold'}
-					editor={editor}
-					content={<FaBold />}
-				/>
-				<MenuBarButton
-					isActiveArg={'italic'}
-					editorFunc={'toggleItalic'}
-					editor={editor}
-					content={<FaItalic />}
-				/>
-				<MenuBarButton
-					isActiveArg={'underline'}
-					editorFunc={'toggleUnderline'}
-					editor={editor}
-					content={<FaUnderline />}
-				/>
-				<MenuBarButton
-					isActiveArg={'strike'}
-					editorFunc={'toggleStrike'}
-					editor={editor}
-					content={<FaStrikethrough />}
-				/>
-				<MenuBarButton
-					isActiveArg={'bulletList'}
-					editorFunc={'toggleBulletList'}
-					editor={editor}
-					content={<FaListUl />}
-				/>
-				<MenuBarButton
-					isActiveArg={'orderedList'}
-					editorFunc={'toggleOrderedList'}
-					editor={editor}
-					content={<FaListOl />}
-				/>
-				<MenuBarButton
-					isActiveArg={{ textAlign: 'right' }}
-					editorFunc={'setTextAlign'}
-					editorFuncArg={'right'}
-					editor={editor}
-					content={<FaAlignRight />}
-				/>
-				<MenuBarButton
-					isActiveArg={{ textAlign: 'center' }}
-					editorFunc={'setTextAlign'}
-					editorFuncArg={'center'}
-					editor={editor}
-					content={<FaAlignCenter />}
-				/>
-				<MenuBarButton
-					isActiveArg={{ textAlign: 'left' }}
-					editorFunc={'setTextAlign'}
-					editorFuncArg={'left'}
-					editor={editor}
-					content={<FaAlignLeft />}
-				/>
-				<MenuBarButton
-					isActiveArg={{ textAlign: 'justify' }}
-					editorFunc={'setTextAlign'}
-					editorFuncArg={'justify'}
-					editor={editor}
-					content={<FaAlignJustify />}
-				/>
-				<MenuBarButton
-					isActiveArg={{ dir: 'rtl' }}
-					editorFunc={'setTextDirection'}
-					editorFuncArg={'rtl'}
-					editor={editor}
-					content={<MdOutlineFormatTextdirectionRToL />}
-				/>
-				<MenuBarButton
-					isActiveArg={{ dir: 'ltr' }}
-					editorFunc={'setTextDirection'}
-					editorFuncArg={'ltr'}
-					editor={editor}
-					content={<MdFormatTextdirectionLToR />}
-				/>
-				<MenuBarSelect editor={editor} />
-			</div>
+		<div className='text-editor-menu-bar' editor={editor}>
+			<MenuBarButton
+				className='use-button'
+				editorFunc={'undo'}
+				editor={editor}
+				content={<FaRedo />}
+			/>
+			<MenuBarButton
+				className='use-button'
+				editorFunc={'redo'}
+				editor={editor}
+				content={<FaUndo />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg='bold'
+				editorFunc={'toggleBold'}
+				editor={editor}
+				content={<FaBold />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={'italic'}
+				editorFunc={'toggleItalic'}
+				editor={editor}
+				content={<FaItalic />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={'underline'}
+				editorFunc={'toggleUnderline'}
+				editor={editor}
+				content={<FaUnderline />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={'strike'}
+				editorFunc={'toggleStrike'}
+				editor={editor}
+				content={<FaStrikethrough />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={'bulletList'}
+				editorFunc={'toggleBulletList'}
+				editor={editor}
+				content={<FaListUl />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={'orderedList'}
+				editorFunc={'toggleOrderedList'}
+				editor={editor}
+				content={<FaListOl />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={{ textAlign: 'right' }}
+				editorFunc={'setTextAlign'}
+				editorFuncArg={'right'}
+				editor={editor}
+				content={<FaAlignRight />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={{ textAlign: 'center' }}
+				editorFunc={'setTextAlign'}
+				editorFuncArg={'center'}
+				editor={editor}
+				content={<FaAlignCenter />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={{ textAlign: 'left' }}
+				editorFunc={'setTextAlign'}
+				editorFuncArg={'left'}
+				editor={editor}
+				content={<FaAlignLeft />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={{ textAlign: 'justify' }}
+				editorFunc={'setTextAlign'}
+				editorFuncArg={'justify'}
+				editor={editor}
+				content={<FaAlignJustify />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={{ dir: 'rtl' }}
+				editorFunc={'setTextDirection'}
+				editorFuncArg={'rtl'}
+				editor={editor}
+				content={<MdOutlineFormatTextdirectionRToL />}
+			/>
+			<MenuBarButton
+				className='syntax-button'
+				isActiveArg={{ dir: 'ltr' }}
+				editorFunc={'setTextDirection'}
+				editorFuncArg={'ltr'}
+				editor={editor}
+				content={<MdFormatTextdirectionLToR />}
+			/>
+			<MenuBarSelect editor={editor} />
 		</div>
 	)
 }
