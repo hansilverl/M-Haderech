@@ -48,16 +48,12 @@ const ElementsEditor = (props) => {
 	}
 
 	const deleteElement = (element) => {
-		console.log('deleteElement', element)
 		const resourcePath = element.resourcePath
 		if (resourcePath && resourcePath !== '') deleteObjectByFilePath(resourcePath)
 
-		console.log(elements)
 		const index = elements.findIndex((elem) => {
-			console.log(elem.id, element.id)
 			return elem.id === element.id
 		})
-		console.log('index', index)
 		if (index < 0) return
 
 		const newElements = [...elements]
@@ -90,10 +86,6 @@ const ElementsEditor = (props) => {
 		setDragging(false)
 		setElements(newElements)
 	}
-
-	useEffect(() => {
-		console.log(elements)
-	}, [elements])
 
 	return (
 		<div className='element-editors-container'>

@@ -14,7 +14,6 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 }
 
 const Post = ({ article }) => {
-	// console.log("article: ",article)
 	const { id, title, datePublished, description, elements, articleType } = article
 	const navigate = useNavigate()
 

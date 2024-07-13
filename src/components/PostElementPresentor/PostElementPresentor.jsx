@@ -78,7 +78,6 @@ const ElementPicker = ({ element }) => {
 }
 
 const PostElementPresentor = ({ element }) => {
-	console.log(element)
 	return (
 		<div className='post-element-presentor'>
 			<ElementPicker element={element} />

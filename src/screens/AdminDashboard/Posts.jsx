@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Posts.css';
 import PostAdmin from '../../components/PostAdmin/PostAdmin';
 import usePostsGet, { queryGetAllPostsAdmin } from '../../hooks/usePostsGet';
@@ -6,21 +6,20 @@ import usePostCreate from '../../hooks/usePostCreate';
 import { useNavigate } from 'react-router-dom';
 
 const Posts = () => {
-	const query = queryGetAllPostsAdmin(20);
-	console.log(query)
-	const { postsGet, loadingGet, errorGet, postsGetHandler } = usePostsGet(query);
+	const query = useRef(queryGetAllPostsAdmin(20))
+	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(query.current)
 	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false);
-	const { postCreateID, postCreateHandler } = usePostCreate();
-	const [needToReload, setNeedToReload] = useState(true);
+	const { postCreateID, startCreate } = usePostCreate();
+	const [needToReload, setNeedToReload] = useState(false);
 	const navigate = useNavigate();
 
 	const addPostHandler = async (e) => {
 		setCreateButtonDisabled(true);
-		await postCreateHandler();
+		startCreate()
 	};
 
 	useEffect(() => {
-		if (needToReload) postsGetHandler(20);
+		if (needToReload) reloadGet()
 		setNeedToReload(false);
 	}, [needToReload]);
 

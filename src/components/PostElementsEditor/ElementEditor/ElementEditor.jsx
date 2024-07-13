@@ -40,6 +40,8 @@ const ElementEditor = (props) => {
 	})
 
 	const autoSaveTimeout = useRef(null)
+
+	const firstRenderRef = useRef(true)
 	const [elem, setElement] = useState(element)
 	const [type, setType] = useState(elem.type)
 	const [content, setContent] = useState(elem.content)
@@ -58,6 +60,10 @@ const ElementEditor = (props) => {
 	}
 
 	useEffect(() => {
+		if(firstRenderRef.current){
+			firstRenderRef.current = false
+			return
+		}
 		const onUpdateElement = () => {
 			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 			autoSaveTimeout.current = null
@@ -79,7 +85,7 @@ const ElementEditor = (props) => {
 	}, [type, content, resourcePath, displayEditor])
 
 	useEffect(() => {
-		updateElement(elem)
+		if (elem != element) updateElement(elem)
 	}, [elem])
 
 	const style = {
