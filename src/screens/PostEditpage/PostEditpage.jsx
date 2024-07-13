@@ -13,8 +13,8 @@ import usePostDelete from '../../hooks/usePostDelete'
 import './PostEditpage.css'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
 const PostEditPageComp = ({ postID, post }) => {
-	const { loadingUpdate, postUpdateHandler } = usePostUpdate(postID)
-	const { postDelete, loadingDelete, postDeleteHandler } = usePostDelete(postID)
+	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
+	const { postDelete, loadingDelete, startDelete } = usePostDelete(postID)
 
 	const setSaveTimeout = useRef(null)
 	const [articleType, setPostType] = useState(post.articleType ? post.articleType : 'article')
@@ -44,14 +44,13 @@ const PostEditPageComp = ({ postID, post }) => {
 		return newPost
 	}
 
-	const handleSave = async () => {
+	const handleSave = () => {
+		console.log('handleSave');
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = null
-
 		const postAdditions = getNewPost()
-		await postUpdateHandler(postAdditions)
-		setSaveButtonText('נשמר בהצלחה')
-		setTimeout(() => setSaveButtonText('שמור'), 3000)
+		startUpdate(postAdditions)
+		setSaveButtonText('שומר')
 	}
 
 	const togglePublished = async () => {
@@ -64,7 +63,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	const handleDelete = async () => {
 		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את הפוסט?')
 		if (confirmDelete) {
-			await postDeleteHandler(postID)
+			startDelete()
 		}
 	}
 
@@ -73,18 +72,29 @@ const PostEditPageComp = ({ postID, post }) => {
 	}
 
 	useEffect(() => {
+		if (elements == post.elements ) return
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
-		}, 300)
+		}, 500)
 	}, [elements, published])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
 	}, [postDelete, navigate])
 
+	useEffect(() => {
+		if (loadingUpdate ) return
+		if (postUpdate) {
+			setSaveButtonText('נשמר בהצלחה')
+			setTimeout(() => {
+				setSaveButtonText('שמור')
+			}, 3000)
+		}
+	}, [postUpdate, loadingUpdate])
+
 	return (
-		<div  className='edit-post-page main-flex-col'>
+		<div className='edit-post-page main-flex-col'>
 			{!post ? (
 				<h1>הפוסט לא נמצא</h1>
 			) : (
@@ -117,7 +127,7 @@ const PostEditPageComp = ({ postID, post }) => {
 							optionNames={['פוסט', 'כנס']}
 						/>
 					</div>
-					<ElementsEditor id='elements-editor' elements={elements} setElements={setElements} />
+					<ElementsEditor elements={elements} setElements={setElements} />
 					<div className='main-flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>
 							{saveButtonText}
@@ -146,15 +156,15 @@ const PostEditPageComp = ({ postID, post }) => {
 
 const PostEditPage = () => {
 	const { id: postID } = useParams()
-	const { postsGet, loadingGet, errorGet, postsGetHandler } = usePostsGet(postID)
+	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(postID)
 	const [refresh, setRefresh] = useState(false)
 
 	useEffect(() => {
 		if (refresh) {
-			postsGetHandler()
+			reloadGet()
 			setRefresh(false)
 		}
-	}, [refresh, postsGetHandler])
+	}, [refresh, reloadGet])
 
 	return loadingGet ? (
 		<h2>טוען...</h2>

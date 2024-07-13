@@ -14,7 +14,6 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 }
 
 const Post = ({ article }) => {
-	// console.log("article: ",article)
 	const { id, title, datePublished, description, elements, articleType } = article
 	const navigate = useNavigate()
 
@@ -42,7 +41,7 @@ const Post = ({ article }) => {
 	}
 
 	return !id ? null : (
-		<div className='post'>
+		<div className='detailed-post'>
 			<div className={`post-type-bubble ${articleType === 'post' ? 'posttype' : 'convention'}`}>
 				{articleType === 'post' ? 'פוסט' : 'כנס'}
 			</div>

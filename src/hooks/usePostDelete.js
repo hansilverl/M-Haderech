@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import { db, storage } from '../firebase/config'
+import { useState, useEffect } from 'react'
+import { db } from '../firebase/config'
 import { doc, deleteDoc, collection } from 'firebase/firestore'
-import { ref, deleteObject } from 'firebase/storage'
 
 import { deleteObjectByFilePath } from './useResourceManagement'
 import { postsFetchByQuery } from './usePostsGet'
@@ -33,8 +32,14 @@ const usePostDelete = (documentID) => {
 	const [postDelete, setPostDelete] = useState(null)
 	const [loadingDelete, setLoadingDelete] = useState(false)
 	const [errorDelete, setErrorDelete] = useState(null)
+	const [load, setLoad] = useState(false)
+
+	const startDelete = () => {
+		setLoad(true)
+	}
 
 	const postDeleteHandler = async () => {
+		if(loadingDelete) return
 		setLoadingDelete(true)
 		try {
 			const p = await postDeleteFunction(documentID)
@@ -48,7 +53,14 @@ const usePostDelete = (documentID) => {
 		return postDelete
 	}
 
-	return { postDelete, loadingDelete, errorDelete, postDeleteHandler }
+	useEffect(() => {
+		if (load) {
+			setLoad(false)
+			postDeleteHandler()
+		}
+	}, [load])
+
+	return { postDelete, loadingDelete, errorDelete, startDelete }
 }
 
 export default usePostDelete

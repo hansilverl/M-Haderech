@@ -5,7 +5,7 @@ import PdfViewer from '../../components/PdfViewer/PdfViewer'
 import pdfIcon from '../../assets/pdf-file.png'
 import usePostsGet from '../../hooks/usePostsGet'
 import './PostDetails.css'
-import ElementPresentor from '../../components/Posts/ElementPresentor/ElementPresentor'
+import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -48,7 +48,7 @@ const PostDetails = () => {
 					</p>
 					<div>
 						{postsGet?.elements.map((element, index) => (
-							<ElementPresentor key={`element-${index}`} element={element} />
+							<PostElementPresentor key={`element-${index}`} element={element} />
 						))}
 					</div>
 				</>

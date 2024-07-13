@@ -1,8 +1,10 @@
+import './PostElementPresentor.css'
+
 import React from 'react'
 import { pdfjs } from 'react-pdf'
 
-import PdfViewer from '../../PdfViewer/PdfViewer'
-import pdfIcon from '../../../assets/pdf-file.png'
+import PdfViewer from '../PdfViewer/PdfViewer'
+import pdfIcon from '../../assets/pdf-file.png'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -24,7 +26,7 @@ const TextElementPresentor = (props) => {
 
 const ImageElementPresentor = (props) => {
 	const { resourceUrl } = props
-	return <img className='element-image' src={resourceUrl} alt={'לא נמצאה תמונה'} />
+	return <img src={resourceUrl} alt={'לא נמצאה תמונה'} />
 }
 
 const VideoElementPresentor = (props) => {
@@ -38,13 +40,14 @@ const AudioElementPresentor = (props) => {
 }
 
 const PdfElementPresentor = (props) => {
-	const { resourceUrl, last } = props
+	const { resourceUrl } = props
+
 	return (
 		<>
 			<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
 				<img src={pdfIcon} alt='Open PDF' />
 			</button>
-			{last && <PdfViewer pdfFile={resourceUrl} />}
+			<PdfViewer pdfFile={resourceUrl} />
 		</>
 	)
 }
@@ -55,8 +58,7 @@ const CompressedElementPresentor = (props) => {
 }
 
 const ElementPicker = ({ element }) => {
-	const { type, content, resourceUrl , last} = element
-	console.log(element)
+	const { type, content, resourceUrl } = element
 	switch (type) {
 		case 'text':
 			return <TextElementPresentor content={content} />
@@ -67,7 +69,7 @@ const ElementPicker = ({ element }) => {
 		case 'audio':
 			return <AudioElementPresentor resourceUrl={resourceUrl} />
 		case 'pdf':
-			return <PdfElementPresentor resourceUrl={resourceUrl} last={last} />
+			return <PdfElementPresentor resourceUrl={resourceUrl} />
 		case 'compressed':
 			return <CompressedElementPresentor resourceUrl={resourceUrl} />
 		default:
@@ -75,11 +77,11 @@ const ElementPicker = ({ element }) => {
 	}
 }
 
-const ElementPresentor = ({ element }) => {
+const PostElementPresentor = ({ element }) => {
 	return (
-		<div>
+		<div className='post-element-presentor'>
 			<ElementPicker element={element} />
 		</div>
 	)
 }
-export default ElementPresentor
+export default PostElementPresentor

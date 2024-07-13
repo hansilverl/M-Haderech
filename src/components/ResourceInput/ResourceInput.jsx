@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useResourceManagement, { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
 import './ResourceInput.css'
-import CustomFileInput from './CustomInput/CustomFileInput';
+import CustomFileInput from './CustomInput/CustomFileInput'
 
 const ResourceInput = (props) => {
 	const { path, setPath, type, title } = props
@@ -38,7 +38,7 @@ const ResourceInput = (props) => {
 	}, [resourcePath])
 
 	return (
-		<div className='main-flex-row resource-input'>
+		<div className='resource-input-container'>
 			<h3 className='title'>קובץ {title}:</h3>
 			{!errorResourcePath ? null : (
 				<h2 className='status-message error'>שגיאה: {errorResourcePath.toString()}</h2>
