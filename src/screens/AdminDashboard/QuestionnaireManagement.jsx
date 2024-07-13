@@ -1,11 +1,10 @@
-// src/screens/AdminDashboard/QuestionnaireManagement.jsx
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc, deleteField } from 'firebase/firestore';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './QuestionnaireManagement.css';
 import Modal from 'react-modal';
 import { FaTrashAlt, FaEdit, FaTimes } from 'react-icons/fa';
-
 
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
@@ -37,15 +36,16 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             id: questionDoc.id,
             question: data.q,
             required: data.required || false,
+            order: data.order || 0,
             answers: Object.entries(data)
-              .filter(([key, value]) => key !== 'q' && key !== 'required')
+              .filter(([key, value]) => key !== 'q' && key !== 'required' && key !== 'order')
               .map(([key, value]) => ({
                 id: key,
                 text: value,
                 score: parseInt(key, 10),
               })),
           };
-        });
+        }).sort((a, b) => a.order - b.order); // Sort questions by order
         setQuestions(questionList);
         setLoading(false);
       } catch (err) {
@@ -241,185 +241,217 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     setNewQuestionModalIsOpen(true);
   };
 
-  const confirmAddQuestion = async () => {
-    try {
-      const questionCollection = collection(db, 'Questionnaire');
-      const questionSnapshot = await getDocs(questionCollection);
-      const highestQuestionNumber = questionSnapshot.docs.reduce((max, doc) => {
-        const docId = doc.id;
-        const questionNumber = parseInt(docId.replace('q', ''), 10);
-        return questionNumber > max ? questionNumber : max;
-      }, 0);
-      const newQuestionNumber = highestQuestionNumber + 1;
-      const newQuestionDocId = `q${newQuestionNumber}`;
-      const newQuestionDocRef = doc(db, 'Questionnaire', newQuestionDocId);
-      await setDoc(newQuestionDocRef, { q: newQuestionText, required: isRequired });
-      const newQuestion = {
-        id: newQuestionDocId,
-        question: newQuestionText,
-        required: isRequired,
-        answers: []
-      };
-      setQuestions([...questions, newQuestion]);
-      setNewQuestionText('');
-      setIsRequired(false);
-      setNewQuestionModalIsOpen(false);
-      alert('השאלה נוספה בהצלחה.');
-    } catch (error) {
-      handleFirestoreError(error);
+  const closeNewQuestionModal = () => {
+    setNewQuestionModalIsOpen(false);
+    setNewQuestionText('');
+    setIsRequired(false);
+  };
+
+  const saveNewQuestion = async () => {
+    if (newQuestionText) {
+      try {
+        const questionCollection = collection(db, 'Questionnaire');
+        const questionDocRef = doc(questionCollection); // Generate a new document reference
+        await setDoc(questionDocRef, { q: newQuestionText, required: isRequired });
+        const newQuestion = {
+          id: questionDocRef.id,
+          question: newQuestionText,
+          required: isRequired,
+          answers: []
+        };
+        setQuestions([...questions, newQuestion]);
+        setNewQuestionText('');
+        setIsRequired(false);
+        setNewQuestionModalIsOpen(false);
+        alert('השאלה נוספה בהצלחה.');
+      } catch (error) {
+        handleFirestoreError(error);
+      }
     }
   };
 
-  if (loading) return <p>טוען...</p>;
-  if (error) return <p>שגיאה: {error}</p>;
+  const onDragEnd = async (result) => {
+    if (!result.destination) return;
+    const reorderedQuestions = Array.from(questions);
+    const [movedQuestion] = reorderedQuestions.splice(result.source.index, 1);
+    reorderedQuestions.splice(result.destination.index, 0, movedQuestion);
+  
+    // Compare the current order with the new order
+    const isOrderChanged = JSON.stringify(questions.map(q => q.id)) !== JSON.stringify(reorderedQuestions.map(q => q.id));
+  
+    // Update the order in Firestore and display the notification if the order is changed
+    if (isOrderChanged) {
+      try {
+        for (let i = 0; i < reorderedQuestions.length; i++) {
+          const questionDocRef = doc(db, 'Questionnaire', reorderedQuestions[i].id);
+          await updateDoc(questionDocRef, { order: i });
+        }
+        setQuestions(reorderedQuestions);
+        alert('סדר השאלות עודכן בהצלחה.');
+      } catch (error) {
+        handleFirestoreError(error);
+      }
+    }
+  };
+  
 
   return (
     <div className="questionnaire-management">
-      <button onClick={handleAddQuestion}>הוסף שאלה חדשה</button>
-      <div className="spacer"></div>
-      <div className="question-list">
-        {questions.map(question => (
-          <div key={question.id} className="question-item">
-            <h2>{question.question}</h2>
-            <div className="actions">
-              <FaTrashAlt
-                className="icon trash-icon"
-                title="מחק שאלה"
-                onClick={() => handleDeleteQuestion(question.id)}
-              />
-            </div>
-            <button onClick={() => openModal(question)}>עריכה</button>
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <p>טוען שאלות...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="questions">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {questions.map((question, index) => (
+                  <Draggable key={question.id} draggableId={question.id} index={index}>
+                    {(provided) => (
+                      <div
+                        className="question"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <h3>
+                          {index + 1}. {question.question} (חובה: {question.required ? 'כן' : 'לא'})
+                          <button onClick={() => handleEditQuestion(question)}><FaEdit /></button>
+                          <button onClick={() => handleDeleteQuestion(question.id)}><FaTrashAlt /></button>
+                        </h3>
+                        <ul>
+                          {question.answers.map(answer => (
+                            <li key={answer.id}>
+                              תשובה: {answer.text}, ניקוד: {answer.score}
+                              <button onClick={() => handleEditAnswer(question, answer)}><FaEdit /></button>
+                              <button onClick={() => handleDeleteAnswer(question.id, answer.id)}><FaTrashAlt /></button>
+                            </li>
+                          ))}
+                        </ul>
+                        <button onClick={() => openModal(question)}>הוסף תשובה</button>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )}
 
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        {selectedQuestion && (
-          <div className="modal-content">
-            <div className="question-header">
-              <h2>{selectedQuestion.question}</h2>
-              <FaEdit
-                className="icon"
-                title="ערוך שאלה"
-                onClick={() => handleEditQuestion(selectedQuestion)}
-              />
-          <FaTimes className="close-button" title="סגור" onClick={closeModal} />
-            </div>
-            <ul>
-              {(selectedQuestion.answers || []).map(answer => (
-                <li key={answer.id}>
-                  {answer.text} (ניקוד: {answer.score})
-                  <div className="actions">
-                    <button
-                      className="button edit-button"
-                      title="ערוך תשובה"
-                      onClick={() => handleEditAnswer(selectedQuestion, answer)}
-                    >
-                      ערוך
-                    </button>
-                    <button
-                      className="button delete-button"
-                      title="מחק תשובה"
-                      onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}
-                    >
-                      מחק
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <h3>הוסף תשובה חדשה</h3>
+      <button onClick={handleAddQuestion}>הוסף שאלה חדשה</button>
+
+      {/* Modal for Adding Answer */}
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Add Answer">
+        <h2>הוסף תשובה לשאלה</h2>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleSaveAnswer(selectedQuestion.id);
+        }}>
+          <div>
+            <label htmlFor="answerText">תשובה:</label>
             <input
               type="text"
-              placeholder="טקסט התשובה"
+              id="answerText"
               value={newAnswerText}
               onChange={(e) => setNewAnswerText(e.target.value)}
             />
+          </div>
+          <div>
+            <label htmlFor="answerScore">ניקוד:</label>
             <input
               type="number"
-              placeholder="ניקוד התשובה"
+              id="answerScore"
               value={newAnswerScore}
               onChange={(e) => setNewAnswerScore(e.target.value)}
             />
-            <div className="modal-actions">
-              <button onClick={() => handleSaveAnswer(selectedQuestion.id)}>שמור תשובה</button>
-              <button onClick={closeModal}>סגור</button>
-            </div>
           </div>
-        )}
+          <button type="submit">שמור</button>
+          <button type="button" onClick={closeModal}><FaTimes /></button>
+        </form>
       </Modal>
 
-      <Modal isOpen={editModalIsOpen} onRequestClose={() => setEditModalIsOpen(false)}>
-        <div className="modal-content">
-          <h2>ערוך פרטים</h2>
-          <input
-            type="text"
-            placeholder="טקסט"
-            value={currentText}
-            onChange={(e) => setCurrentText(e.target.value)}
-          />
-          {selectedAnswer && (
+      {/* Modal for Editing Question or Answer */}
+      <Modal isOpen={editModalIsOpen} onRequestClose={() => setEditModalIsOpen(false)} contentLabel="Edit">
+        <h2>{selectedAnswer ? 'ערוך תשובה' : 'ערוך שאלה'}</h2>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          selectedAnswer ? confirmEditAnswer() : confirmEditQuestion();
+        }}>
+          <div>
+            <label htmlFor="editText">{selectedAnswer ? 'תשובה:' : 'שאלה:'}</label>
             <input
-              type="number"
-              placeholder="ניקוד"
-              value={currentScore}
-              onChange={(e) => setCurrentScore(e.target.value)}
+              type="text"
+              id="editText"
+              value={currentText}
+              onChange={(e) => setCurrentText(e.target.value)}
             />
-          )}
-          {selectedQuestion && !selectedAnswer && (
-            <div className="checkbox-container">
-              <label>
-                האם השאלה נדרשת
-                <input
-                  type="checkbox"
-                  checked={isRequired}
-                  onChange={(e) => setIsRequired(e.target.checked)}
-                />
-              </label>
+          </div>
+          {selectedAnswer && (
+            <div>
+              <label htmlFor="editScore">ניקוד:</label>
+              <input
+                type="number"
+                id="editScore"
+                value={currentScore}
+                onChange={(e) => setCurrentScore(e.target.value)}
+              />
             </div>
           )}
-          <div className="modal-actions">
-            <button onClick={selectedAnswer ? confirmEditAnswer : confirmEditQuestion}>שמור</button>
-            <button onClick={() => setEditModalIsOpen(false)}>סגור</button>
-          </div>
-        </div>
-      </Modal>
-
-      <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)}>
-        <div className="modal-content">
-          <h2>אישור מחיקה</h2>
-          <p>האם אתה בטוח שברצונך למחוק?</p>
-          <div className="modal-actions">
-            <button onClick={selectedAnswer ? confirmDeleteAnswer : confirmDeleteQuestion}>מחק</button>
-            <button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
-          </div>
-        </div>
-      </Modal>
-
-      <Modal isOpen={newQuestionModalIsOpen} onRequestClose={() => setNewQuestionModalIsOpen(false)}>
-        <div className="modal-content">
-          <h2>הוסף שאלה חדשה</h2>
-          <input
-            type="text"
-            placeholder="טקסט השאלה"
-            value={newQuestionText}
-            onChange={(e) => setNewQuestionText(e.target.value)}
-          />
-          <div className="checkbox-container">
-            <label>
-              האם השאלה נדרשת
+          {!selectedAnswer && (
+            <div>
+              <label htmlFor="isRequired">חובה:</label>
               <input
                 type="checkbox"
+                id="isRequired"
                 checked={isRequired}
                 onChange={(e) => setIsRequired(e.target.checked)}
               />
-            </label>
+            </div>
+          )}
+          <button type="submit">שמור</button>
+          <button type="button" onClick={() => setEditModalIsOpen(false)}><FaTimes /></button>
+        </form>
+      </Modal>
+
+      {/* Modal for Confirm Delete */}
+      <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
+        <h2>אישור מחיקה</h2>
+        <p>האם אתה בטוח שברצונך למחוק?</p>
+        <button onClick={selectedAnswer ? confirmDeleteAnswer : confirmDeleteQuestion}>מחק</button>
+        <button onClick={() => setDeleteConfirmIsOpen(false)}><FaTimes /></button>
+      </Modal>
+
+      {/* Modal for Adding New Question */}
+      <Modal isOpen={newQuestionModalIsOpen} onRequestClose={closeNewQuestionModal} contentLabel="Add New Question">
+        <h2>הוסף שאלה חדשה</h2>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          saveNewQuestion();
+        }}>
+          <div>
+            <label htmlFor="newQuestionText">שאלה:</label>
+            <input
+              type="text"
+              id="newQuestionText"
+              value={newQuestionText}
+              onChange={(e) => setNewQuestionText(e.target.value)}
+            />
           </div>
-          <div className="modal-actions">
-            <button onClick={confirmAddQuestion}>שמור</button>
-            <button onClick={() => setNewQuestionModalIsOpen(false)}>סגור</button>
+          <div>
+            <label htmlFor="isRequired">חובה:</label>
+            <input
+              type="checkbox"
+              id="isRequired"
+              checked={isRequired}
+              onChange={(e) => setIsRequired(e.target.checked)}
+            />
           </div>
-        </div>
+          <button type="submit">שמור</button>
+          <button type="button" onClick={closeNewQuestionModal}><FaTimes /></button>
+        </form>
       </Modal>
     </div>
   );
