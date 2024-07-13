@@ -1,6 +1,6 @@
 /* Base styles for the post details container */
 .post-details {
-  max-width: 800px;
+  width:90%;
   margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;

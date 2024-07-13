@@ -1,6 +1,6 @@
 import './PostElementPresentor.css'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { pdfjs } from 'react-pdf'
 
 import PdfViewer from '../PdfViewer/PdfViewer'
@@ -18,7 +18,7 @@ const handleOpenPdf = (resourcePath) => {
 const TextElementPresentor = (props) => {
 	const { content } = props
 	return content ? (
-		<div className='tiptap' dangerouslySetInnerHTML={{ __html: content }} />
+		<div className='text-presentor tiptap' dangerouslySetInnerHTML={{ __html: content }} />
 	) : (
 		<h3>לא נמצא טקסט</h3>
 	)
@@ -42,13 +42,18 @@ const AudioElementPresentor = (props) => {
 const PdfElementPresentor = (props) => {
 	const { resourceUrl } = props
 
+	const [presentPdf, setPresentPdf] = useState(false)
 	return (
-		<>
-			<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
-				<img src={pdfIcon} alt='Open PDF' />
-			</button>
-			<PdfViewer pdfFile={resourceUrl} />
-		</>
+		<div>
+			<div className='pdf-container'>
+				<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
+					פתח קובץ
+					<img src={pdfIcon} alt='Open PDF' />
+				</button>
+				<button onClick={() => setPresentPdf(!presentPdf)}>הצג קובץ</button>
+			</div>
+			{presentPdf && <PdfViewer pdfFile={resourceUrl} />}
+		</div>
 	)
 }
 

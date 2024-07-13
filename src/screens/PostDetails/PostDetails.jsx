@@ -1,16 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { pdfjs } from 'react-pdf'
-import PdfViewer from '../../components/PdfViewer/PdfViewer'
-import pdfIcon from '../../assets/pdf-file.png'
 import usePostsGet from '../../hooks/usePostsGet'
 import './PostDetails.css'
 import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-	'pdfjs-dist/build/pdf.worker.min.mjs',
-	import.meta.url
-).toString()
 
 const formatDate = (timestamp) => {
 	if (!timestamp) return ''
@@ -24,10 +16,6 @@ const formatDate = (timestamp) => {
 const PostDetails = () => {
 	const { id } = useParams()
 	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
-
-	const handleOpenPdf = () => {
-		window.open(postsGet.contentUrl, '_blank')
-	}
 
 	return (
 		<div className='post-details'>
