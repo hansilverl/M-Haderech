@@ -11,9 +11,10 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
 import TextDirection from 'tiptap-text-direction'
+import Link from '@tiptap/extension-link'
 import TiptapFontSize from './TipTapFontSize'
 
-import TextEditorToolBar from './MenuBar/TextEditorToolBar'
+import TextEditorToolBar from './EditorToolBar/TextEditorToolBar'
 
 const TextEditor = ({ content, setContent }) => {
 	const extensions = [
@@ -36,6 +37,14 @@ const TextEditor = ({ content, setContent }) => {
 			orderedList: {
 				keepMarks: true,
 				keepAttributes: false,
+			},
+		}),
+		Link.configure({
+			openOnClick: true, // Links will open on click
+			linkOnPaste: true, // Automatically detect and convert URLs pasted into the editor to links
+			HTMLAttributes: {
+				target: '_blank', // Open links in a new tab
+				rel: 'noopener noreferrer',
 			},
 		}),
 		TextStyle.extend(),

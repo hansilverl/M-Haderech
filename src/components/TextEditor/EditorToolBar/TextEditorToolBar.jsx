@@ -17,10 +17,12 @@ import {
 	FaAlignJustify,
 } from 'react-icons/fa'
 
+import { FaLink, FaUnlink } from 'react-icons/fa'
+
 import { MdOutlineFormatTextdirectionRToL, MdFormatTextdirectionLToR } from 'react-icons/md'
 
-import MenuBarButton from './MenuBar-Button/MenuBarButton'
-import MenuBarSelectSize from './MenuBar-Select/MenuBarSelect'
+import ToolBarButton from './EditorToolBarButton/ToolBarButton'
+import MenuBarSelectSize from './EditorToolBarSelect/MenuBarSelect'
 
 const TextEditorToolBar = (props) => {
 	const { editor } = props
@@ -32,61 +34,61 @@ const TextEditorToolBar = (props) => {
 	return (
 		<div className='text-editor-menu-bar' editor={editor}>
 			<div className='sub-menu-bar'>
-				<MenuBarButton
+				<ToolBarButton
 					className='use-button'
 					editorFunc={'undo'}
 					editor={editor}
 					content={<FaRedo />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='use-button'
 					editorFunc={'redo'}
 					editor={editor}
 					content={<FaUndo />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg='bold'
 					editorFunc={'toggleBold'}
 					editor={editor}
 					content={<FaBold />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={'italic'}
 					editorFunc={'toggleItalic'}
 					editor={editor}
 					content={<FaItalic />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={'underline'}
 					editorFunc={'toggleUnderline'}
 					editor={editor}
 					content={<FaUnderline />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={'strike'}
 					editorFunc={'toggleStrike'}
 					editor={editor}
 					content={<FaStrikethrough />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={'bulletList'}
 					editorFunc={'toggleBulletList'}
 					editor={editor}
 					content={<FaListUl />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={'orderedList'}
 					editorFunc={'toggleOrderedList'}
 					editor={editor}
 					content={<FaListOl />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={{ textAlign: 'right' }}
 					editorFunc={'setTextAlign'}
@@ -94,7 +96,7 @@ const TextEditorToolBar = (props) => {
 					editor={editor}
 					content={<FaAlignRight />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={{ textAlign: 'center' }}
 					editorFunc={'setTextAlign'}
@@ -102,7 +104,7 @@ const TextEditorToolBar = (props) => {
 					editor={editor}
 					content={<FaAlignCenter />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={{ textAlign: 'left' }}
 					editorFunc={'setTextAlign'}
@@ -110,7 +112,7 @@ const TextEditorToolBar = (props) => {
 					editor={editor}
 					content={<FaAlignLeft />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={{ textAlign: 'justify' }}
 					editorFunc={'setTextAlign'}
@@ -118,7 +120,7 @@ const TextEditorToolBar = (props) => {
 					editor={editor}
 					content={<FaAlignJustify />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={{ dir: 'rtl' }}
 					editorFunc={'setTextDirection'}
@@ -126,7 +128,7 @@ const TextEditorToolBar = (props) => {
 					editor={editor}
 					content={<MdOutlineFormatTextdirectionRToL />}
 				/>
-				<MenuBarButton
+				<ToolBarButton
 					className='syntax-button'
 					isActiveArg={{ dir: 'ltr' }}
 					editorFunc={'setTextDirection'}
@@ -136,6 +138,14 @@ const TextEditorToolBar = (props) => {
 				/>
 			</div>
 			<div className='sub-menu-bar'>
+				<ToolBarButton
+					className='syntax-button'
+					isActiveArg={{ dir: 'ltr' }}
+					editorFunc={['extendMarkRange', setLink]}
+					editorFuncArg={'ltr'}
+					editor={editor}
+					content={<MdFormatTextdirectionLToR />}
+				/>
 				<MenuBarSelectSize editor={editor} />
 			</div>
 		</div>
