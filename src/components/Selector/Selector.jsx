@@ -20,7 +20,7 @@ const Selector = (props) => {
 				id={id}
 				value={currentValue}
 				onChange={(e) => selectFunction(e.target.value)}
-				className='post-type-select'
+				className='selector-select-element'
 				disabled={disabled}>
 				{optionValues.map((optionValue, index) => (
 					<option key={index} value={optionValue}>

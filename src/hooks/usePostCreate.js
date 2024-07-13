@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
 import { addDoc, serverTimestamp, collection } from 'firebase/firestore'
 
@@ -26,8 +26,14 @@ const usePostCreate = () => {
 	const [postCreateID, setPostCreateID] = useState(null)
 	const [loadingCreate, setLoadingCreate] = useState(false)
 	const [errorCreate, setErrorCreate] = useState(null)
+	const [load, setLoad] = useState(false)
+
+	const startCreate = () => {
+		setLoad(true)
+	}
 
 	const postCreateHandler = async () => {
+		if (loadingCreate) return
 		setLoadingCreate(true)
 		setErrorCreate(null)
 		try {
@@ -41,8 +47,14 @@ const usePostCreate = () => {
 		setLoadingCreate(false)
 	}
 
-	return { postCreateID, loadingCreate, errorCreate, postCreateHandler }
+	useEffect(() => {
+		if (load) {
+			setLoad(false)
+			postCreateHandler()
+		}
+	}, [load])
+
+	return { postCreateID, loadingCreate, errorCreate, startCreate }
 }
 
 export default usePostCreate
-

@@ -1,5 +1,4 @@
 .draggable-post-element {
-	user-select: none;
 	padding: 0px;
 	margin: 0 0 0px 0;
 	background-color: #fff;
@@ -7,22 +6,40 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin : 5px;
+	width: 100%;
 }
 
 .drag-handle {
   cursor: grab;
-  
   padding: 2px;
 }
 
+.element-editor-container {
+	width: 100%;
+	justify-content: center;
+}
+
 .element-editor-header {
-	border: #333 solid 1px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0px;
+	padding: 10px;
+	border: #bcbcbc solid 1px;
 	border-radius: 5px;
-	background-color: aqua;
+	background-color: #c2c2c2;
+}
+
+.element-editor-header input {
+	width: fit-content;
 }
 
 .element-editor-container {
 	border: #333 solid 1px;
 	border-radius: 5px;
-	background-color: aquamarine;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 }

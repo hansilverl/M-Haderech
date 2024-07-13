@@ -10,14 +10,12 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 	const year = now.getFullYear()
 	const month = (now.getMonth() + 1).toString().padStart(2, '0')
 	const day = now.getDate().toString().padStart(2, '0')
-	
-	return `${year}.${month}.${day}`
+	return `${day}/${month}/${year}`
 }
 
 const Post = ({ article }) => {
-	const { id, title, datePublished, description, elements } = article
+	const { id, title, datePublished, description, elements, articleType } = article
 	const navigate = useNavigate()
-	// const [hovered, setHovered] = useState(false);
 
 	const [imageUrl, setImageUrl] = useState(null)
 
@@ -31,7 +29,7 @@ const Post = ({ article }) => {
 	}, [imagePath])
 
 	const handleViewPost = () => {
-		navigate(`/posts/${id}`) // Navega a la página de detalles del post
+		navigate(`/posts/${id}`) // Navigate to the post details page
 	}
 
 	const truncateDescription = (text, wordLimit) => {
@@ -43,7 +41,10 @@ const Post = ({ article }) => {
 	}
 
 	return !id ? null : (
-		<div className='post'>
+		<div className='detailed-post'>
+			<div className={`post-type-bubble ${articleType === 'post' ? 'posttype' : 'convention'}`}>
+				{articleType === 'post' ? 'פוסט' : 'כנס'}
+			</div>
 			{!imageUrl ? null : <img src={imageUrl} alt={title} className='post-image' />}
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{getDateStringFromTimeStamp(datePublished)}</p>

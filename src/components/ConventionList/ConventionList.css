@@ -1,0 +1,15 @@
+.container {
+    padding: 20px;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .conventions-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  

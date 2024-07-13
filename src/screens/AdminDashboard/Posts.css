@@ -1,15 +1,14 @@
 /* Container for the whole component */
 .container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   margin-right: 300px;
 }
-
 /* Header section */
 .header {
   display: flex;
-  justify-content: center; /* Center the button */
+  justify-content: flex-start;
   margin-bottom: 10px; /* Reduced margin */
 }
 

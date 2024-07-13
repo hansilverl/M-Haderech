@@ -1,4 +1,4 @@
-.post {
+.detailed-post {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1em;
@@ -9,7 +9,28 @@
   background-color: rgb(243, 243, 243);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* This will justify the content and push the button to the bottom */
+  justify-content: space-between;
+  position: relative; /* Add relative positioning for the bubble */
+}
+
+
+.post-type-bubble {
+  position: absolute; /* Position the bubble */
+  top: 8px; /* Adjust as necessary */
+  right: 8px; /* Adjust as necessary */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  margin-bottom: 30px;
+}
+
+.post-type-bubble.posttype {
+  background-color: #413b44; /* Gray color for "post" */
+}
+
+.post-type-bubble.convention {
+  background-color: #a1564d; /* Green color for "convention" */
 }
 
 .post-image {
@@ -22,6 +43,7 @@
 .post-title {
   font-size: 1.5em;
   margin: 0.5em 0;
+  margin-top: 30px;
 }
 
 .post-date {

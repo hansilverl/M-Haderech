@@ -49,10 +49,17 @@ const usePostsGet = (query) => {
 	const [postsGet, setPosts] = useState(null)
 	const [loadingGet, setLoading] = useState(false)
 	const [errorGet, setError] = useState(null)
+	const [load, setLoad] = useState(true)
 
+	const reloadGet = () => {
+		setLoad(true)
+	}
 	const postsGetHandler = async () => {
+		if (loadingGet) return
+		setLoading(true)
+		setLoad(false)
 		try {
-			setLoading(true)
+			if (!query) throw new Error('לא התקבלה שאילתה!')
 			const fetchedPosts = await postsFetchByQuery(query)
 			setPosts(fetchedPosts)
 		} catch (error) {
@@ -63,12 +70,22 @@ const usePostsGet = (query) => {
 	}
 
 	useEffect(() => {
-		if (query) postsGetHandler()
-	}, [])
-	return { postsGet, loadingGet, errorGet, postsGetHandler }
+		if(load) {
+			setLoad(false)
+			postsGetHandler()
+		}
+	}, [load])
+	return { postsGet, loadingGet, errorGet, reloadGet }
 }
 
 const queryGetPublishedPosts = (lim = 3) => {
+	if (lim < 1)
+		return query(
+			collection(db, collectionNames.posts),
+			where('articleType', '==', 'post'),
+			where('published', '==', true),
+			orderBy('datePublished', 'desc')
+		)
 	return query(
 		collection(db, collectionNames.posts),
 		where('articleType', '==', 'post'),
@@ -78,8 +95,15 @@ const queryGetPublishedPosts = (lim = 3) => {
 	)
 }
 const queryGetPublishedConventions = (lim = 3) => {
+	if (lim < 1)
+		return query(
+			collection(db, collectionNames.posts),
+			where('articleType', '==', 'convention'),
+			where('published', '==', true),
+			orderBy('datePublished', 'desc')
+		)
 	return query(
-		collection(db, collectionNames.conventions),
+		collection(db, collectionNames.posts),
 		where('articleType', '==', 'convention'),
 		where('published', '==', true),
 		orderBy('datePublished', 'desc'),
@@ -88,6 +112,7 @@ const queryGetPublishedConventions = (lim = 3) => {
 }
 
 const queryGetAllPostsAdmin = (lim = 3) => {
+	if (lim < 1) return query(collection(db, collectionNames.posts), orderBy('dateAdded', 'desc'))
 	return query(collection(db, collectionNames.posts), orderBy('dateAdded', 'desc'), limit(lim))
 }
 

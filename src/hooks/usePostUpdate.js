@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
 import { doc, setDoc, collection } from 'firebase/firestore'
 
@@ -14,14 +14,20 @@ const usePostUpdate = (documentID) => {
 	const [postUpdate, setPostUpdate] = useState(null)
 	const [loadingUpdate, setLoadingUpdate] = useState(false)
 	const [errorUpdate, setErrorUpdate] = useState(null)
+	const [postToUpdate, setPostToUpdate] = useState(null)
 
-	const postUpdateHandler = async (newPost) => {
-		if(!documentID) return
+	const startUpdate = (newPost) => {
+		setPostToUpdate(newPost)
+	}
+
+	const postUpdateHandler = async () => {
+		if(loadingUpdate) return
 		setLoadingUpdate(true)
 		setErrorUpdate(null)
 		try {
-			if (newPost?.id) delete newPost.id
-			const p = await postUpdateFunction(documentID, newPost)
+			if (postToUpdate?.id) delete postToUpdate.id
+			const p = await postUpdateFunction(documentID, postToUpdate)
+			setPostToUpdate(null)
 			setPostUpdate(p)
 		} catch (error) {
 			console.error('Error updating posts: ', error) // Log error for debugging
@@ -31,7 +37,13 @@ const usePostUpdate = (documentID) => {
 		setLoadingUpdate(false)
 	}
 
-	return { postUpdate, loadingUpdate, errorUpdate, postUpdateHandler }
+	useEffect(() => {
+		if (postToUpdate) {
+			postUpdateHandler()
+		}
+	}, [postToUpdate])
+
+	return { postUpdate, loadingUpdate, errorUpdate, startUpdate }
 }
 
 export default usePostUpdate

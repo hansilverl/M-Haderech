@@ -1,39 +1,43 @@
-.resource-input {
-	width: 100%;
-	margin: 10px 0;
+.resource-input-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
 	padding: 5px;
+	margin: 10px 0;
 	background: #fff;
 	border-radius: 8px;
+	width: fit-content;
 }
 
-.resource-input .title {
+.resource-input-container .title {
 	text-align: right;
 	font-size: 16px;
 }
 
-.resource-input h3 {
+.resource-input-container h3 {
 	color: #333;
 	margin-bottom: 10px;
 }
 
-.resource-input .file-input,
-.resource-input .file-info {
+.resource-input-container .file-input,
+.resource-input-container .file-info {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 }
 
-.resource-input .file-input {
+.resource-input-container .file-input {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
-.resource-input .file-input input[type='file'] {
+.resource-input-container .file-input input[type='file'] {
 	margin-right: 10px; /* Add some space between the input and the button */
 }
 
-.resource-input .upload-button {
+.resource-input-container .upload-button {
 	background-color: #60c879;
 	color: white;
 	border: none;
@@ -43,33 +47,33 @@
 	transition: background-color 0.3s, transform 0.3s;
 }
 
-.resource-input .upload-button:hover {
+.resource-input-container .upload-button:hover {
 	background-color: #218838;
 	transform: translateY(-2px);
 }
 
-.resource-input .file-info {
+.resource-input-container .file-info {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin-top: 10px; /* Add space between file-info and previous content */
 }
 
-.resource-input .file-info h4 {
+.resource-input-container .file-info h4 {
 	margin-right: 10px; /* Add space between the text and the link */
 }
 
-.resource-input .file-info a {
+.resource-input-container .file-info a {
 	color: #007bff;
 	text-decoration: none;
 	margin-right: 10px; /* Add space between the link and the button */
 }
 
-.resource-input .file-info a:hover {
+.resource-input-container .file-info a:hover {
 	text-decoration: underline;
 }
 
-.resource-input .delete-button-input {
+.resource-input-container .delete-button-input {
 	background-color: #d44242;
 	color: white;
 	border: none;
@@ -79,16 +83,16 @@
 	font-size: 14px;
 }
 
-.resource-input .delete-button-input:hover {
+.resource-input-container .delete-button-input:hover {
 	background-color: #9b2323;
 	transform: translateY(-2px);
 }
 
-.resource-input .status-message {
+.resource-input-container .status-message {
 	color: #555;
 	margin-top: 10px;
 }
 
-.resource-input .status-message.error {
+.resource-input-container .status-message.error {
 	color: #d44242;
 }
