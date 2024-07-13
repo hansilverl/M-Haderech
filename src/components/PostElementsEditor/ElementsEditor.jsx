@@ -96,7 +96,7 @@ const ElementsEditor = (props) => {
 	}, [elements])
 
 	return (
-		<div className='elements-editor-container'>
+		<div className='element-editors-container'>
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCenter}

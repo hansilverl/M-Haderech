@@ -12,18 +12,18 @@ import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
 import TextDirection from 'tiptap-text-direction'
 import Link from '@tiptap/extension-link'
-import TiptapFontSize from './TipTapFontSize'
+import CustomFontSize from './CutsomTiptapExtensions/CustomFontSize'
 
 import TextEditorToolBar from './EditorToolBar/TextEditorToolBar'
 
 const TextEditor = ({ content, setContent }) => {
 	const extensions = [
 		TextDirection.configure({
-			types: ['heading', 'paragraph', 'orderedList'],
+			types: ['heading', 'paragraph', 'orderedList', 'bulletList', 'listItem'],
 			defaultDirection: 'rtl',
 		}),
 		TextAlign.configure({
-			types: ['heading', 'paragraph'],
+			types: ['heading', 'paragraph', 'listItem', 'orderedList', 'bulletList'],
 			alignments: ['left', 'center', 'right', 'justify'],
 		}),
 		Underline,
@@ -32,11 +32,11 @@ const TextEditor = ({ content, setContent }) => {
 		StarterKit.configure({
 			bulletList: {
 				keepMarks: true,
-				keepAttributes: false,
+				keepAttributes: true,
 			},
 			orderedList: {
 				keepMarks: true,
-				keepAttributes: false,
+				keepAttributes: true,
 			},
 		}),
 		Link.configure({
@@ -48,7 +48,7 @@ const TextEditor = ({ content, setContent }) => {
 			},
 		}),
 		TextStyle.extend(),
-		TiptapFontSize,
+		CustomFontSize,
 	]
 
 	const onUpdate = ({ editor }) => {

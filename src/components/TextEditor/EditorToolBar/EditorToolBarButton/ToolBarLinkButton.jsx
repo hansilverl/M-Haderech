@@ -5,14 +5,18 @@ import React, { useState } from 'react'
 import GeneralModal from '../../../Modals/GeneralModal'
 
 const ToolBarLinkButton = (props) => {
-	const { isActiveArg, content, editor, className } = props
-	const activeClass = editor.isActive(isActiveArg) ? 'is-active' : ''
+	const { isActiveArg, editorFunc, content, editor, className } = props
+
+	let isActive = editor.isActive(isActiveArg)
+	if (editorFunc !== 'setLink') isActive = !isActive
+
+	const activeClass = isActive ? 'is-active' : ''
 
 	const [link, setLinkUrl] = useState('')
-	const [requestLink, setRequestLink] = useState(false)
+	const [requestLinkModalOpen, setRequestLinkModalOpen] = useState(false)
 
 	const modalClose = () => {
-		setRequestLink(false)
+		setRequestLinkModalOpen(false)
 		if (link && link !== '') {
 			editor.chain().focus().extendMarkRange('link').setLink({ href: link }).run()
 			setLinkUrl('')
@@ -20,36 +24,51 @@ const ToolBarLinkButton = (props) => {
 	}
 
 	const clickHandler = () => {
-		setLinkUrl('')
-		setRequestLink(true)
+		if (editorFunc === 'setLink') {
+			setLinkUrl('')
+			setRequestLinkModalOpen(true)
+		} else {
+			editor.chain().focus().extendMarkRange('link').unsetLink().run()
+		}
 	}
 
 	const isDisabled = () => {
-		if (typeof editorFunc === 'string') {
-			return !editor.can().chain().focus()[editorFunc](editorFuncArgs).run()
-		}
+		const res =
+			editorFunc == 'setLink'
+				? !editor
+						.can()
+						.chain()
+						.focus()
+						.extendMarkRange('link')
+						.setLink({ href: 'https://google.com' })
+						.run()
+				: !editor.can().chain().focus().extendMarkRange('link').unsetLink().run()
 
-		let tempEditor = editor.can().chain().focus()
-		editorFunc.forEach((func, index) => {
-			tempEditor = tempEditor[func](editorFuncArgs[index])
-		})
-		return !tempEditor
+		return res
 	}
 
 	return (
 		<>
 			<button
 				onClick={clickHandler}
-				disabled={isDisabled}
+				disabled={isDisabled()}
 				className={`text-editor-menu-bar-button ${className} ${activeClass}`}>
 				{content}
 			</button>
 			<GeneralModal
-				isOpen={requestLink}
+				isOpen={requestLinkModalOpen}
 				onRequestClose={modalClose}
 				handleCancel={modalClose}
-				handleConfirm={clickHandler}>
-				<form></form>
+				isEnterPossible={true}
+				handleConfirm={modalClose}>
+				<label htmlFor='new-link-url'>הכנס קישור</label>
+				<input
+					id='new-link-url'
+					type='text'
+					value={link}
+					onChange={(event) => setLinkUrl(event.target.value)}
+					placeholder='כתובת אתר'
+				/>
 			</GeneralModal>
 		</>
 	)

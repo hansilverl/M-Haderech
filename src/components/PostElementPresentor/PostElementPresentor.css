@@ -1,0 +1,21 @@
+.post-element-presentor {
+	width: fit-content; /* or any specific width */
+	height: fit-content; /* or any specific height */
+	overflow: hidden; /* Ensures nothing spills out */
+	display: flex; /* Centering the image if needed */
+	justify-content: center; /* Center horizontally */
+	align-items: center; /* Center vertically */
+	border-radius: 10px;
+}
+
+.post-element-presentor video {
+	max-width: 100%;
+	height: auto;
+}
+
+.post-element-presentor img {
+	width: 100%; /* Adjust width to container's width */
+	height: 100%; /* Adjust height to container's height */
+	max-width: 100%;
+	object-fit: contain; /* Ensures image's aspect ratio is maintained */
+}

@@ -4,7 +4,7 @@
 	justify-content: center;
 	background-color: #9b59b6;
 	color: white;
-	border-radius: 10px;
+	border-radius: 4px;
 	box-shadow: none;
 	cursor: pointer;
 
@@ -29,7 +29,6 @@
 .text-editor-menu-bar .syntax-button,
 .text-editor-menu-bar .syntax-button:hover,
 .text-editor-menu-bar .use-button {
-	border-radius: 0cqh;
 	background-color: white;
 	color: black;
 }

@@ -88,8 +88,8 @@ const ElementEditor = (props) => {
 	}
 
 	return (
-		<div ref={setNodeRef} style={style} {...attributes}>
-			<div className='element-editor-header main-flex-row'>
+		<div ref={setNodeRef} style={style} {...attributes} className='element-editor-container'>
+			<div className='element-editor-header'>
 				<span className='drag-handle' {...listeners}>
 					☰
 				</span>
@@ -123,9 +123,9 @@ const ElementEditor = (props) => {
 				cancelName='ביטול'
 				handleCancel={() => setIsModalActive(false)}
 				handleConfirm={() => onDeleteElement()}>
-					<h3>לא יהיה ניתן לשחזר את הרכיב או התוכן שלו</h3>
-					<h3>האם אתה בטוח שברצונך להמשיך?</h3>
-				</GeneralModal>
+				<h3>לא יהיה ניתן לשחזר את הרכיב או התוכן שלו</h3>
+				<h3>האם אתה בטוח שברצונך להמשיך?</h3>
+			</GeneralModal>
 		</div>
 	)
 }

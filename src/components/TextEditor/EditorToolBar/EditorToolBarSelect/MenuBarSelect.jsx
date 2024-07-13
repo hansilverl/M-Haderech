@@ -1,20 +1,6 @@
 import './MenuBarSelect.css'
 import Select from 'react-select'
 
-const getFontSize = (elementType) => {
-	// Create a temporary h1 element
-	const tempH1 = document.createElement(elementType, { visibility: 'hidden' })
-	tempH1.style.visibility = 'hidden' // Make it invisible
-	document.body.appendChild(tempH1)
-
-	// Get the computed font size
-	const fontSize = window.getComputedStyle(tempH1).fontSize
-
-	// Remove the temporary h1 element
-	document.body.removeChild(tempH1)
-	return fontSize
-}
-
 const MenuBarSelectSize = (props) => {
 	const { editor } = props
 
@@ -26,7 +12,7 @@ const MenuBarSelectSize = (props) => {
 	if (!editor) return null
 
 	const setFontSize = (size) => {
-		if(!size) return
+		if (!size) return
 		editor.chain().focus().setFontSize(size).run()
 	}
 
@@ -44,11 +30,16 @@ const MenuBarSelectSize = (props) => {
 	}
 
 	const handleInputChange = (inputValue, actionMeta) => {
-		console.group('Input Changed')
-		console.log(inputValue)
-		console.log(`action: ${actionMeta.action}`)
-		console.groupEnd()
+		
 	}
+
+	const getPlaceHolder = () => {
+		const fontSize = getFontSize()
+
+		if (!fontSize) return 'בחר גודל גופן';
+		return `גודל גופן: ${fontSize}px`;
+	}
+
 
 	return (
 		<div className='menu-bar-select-container'>
@@ -61,8 +52,7 @@ const MenuBarSelectSize = (props) => {
 				isClearable={true}
 				isSearchable={true}
 				isDisabled={false}
-				placeholder='בחר גודל גופן'
-
+				placeholder={getPlaceHolder()}
 			/>
 		</div>
 	)

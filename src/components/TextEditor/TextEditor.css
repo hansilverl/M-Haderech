@@ -1,17 +1,17 @@
 .tiptap {
 	border-top: 1px solid grey;
-	
-	border-radius: 1rem;
+	border-radius: 0.25rem;
 	background: white;
 	min-height: 300px; /* Increased height for a bigger input area */
 	background-color: #f0f0f0;
 	color: #333;
-	margin: 10px;
-
+	margin: 5px;
+	width: auto;
+	text-align: right;
 }
 
 .tiptap:focus {
-	border: none;
+	/* border: none; */
 	outline: 1px solid black;
 }
 
@@ -27,8 +27,8 @@
 
 .tiptap ul,
 .tiptap ol {
-	padding: 0 1rem;
-	margin: 1.25rem 1rem 1.25rem 0.4rem;
+	padding: 0 2rem;
+	margin: 1.25rem 1rem 1.25rem 1rem;
 }
 
 .tiptap ul li p,
@@ -63,5 +63,8 @@
 }
 
 .editor-container {
-	width: fit-content;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
 }

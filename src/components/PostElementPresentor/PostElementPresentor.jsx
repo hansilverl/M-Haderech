@@ -1,8 +1,10 @@
+import './PostElementPresentor.css'
+
 import React from 'react'
 import { pdfjs } from 'react-pdf'
 
-import PdfViewer from '../../PdfViewer/PdfViewer'
-import pdfIcon from '../../../assets/pdf-file.png'
+import PdfViewer from '../PdfViewer/PdfViewer'
+import pdfIcon from '../../assets/pdf-file.png'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -24,7 +26,7 @@ const TextElementPresentor = (props) => {
 
 const ImageElementPresentor = (props) => {
 	const { resourceUrl } = props
-	return <img className='element-image' src={resourceUrl} alt={'לא נמצאה תמונה'} />
+	return <img src={resourceUrl} alt={'לא נמצאה תמונה'} />
 }
 
 const VideoElementPresentor = (props) => {
@@ -38,7 +40,7 @@ const AudioElementPresentor = (props) => {
 }
 
 const PdfElementPresentor = (props) => {
-	const { resourceUrl, last } = props
+	const { resourceUrl } = props
 
 	return (
 		<>
@@ -75,11 +77,12 @@ const ElementPicker = ({ element }) => {
 	}
 }
 
-const ElementPresentor = ({ element }) => {
+const PostElementPresentor = ({ element }) => {
+	console.log(element)
 	return (
-		<div>
+		<div className='post-element-presentor'>
 			<ElementPicker element={element} />
 		</div>
 	)
 }
-export default ElementPresentor
+export default PostElementPresentor

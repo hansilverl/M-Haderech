@@ -1,9 +1,8 @@
 import { Extension } from '@tiptap/core'
 import TextStyle from '@tiptap/extension-text-style'
 
-const TipTapFontSize = TextStyle.extend({
+const CustomFontSize = TextStyle.extend({
 	name: 'customTextStyle',
-
 	
 	addGlobalAttributes() {
 		return [
@@ -43,4 +42,4 @@ const TipTapFontSize = TextStyle.extend({
 	},
 })
 
-export default TipTapFontSize
+export default CustomFontSize
