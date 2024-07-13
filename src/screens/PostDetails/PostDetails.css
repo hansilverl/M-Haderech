@@ -94,10 +94,6 @@
   transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
 }
 
-.post-details .pdf-button:hover img {
-  transform: scale(1.1); /* Slightly enlarge the icon on hover */
-}
-
 /* Responsive design adjustments */
 @media (max-width: 768px) {
   .post-details {

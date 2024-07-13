@@ -4,6 +4,7 @@ import { doc, deleteDoc, collection } from 'firebase/firestore'
 
 import { deleteObjectByFilePath } from './useResourceManagement'
 import { postsFetchByQuery } from './usePostsGet'
+import { elements } from 'chart.js'
 
 const deleteDocByReference = async (ref) => {
 	if (!ref) return
@@ -21,10 +22,11 @@ const postDeleteFunction = async (documentID) => {
 	const post = await postsFetchByQuery(documentID)
 	if (!post) throw new Error('Post not found')
 
-	await deleteObjectByFilePath(post.contentFile)
-	await deleteObjectByFilePath(post.imageUrl)
-	await deleteDocByReference(docRef)
+	post.elements.forEach(async (element) => {
+		await deleteObjectByFilePath(element.resourcePath)
+	})
 
+	await deleteDocByReference(docRef)
 	return post
 }
 
@@ -39,7 +41,7 @@ const usePostDelete = (documentID) => {
 	}
 
 	const postDeleteHandler = async () => {
-		if(loadingDelete) return
+		if (loadingDelete) return
 		setLoadingDelete(true)
 		try {
 			const p = await postDeleteFunction(documentID)
