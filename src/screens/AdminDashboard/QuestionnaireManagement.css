@@ -13,8 +13,9 @@
 }
 
 .question-item {
-  background-color: #f0f0f0;
-  margin: 10px 0;
+  background-color: #f8f9fa;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.196);
+    margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
 }
