@@ -18,12 +18,14 @@ const PostEditPageComp = ({ postID, post }) => {
 	const { postDelete, loadingDelete, startDelete } = usePostDelete(postID)
 
 	const setSaveTimeout = useRef(null)
+	const firstRender = useRef(true)
 	const [articleType, setPostType] = useState(post.articleType ? post.articleType : 'article')
 	const [title, setTitle] = useState(post.title ? post.title : '')
 	const [description, setDescription] = useState(post.description ? post.description : '')
 	const [published, setPublished] = useState(post.published ? post.published : false)
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
 	const [elements, setElements] = useState(post.elements ? post.elements : [])
+	const [saveButtonPressed, setSaveButtonPressed] = useState(false)
 
 	const [saveButtonText, setSaveButtonText] = useState('שמור')
 	const navigate = useNavigate()
@@ -46,12 +48,11 @@ const PostEditPageComp = ({ postID, post }) => {
 	}
 
 	const handleSave = () => {
-		console.log('handleSave')
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = null
 		const postAdditions = getNewPost()
 		startUpdate(postAdditions)
-		setSaveButtonText('שומר')
+		if (saveButtonPressed) setSaveButtonText('שומר')
 	}
 
 	const togglePublished = async () => {
@@ -68,8 +69,19 @@ const PostEditPageComp = ({ postID, post }) => {
 		}
 	}
 
+	const forceSave = () => {
+		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
+		setSaveTimeout.current = null
+		setSaveButtonPressed(true)
+		handleSave()
+	}
+
 	useEffect(() => {
-		if (elements == post.elements) return
+		if (firstRender.current) {
+			firstRender.current = false
+			return
+		}
+
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
@@ -82,11 +94,12 @@ const PostEditPageComp = ({ postID, post }) => {
 
 	useEffect(() => {
 		if (loadingUpdate) return
-		if (postUpdate) {
+		if (postUpdate && saveButtonPressed) {
 			setSaveButtonText('נשמר בהצלחה')
 			setTimeout(() => {
 				setSaveButtonText('שמור')
 			}, 3000)
+			setSaveButtonPressed(false)
 		}
 	}, [postUpdate, loadingUpdate])
 
@@ -131,21 +144,15 @@ const PostEditPageComp = ({ postID, post }) => {
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
 					<div className='buttons-container main-flex-row'>
-						<button onClick={handleSave} disabled={loadingUpdate}>
+						<button onClick={forceSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
 						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
 							מחק
 						</button>
-						{!published ? (
-							<button onClick={togglePublished} className='publish-button'>
-								פרסם
-							</button>
-						) : (
-							<button onClick={togglePublished} className='unpublish-button'>
-								בטל פרסום
-							</button>
-						)}
+						<button onClick={togglePublished} className='publish-button'>
+							{published ? 'בטל פרסום' : 'פרסם'}
+						</button>
 					</div>
 				</>
 			)}

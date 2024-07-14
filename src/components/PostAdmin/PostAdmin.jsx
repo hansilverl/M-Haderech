@@ -1,10 +1,12 @@
+import './PostAdmin.css'
+
 import React, { useState, useEffect } from 'react'
-import Post from '../Posts/Post'
 import { useNavigate } from 'react-router-dom'
+import { serverTimestamp } from 'firebase/firestore'
+
+import Post from '../Posts/Post'
 import usePostDelete from '../../hooks/usePostDelete'
 import usePostUpdate from '../../hooks/usePostUpdate'
-import { serverTimestamp } from 'firebase/firestore'
-import './PostAdmin.css'
 
 const PostAdmin = ({ id, post, setRefresh }) => {
 	const { articleType } = post
