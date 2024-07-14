@@ -1,9 +1,33 @@
-.pdf-div{
-    padding: 50px;
-    background-color: #dedede;
-    margin-top: 50px;
+.pdf-div {
+	background-color: #dedede;
+	margin-top: 50px;
+	width: 100%;
 }
 
-canvas.react-pdf__Page__canvas {
-    margin-bottom: 50px;
+.pdf-div .pdf-document {
+
+	padding: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.react-pdf__Page__canvas {
+	margin-bottom: 50px;
+	margin: 0 auto;
+    align-items: center;
+    background-color: #dedede;
+	width: 70% !important;
+	height: auto !important;
+}
+
+@media (max-width: 768px) {
+	.pdf-div .pdf-document {
+		padding: 0px;
+	}
+	.react-pdf__Page__canvas {
+		margin-bottom: 50px;
+		margin: 0 auto;
+		width: 100% !important;
+		height: 100% !important;
+	}
 }

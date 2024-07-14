@@ -1,3 +1,6 @@
+import 'normalize.css'
+import './App.css'
+
 // src/App.js
 
 import React, { useState } from 'react'
@@ -18,9 +21,6 @@ import { LoginPopup } from './components/LoginPopup/LoginPopup'
 import PostDetails from './screens/PostDetails/PostDetails'
 import PostEditpage from './screens/PostEditpage/PostEditpage'
 import AboutFull from './screens/AboutFull/AboutFull'
-
-import 'normalize.css'
-import './App.css'
 import Convention from './screens/Conventions/Convention'
 
 function App() {
