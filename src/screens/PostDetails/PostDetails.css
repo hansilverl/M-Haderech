@@ -1,5 +1,7 @@
 /* Base styles for the post details container */
 .post-details {
+  display : flex;
+  flex-direction: column;
   width:90%;
   margin: 20px auto;
   padding: 20px;
@@ -7,6 +9,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   font-family: 'Arial', sans-serif;
+  justify-content: right;
+  align-items: flex-start;
 }
 
 /* Style for the headings within the post details */
@@ -46,7 +50,7 @@
 }
 
 /* Styles for the links to make them stand out */
-.post-details a {
+/* .post-details a {
   display: inline-block;
   background-color: #007bff;
   color: #ffffff;
@@ -56,7 +60,7 @@
   text-decoration: none;
   text-align: center;
   transition: background-color 0.3s;
-}
+} */
 
 /* Hover effect for links */
 .post-details a:hover {

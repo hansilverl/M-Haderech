@@ -25,6 +25,7 @@ const TextEditor = ({ content, setContent }) => {
 		TextAlign.configure({
 			types: ['heading', 'paragraph', 'listItem', 'orderedList', 'bulletList'],
 			alignments: ['left', 'center', 'right', 'justify'],
+			defaultAlignment: 'right',
 		}),
 		Underline,
 		Color.configure({ types: [TextStyle.name, ListItem.name] }),
