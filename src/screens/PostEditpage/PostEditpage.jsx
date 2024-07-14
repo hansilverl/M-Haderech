@@ -5,6 +5,7 @@ import Selector from '../../components/Selector/Selector'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { serverTimestamp } from 'firebase/firestore'
+import { FaArrowRight } from 'react-icons/fa'
 
 import usePostsGet from '../../hooks/usePostsGet'
 import usePostUpdate from '../../hooks/usePostUpdate'
@@ -45,7 +46,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}
 
 	const handleSave = () => {
-		console.log('handleSave');
+		console.log('handleSave')
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = null
 		const postAdditions = getNewPost()
@@ -67,12 +68,8 @@ const PostEditPageComp = ({ postID, post }) => {
 		}
 	}
 
-	const handleBack = () => {
-		navigate(-1) // Go back to the previous page
-	}
-
 	useEffect(() => {
-		if (elements == post.elements ) return
+		if (elements == post.elements) return
 		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
 		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
@@ -84,7 +81,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}, [postDelete, navigate])
 
 	useEffect(() => {
-		if (loadingUpdate ) return
+		if (loadingUpdate) return
 		if (postUpdate) {
 			setSaveButtonText('נשמר בהצלחה')
 			setTimeout(() => {
@@ -95,6 +92,11 @@ const PostEditPageComp = ({ postID, post }) => {
 
 	return (
 		<div className='edit-post-page main-flex-col'>
+			<div className='back-button-container'>
+				<button className='back-button' onClick={() => navigate(-1)}>
+					<FaArrowRight />
+				</button>
+			</div>
 			{!post ? (
 				<h1>המאמר לא נמצא</h1>
 			) : (
@@ -128,7 +130,7 @@ const PostEditPageComp = ({ postID, post }) => {
 						/>
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
-					<div className='main-flex-row'>
+					<div className='buttons-container main-flex-row'>
 						<button onClick={handleSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
@@ -144,9 +146,6 @@ const PostEditPageComp = ({ postID, post }) => {
 								בטל פרסום
 							</button>
 						)}
-						<button onClick={handleBack} className='back-button'>
-							חזור
-						</button>
 					</div>
 				</>
 			)}

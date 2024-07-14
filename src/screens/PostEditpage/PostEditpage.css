@@ -41,11 +41,11 @@
 	text-align: center;
 }
 
-.title-content {
+.edit-post-page .title-content {
 	text-align: right;
 }
 
-.post-contents {
+.edit-post-page .post-contents {
 	width: 100%;
 	margin-top: 20px;
 	padding: 20px;
@@ -69,6 +69,7 @@
 .edit-post-page button:hover {
 	background-color: #0056b3;
 	transform: translateY(-2px);
+	margin: 0px 10px;
 }
 
 .edit-post-page button:disabled {
@@ -77,36 +78,61 @@
 }
 
 /* Specific button styles */
-.delete-button {
+.edit-post-page .delete-button {
 	background-color: #dc3545;
 }
 
-.delete-button:hover {
+.edit-post-page .delete-button:hover {
 	background-color: #c82333;
 }
 
-.publish-button {
+.edit-post-page .publish-button {
 	background-color: #60c879;
 }
 
-.publish-button:hover {
+.edit-post-page .publish-button:hover {
 	background-color: #218838;
 }
 
-.unpublish-button {
+.edit-post-page .unpublish-button {
 	background-color: #d44242;
 }
 
-.unpublish-button:hover {
+.edit-post-page .unpublish-button:hover {
 	background-color: #9b2323;
 }
 
-.input-label {
+.edit-post-page .back-button-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.edit-post-page .back-button {
+	background-color: #333;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	margin: 10px;
+	font-size: 16px;
+}
+
+.edit-post-page .input-label {
 	width: auto;
 	margin: 0 10px;
 	text-align: right;
 	margin-right: 10px;
 	font-weight: bold;
+}
+
+.edit-post-page .buttons-container {
+	display: flex;
+	max-width: 50%;
+	min-width: fit-content;
+	justify-content: space-around;	
 }
 
 @media (max-width: 768px) {
@@ -118,10 +144,5 @@
 	.input-label {
 		text-align: left;
 		margin-bottom: 5px;
-	}
-
-	.edit-post-page button {
-		/* width: 100%; */
-		margin: 10px 0;
 	}
 }
