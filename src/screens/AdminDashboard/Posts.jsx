@@ -43,7 +43,7 @@ const Posts = () => {
 					className='add-post-button'
 					onClick={addPostHandler}
 					disabled={isCreateButtonDisabled}>
-					הוספת פוסט
+					הוספת מאמר
 				</button>
 			</div>
 			{loadingGet ? (
@@ -51,7 +51,7 @@ const Posts = () => {
 			) : errorGet ? (
 				<div className='error'>{errorGet.toString()}</div>
 			) : !postsGet ? (
-				<h2 className='error'>הפוסטים לא נמצאו</h2>
+				<h2 className='error'>המאמרים לא נמצאו</h2>
 			) : (
 				<div className='posts-container'>
 					{sortedPosts.map((post, index) => (

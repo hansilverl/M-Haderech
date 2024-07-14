@@ -61,7 +61,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}
 
 	const handleDelete = async () => {
-		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את הפוסט?')
+		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את המאמר?')
 		if (confirmDelete) {
 			startDelete()
 		}
@@ -96,11 +96,11 @@ const PostEditPageComp = ({ postID, post }) => {
 	return (
 		<div className='edit-post-page main-flex-col'>
 			{!post ? (
-				<h1>הפוסט לא נמצא</h1>
+				<h1>המאמר לא נמצא</h1>
 			) : (
 				<>
 					<div className='main-flex-row'>
-						<label className='input-label'>כותרת הפוסט:</label>
+						<label className='input-label'>כותרת המאמר:</label>
 						<input
 							type='text'
 							placeholder='כותרת'
@@ -109,7 +109,7 @@ const PostEditPageComp = ({ postID, post }) => {
 						/>
 					</div>
 					<div className='main-flex-row'>
-						<label className='input-label'>תיאור הפוסט:</label>
+						<label className='input-label'>תיאור המאמר:</label>
 						<input
 							type='text'
 							placeholder='תיאור'
@@ -120,11 +120,11 @@ const PostEditPageComp = ({ postID, post }) => {
 					<div className='main-flex-row'>
 						<Selector
 							id='post-type'
-							name='סוג הפוסט (פוסט או כנס)'
+							name='סוג המאמר (מאמר או כנס)'
 							value={articleType}
 							selectFunction={setPostType}
 							optionValues={['post', 'convention']}
-							optionNames={['פוסט', 'כנס']}
+							optionNames={['מאמר', 'כנס']}
 						/>
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
@@ -170,13 +170,13 @@ const PostEditPage = () => {
 		<h2>טוען...</h2>
 	) : errorGet ? (
 		<>
-			<h2>הפוסט לא נמצא</h2>
+			<h2>המאמר לא נמצא</h2>
 			<p>{errorGet.toString()}</p>
 		</>
 	) : postsGet ? (
 		<PostEditPageComp postID={postID} post={postsGet} setRefresh={setRefresh} />
 	) : (
-		<h2>הפוסט לא נמצא</h2>
+		<h2>המאמר לא נמצא</h2>
 	)
 }
 

@@ -15,7 +15,7 @@ const Posts = () => {
 			) : errorGet ? (
 				<h2>{errorGet.toString()}</h2>
 			) : !postsGet ? (
-				<h2>הפוסטים לא נמצאו</h2>
+				<h2>המאמרים לא נמצאו</h2>
 			) : (
 				<div className='posts-container'>
 					{postsGet.map((post, index) => (

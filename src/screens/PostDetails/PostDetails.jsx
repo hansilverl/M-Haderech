@@ -32,7 +32,7 @@ const PostDetails = () => {
 			) : errorGet ? (
 				<p>{errorGet.toString()}</p>
 			) : !postsGet ? (
-				<p>הפוסט לא נמצא</p>
+				<p>המאמר לא נמצא</p>
 			) : (
 				<>
 					<div className='post-details-header'>
