@@ -14,7 +14,7 @@
 }
 
 /* Styles for the back button */
-.back-button {
+.post-details-container .back-button {
   background: black;
   border: none;
   cursor: pointer;
@@ -25,13 +25,13 @@
   margin-bottom: 20px;
 }
 
-.back-button svg {
+.post-details-container .back-button svg {
   width: 24px;
   height: 24px;
   transition: transform 0.3s ease;
 }
 
-.back-button:hover svg {
+.post-details-container .back-button:hover svg {
   transform: scale(1.1);
 }
 
