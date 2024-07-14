@@ -1,59 +1,116 @@
 .questionnaire-management {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: auto;
   padding-right: 20em;
 }
 
-.question {
-  margin-bottom: 20px;
+.questions-container {
   border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 10px;
+  margin-bottom: 20px;
+}
+
+.question {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
   background-color: #f9f9f9;
 }
 
 .question-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.question-header .icons {
-  display: flex;
   align-items: center;
 }
 
-.question-header .icons > * {
-  margin-right: 5px;
-  cursor: pointer;
+.question-header span {
+  font-weight: bold;
 }
 
-ul {
-  list-style-type: none;
+button {
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.edit-question-form{
+  margin-right: 20em;
+}
+
+.Modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  z-index: 1000;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Modal h2 {
+  margin-top: 0;
+}
+
+.Modal button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.Modal button[type="button"] {
+  background-color: #6c757d;
+}
+
+.Modal button:hover {
+  background-color: #0056b3;
+}
+
+.Modal input[type="text"], .Modal input[type="number"], .Modal input[type="checkbox"] {
+  margin: 8px 0;
+  padding: 8px;
+  width: calc(100% - 22px);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.Modal label {
+  display: block;
+  margin-top: 10px;
+}
+
+.Modal ul {
+  list-style: none;
   padding: 0;
 }
 
-ul li {
-  margin-bottom: 5px;
+.Modal ul li {
+  margin-bottom: 10px;
+}
+
+.Modal form {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
-ul li .icons {
-  margin-left: 10px;
+.Modal form > div {
+  margin-bottom: 20px;
 }
 
-ul li .icons > * {
-  cursor: pointer;
-}
-
-/* style for all buttons */
-button {
-  padding: 5px 10px;
-  margin: 0 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  justify-content: center;
-  /* space between */
-  background-color: #007bff;
-  align-self: flex-end;
-}
