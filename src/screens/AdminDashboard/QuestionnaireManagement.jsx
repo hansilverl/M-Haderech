@@ -5,9 +5,10 @@ import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc, deleteF
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './QuestionnaireManagement.css';
 import Modal from 'react-modal';
-import { FaTrashAlt, FaEdit, FaTimes } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit, FaTimes, FaPlus } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
 const QuestionnaireManagement = ({ questionnaireId }) => {
@@ -25,6 +26,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
   const [isRequired, setIsRequired] = useState(false);
   const [deleteConfirmIsOpen, setDeleteConfirmIsOpen] = useState(false);
   const [addQuestionModalIsOpen, setAddQuestionModalIsOpen] = useState(false);
+  const [editingAnswer, setEditingAnswer] = useState(null); // New state for editing answer
+  const [showNewAnswerFields, setShowNewAnswerFields] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -136,13 +139,25 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       setSelectedQuestion(updatedQuestion);
       setNewAnswerText('');
       setNewAnswerScore('');
+      setShowNewAnswerFields(false);
     }
   };
 
   const handleEditAnswer = (answer) => {
+    setEditingAnswer(answer);
     setCurrentText(answer.text);
-    setCurrentScore(answer.id); // Set the current score based on the answer ID
-    setSelectedAnswer(answer);
+    setCurrentScore(answer.score);
+  };
+
+  const saveEditedAnswer = async () => {
+    const updatedAnswers = selectedQuestion.answers.map(answer =>
+      answer.id === editingAnswer.id
+        ? { ...answer, text: currentText, score: currentScore }
+        : answer
+    );
+    const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
+    setSelectedQuestion(updatedQuestion);
+    setEditingAnswer(null);
   };
 
   const saveQuestionChanges = async () => {
@@ -172,6 +187,15 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       [name]: type === 'checkbox' ? checked : value,
     };
     setSelectedQuestion(updatedQuestion);
+  };
+
+  const handleAnswerChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'answerText') {
+      setCurrentText(value);
+    } else if (name === 'answerScore') {
+      setCurrentScore(value);
+    }
   };
 
   const onDragEnd = async (result) => {
@@ -246,8 +270,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                       >
                         <div className="question-header">
                           <span>{index + 1}. {question.question}</span>
-                          <button onClick={() => handleEditQuestion(question)}><FaEdit /></button>
-                          <button onClick={() => handleDeleteQuestion(question.id)}><FaTrashAlt /></button>
+                          <button onClick={() => handleEditQuestion(question)}><FaEdit style={{ color: 'black' }} /></button>
+                          <button onClick={() => handleDeleteQuestion(question.id)}><FaTrashAlt style={{ color: 'black' }} /></button>
                         </div>
                       </div>
                     )}
@@ -299,13 +323,14 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       {/* Modal for Editing Question */}
       {selectedQuestion && (
         <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} contentLabel="Edit Question">
-          <h2>Edit Question</h2>
+          <h2> עריכת שאלה</h2>
           <form className="edit-question-form"
           onSubmit={(e) => {
             e.preventDefault();
             saveQuestionChanges();
           }}>
             <div>
+              <div className="questionCheckbox">
               <label htmlFor="question">שאלה:</label>
               <input
                 type="text"
@@ -326,33 +351,60 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                 חובה
               </label>
             </div>
+            </div>
             <h3>תשובות:</h3>
             <ul>
-              {selectedQuestion.answers.map((answer, index) => (
+              {selectedQuestion.answers.map((answer) => (
                 <li key={answer.id}>
-                  {answer.text} (ניקוד: {answer.score})
-                  <button type="button" onClick={() => handleEditAnswer(answer)}>עריכה</button>
-                  <button type="button" onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}>מחיקה</button>
+                  {editingAnswer && editingAnswer.id === answer.id ? (
+                    <>
+                      <input
+                        type="text"
+                        name="answerText"
+                        value={currentText}
+                        onChange={handleAnswerChange}
+                      />
+                      <input
+                        type="number"
+                        name="answerScore"
+                        value={currentScore}
+                        onChange={handleAnswerChange}
+                      />
+                      <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                    </>
+                  ) : (
+                    <>
+                      {answer.text} (ניקוד: {answer.score})
+                      <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                      <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+                    </>
+                  )}
                 </li>
               ))}
             </ul>
             <div>
-              <input
-                type="text"
-                placeholder="תשובה"
-                value={newAnswerText}
-                onChange={(e) => setNewAnswerText(e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder="ניקוד"
-                value={newAnswerScore}
-                onChange={(e) => setNewAnswerScore(e.target.value)}
-              />
-              <button type="button" onClick={handleAddAnswer}>הוספת תשובה</button>
+              {showNewAnswerFields ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="תשובה"
+                    value={newAnswerText}
+                    onChange={(e) => setNewAnswerText(e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="ניקוד"
+                    value={newAnswerScore}
+                    onChange={(e) => setNewAnswerScore(e.target.value)}
+                  />
+                  <button type="button" className="add-answer-button" title="הוספת תשובה" onClick={handleAddAnswer}> <FaPlus /> </button>
+                </>
+              ) : (
+                <button type="button" className="add-answer-button" onClick={() => setShowNewAnswerFields(true)}>הוספת תשובה</button>
+              )}
             </div>
             <button type="submit" className="save-button" title="שמירה"> <FontAwesomeIcon icon={faFloppyDisk} /></button>
-            <button type="button" onClick={() => setModalIsOpen(false)}><FaTimes /></button>
+            <button type="button" className='close-button' onClick={() => setModalIsOpen(false)}><FaTimes style={{ color: 'black' }} /> סגירה</button>
           </form>
         </Modal>
       )}
