@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 import usePostsGet from '../../hooks/usePostsGet'
 import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
 import { useNavigate } from 'react-router-dom'
+import { FaArrowRight } from 'react-icons/fa'
+
 
 const formatDate = (timestamp) => {
 	if (!timestamp) return ''
@@ -22,7 +24,9 @@ const PostDetails = () => {
 
 	return (
 		<div className='post-details-container'>
-			<button onClick={() => navigate(-1)}>חזרה</button>
+			<button className="back-button" onClick={() => navigate(-1)}>
+				<FaArrowRight />
+			</button>
 			{loadingGet ? (
 				<p>טוען...</p>
 			) : errorGet ? (
