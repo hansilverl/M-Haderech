@@ -399,32 +399,21 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               />
             </div>
           )}
-          {!selectedAnswer && (
-            <div>
-              <label htmlFor="isRequired">חובה:</label>
-              <input
-                type="checkbox"
-                id="isRequired"
-                checked={isRequired}
-                onChange={(e) => setIsRequired(e.target.checked)}
-              />
-            </div>
-          )}
           <button type="submit">שמור</button>
           <button type="button" onClick={() => setEditModalIsOpen(false)}><FaTimes /></button>
         </form>
       </Modal>
 
-      {/* Modal for Confirm Delete */}
+      {/* Modal for Confirming Deletion */}
       <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
         <h2>אישור מחיקה</h2>
         <p>האם אתה בטוח שברצונך למחוק?</p>
-        <button onClick={selectedAnswer ? confirmDeleteAnswer : confirmDeleteQuestion}>מחק</button>
-        <button onClick={() => setDeleteConfirmIsOpen(false)}><FaTimes /></button>
+        <button onClick={selectedAnswer ? confirmDeleteAnswer : confirmDeleteQuestion}>כן</button>
+        <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
       </Modal>
 
       {/* Modal for Adding New Question */}
-      <Modal isOpen={newQuestionModalIsOpen} onRequestClose={closeNewQuestionModal} contentLabel="Add New Question">
+      <Modal isOpen={newQuestionModalIsOpen} onRequestClose={closeNewQuestionModal} contentLabel="Add Question">
         <h2>הוסף שאלה חדשה</h2>
         <form onSubmit={(e) => {
           e.preventDefault();
@@ -440,13 +429,14 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             />
           </div>
           <div>
-            <label htmlFor="isRequired">חובה:</label>
-            <input
-              type="checkbox"
-              id="isRequired"
-              checked={isRequired}
-              onChange={(e) => setIsRequired(e.target.checked)}
-            />
+            <label>
+              <input
+                type="checkbox"
+                checked={isRequired}
+                onChange={(e) => setIsRequired(e.target.checked)}
+              />
+              חובה
+            </label>
           </div>
           <button type="submit">שמור</button>
           <button type="button" onClick={closeNewQuestionModal}><FaTimes /></button>
