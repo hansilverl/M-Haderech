@@ -252,11 +252,16 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       try {
         const questionCollection = collection(db, 'Questionnaire');
         const questionDocRef = doc(questionCollection); // Generate a new document reference
-        await setDoc(questionDocRef, { q: newQuestionText, required: isRequired });
+  
+        // Calculate the new order value
+        const newOrder = questions.length > 0 ? Math.max(...questions.map(q => q.order)) + 1 : 0;
+  
+        await setDoc(questionDocRef, { q: newQuestionText, required: isRequired, order: newOrder });
         const newQuestion = {
           id: questionDocRef.id,
           question: newQuestionText,
           required: isRequired,
+          order: newOrder,
           answers: []
         };
         setQuestions([...questions, newQuestion]);
@@ -269,7 +274,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       }
     }
   };
-
+  
   const onDragEnd = async (result) => {
     if (!result.destination) return;
     const reorderedQuestions = Array.from(questions);

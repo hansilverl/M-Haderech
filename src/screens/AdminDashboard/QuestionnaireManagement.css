@@ -1,132 +1,46 @@
 .questionnaire-management {
-  margin: 20px;
-  font-family: Arial, sans-serif;
+  padding: 20px;
 }
 
-.questionnaire-management h2 {
+.question {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.questions-list {
+.question-header .icons {
+  display: flex;
+  align-items: center;
+}
+
+.question-header .icons > * {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+ul {
   list-style-type: none;
   padding: 0;
 }
 
-.question-item {
-  background-color: #f8f9fa;
-  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.196);
-    margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.question-item .question-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.question-item .question-actions,
-.answer-actions {
+ul li {
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
 
-.question-item .question-actions .edit-icon,
-.answer-actions .edit-icon,
-.question-item .question-actions .delete-icon,
-.answer-actions .delete-icon {
-  cursor: pointer;
+ul li .icons {
   margin-left: 10px;
 }
 
-.answer-item {
-  margin: 5px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.answer-item .answer-actions {
-  display: flex;
-  align-items: center;
-}
-
-.add-question-section {
-  margin-top: 20px;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
+ul li .icons > * {
   cursor: pointer;
-  font-size: 18px;
-}
-
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.edit-form label {
-  font-weight: bold;
-}
-
-.edit-form input {
-  padding: 8px;
-  font-size: 16px;
-}
-
-.edit-form button {
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit-form button:hover {
-  background-color: #0056b3;
-}
-
-.add-form button {
-  padding: 8px 16px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-form button:hover {
-  background-color: #218838;
-}
-
-.modal button + button {
-  margin-left: 10px;
-}
-
-.modal input[type='checkbox'] {
-  margin-top: 5px;
 }
