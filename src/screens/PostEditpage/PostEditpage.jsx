@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import './PostEditpage.css'
 
-import Selector from '../../components/Selector/Selector'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
@@ -11,8 +11,9 @@ import usePostsGet from '../../hooks/usePostsGet'
 import usePostUpdate from '../../hooks/usePostUpdate'
 import usePostDelete from '../../hooks/usePostDelete'
 
-import './PostEditpage.css'
+import Selector from '../../components/Selector/Selector'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
+
 const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
 	const { postDelete, loadingDelete, startDelete } = usePostDelete(postID)

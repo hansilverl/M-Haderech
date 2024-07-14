@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import './Posts.css'
+
+import React from 'react'
 import Post from '../../components/Posts/Post'
 import usePostsGet, { queryGetPublishedPosts } from '../../hooks/usePostsGet'
-import './Posts.css'
 
 const Posts = () => {
 	const query = queryGetPublishedPosts(20)
@@ -19,10 +20,7 @@ const Posts = () => {
 			) : (
 				<div className='posts-container'>
 					{postsGet.map((post, index) => (
-						<Post
-							key={index}
-							article={post}
-						/>
+						<Post key={index} article={post} />
 					))}
 				</div>
 			)}
