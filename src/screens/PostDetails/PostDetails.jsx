@@ -13,7 +13,7 @@ const formatDate = (timestamp) => {
 	const month = String(date.getMonth() + 1).padStart(2, '0') // getMonth() is zero-based
 	const year = date.getFullYear()
 	return `${day}/${month}/${year}`
-  }
+}
 
 const PostDetails = () => {
 	const { id } = useParams()
@@ -21,7 +21,7 @@ const PostDetails = () => {
 	const navigate = useNavigate()
 
 	return (
-		<div className='post-details'>
+		<div className='post-details-container'>
 			<button onClick={() => navigate(-1)}>חזרה</button>
 			{loadingGet ? (
 				<p>טוען...</p>
@@ -31,14 +31,16 @@ const PostDetails = () => {
 				<p>הפוסט לא נמצא</p>
 			) : (
 				<>
-					<h1>{postsGet.title}</h1>
-					<p>
-						<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
-					</p>
-					<p>
-						<strong>תיאור:</strong> {postsGet.description}
-					</p>
-					<div>
+					<div className='post-details-header'>
+						<h1>{postsGet.title}</h1>
+						<p>
+							<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
+						</p>
+						<p>
+							<strong>תיאור:</strong> {postsGet.description}
+						</p>
+					</div>
+					<div className='post-details-elements'>
 						{postsGet?.elements.map((element, index) => (
 							<PostElementPresentor key={`element-${index}`} element={element} />
 						))}
