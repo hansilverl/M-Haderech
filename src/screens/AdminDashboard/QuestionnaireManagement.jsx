@@ -286,138 +286,148 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       )}
 
       {/* Modal for Adding New Question */}
-      <Modal isOpen={addQuestionModalIsOpen} onRequestClose={() => setAddQuestionModalIsOpen(false)} contentLabel="Add New Question">
-        <h2>הוספת שאלה חדשה</h2>
-        <form className="add-question-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            saveNewQuestion();
-          }}>
-          <div>
-            <label htmlFor="newQuestionText">שאלה:</label>
+{/* Modal for Adding New Question */}
+<Modal isOpen={addQuestionModalIsOpen} onRequestClose={() => setAddQuestionModalIsOpen(false)} contentLabel="Add New Question">
+  <button className="close-button" onClick={() => setAddQuestionModalIsOpen(false)}>
+    <FaTimes />
+  </button>
+  <h2>הוספת שאלה חדשה</h2>
+  <form className="add-question-form"
+    onSubmit={(e) => {
+      e.preventDefault();
+      saveNewQuestion();
+    }}>
+    <div>
+      <label htmlFor="newQuestionText">שאלה:</label>
+      <input
+        type="text"
+        id="newQuestionText"
+        name="newQuestionText"
+        value={newQuestionText}
+        onChange={(e) => setNewQuestionText(e.target.value)}
+        required
+      />
+    </div>
+    <div className="required-checkbox">
+      <label>
+        <input
+          type="checkbox"
+          name="isRequired"
+          checked={isRequired}
+          onChange={(e) => setIsRequired(e.target.checked)}
+        />
+        שאלת חובה
+      </label>
+    </div>
+    <button type="submit">Add</button>
+    <button type="button" onClick={() => setAddQuestionModalIsOpen(false)}><FaTimes /> Close</button>
+  </form>
+</Modal>
+
+{/* Modal for Editing Question */}
+{selectedQuestion && (
+  <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} contentLabel="Edit Question">
+    <button className="close-button" onClick={() => setModalIsOpen(false)}>
+      <FaTimes />
+    </button>
+    <h2> עריכת שאלה</h2>
+    <form className="edit-question-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        saveQuestionChanges();
+      }}>
+      <div>
+        <div className="questionCheckbox">
+          <label htmlFor="question">שאלה:</label>
+          <input
+            type="text"
+            id="question"
+            name="question"
+            value={selectedQuestion.question}
+            onChange={handleQuestionChange}
+          />
+        </div>
+        <div className="required-checkbox">
+          <label>
+            <input
+              type="checkbox"
+              name="required"
+              checked={selectedQuestion.required}
+              onChange={handleQuestionChange}
+            />
+            חובה
+          </label>
+        </div>
+      </div>
+      <h3>תשובות:</h3>
+      <ul>
+        {selectedQuestion.answers.map((answer) => (
+          <li key={answer.id}>
+            {editingAnswer && editingAnswer.id === answer.id ? (
+              <>
+                <input
+                  type="text"
+                  name="answerText"
+                  value={currentText}
+                  onChange={handleAnswerChange}
+                />
+                <input
+                  type="number"
+                  name="answerScore"
+                  value={currentScore}
+                  onChange={handleAnswerChange}
+                />
+                <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+              </>
+            ) : (
+              <>
+                {answer.text} (ניקוד: {answer.score})
+                <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div>
+        {showNewAnswerFields ? (
+          <>
             <input
               type="text"
-              id="newQuestionText"
-              name="newQuestionText"
-              value={newQuestionText}
-              onChange={(e) => setNewQuestionText(e.target.value)}
-              required
+              placeholder="תשובה"
+              value={newAnswerText}
+              onChange={(e) => setNewAnswerText(e.target.value)}
             />
-          </div>
-          <div className="required-checkbox">
-            <label>
-              <input
-                type="checkbox"
-                name="isRequired"
-                checked={isRequired}
-                onChange={(e) => setIsRequired(e.target.checked)}
-              />
-              שאלת חובה
-            </label>
-          </div>
-          <button type="submit">Add</button>
-          <button type="button" onClick={() => setAddQuestionModalIsOpen(false)}><FaTimes /> Close</button>
-        </form>
-      </Modal>
+            <input
+              type="number"
+              placeholder="ניקוד"
+              value={newAnswerScore}
+              onChange={(e) => setNewAnswerScore(e.target.value)}
+            />
+            <button type="button" className="add-answer-button" title="הוספת תשובה" onClick={handleAddAnswer}> <FaPlus /> </button>
+          </>
+        ) : (
+          <button type="button" className="add-answer-button" onClick={() => setShowNewAnswerFields(true)}>הוספת תשובה</button>
+        )}
+      </div>
+      <button type="submit" className="save-button" title="שמירה"> <FontAwesomeIcon icon={faFloppyDisk} /></button>
+      <button type="button" className='close-button' onClick={() => setModalIsOpen(false)}><FaTimes style={{ color: 'black' }} /> סגירה</button>
+    </form>
+  </Modal>
+)}
 
-      {/* Modal for Editing Question */}
-      {selectedQuestion && (
-        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} contentLabel="Edit Question">
-          <h2> עריכת שאלה</h2>
-          <form className="edit-question-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            saveQuestionChanges();
-          }}>
-            <div>
-              <div className="questionCheckbox">
-              <label htmlFor="question">שאלה:</label>
-              <input
-                type="text"
-                id="question"
-                name="question"
-                value={selectedQuestion.question}
-                onChange={handleQuestionChange}
-              />
-            </div>
-            <div className="required-checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  name="required"
-                  checked={selectedQuestion.required}
-                  onChange={handleQuestionChange}
-                />
-                חובה
-              </label>
-            </div>
-            </div>
-            <h3>תשובות:</h3>
-            <ul>
-              {selectedQuestion.answers.map((answer) => (
-                <li key={answer.id}>
-                  {editingAnswer && editingAnswer.id === answer.id ? (
-                    <>
-                      <input
-                        type="text"
-                        name="answerText"
-                        value={currentText}
-                        onChange={handleAnswerChange}
-                      />
-                      <input
-                        type="number"
-                        name="answerScore"
-                        value={currentScore}
-                        onChange={handleAnswerChange}
-                      />
-                      <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
-                    </>
-                  ) : (
-                    <>
-                      {answer.text} (ניקוד: {answer.score})
-                      <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
-                      <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
-                    </>
-                  )}
-                </li>
-              ))}
-            </ul>
-            <div>
-              {showNewAnswerFields ? (
-                <>
-                  <input
-                    type="text"
-                    placeholder="תשובה"
-                    value={newAnswerText}
-                    onChange={(e) => setNewAnswerText(e.target.value)}
-                  />
-                  <input
-                    type="number"
-                    placeholder="ניקוד"
-                    value={newAnswerScore}
-                    onChange={(e) => setNewAnswerScore(e.target.value)}
-                  />
-                  <button type="button" className="add-answer-button" title="הוספת תשובה" onClick={handleAddAnswer}> <FaPlus /> </button>
-                </>
-              ) : (
-                <button type="button" className="add-answer-button" onClick={() => setShowNewAnswerFields(true)}>הוספת תשובה</button>
-              )}
-            </div>
-            <button type="submit" className="save-button" title="שמירה"> <FontAwesomeIcon icon={faFloppyDisk} /></button>
-            <button type="button" className='close-button' onClick={() => setModalIsOpen(false)}><FaTimes style={{ color: 'black' }} /> סגירה</button>
-          </form>
-        </Modal>
-      )}
-
-      {/* Confirm Delete Modal */}
-      {deleteConfirmIsOpen && (
-        <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
-          <h2>אישור מחיקה</h2>
-          <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
-          <button onClick={confirmDeleteQuestion}>כן</button>
-          <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
-        </Modal>
-      )}
+{/* Confirm Delete Modal */}
+{deleteConfirmIsOpen && (
+  <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
+    <button className="close-button" onClick={() => setDeleteConfirmIsOpen(false)}>
+      <FaTimes />
+    </button>
+    <h2>אישור מחיקה</h2>
+    <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
+    <button onClick={confirmDeleteQuestion}>כן</button>
+    <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
+  </Modal>
+)}
     </div>
   );
 };
