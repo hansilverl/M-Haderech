@@ -1,89 +1,82 @@
 /* Container for the whole component */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  margin-right: 300px;
+.admin-dashboard-posts-container {
+	width: 100%;
+	margin: 0 auto;
+	padding: 20px;
 }
 /* Header section */
-.header {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 10px; /* Reduced margin */
+.admin-dashboard-posts-header {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 10px; /* Reduced margin */
 }
 
 /* Button styles */
-.add-post-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.admin-dashboard-posts-container .add-post-button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
-.add-post-button:disabled {
-  background-color: #a0a0a0;
-  cursor: not-allowed;
+.admin-dashboard-posts-container .add-post-button:disabled {
+	background-color: #a0a0a0;
+	cursor: not-allowed;
 }
 
-.add-post-button:hover:enabled {
-  background-color: #0056b3;
+.admin-dashboard-posts-container .add-post-button:hover:enabled {
+	background-color: #0056b3;
 }
 
 /* Content section */
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.admin-dashboard-posts-container .posts-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 /* Loading and error styles */
-.loading, .error {
-  font-size: 1.5em;
-  color: #333;
-  margin-top: 20px;
-  text-align: center;
+.admin-dashboard-posts-container .loading,
+.admin-dashboard-posts-container .error {
+	font-size: 1.5em;
+	color: #333;
+	margin-top: 20px;
+	text-align: center;
 }
 
 /* Posts container styles */
-.posts-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px; /* Added margin to separate posts from button */
+.admin-dashboard-posts-container .posts-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 420px);
+	gap: 20px;
+	justify-content: center;
+	margin-top: 20px; /* Added margin to separate posts from button */
 }
 
 /* Individual post styles */
-.post-admin {
-  width: 300px;
-  /* height: 470px; */
-  height: 100%;
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-sizing: border-box;
-  padding: 20px;
-  transition: transform 0.3s, box-shadow 0.3s;
+.admin-dashboard-posts-container .post-admin {
+	width: 300px;
+	/* height: 470px; */
+	height: 100%;
+	background: #f8f9fa;
+	border: 1px solid #dee2e6;
+	border-radius: 8px;
+	box-sizing: border-box;
+	padding: 20px;
+	transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.post-admin:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive design */
-@media (max-width: 1200px) {
-  .posts-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.admin-dashboard-posts-container .post-admin:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
-  .posts-container {
-    grid-template-columns: 1fr;
-  }
+	.admin-dashboard-posts-container .add-post-button {
+		margin-right: 70px;
+	}
 }

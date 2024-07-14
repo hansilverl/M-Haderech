@@ -23,11 +23,10 @@ const GeneralModal = (props) => {
 			window.removeEventListener('keydown', handleKeyDown)
 			return
 		}
-		if (isOpen) {
-			window.addEventListener('keydown', handleKeyDown)
-		} else {
-			window.removeEventListener('keydown', handleKeyDown)
-		}
+		
+		if (isOpen) window.addEventListener('keydown', handleKeyDown)
+		else window.removeEventListener('keydown', handleKeyDown)
+
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown)
 		}

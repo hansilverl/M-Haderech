@@ -37,8 +37,8 @@ const Posts = () => {
 	}) : [];
 
 	return (
-		<div className='container'>
-			<div className='header'>
+		<div className='admin-dashboard-posts-container'>
+			<div className='admin-dashboard-posts-header'>
 				<button
 					className='add-post-button'
 					onClick={addPostHandler}
@@ -60,7 +60,7 @@ const Posts = () => {
 				</div>
 			)}
 		</div>
-	);
+	)
 };
 
 export default Posts;

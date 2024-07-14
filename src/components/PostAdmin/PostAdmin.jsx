@@ -7,6 +7,7 @@ import { serverTimestamp } from 'firebase/firestore'
 import './PostAdmin.css'
 
 const PostAdmin = ({ id, post, setRefresh }) => {
+	const { articleType } = post
 	const { published, datePublished } = post
 	const { postDelete, startDelete } = usePostDelete(id)
 	const { postUpdate, startUpdate } = usePostUpdate(id)
@@ -61,10 +62,11 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 	}
 
 	return (
-		<div className='post-admin'>
-			<div className='post-content'>
-				<Post article={post} />
+		<div className='admin-post-container'>
+			<div className={`post-type-bubble ${articleType === 'post' ? 'posttype' : 'convention'}`}>
+				{articleType === 'post' ? 'פוסט' : 'כנס'}
 			</div>
+			<Post article={post} />
 			<AdminBar id={id} />
 		</div>
 	)
