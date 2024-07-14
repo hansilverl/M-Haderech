@@ -13,6 +13,28 @@
   align-items: flex-start;
 }
 
+/* Styles for the back button */
+.back-button {
+  background: black;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+  transform: scale(1.1);
+}
+
 /* Style for the headings within the post details */
 .post-details h1 {
   color: #333;
