@@ -1,8 +1,10 @@
+import './PostDetails.css'
+
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import usePostsGet from '../../hooks/usePostsGet'
-import './PostDetails.css'
 import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
+import { useNavigate } from 'react-router-dom'
 
 const formatDate = (timestamp) => {
 	if (!timestamp) return ''
@@ -16,9 +18,11 @@ const formatDate = (timestamp) => {
 const PostDetails = () => {
 	const { id } = useParams()
 	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
+	const navigate = useNavigate()
 
 	return (
 		<div className='post-details'>
+			<button onClick={() => navigate(-1)}>חזרה</button>
 			{loadingGet ? (
 				<p>טוען...</p>
 			) : errorGet ? (

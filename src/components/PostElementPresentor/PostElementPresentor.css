@@ -1,44 +1,77 @@
 .post-element-presentor {
-	width: fit-content; /* or any specific width */
+	width: 100%; /* or any specific width */
 	height: fit-content; /* or any specific height */
 	overflow: hidden; /* Ensures nothing spills out */
 	display: flex; /* Centering the image if needed */
 	justify-content: center; /* Center horizontally */
 	align-items: center; /* Center vertically */
 	border-radius: 10px;
+	margin-bottom: 15px;
 }
 
 .post-element-presentor video {
-	max-width: 100%;
+	max-width: 70%;
 	height: auto;
 }
 
 .post-element-presentor img {
-	width: 100%; /* Adjust width to container's width */
 	height: 100%; /* Adjust height to container's height */
-	max-width: 100%;
+	max-width: 70%;
 	object-fit: contain; /* Ensures image's aspect ratio is maintained */
 }
 
 .post-element-presentor .pdf-button {
-  border: none;
-  background-color: transparent; /* No background for a cleaner look */
-  cursor: pointer; /* Cursor changes to pointer to indicate clickable */
-  padding: 5px; /* Padding to increase the clickable area */
-  display: inline-flex; /* Aligns the icon image properly */
-  align-items: center; /* Center the icon vertically */
-  justify-content: center; /* Center the icon horizontally */
+	border: none;
+	background-color: transparent; /* No background for a cleaner look */
+	cursor: pointer; /* Cursor changes to pointer to indicate clickable */
+	padding: 5px; /* Padding to increase the clickable area */
+	display: inline-flex; /* Aligns the icon image properly */
+	align-items: center; /* Center the icon vertically */
+	justify-content: center; /* Center the icon horizontally */
 }
 
 .post-element-presentor .pdf-button img {
-  width: 60px; /* Fixed size for consistency */
-  height: 60px;
-  transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
+	width: 60px; /* Fixed size for consistency */
+	height: 60px;
+	transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
 }
 
 .post-element-presentor .pdf-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+.pdf-container .pdf-buttons-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+}
+
+.pdf-container .pdf-buttons-container button {
+  margin: 0 10px;
+  padding: 15px;
+}
+
+@media (max-width: 768px) {
+	.post-element-presentor video {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.post-element-presentor img {
+		height: 100%; /* Adjust height to container's height */
+		width: 100%;
+		max-width: 100%;
+		object-fit: contain; /* Ensures image's aspect ratio is maintained */
+	}
+
+	.post-element-presentor .pdf-button img {
+		width: 30px; /* Fixed size for consistency */
+		height: 30px;
+		transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
+	}
 }
