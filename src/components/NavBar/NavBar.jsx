@@ -91,7 +91,7 @@ const Navbar = ({ setShowLogin }) => {
         </div>
         <ul className={`navbar-menu ${navbarOpen ? 'active' : ''}`}>
           <li><Link to="/" className={isActive('/')}>דף הבית</Link></li>
-          <li><Link to="/posts" className={isActive('/posts')}>פוסטים</Link></li>
+          <li><Link to="/posts" className={isActive('/posts')}>מאמרים</Link></li>
           <li><Link to="/about" className={isActive('/about')}>קצת עלינו</Link></li>
           <li><Link to="/convention" className={isActive('/convention')}>כנסים</Link></li>
           <li><Link to="/helpScore" onClick={() => setNavbarOpen(false)} className={isActive('/helpScore')}>מילוי שאלון</Link></li>

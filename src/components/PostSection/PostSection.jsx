@@ -18,7 +18,7 @@ const PostsSection = () => {
 	return (
 		<section id='posts' className='posts-section'>
 			<div className='posts-header'>
-				<h2>פוסטים</h2>
+				<h2>מאמרים</h2>
 			</div>
 			<div className='posts-container'>
 				{loadingGet ? (
@@ -26,7 +26,7 @@ const PostsSection = () => {
 				) : errorGet ? (
 					<p>{errorGet.toString()}</p>
 				) : !postsGet ? (
-					<h2>הפוסטים לא נמצאו</h2>
+					<h2>המאמרים לא נמצאו</h2>
 				) : (
 					postsGet.map((post, index) => (
 						<Post
@@ -38,7 +38,7 @@ const PostsSection = () => {
 			</div>
 			<div className='view-all-button-container'>
 				<button onClick={handleViewAllClick} className='view-all-button'>
-					ראה את כל הפוסטים
+					ראה את כל המאמרים
 				</button>
 			</div>
 		</section>

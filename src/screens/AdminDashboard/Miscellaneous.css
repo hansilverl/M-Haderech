@@ -1,25 +1,24 @@
 /* Miscellaneous.css */
 
-.miscellaneous {
-  padding: 20px;
-  min-height: 100vh;
+.admin-miscellaneous-container {
+  width: 100%;
   align-items: center;
-  margin-right: 250px; /* Adjusted margin for sidebar */
   margin-left: auto;
   max-width: auto;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
 }
 
-.miscellaneous h1 {
+.admin-miscellaneous-container h1 {
   margin-bottom: 20px;
   text-align: center;
 }
 
-.miscellaneous-content {
+.admin-miscellaneous-container .miscellaneous-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ensure a maximum of 5 boxes per row */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ensure a maximum of 5 boxes per row */
   grid-gap: 20px;
   justify-content: center;
   align-items: flex-start;
@@ -27,7 +26,7 @@
   max-width: 1200px; /* Optional: Limit the maximum width of the grid */
 }
 
-.section {
+.admin-miscellaneous-container .section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,12 +38,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.section h2 {
+.admin-miscellaneous-container .section h2 {
   text-align: center;
   margin-bottom: 10px;
 }
 
-button.update-button {
+.admin-miscellaneous-container button.update-button {
   background-color: #3498db;
   color: white;
   border: none;
@@ -56,6 +55,6 @@ button.update-button {
   margin-top: 10px;
 }
 
-button.update-button:hover {
+.admin-miscellaneous-container button.update-button:hover {
   background-color: #2980b9;
 }

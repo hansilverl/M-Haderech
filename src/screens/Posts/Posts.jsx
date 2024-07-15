@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import './Posts.css'
+
+import React from 'react'
 import Post from '../../components/Posts/Post'
 import usePostsGet, { queryGetPublishedPosts } from '../../hooks/usePostsGet'
-import './Posts.css'
 
 const Posts = () => {
 	const query = queryGetPublishedPosts(20)
@@ -15,14 +16,11 @@ const Posts = () => {
 			) : errorGet ? (
 				<h2>{errorGet.toString()}</h2>
 			) : !postsGet ? (
-				<h2>הפוסטים לא נמצאו</h2>
+				<h2>המאמרים לא נמצאו</h2>
 			) : (
 				<div className='posts-container'>
 					{postsGet.map((post, index) => (
-						<Post
-							key={index}
-							article={post}
-						/>
+						<Post key={index} article={post} />
 					))}
 				</div>
 			)}

@@ -43,6 +43,16 @@
 	justify-content: center;
 	width: 100%;
 }
+
+.post-element-presentor .text-presentor {
+	margin-top: 20px;
+	padding: 15px;
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	width: 95%;
+}
+
 .pdf-container .pdf-buttons-container {
 	display: flex;
 	flex-direction: row;
@@ -52,8 +62,8 @@
 }
 
 .pdf-container .pdf-buttons-container button {
-  margin: 0 10px;
-  padding: 15px;
+	margin: 0 10px;
+	padding: 15px;
 }
 
 @media (max-width: 768px) {

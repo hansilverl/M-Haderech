@@ -1,100 +1,81 @@
-.detailed-post {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1em;
-  text-align: right;
-  max-width: 300px;
-  min-width: 200px;
-  margin: 1em;
-  background-color: rgb(243, 243, 243);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative; /* Add relative positioning for the bubble */
+.detailed-post-container {
+	width: 300px;
+	height: 360px;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 1em;
+	text-align: right;
+	margin: 1em;
+	background-color: rgb(243, 243, 243);
+	justify-content: space-between;
+	position: relative; /* Add relative positioning for the bubble */
 }
 
-
-.post-type-bubble {
-  position: absolute; /* Position the bubble */
-  top: 8px; /* Adjust as necessary */
-  right: 8px; /* Adjust as necessary */
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 10px;
-  margin-bottom: 30px;
+.detailed-post-container .post-image {
+	max-width: 90%;
+	max-height: 270px;
+	height: auto;
+	border-radius: 8px;
+	align-self: center; /* Center the image if it is smaller than the width */
 }
 
-.post-type-bubble.posttype {
-  background-color: #413b44; /* Gray color for "post" */
+.detailed-post-container .post-title {
+	font-size: 1.5em;
+	margin: 0.5em 0;
+	margin-top: 30px;
 }
 
-.post-type-bubble.convention {
-  background-color: #a1564d; /* Green color for "convention" */
+.detailed-post-container .post-date {
+	color: #888;
+	font-size: 0.9em;
+	margin: 0.5em 0;
 }
 
-.post-image {
-  width: 90%;
-  height: auto;
-  border-radius: 8px;
-  align-self: center; /* Center the image if it is smaller than the width */
+.detailed-post-container .post-description {
+	font-size: 1em;
+	margin: 0.5em 0;
 }
 
-.post-title {
-  font-size: 1.5em;
-  margin: 0.5em 0;
-  margin-top: 30px;
+.detailed-post-container .post-button {
+	background: #9b59b6;
+	color: #fff;
+	border: none;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	border-radius: 10px;
+	font-size: 11px;
+	max-width: 40%; /* Adjust the width to fill the container */
+	margin-top: auto; /* This pushes the button to the bottom */
 }
 
-.post-date {
-  color: #888;
-  font-size: 0.9em;
-  margin: 0.5em 0;
+.detailed-post-container .post-button:hover {
+	background: #653a76;
 }
 
-.post-description {
-  font-size: 1em;
-  margin: 0.5em 0;
+.detailed-post-container .post-pdf-button {
+	background: transparent;
+	border: none;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	border-radius: 10px;
+	font-size: 14px;
+	margin: 0.5em 0;
+	text-align: center;
+	max-width: 20%;
+	transition: background-color 0.3s;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
-.post-button {
-  background: #9b59b6;
-  color: #fff;
-  border: none;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 11px;
-  max-width: 40%; /* Adjust the width to fill the container */
-  margin-top: auto; /* This pushes the button to the bottom */
-}
-
-.post-button:hover {
-  background: #653a76;
-}
-
-.post-pdf-button {
-  background: transparent;
-  border: none;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 14px;
-  margin: 0.5em 0;
-  text-align: center;
-  max-width: 20%;
-  transition: background-color 0.3s;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.post-pdf-button img {
-  display: block;  
-  width: 24px; 
-  height: 24px;  
+.detailed-post-container .post-pdf-button img {
+	display: block;
+	width: 24px;
+	height: 24px;
 }
 
 /* Prevent background change on hover */
-.post-pdf-button:hover {
-  background: transparent;
+.detailed-post-container .post-pdf-button:hover {
+	background: transparent;
 }

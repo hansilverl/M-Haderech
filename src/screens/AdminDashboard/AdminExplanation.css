@@ -6,7 +6,6 @@
   padding: 20px;
   box-sizing: border-box; /* Ensure padding is included in the height calculation */
   /* margin-right: 250px; */
-  margin-right: 20%;
 }
 
 .admin-explanation {

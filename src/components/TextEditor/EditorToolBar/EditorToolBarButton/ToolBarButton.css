@@ -7,9 +7,8 @@
 	border-radius: 4px;
 	box-shadow: none;
 	cursor: pointer;
-
 	border: #0d0d0d solid 1px;
-	transition: background-color 0.3s, transform 0.3s;
+	/* transition: background-color 0.3s, transform 0.3s; */
 	font-size: 16px; /* Smaller font size for buttons */
 	padding: 0.25rem 0.5rem;
 	margin: 1px;
@@ -17,8 +16,9 @@
 }
 
 .text-editor-menu-bar .text-editor-menu-bar-button:hover {
+	margin: 1px;
 	background-color: #a20067;
-	transform: translateY(-2px);
+	transform: none;
 }
 
 .text-editor-menu-bar .text-editor-menu-bar-button:disabled {

@@ -41,10 +41,7 @@ const Post = ({ article }) => {
 	}
 
 	return !id ? null : (
-		<div className='detailed-post'>
-			<div className={`post-type-bubble ${articleType === 'post' ? 'posttype' : 'convention'}`}>
-				{articleType === 'post' ? 'פוסט' : 'כנס'}
-			</div>
+		<div className='detailed-post-container'>
 			{!imageUrl ? null : <img src={imageUrl} alt={title} className='post-image' />}
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{getDateStringFromTimeStamp(datePublished)}</p>
