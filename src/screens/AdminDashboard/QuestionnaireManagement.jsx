@@ -75,7 +75,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     setSelectedQuestion(question);
     setDeleteConfirmIsOpen(true);
   };
-  
+
   const confirmDeleteQuestion = async () => {
     try {
       if (!selectedQuestion || !selectedQuestion.id) {
