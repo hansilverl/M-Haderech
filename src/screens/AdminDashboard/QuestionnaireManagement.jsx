@@ -413,51 +413,54 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             </div>
             <div className="answers-section">
               <h3>תשובות:</h3>
-              <table className="answers-table">
-                <tbody>
-                  <tr>
-                    {selectedQuestion.answers.map((answer) => (
-                      <tr key={answer.id} className="edit-answer-row">
-                        <td>
-                          {editingAnswer && editingAnswer.id === answer.id ? (
-                            <input
-                              type="text"
-                              name="answerText"
-                              value={currentText}
-                              onChange={handleAnswerChange}
-                            />
-                          ) : (
-                            <>{answer.text}</>
-                          )}
-                        </td>
-                        <td>
-                          {editingAnswer && editingAnswer.id === answer.id ? (
-                            <input
-                              type="number"
-                              name="answerScore"
-                              value={currentScore}
-                              onChange={handleAnswerChange}
-                            />
-                          ) : (
-                            <>ניקוד: {answer.score}</>
-                          )}
-                        </td>
-                        <td>
-                          {editingAnswer && editingAnswer.id === answer.id ? (
-                            <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
-                          ) : (
-                            <>
-                              <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
-                              <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
-                            </>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
+              <div className="answers-table-wrapper">
+                <div className="answers-table-container">
+                  <table className="answers-table">
+                    <tbody>
+                      {selectedQuestion.answers.map((answer) => (
+                        <tr key={answer.id} className="edit-answer-row">
+                          <td>
+                            {editingAnswer && editingAnswer.id === answer.id ? (
+                              <input
+                                type="text"
+                                name="answerText"
+                                value={currentText}
+                                onChange={handleAnswerChange}
+                              />
+                            ) : (
+                              <>{answer.text}</>
+                            )}
+                          </td>
+                          <td>
+                            {editingAnswer && editingAnswer.id === answer.id ? (
+                              <input
+                                type="number"
+                                name="answerScore"
+                                value={currentScore}
+                                onChange={handleAnswerChange}
+                              />
+                            ) : (
+                              <>ניקוד: {answer.score}</>
+                            )}
+                          </td>
+                          <td>
+                            {editingAnswer && editingAnswer.id === answer.id ? (
+                              <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                            ) : (
+                              <>
+                                <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                                <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+                              </>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
+
             <div>
               {showNewAnswerFields ? (
                 <>
