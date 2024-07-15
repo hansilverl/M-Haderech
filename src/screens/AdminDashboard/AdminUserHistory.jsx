@@ -137,11 +137,12 @@ const AdminUserHistory = () => {
       {error && <p className="error-message">{error}</p>}
       {history.length === 0 && !error && <p className="no-history">אין היסטוריה לשאלונים עבור אימייל זה</p>}
       <div className="score-ranges">
-      <p>סה"כ רשומות היסטוריה: {history.length}</p>
-      <br></br><br></br>
-        <p style={{ color: '#2D936C' }}>סך כל השאלונים עם ניקוד 0-19: {scoreRanges.low}</p>
-        <p style={{ color: '#F2CD60' }}>סך כל השאלונים עם ניקוד 20-32: {scoreRanges.medium}</p>
-        <p style={{ color: '#A4303F' }}>סך כל השאלונים עם ניקוד 33-60: {scoreRanges.high}</p>
+        <b>
+        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#2D936C' }}>קל</span> (0-19): {scoreRanges.low}</p>
+        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#F2CD60' }}>בינוני</span> (20-32): {scoreRanges.medium}</p>
+        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#A4303F' }}>קשה</span> (33-60): {scoreRanges.high}</p>
+        <br></br><br></br>
+        <p>סך כל השאלונים שמולאו: {history.length}</p></b>
       </div>
       <div className="statistics-container">
         <h2>סטטיסטיקות של שאלות (לפי תאריכים נבחרים):</h2>
