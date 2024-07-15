@@ -22,10 +22,10 @@ const NewsletterLinkAdmin = () => {
         if (docSnap.exists()) {
           setNewsletterLink(docSnap.data().newsletter);
         } else {
-          setError('לא נמצא קישור לניוזלטר.');
+          setError('לא נמצא קישור לרשימת תפוצה.');
         }
       } catch (err) {
-        setError('נכשל בטעינת קישור לניוזלטר.');
+        setError('נכשל בטעינת קישור לרשימת תפוצה.');
       } finally {
         setLoading(false);
       }
@@ -55,9 +55,9 @@ const NewsletterLinkAdmin = () => {
       });
       setNewsletterLink(tempNewsletterLink);
       closeModal();
-      alert('קישור לניוזלטר עודכן בהצלחה.');
+      alert('קישור לרשימת תפוצה עודכן בהצלחה.');
     } catch (error) {
-      alert('שגיאה בעדכון קישור לניוזלטר.');
+      alert('שגיאה בעדכון קישור לרשימת תפוצה.');
     }
   };
 
@@ -67,7 +67,7 @@ const NewsletterLinkAdmin = () => {
   return (
     <div className="newsletter-link">
       <div className="newsletter-link-content">
-        <p><strong>קישור לניוזלטר:</strong> {newsletterLink}</p>
+        <p><strong>קישור לרשימת תפוצה:</strong> {newsletterLink}</p>
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 
@@ -77,7 +77,7 @@ const NewsletterLinkAdmin = () => {
         overlayClassName="modal-overlay"
         className="modal-content"
       >
-        <h2>עדכון קישור לניוזלטר</h2>
+        <h2>עדכון קישור לרשימת תפוצה</h2>
         <form>
           <div className="modal-field">
             <label>

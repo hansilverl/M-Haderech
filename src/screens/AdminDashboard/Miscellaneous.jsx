@@ -45,7 +45,7 @@ const Miscellaneous = () => {
           <DonationNumber />
         </div>
         <div className="section">
-          <h2>קישור לניוזלטר</h2>
+          <h2>קישור לרשימת תפוצה</h2>
           <NewsletterLinkAdmin />
         </div>
         <div className="section">
