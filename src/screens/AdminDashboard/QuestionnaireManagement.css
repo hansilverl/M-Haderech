@@ -14,7 +14,8 @@
 
 .questionnaire-management {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: calc(100% - 250px); /* Adjust based on your navbar width */
+  max-width: calc(100% - 250px);
+  /* Adjust based on your navbar width */
   width: 100%;
   padding: 30px;
   background-color: inherit;
@@ -23,7 +24,8 @@
   text-align: right;
 
 }
-.answers-section > h3 {
+
+.answers-section>h3 {
   /* text-align: center;
   margin: 0 auto; */
   margin-bottom: 5px;
@@ -37,7 +39,8 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 20px; /* Added margin space below the button */
+  margin-bottom: 20px;
+  /* Added margin space below the button */
 }
 
 .button:hover {
@@ -45,7 +48,8 @@
 }
 
 .spacer {
-  height: 20px; /* Add space between the button and the question list */
+  height: 20px;
+  /* Add space between the button and the question list */
 }
 
 .question {
@@ -58,13 +62,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.255);
 
 }
+
 .answers-table {
   align-self: center;
   justify-self: center;
   margin: 0 auto;
   border: 1px solid #a9a9a9;
   width: 100%;
-  table-layout: fixed; /* Ensure fixed layout */
+  table-layout: fixed;
+  /* Ensure fixed layout */
 }
 
 .answers-table tr {
@@ -75,16 +81,30 @@
   border: 1px outset #a9a9a9;
   text-align: right;
   padding: 0.5rem;
-  word-wrap: break-word; /* Ensure text does not overflow */
+  word-wrap: break-word;
+  /* Ensure text does not overflow */
+}
+
+/* only for the third column of the table */
+.answers-table td:nth-child(3) {
+  text-align: center;
 }
 
 .edit-answer-row {
   display: table-row;
 }
 
-.edit-answer-row input {
-  width: 100%; /* Ensure input takes full width of the cell */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+.edit-answer-row input ,.new-answer-row input{
+  width: 100%;
+  /* Ensure input takes full width of the cell */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+}
+
+.cancel-answer {
+  background-color: #dc3545;
+  color: black;
+  flex-direction: flex-end;
 }
 
 /* Ensure the modal has a fixed size */
@@ -97,14 +117,14 @@
   overflow: hidden;
   transition: all 0.3s ease;
   max-width: 50vw;
-  max-height: 80vh; /* Fix the height */
+  max-height: 90vh;
+  /* Fix the height */
   align-self: center;
   justify-self: center;
 }
 
 .answers-section {
-  max-height: calc(80vh - 200px); /* Adjust based on modal height and other content */
-  overflow-y: auto; /* Enable vertical scroll if content overflows */
+  max-height: calc(80vh - 100px);
 }
 
 .answers-table-wrapper {
@@ -116,16 +136,10 @@
 }
 
 .answers-table-container {
-  width: 60vw; /* Fixed width */
+  width: 60vw;
+  /* Fixed width */
 }
 
-
-
-/* when the edit button isn't clicked, and the input field is hidden */
-.answers-table input[type="text"] :not(.edit) {
-  background-color:yellow;
-
-}
 
 .edit-answer-row input {
   justify-self: center;
@@ -133,7 +147,7 @@
   margin: auto 0;
 }
 
-.required-checkbox{
+.required-checkbox {
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 4px;
@@ -154,7 +168,8 @@
 
 .question-label {
   display: flex;
-  gap: 8px; /* Adds some space between the checkbox and the text */
+  gap: 8px;
+  /* Adds some space between the checkbox and the text */
 }
 
 .question:hover {
@@ -183,7 +198,6 @@
 button {
   border: none;
   cursor: pointer;
-  margin-left: 10px;
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 14px;
@@ -215,19 +229,18 @@ button:hover {
 }
 
 .add-answer-button {
-  background-color: #9b59b6;
   color: white;
-  border: 1px solid #ccc;
+  background-color: #007bff;
   font-weight: 600;
-  padding: 8px 12px;
   margin: 5px;
 }
 
 .add-answer-button:hover {
-  background-color: #f0f0f0;
+  background-color: #0056b3;
 }
 
-.editButton, .trashButton {
+.editButton,
+.trashButton {
   color: white;
   display: inline-flex;
   flex-direction: row;
@@ -238,8 +251,15 @@ button:hover {
 
 .save-button {
   background-color: #28a745 !important;
-  align-self: flex-start;
+  font-weight: 600;
+  color: white;
+  border: none;
+  /* align button center */
+  margin: 0 auto;
   display: block;
+  padding: 10px;
+  margin-top: 20px;
+
 }
 
 .save-button:hover {
@@ -260,7 +280,8 @@ button:hover {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Adjusted to center the modal */
+  margin: 0 auto;
+  /* Adjusted to center the modal */
   box-sizing: border-box;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -272,40 +293,42 @@ button:hover {
 
 .Modal input {
   margin-bottom: 10px;
-  border: 1px solid #ccc; /* Example style */
-  border-radius: 4px; /* Example style */
+  border: 1px solid #ccc;
+  /* Example style */
+  border-radius: 4px;
+  /* Example style */
 }
 
 /* Styling the label for newQuestionText specifically */
 label[for="question"] {
- max-width: 30vw;
+  max-width: 30vw;
 }
 
 .question-input {
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc; 
-  border-radius: 4px; /* Example style */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* Example style */
   width: 30vw;
 }
 
 .question-input:focus {
   outline: none;
-  border-color: #3498db; /* Example style */
+  border-color: #3498db;
+  /* Example style */
 }
 
 .save-answer {
   background-color: #28a745;
   color: white;
+  font-weight: 600;
 }
 
 .save-answer:hover {
   background-color: #218838;
 }
 
-.add-answer-header {
-  margin-bottom: -3px;
-}
 
 .close-button {
   position: absolute;
@@ -320,4 +343,20 @@ label[for="question"] {
 
 .close-button:hover {
   color: #000;
+}
+
+.add-question-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.submit-add-question {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }

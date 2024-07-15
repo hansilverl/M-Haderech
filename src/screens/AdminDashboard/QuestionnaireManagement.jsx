@@ -75,7 +75,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     setSelectedQuestion(question);
     setDeleteConfirmIsOpen(true);
   };
-
+  
   const confirmDeleteQuestion = async () => {
     try {
       if (!selectedQuestion || !selectedQuestion.id) {
@@ -89,6 +89,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       handleFirestoreError(error);
     }
   };
+  
 
 
   const handleDeleteAnswer = async (questionId, answerId) => {
@@ -345,6 +346,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         <button className="close-button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}>
           <FaTimes />
         </button>
+
         <h2>הוספת שאלה חדשה</h2>
         <form className="add-question-form"
           onSubmit={(e) => {
@@ -352,7 +354,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             saveNewQuestion();
           }}>
           <div>
-            <label htmlFor="newQuestionText">שאלה:</label>
+            <label htmlFor="newQuestionText">שאלה: </label>
             <input
               type="text"
               id="newQuestionText"
@@ -373,11 +375,11 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               שאלת חובה
             </label>
           </div>
-          <button type="submit">Add</button>
+          <button type="submit" className="submit-add-question"
+          >הוספה</button>
           <button type="button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}><FaTimes /> Close</button>
         </form>
       </Modal>
-
       {/* Modal for Editing Question */}
       {selectedQuestion && (
         <Modal isOpen={modalIsOpen} onRequestClose={() => { setModalIsOpen(false); resetInputFields(); }} contentLabel="Edit Question">
@@ -391,7 +393,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               saveQuestionChanges();
             }}>
             <div>
-              <label htmlFor="question">שאלה:</label>
+              <label htmlFor="question">שאלה: </label>
               <input className="question-input"
                 type="text"
                 id="question"
@@ -445,7 +447,9 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                           </td>
                           <td>
                             {editingAnswer && editingAnswer.id === answer.id ? (
-                              <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                              <div className="edit-answer-buttons">
+                                <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                              </div>
                             ) : (
                               <>
                                 <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
@@ -455,62 +459,52 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                           </td>
                         </tr>
                       ))}
+                      <tr className="new-answer-row">
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="תשובה"
+                            value={newAnswerText}
+                            onChange={(e) => setNewAnswerText(e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="number"
+                            placeholder="ניקוד"
+                            value={newAnswerScore}
+                            onChange={(e) => setNewAnswerScore(e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <button type="button" className="add-answer-button" onClick={handleAddAnswer}>הוספת תשובה</button>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-
             <div>
-              {showNewAnswerFields ? (
-                <>
-                  <h4 className="add-answer-header">
-                  </h4>
-                  <input
-                    type="text"
-                    placeholder="תשובה"
-                    value={newAnswerText}
-                    onChange={(e) => setNewAnswerText(e.target.value)}
-                  />
-                  <input
-                    type="number"
-                    placeholder="ניקוד"
-                    value={newAnswerScore}
-                    onChange={(e) => setNewAnswerScore(e.target.value)}
-                  />
-                  <button type="button" className="add-answer-button" onClick={() => handleAddAnswer()}>הוספת תשובה</button>
-                </>
-              ) : (
-                <button type="button" className="add-answer-button" title="הוספת תשובה" onClick={() => setShowNewAnswerFields(true)}> <FaPlus style={{ color: 'black' }} /></button>
-              )}
-              <button type="submit" className="save-button" title="שמירה"> <FontAwesomeIcon icon={faFloppyDisk} /></button>
+              <button type="submit" className="save-button" title="שמירה"> שמירת שינויים <FontAwesomeIcon icon={faFloppyDisk} /></button>
             </div>
           </form>
         </Modal>
       )}
-      {/* Confirm Delete Modal */}
-      {deleteConfirmIsOpen && (
-        <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
-          <button className="close-button" onClick={() => setDeleteConfirmIsOpen(false)}>
-            <FaTimes />
-          </button>
-          <h2>אישור מחיקה</h2>
-          {selectedAnswer ? (
-            <>
-              <p>האם את בטוחה שברצונך למחוק את התשובה?</p>
-              <button onClick={confirmDeleteAnswer}>כן</button>
-            </>
-          ) : (
-            <>
-              <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
-              <button onClick={confirmDeleteQuestion}>כן</button>
-            </>
-          )}
-          <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
-        </Modal>
-      )}
-
-    </div>
+    
+    {/* Confirm Delete Modal */}
+    {deleteConfirmIsOpen && (
+      <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
+        <button className="close-button" onClick={() => setDeleteConfirmIsOpen(false)}>
+          <FaTimes />
+        </button>
+        <h2>אישור מחיקה</h2>
+        <p>האם אתה בטוח שברצונך למחוק את השאלה?</p>
+        <button onClick={confirmDeleteQuestion}>כן</button>
+        <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
+      </Modal>
+    )}
+  </div>
   );
 };
 
