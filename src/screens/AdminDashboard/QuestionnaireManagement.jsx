@@ -112,9 +112,9 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         prevQuestions.map(question =>
           question.id === questionId
             ? {
-                ...question,
-                answers: question.answers.filter(answer => answer.id !== answerId)
-              }
+              ...question,
+              answers: question.answers.filter(answer => answer.id !== answerId)
+            }
             : question
         )
       );
@@ -217,10 +217,10 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     const reorderedQuestions = Array.from(questions);
     const [movedQuestion] = reorderedQuestions.splice(result.source.index, 1);
     reorderedQuestions.splice(result.destination.index, 0, movedQuestion);
-  
+
     // Check if the order has been changed
     const orderChanged = JSON.stringify(questions) !== JSON.stringify(reorderedQuestions);
-  
+
     // Update the order in Firestore
     try {
       for (let i = 0; i < reorderedQuestions.length; i++) {
@@ -235,7 +235,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       handleFirestoreError(error);
     }
   };
-  
+
 
   const handleAddQuestion = async () => {
     setAddQuestionModalIsOpen(true);
@@ -380,33 +380,35 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             </div>
             <h3>תשובות:</h3>
             <ul>
-              {selectedQuestion.answers.map((answer) => (
-                <li key={answer.id}>
-                  {editingAnswer && editingAnswer.id === answer.id ? (
-                    <>
-                      <input
-                        type="text"
-                        name="answerText"
-                        value={currentText}
-                        onChange={handleAnswerChange}
-                      />
-                      <input
-                        type="number"
-                        name="answerScore"
-                        value={currentScore}
-                        onChange={handleAnswerChange}
-                      />
-                      <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
-                    </>
-                  ) : (
-                    <>
-                      {answer.text} (ניקוד: {answer.score})
-                      <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
-                      <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
-                    </>
-                  )}
-                </li>
-              ))}
+              <div className="answers-box">
+                {selectedQuestion.answers.map((answer) => (
+                  <li key={answer.id}>
+                    {editingAnswer && editingAnswer.id === answer.id ? (
+                      <>
+                        <input
+                          type="text"
+                          name="answerText"
+                          value={currentText}
+                          onChange={handleAnswerChange}
+                        />
+                        <input
+                          type="number"
+                          name="answerScore"
+                          value={currentScore}
+                          onChange={handleAnswerChange}
+                        />
+                        <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                      </>
+                    ) : (
+                      <>
+                        {answer.text} (ניקוד: {answer.score})
+                        <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                        <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+                      </>
+                    )}
+                  </li>
+                ))}
+              </div>
             </ul>
             <div>
               {showNewAnswerFields ? (
@@ -434,7 +436,6 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           </form>
         </Modal>
       )}
-
       {/* Confirm Delete Modal */}
       {deleteConfirmIsOpen && (
         <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
@@ -442,11 +443,21 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             <FaTimes />
           </button>
           <h2>אישור מחיקה</h2>
-          <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
-          <button onClick={confirmDeleteQuestion}>כן</button>
+          {selectedAnswer ? (
+            <>
+              <p>האם את בטוחה שברצונך למחוק את התשובה?</p>
+              <button onClick={confirmDeleteAnswer}>כן</button>
+            </>
+          ) : (
+            <>
+              <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
+              <button onClick={confirmDeleteQuestion}>כן</button>
+            </>
+          )}
           <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
         </Modal>
       )}
+
     </div>
   );
 };

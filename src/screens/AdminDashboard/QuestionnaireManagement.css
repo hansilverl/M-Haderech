@@ -55,6 +55,13 @@
 
 }
 
+.answers-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
 .question-label {
   display: flex;
   gap: 8px; /* Adds some space between the checkbox and the text */
@@ -157,9 +164,8 @@ button:hover {
 }
 
 
-.Modal form {
-  display: flex;
-  flex-direction: column;
+.edit-question-form {
+  width: 40vw;
 }
 
 .Modal input {
