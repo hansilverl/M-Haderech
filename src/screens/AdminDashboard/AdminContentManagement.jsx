@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import usePostCreate from '../../hooks/usePostCreate'
 import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 
-const MAX_PER_PAGE = 3
+const MAX_PER_PAGE = 12
 
 const AdminContentManagement = () => {
 	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)
@@ -30,10 +30,10 @@ const AdminContentManagement = () => {
 		<div className='admin-dashboard-posts-container'>
 			<div className='admin-dashboard-posts-navbar-container'>
 				<ul className='admin-dashboard-posts-navbar-menu'>
-					<li>
+					<li className={type === 'post' ? 'active-tab' : ''}>
 						<button onClick={() => setType('post')}>מאמרים</button>
 					</li>
-					<li>
+					<li className={type === 'convention' ? 'active-tab' : ''}>
 						<button onClick={() => setType('convention')}>כנסים</button>
 					</li>
 				</ul>

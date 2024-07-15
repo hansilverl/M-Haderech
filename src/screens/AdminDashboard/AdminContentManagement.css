@@ -3,6 +3,7 @@
 	width: 100%;
 	margin: 0;
 	border: none;
+
 }
 /* Header section */
 .admin-dashboard-posts-container .admin-dashboard-posts-navbar-container {
@@ -12,7 +13,6 @@
 	position: sticky;
 	top: 0;
 	width: 100%;
-	/* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -46,12 +46,13 @@
 
 /* Button styles */
 .admin-dashboard-posts-container .add-post-button {
-	background-color: #007bff;
+	margin-top: 20px;
 	color: white;
 	border: none;
 	padding: 10px 20px;
 	border-radius: 5px;
 	cursor: pointer;
+	font-size: 25px;
 	transition: background-color 0.3s;
 }
 
@@ -60,9 +61,8 @@
 	cursor: not-allowed;
 }
 
-.admin-dashboard-posts-container .add-post-button:hover:enabled {
-	background-color: #0056b3;
-}
+/* .admin-dashboard-posts-container .add-post-button:hover:enabled {
+} */
 
 /* Content section */
 .admin-dashboard-posts-container .posts-container {
