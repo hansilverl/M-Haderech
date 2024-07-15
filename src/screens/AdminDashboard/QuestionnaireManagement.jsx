@@ -97,16 +97,16 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       const questionDocRef = doc(db, 'Questionnaire', questionId);
       const questionDoc = await getDoc(questionDocRef);
       const questionData = questionDoc.data();
-  
+
       // Remove the answer from the question data locally
       const updatedQuestionData = { ...questionData };
       delete updatedQuestionData[answerId];
-  
+
       // Update the document in Firestore
       await updateDoc(questionDocRef, {
         [answerId]: deleteField()
       });
-  
+
       // Update the local state
       setQuestions(prevQuestions =>
         prevQuestions.map(question =>
@@ -118,20 +118,20 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             : question
         )
       );
-  
+
       // Update the selectedQuestion object's answers array
       setSelectedQuestion(prevQuestion => ({
         ...prevQuestion,
         answers: prevQuestion.answers.filter(answer => answer.id !== answerId)
       }));
-  
+
       setDeleteConfirmIsOpen(false);
       alert('התשובה נמחקה בהצלחה!');
     } catch (error) {
       handleFirestoreError(error);
     }
   };
-  
+
   const handleEditQuestion = (question) => {
     setCurrentText(question.question);
     setIsRequired(question.required || false);
@@ -139,26 +139,31 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     setModalIsOpen(true);
   };
 
-const handleAddAnswer = async () => {
-  if (newAnswerText && newAnswerScore) {
-    const updatedAnswers = [
-      ...selectedQuestion.answers,
-      { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }
-    ];
-    const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
-    setSelectedQuestion(updatedQuestion);
-
-    // Update the Firestore document with the new answer
-    const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id);
-    await updateDoc(questionDocRef, {
-      [newAnswerScore]: newAnswerText
-    });
-
-    setNewAnswerText('');
-    setNewAnswerScore('');
-    setShowNewAnswerFields(false);
-  }
-};
+  const handleAddAnswer = async () => {
+    if (newAnswerText && newAnswerScore) {
+      const updatedAnswers = [
+        ...selectedQuestion.answers,
+        { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }
+      ];
+  
+      // Sort the updatedAnswers array by score
+      updatedAnswers.sort((a, b) => a.score - b.score);
+  
+      const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
+      setSelectedQuestion(updatedQuestion);
+  
+      // Update the Firestore document with the new answer
+      const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id);
+      await updateDoc(questionDocRef, {
+        [newAnswerScore]: newAnswerText
+      });
+  
+      setNewAnswerText('');
+      setNewAnswerScore('');
+      setShowNewAnswerFields(false);
+    }
+  };
+  
 
 
   const handleEditAnswer = (answer) => {
