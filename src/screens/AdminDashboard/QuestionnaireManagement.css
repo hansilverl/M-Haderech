@@ -7,7 +7,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ffffff4b;
+  background-color: #e4e3e34b;
   z-index: -1;
 }
 
@@ -23,7 +23,11 @@
   text-align: right;
 
 }
-
+.answers-section > h3 {
+  /* text-align: center;
+  margin: 0 auto; */
+  margin-bottom: 5px;
+}
 
 
 .button {
@@ -58,6 +62,38 @@
   align-self: center;
   justify-self: center;
   margin: 0 auto;
+  border: 1px solid #a9a9a9;
+
+}
+
+.answers-table tr{
+  /* constant width for the table */
+  width: 60vw;
+}
+
+.answers-table td {
+  border: 1px outset #a9a9a9;
+  text-align: right;
+  padding: 0.5rem;
+
+}
+
+.answer-input {
+  align-self: center;
+  margin: 0 auto;
+  padding-right: 10px;
+}
+
+/* when the edit button isn't clicked, and the input field is hidden */
+.answers-table input[type="text"] :not(.edit) {
+  background-color:yellow;
+
+}
+
+.edit-answer-row input {
+  justify-self: center;
+  align-self: center;
+  margin: auto 0;
 }
 
 .required-checkbox{
@@ -76,6 +112,7 @@
 .required-checkbox input[type="checkbox"] {
   margin-left: 5px;
 }
+
 
 
 .question-label {
@@ -190,7 +227,6 @@ button:hover {
   overflow: hidden;
   transition: all 0.3s ease;
   max-width: 50vw;
-  max-height: 80vh;
   align-self: center;
   justify-self: center;
 }
@@ -210,7 +246,7 @@ label[for="question"] {
 .question-input {
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc; /* Example style */
+  border: 1px solid #ccc; 
   border-radius: 4px; /* Example style */
   width: 30vw;
 }

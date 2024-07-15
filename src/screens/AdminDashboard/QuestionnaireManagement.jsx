@@ -416,43 +416,44 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               <table className="answers-table">
                 <tbody>
                   <tr>
-                    <td className="answers-box">
-                      {selectedQuestion.answers.map((answer) => (
-                        <tr key={answer.id}>
-                          <td>
-                            {editingAnswer && editingAnswer.id === answer.id ? (
-                              <>
-                                <input
-                                  type="text"
-                                  name="answerText"
-                                  value={currentText}
-                                  onChange={handleAnswerChange}
-                                />
-                                <input
-                                  type="number"
-                                  name="answerScore"
-                                  value={currentScore}
-                                  onChange={handleAnswerChange}
-                                />
-                                <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
-                              </>
-                            ) : (
-                              <>
-                                {answer.text} (ניקוד: {answer.score})
-                              </>
-                            )}
-                          </td>
-                          <td>
-                            {editingAnswer && editingAnswer.id === answer.id ? null : (
-                              <>
-                                <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
-                                <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
-                              </>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </td>
+                    {selectedQuestion.answers.map((answer) => (
+                      <tr key={answer.id} className="edit-answer-row">
+                        <td>
+                          {editingAnswer && editingAnswer.id === answer.id ? (
+                            <input
+                              type="text"
+                              name="answerText"
+                              value={currentText}
+                              onChange={handleAnswerChange}
+                            />
+                          ) : (
+                            <>{answer.text}</>
+                          )}
+                        </td>
+                        <td>
+                          {editingAnswer && editingAnswer.id === answer.id ? (
+                            <input
+                              type="number"
+                              name="answerScore"
+                              value={currentScore}
+                              onChange={handleAnswerChange}
+                            />
+                          ) : (
+                            <>ניקוד: {answer.score}</>
+                          )}
+                        </td>
+                        <td>
+                          {editingAnswer && editingAnswer.id === answer.id ? (
+                            <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                          ) : (
+                            <>
+                              <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                              <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+                            </>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
                   </tr>
                 </tbody>
               </table>
