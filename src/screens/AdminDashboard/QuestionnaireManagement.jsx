@@ -6,7 +6,9 @@ import './QuestionnaireManagement.css';
 import Modal from 'react-modal';
 import { FaTrashAlt, FaEdit, FaTimes, FaPlus } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons';
+
+
 
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
@@ -27,6 +29,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
   const [addQuestionModalIsOpen, setAddQuestionModalIsOpen] = useState(false);
   const [editingAnswer, setEditingAnswer] = useState(null); // New state for editing answer
   const [showNewAnswerFields, setShowNewAnswerFields] = useState(false);
+  // for loading icon:
+  const [isReordering, setIsReordering] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -59,6 +63,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
     fetchQuestions();
   }, [questionnaireId]);
+
 
   const handleFirestoreError = (error) => {
     console.error('Firebase error: ', error);
@@ -212,7 +217,10 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     const reorderedQuestions = Array.from(questions);
     const [movedQuestion] = reorderedQuestions.splice(result.source.index, 1);
     reorderedQuestions.splice(result.destination.index, 0, movedQuestion);
-
+  
+    // Check if the order has been changed
+    const orderChanged = JSON.stringify(questions) !== JSON.stringify(reorderedQuestions);
+  
     // Update the order in Firestore
     try {
       for (let i = 0; i < reorderedQuestions.length; i++) {
@@ -220,11 +228,14 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         await updateDoc(questionDocRef, { order: i });
       }
       setQuestions(reorderedQuestions);
-      alert('סדר השאלות עודכן בהצלחה!');
+      if (orderChanged) {
+        alert('סדר השאלות עודכן בהצלחה!');
+      }
     } catch (error) {
       handleFirestoreError(error);
     }
   };
+  
 
   const handleAddQuestion = async () => {
     setAddQuestionModalIsOpen(true);
@@ -286,6 +297,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                   </Draggable>
                 ))}
                 {provided.placeholder}
+                {isReordering && <FontAwesomeIcon icon={faBars} style={{ color: 'black' }} />}
               </div>
             )}
           </Droppable>
