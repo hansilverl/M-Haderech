@@ -2,7 +2,7 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import './AdminDashboard.css'
-import Posts from './Posts'
+import AdminContentManagement from './AdminContentManagement'
 import Users from './Users'
 import Sidebar from '../../components/AdminDashboard/Sidebar'
 import QuestionnaireManagement from './QuestionnaireManagement'
@@ -23,7 +23,7 @@ const AdminDashboard = () => {
 					</div>
 				)}
 				<Routes>
-					<Route exact path='posts' element={<Posts />} />
+					<Route exact path='posts' element={<AdminContentManagement />} />
 					<Route exact path='users' element={<Users />} />
 					<Route exact path='questionnaire' element={<QuestionnaireManagement />} />
 					<Route exact path='miscellaneous' element={<Miscellaneous />} />

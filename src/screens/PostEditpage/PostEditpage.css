@@ -10,9 +10,9 @@
 }
 
 /* General styles remain unchanged */
-.edit-post-page select,
-.edit-post-page option,
-.edit-post-page input[type='text'] {
+.edit-post-page .edit-post-header select,
+.edit-post-page .edit-post-header option,
+.edit-post-page .edit-post-header input[type='text'] {
 	/*type text assures that we only take text inputs from the current page, instead of all inputs on the website*/
 	border-radius: 5px;
 	border: 1px solid #ccc;
@@ -25,17 +25,17 @@
 	/* max-width: 30%; */
 }
 
-.edit-post-page input:focus,
-.edit-post-page select:focus,
-.edit-post-page option:focus {
+.edit-post-page .edit-post-header input:focus,
+.edit-post-page .edit-post-header select:focus,
+.edit-post-page .edit-post-header option:focus {
 	outline: none;
 	border-color: #007bff;
 	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-.edit-post-page h1,
-.edit-post-page h2,
-.edit-post-page h3 {
+.edit-post-page .edit-post-header h1,
+.edit-post-page .edit-post-header h2,
+.edit-post-page .edit-post-header h3 {
 	padding: 0 20px;
 	color: #333;
 	text-align: center;
@@ -54,9 +54,8 @@
 	background: #fff;
 }
 
-.edit-post-page button {
-	background-color: #007bff;
-	color: white;
+.edit-post-page .edit-post-header button,
+.edit-post-page .buttons-container button {
 	border: none;
 	padding: 10px 20px;
 	border-radius: 5px;
@@ -65,12 +64,13 @@
 	font-size: 16px;
 }
 
-.edit-post-page button:hover {
-	background-color: #0056b3;
+.edit-post-page .edit-post-header button:hover,
+.edit-post-page .buttons-container button:hover {
 	margin: 0px 10px;
 }
 
-.edit-post-page button:disabled {
+.edit-post-page .edit-post-header button:disabled,
+.edit-post-page .buttons-container button:disabled {
 	background-color: #a0a0a0;
 	cursor: not-allowed;
 }
@@ -130,7 +130,7 @@
 	display: flex;
 	max-width: 50%;
 	min-width: fit-content;
-	justify-content: space-around;	
+	justify-content: space-around;
 }
 
 @media (max-width: 768px) {

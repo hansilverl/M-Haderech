@@ -115,33 +115,35 @@ const PostEditPageComp = ({ postID, post }) => {
 				<h1>המאמר לא נמצא</h1>
 			) : (
 				<>
-					<div className='main-flex-row'>
-						<label className='input-label'>כותרת המאמר:</label>
-						<input
-							type='text'
-							placeholder='כותרת'
-							value={title}
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-					</div>
-					<div className='main-flex-row'>
-						<label className='input-label'>תיאור המאמר:</label>
-						<input
-							type='text'
-							placeholder='תיאור'
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
-						/>
-					</div>
-					<div className='main-flex-row'>
-						<Selector
-							id='post-type'
-							name='סוג המאמר (מאמר או כנס)'
-							value={articleType}
-							selectFunction={setPostType}
-							optionValues={['post', 'convention']}
-							optionNames={['מאמר', 'כנס']}
-						/>
+					<div className='edit-post-header main-flex-col'>
+						<div className='main-flex-row'>
+							<label className='input-label'>כותרת המאמר:</label>
+							<input
+								type='text'
+								placeholder='כותרת'
+								value={title}
+								onChange={(e) => setTitle(e.target.value)}
+							/>
+						</div>
+						<div className='main-flex-row'>
+							<label className='input-label'>תיאור המאמר:</label>
+							<input
+								type='text'
+								placeholder='תיאור'
+								value={description}
+								onChange={(e) => setDescription(e.target.value)}
+							/>
+						</div>
+						<div className='main-flex-row'>
+							<Selector
+								id='post-type'
+								name='סוג המאמר (מאמר או כנס)'
+								value={articleType}
+								selectFunction={setPostType}
+								optionValues={['post', 'convention']}
+								optionNames={['מאמר', 'כנס']}
+							/>
+						</div>
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
 					<div className='buttons-container main-flex-row'>
@@ -151,7 +153,9 @@ const PostEditPageComp = ({ postID, post }) => {
 						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
 							מחק
 						</button>
-						<button onClick={togglePublished} className='publish-button'>
+						<button
+							onClick={togglePublished}
+							className={!published ? 'publish-button' : 'unpublish-button'}>
 							{published ? 'בטל פרסום' : 'פרסם'}
 						</button>
 					</div>

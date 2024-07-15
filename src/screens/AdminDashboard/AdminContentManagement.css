@@ -1,14 +1,47 @@
 /* Container for the whole component */
 .admin-dashboard-posts-container {
 	width: 100%;
-	margin: 0 auto;
-	padding: 20px;
+	margin: 0;
+	border: none;
 }
 /* Header section */
-.admin-dashboard-posts-header {
+.admin-dashboard-posts-container .admin-dashboard-posts-navbar-container {
+	background: #9b59b6;
+	color: white;
+	padding: 1em 0;
+	position: sticky;
+	top: 0;
+	width: 100%;
+	/* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 	display: flex;
-	justify-content: flex-start;
-	margin-bottom: 10px; /* Reduced margin */
+	justify-content: space-around;
+	align-items: center;
+	list-style: none;
+}
+
+.admin-dashboard-posts-navbar-container .admin-dashboard-posts-navbar-menu  {
+	list-style: none;
+	display: flex;
+	margin: 0px;
+	padding: 0px;
+}
+.admin-dashboard-posts-navbar-container .admin-dashboard-posts-navbar-menu li {
+	margin: 1em 2em;
+}
+
+.admin-dashboard-posts-navbar-container .admin-dashboard-posts-navbar-menu li button {
+	background-color: transparent;
+	color: #fff;
+	border: none;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	font-size: 2em;
+	transition: background-color 0.3s;
+}
+
+.admin-dashboard-posts-navbar-container .admin-dashboard-posts-navbar-menu li button:hover {
+	background-color: #575757;
+	border-radius: 5px;
 }
 
 /* Button styles */
@@ -46,15 +79,6 @@
 	color: #333;
 	margin-top: 20px;
 	text-align: center;
-}
-
-/* Posts container styles */
-.admin-dashboard-posts-container .posts-container {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 400px);
-	gap: 20px;
-	justify-content: center;
-	margin-top: 20px; 
 }
 
 @media (max-width: 768px) {

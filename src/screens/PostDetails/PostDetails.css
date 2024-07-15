@@ -1,83 +1,84 @@
 /* Base styles for the post details container */
 .post-details-container {
-  display : flex;
-  flex-direction: column;
-  width:90%;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  font-family: 'Arial', sans-serif;
-  justify-content: right;
-  align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	max-width: 1200px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #ffffff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	font-family: 'Arial', sans-serif;
+	justify-content: right;
+	align-items: flex-start;
 }
 
 /* Styles for the back button */
 .post-details-container .back-button {
-  background: black;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+	background: black;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
 }
 
 .post-details-container .back-button svg {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.3s ease;
+	width: 24px;
+	height: 24px;
+	transition: transform 0.3s ease;
 }
 
 .post-details-container .back-button:hover svg {
-  transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 /* Style for the headings within the post details */
 .post-details-container .post-details-header h1 {
-  color: #333;
-  text-align: right;
-  margin-bottom: 20px;
+	color: #333;
+	text-align: right;
+	margin-bottom: 20px;
 }
 
 /* Styling for the paragraph elements */
 .post-details-container .post-details-header p {
-  color: #666;
-  line-height: 1.6;
-  font-size: 16px;
-  margin-top: 10px;
-  text-align: right;
+	color: #666;
+	line-height: 1.6;
+	font-size: 16px;
+	margin-top: 10px;
+	text-align: right;
 }
 
 /* Specific style for the date to make it less prominent */
 .post-details-container .post-details-header p strong {
-  color: #333;
-  margin-right: 5px;
+	color: #333;
+	margin-right: 5px;
 }
 
 /* Styles for the links to make them stand out */
 .post-details-container .post-details-header a {
-  display: inline-block;
-  background-color: #007bff;
-  color: #ffffff;
-  padding: 10px 20px;
-  margin-top: 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  text-align: center;
-  transition: background-color 0.3s;
+	display: inline-block;
+	background-color: #007bff;
+	color: #ffffff;
+	padding: 10px 20px;
+	margin-top: 20px;
+	border-radius: 5px;
+	text-decoration: none;
+	text-align: center;
+	transition: background-color 0.3s;
 }
 
 /* Hover effect for links */
 .post-details-container .post-details-header a:hover {
-  background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 /* Styling for the narrow content box */
 .post-details .narrow-content {
-  width: 60%; /* Further reduce width for non-PDF content */
+	width: 60%; /* Further reduce width for non-PDF content */
 }
 
 /* Responsive design adjustments */

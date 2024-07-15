@@ -105,7 +105,6 @@ const useResourceManagement = (initialPath = null) => {
 		try {
 			setErrorResourcePath(null)
 			const filePath = await uploadFile(file, type)
-			console.log(filePath)
 			setResourcePath(filePath)
 		} catch (error) {
 			setErrorResourcePath(error.message)

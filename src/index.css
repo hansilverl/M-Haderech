@@ -23,16 +23,16 @@ button {
 	background: #007bff;
 	color: #fff;
 	border: none;
-	padding: 1em 2em;
-	cursor: pointer;
+	padding: 10px 20px;
 	border-radius: 5px;
-	font-size: 1em;
+	cursor: pointer;
+	margin: 10px;
+	font-size: 16px;
 }
 
 button:hover {
 	background: #0056b3;
 }
-
 
 .main-flex-row {
 	display: flex;
@@ -50,11 +50,10 @@ button:hover {
 	width: 100%;
 }
 
-
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --font-size: 16px;
-    --padding: 10px;
+	--primary-color: #3498db;
+	--secondary-color: #2ecc71;
+	--font-size: 16px;
+	--padding: 10px;
 	--admin-sidebar-width: 250px;
 }

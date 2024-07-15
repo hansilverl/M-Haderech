@@ -3,7 +3,7 @@ import { db } from '../firebase/config'
 import { doc, deleteDoc, collection } from 'firebase/firestore'
 
 import { deleteObjectByFilePath } from './useResourceManagement'
-import { postsFetchByQuery } from './usePostsGet'
+import { fetchSinglePost } from './usePostsGet'
 import { elements } from 'chart.js'
 
 const deleteDocByReference = async (ref) => {
@@ -19,7 +19,7 @@ const postDeleteFunction = async (documentID) => {
 	if (!documentID) throw new Error('No document ID provided!')
 	const postsCollection = collection(db, 'Posts')
 	const docRef = doc(postsCollection, documentID)
-	const post = await postsFetchByQuery(documentID)
+	const post = await fetchSinglePost(documentID)
 	if (!post) throw new Error('Post not found')
 
 	post.elements.forEach(async (element) => {

@@ -11,10 +11,11 @@
   width: 100%;
   box-sizing: border-box; /* Include padding in total width */
   background-color: #f5f5f5; /* Light background color for better readability */
-  align-items: center;
+  align-items: top;
   justify-content: center;
   min-height: 100vh;
 }
+
 
 @media (max-width: 768px){
   .admin-dashboard-content {

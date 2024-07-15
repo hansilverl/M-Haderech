@@ -1,6 +1,6 @@
 import './PostAdmin.css'
 
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { serverTimestamp } from 'firebase/firestore'
 
@@ -8,13 +8,9 @@ import Post from '../Posts/Post'
 import usePostDelete from '../../hooks/usePostDelete'
 import usePostUpdate from '../../hooks/usePostUpdate'
 
-const PostAdmin = ({ id, post, setRefresh }) => {
-	const { articleType } = post
-	const { published, datePublished } = post
-	const { postDelete, startDelete } = usePostDelete(id)
-	const { postUpdate, startUpdate } = usePostUpdate(id)
-
-	const [isPublished, setPublished] = useState(published ? true : false)
+const PostAdmin = ({ article, setRefresh }) => {
+	const { postDelete, startDelete } = usePostDelete(article.id)
+	const { postUpdate, startUpdate } = usePostUpdate(article.id)
 
 	const deletePostButton = async () => {
 		if (window.confirm('Are you sure you want to delete this post?')) {
@@ -23,34 +19,28 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 	}
 
 	const togglePublished = async () => {
-		setPublished(!isPublished)
+		article.published = !article.published
+		if (!article.datePublished && article.published) article.datePublished = serverTimestamp()
+		const newPost = { published: article.published, datePublished: article.datePublished }
+		startUpdate(newPost)
 	}
 
 	useEffect(() => {
-		const togglePublish = async () => {
-			const newPost = { published: isPublished }
-			if (isPublished && !datePublished) newPost['datePublished'] = serverTimestamp()
-			startUpdate(newPost)
-		}
-		togglePublish()
-	}, [isPublished])
-
-	useEffect(() => {
 		if (postDelete) setRefresh(true)
-	}, [postDelete, isPublished])
+	}, [postDelete, article.published])
 
-	const navigate = useNavigate(`/edit/${id}`)
+	const navigate = useNavigate(`/edit/${article.id}`)
 
 	const AdminBar = () => {
 		return (
-			<div className='admin-bar'>
-				<button onClick={() => navigate(`/edit/${id}`)} className='admin-button'>
+			<div id={article.id} className='admin-bar'>
+				<button onClick={() => navigate(`/edit/${article.id}`)} className='admin-button'>
 					ערוך
 				</button>
 				<button onClick={deletePostButton} className='admin-button'>
 					מחק
 				</button>
-				{!isPublished ? (
+				{!article.published ? (
 					<button onClick={togglePublished} className='admin-button publish-button'>
 						פרסם
 					</button>
@@ -65,11 +55,14 @@ const PostAdmin = ({ id, post, setRefresh }) => {
 
 	return (
 		<div className='admin-post-container'>
-			<div className={`post-type-bubble ${articleType === 'post' ? 'posttype' : 'convention'}`}>
-				{articleType === 'post' ? 'מאמר' : 'כנס'}
+			<div
+				className={`post-type-bubble ${
+					article.articleType === 'post' ? 'posttype' : 'convention'
+				}`}>
+				{article.articleType === 'post' ? 'מאמר' : 'כנס'}
 			</div>
-			<Post article={post} />
-			<AdminBar id={id} />
+			<Post article={article} />
+			<AdminBar id={article.id} />
 		</div>
 	)
 }

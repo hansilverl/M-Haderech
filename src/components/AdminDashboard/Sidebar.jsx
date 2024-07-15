@@ -27,7 +27,7 @@ const Sidebar = () => {
           <li>
             <Link to="/admin/posts" onClick={closeSidebar}>
               <FaRegNewspaper className="sidebar-icon" />
-              <span>מאמרים</span>
+              <span>ניהול תוכן</span>
             </Link>
           </li>
           <li>

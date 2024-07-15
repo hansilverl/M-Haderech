@@ -1,4 +1,12 @@
-.draggable-post-element {
+.element-editor-container {
+	border: #333 solid 1px;
+	border-radius: 5px;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.element-editor-container .draggable-post-element {
 	padding: 0px;
 	margin: 0 0 0px 0;
 	background-color: #fff;
@@ -6,21 +14,21 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin : 5px;
+	margin: 5px;
 	width: 100%;
 }
 
-.drag-handle {
-  cursor: grab;
-  padding: 2px;
+.element-editor-container .drag-handle {
+	cursor: grab;
+	padding: 2px;
 }
 
-.element-editor-container {
+.element-editor-container .element-editor-container {
 	width: 100%;
 	justify-content: center;
 }
 
-.element-editor-header {
+.element-editor-container .element-editor-header {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -32,14 +40,6 @@
 	background-color: #c2c2c2;
 }
 
-.element-editor-header input {
+.element-editor-container .element-editor-header input {
 	width: fit-content;
-}
-
-.element-editor-container {
-	border: #333 solid 1px;
-	border-radius: 5px;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
 }

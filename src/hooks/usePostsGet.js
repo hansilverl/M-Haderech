@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react'
 import { db, collectionNames } from '../firebase/config'
 import { getDownloadURLFromPath } from './useResourceManagement'
-import { collection, query, where, orderBy, limit, getDocs, getDoc, doc } from 'firebase/firestore'
+import {
+	collection,
+	query,
+	where,
+	orderBy,
+	limit,
+	getDocs,
+	getDoc,
+	doc,
+	startAfter,
+	startAt,
+} from 'firebase/firestore'
+
+const DEFAULT_LIMIT = 20
 
 const addFileUrls = async (post) => {
 	const { elements } = post
@@ -18,109 +31,121 @@ const convertDocToPost = async (doc) => {
 	return post
 }
 
-const postsFetchByQuery = async (query) => {
-	if (!query && typeof query !== 'string' && typeof query !== 'object') return
-
-	if (typeof query === 'string') {
-		const col = collection(db, collectionNames.posts)
-		const docRef = doc(col, query)
-		const docSnap = await getDoc(docRef)
-		if (!docSnap.exists()) throw new Error('לא נמצא מאמר עם המזהה המתאים')
-		const post = await convertDocToPost(docSnap)
-		addFileUrls(post)
-		return post
-	}
-
-	const querySnapshot = await getDocs(query)
-	const rawData = await Promise.all(
-		querySnapshot.docs.map(async (doc) => await convertDocToPost(doc))
-	)
-	if (rawData.length === 0) throw new Error('לא נמצאו מאמרים')
-
-	const posts = []
-	for (const post of rawData) {
-		await addFileUrls(post)
-		posts.push(post)
-	}
-
-	return posts
+const convertDocsToPosts = async (docs) => {
+	const posts = await Promise.all(docs.map(async (doc) => await convertDocToPost(doc)))
+	await Promise.all(posts.map(async (post) => await addFileUrls(post)))
+	return posts.length > 0 ? posts : null
 }
-const usePostsGet = (query) => {
+
+const fetchSinglePost = async (documentID) => {
+	const col = collection(db, collectionNames.posts)
+	const docRef = doc(col, documentID)
+	const docSnap = await getDoc(docRef)
+	if (!docSnap.exists()) throw new Error('לא נמצא מאמר עם המזהה המתאים')
+	const post = await convertDocToPost(docSnap)
+	return post
+}
+
+const getNextFetch = async (firebaseQuery, fetchedDocs) => {
+	if (!firebaseQuery || !fetchedDocs || fetchedDocs.length === 0) return null
+	if (firebaseQuery._query.limit < fetchedDocs.length) return null
+
+	const modifiedQuery = query(
+		firebaseQuery,
+		startAfter(fetchedDocs[fetchedDocs.length - 1]),
+		limit(1)
+	)
+	const querySnapshot = await getDocs(modifiedQuery)
+
+	if (querySnapshot.docs.length === 0) return null
+	return querySnapshot.docs[0]
+}
+const usePostsGet = (firebaseQuery) => {
 	const [postsGet, setPosts] = useState(null)
 	const [loadingGet, setLoading] = useState(false)
 	const [errorGet, setError] = useState(null)
-	const [load, setLoad] = useState(true)
+
+	const [hasMore, setHasMore] = useState(false)
+	const [lastFetch, setLastFetch] = useState(null)
+	const [loadMore, setLoadMore] = useState(false)
+	const [reload, setReload] = useState(true)
 
 	const reloadGet = () => {
-		setLoad(true)
+		setReload(true)
 	}
-	const postsGetHandler = async () => {
+
+	const loadMoreGet = () => {
+		setLoadMore(true)
+	}
+
+	const postsGetHandler = async (isLoadMore) => {
 		if (loadingGet) return
 		setLoading(true)
-		setLoad(false)
+		setError(null)
+
 		try {
-			if (!query) throw new Error('לא התקבלה שאילתה!')
-			const fetchedPosts = await postsFetchByQuery(query)
-			setPosts(fetchedPosts)
+			if (isLoadMore && (!hasMore || !lastFetch)) throw new Error('אין עוד מאמרים')
+
+			if (!firebaseQuery) throw new Error('לא התקבלה שאילתה!')
+			if (typeof firebaseQuery === 'string') {
+				const fetchedPost = await fetchSinglePost(firebaseQuery)
+				setPosts(fetchedPost)
+			} else {
+				let modifiedQuery = firebaseQuery
+				if (isLoadMore && hasMore) modifiedQuery = query(firebaseQuery, startAt(lastFetch))
+
+				const docsSnapshot = await getDocs(modifiedQuery)
+				const nextFetch = await getNextFetch(modifiedQuery, docsSnapshot.docs)
+				const fetchedPosts = await convertDocsToPosts(docsSnapshot.docs)
+
+				if (isLoadMore && hasMore) setPosts((prevPosts) => [...prevPosts, ...fetchedPosts])
+				else setPosts(fetchedPosts)
+
+				if (nextFetch) {
+					setLastFetch(nextFetch)
+					setHasMore(true)
+				} else {
+					setLastFetch(null)
+					setHasMore(false)
+				}
+			}
 		} catch (error) {
 			console.error('Error fetching posts: ', error) // Log error for debugging
 			setError(error.message)
 		}
+
 		setLoading(false)
 	}
 
 	useEffect(() => {
-		if(load) {
-			setLoad(false)
-			postsGetHandler()
+		if (reload) {
+			setReload(false)
+			setLoadMore(false)
+			postsGetHandler(false)
 		}
-	}, [load])
-	return { postsGet, loadingGet, errorGet, reloadGet }
+		if (loadMore) {
+			setReload(false)
+			setLoadMore(false)
+			postsGetHandler(true)
+		}
+	}, [reload, loadMore])
+
+	
+	return { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet }
 }
 
-const queryGetPublishedPosts = (lim = 3) => {
-	if (lim < 1)
-		return query(
-			collection(db, collectionNames.posts),
-			where('articleType', '==', 'post'),
-			where('published', '==', true),
-			orderBy('datePublished', 'desc')
-		)
-	return query(
-		collection(db, collectionNames.posts),
-		where('articleType', '==', 'post'),
-		where('published', '==', true),
-		orderBy('datePublished', 'desc'),
-		limit(lim)
-	)
-}
-const queryGetPublishedConventions = (lim = 3) => {
-	if (lim < 1)
-		return query(
-			collection(db, collectionNames.posts),
-			where('articleType', '==', 'convention'),
-			where('published', '==', true),
-			orderBy('datePublished', 'desc')
-		)
-	return query(
-		collection(db, collectionNames.posts),
-		where('articleType', '==', 'convention'),
-		where('published', '==', true),
-		orderBy('datePublished', 'desc'),
-		limit(lim)
-	)
-}
+const buildQuery = (type, published, amount = DEFAULT_LIMIT) => {
+	let q = query(collection(db, collectionNames.posts))
 
-const queryGetAllPostsAdmin = (lim = 3) => {
-	if (lim < 1) return query(collection(db, collectionNames.posts), orderBy('dateAdded', 'desc'))
-	return query(collection(db, collectionNames.posts), orderBy('dateAdded', 'desc'), limit(lim))
+	if (type) q = query(q, where('articleType', '==', type))
+
+	if (published) q = query(q, where('published', '==', true), orderBy('datePublished', 'desc'))
+	else q = query(q, orderBy('dateAdded', 'desc'))
+
+	if (amount > 0) q = query(q, limit(amount))
+	return q
 }
 
 export default usePostsGet
 
-export {
-	queryGetPublishedPosts,
-	queryGetPublishedConventions,
-	queryGetAllPostsAdmin,
-	postsFetchByQuery,
-}
+export { buildQuery, fetchSinglePost }

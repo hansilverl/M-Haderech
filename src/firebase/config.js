@@ -34,4 +34,6 @@ const collectionNames = {
 	questionnaireHistory: 'questionnaireHistory',
 }
 
-export { db, auth, storage, collectionNames }
+const postTypes = ['article', 'convention']
+
+export { db, auth, storage, collectionNames, postTypes }
