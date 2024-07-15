@@ -65,7 +65,7 @@ const Navbar = ({ setShowLogin }) => {
 					</li>
 					<li>
 						<a href='/posts' onClick={openPosts}>
-							פוסטים
+							מאמרים
 						</a>
 					</li>
 					<li>

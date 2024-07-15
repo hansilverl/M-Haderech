@@ -1,5 +1,6 @@
+import './ElementEditor.css'
+
 import React, { useEffect, useRef, useState } from 'react'
-import { FaGripLines } from 'react-icons/fa'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
@@ -8,7 +9,6 @@ import TextEditor from '../../TextEditor/TextEditor'
 import ResourceInput from '../../ResourceInput/ResourceInput'
 import GeneralModal from '../../Modals/GeneralModal'
 
-import './ElementEditor.css'
 
 const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'other']
 const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'אחר']

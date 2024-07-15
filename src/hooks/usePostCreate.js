@@ -7,7 +7,7 @@ const createEmptyPost = async () => {
 		title: 'כותרת ראשונית',
 		datePublished: null,
 		dateAdded: serverTimestamp(),
-		description: 'תיאור הפוסט',
+		description: 'תיאור המאמר',
 		published: false,
 		elements: [],
 	}

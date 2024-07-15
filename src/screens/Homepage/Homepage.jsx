@@ -1,7 +1,8 @@
 // src/pages/HomePage/HomePage.js
+import './Homepage.css';
+
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../../components/Footer/Footer';
-import './Homepage.css';
 import PostsSection from '../../components/PostSection/PostSection';
 import AnalyticsSection from '../../components/AnalyticsSection/AnalyticsSection';
 import DonationSection from '../../components/DonationSection/DonationSection';

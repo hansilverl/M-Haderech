@@ -2,11 +2,11 @@ import './PostDetails.css'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import usePostsGet from '../../hooks/usePostsGet'
-import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
 import { useNavigate } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 
+import usePostsGet from '../../hooks/usePostsGet'
+import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
 
 const formatDate = (timestamp) => {
 	if (!timestamp) return ''
@@ -15,7 +15,7 @@ const formatDate = (timestamp) => {
 	const month = String(date.getMonth() + 1).padStart(2, '0') // getMonth() is zero-based
 	const year = date.getFullYear()
 	return `${day}/${month}/${year}`
-  }
+}
 
 const PostDetails = () => {
 	const { id } = useParams()
@@ -23,8 +23,8 @@ const PostDetails = () => {
 	const navigate = useNavigate()
 
 	return (
-		<div className='post-details'>
-			<button className="back-button" onClick={() => navigate(-1)}>
+		<div className='post-details-container'>
+			<button className='back-button' onClick={() => navigate(-1)}>
 				<FaArrowRight />
 			</button>
 			{loadingGet ? (
@@ -32,17 +32,19 @@ const PostDetails = () => {
 			) : errorGet ? (
 				<p>{errorGet.toString()}</p>
 			) : !postsGet ? (
-				<p>הפוסט לא נמצא</p>
+				<p>המאמר לא נמצא</p>
 			) : (
 				<>
-					<h1>{postsGet.title}</h1>
-					<p>
-						<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
-					</p>
-					<p>
-						<strong>תיאור:</strong> {postsGet.description}
-					</p>
-					<div>
+					<div className='post-details-header'>
+						<h1>{postsGet.title}</h1>
+						<p>
+							<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
+						</p>
+						<p>
+							<strong>תיאור:</strong> {postsGet.description}
+						</p>
+					</div>
+					<div className='post-details-elements'>
 						{postsGet?.elements.map((element, index) => (
 							<PostElementPresentor key={`element-${index}`} element={element} />
 						))}

@@ -25,7 +25,7 @@ const postsFetchByQuery = async (query) => {
 		const col = collection(db, collectionNames.posts)
 		const docRef = doc(col, query)
 		const docSnap = await getDoc(docRef)
-		if (!docSnap.exists()) throw new Error('לא נמצא פוסט עם המזהה המתאים')
+		if (!docSnap.exists()) throw new Error('לא נמצא מאמר עם המזהה המתאים')
 		const post = await convertDocToPost(docSnap)
 		addFileUrls(post)
 		return post
@@ -35,7 +35,7 @@ const postsFetchByQuery = async (query) => {
 	const rawData = await Promise.all(
 		querySnapshot.docs.map(async (doc) => await convertDocToPost(doc))
 	)
-	if (rawData.length === 0) throw new Error('לא נמצאו פוסטים')
+	if (rawData.length === 0) throw new Error('לא נמצאו מאמרים')
 
 	const posts = []
 	for (const post of rawData) {

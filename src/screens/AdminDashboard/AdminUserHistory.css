@@ -1,8 +1,7 @@
 .admin-user-history-container {
-  padding: 20px;
+  width: 90%;
   min-height: 100vh;
   box-sizing: border-box;
-  margin-right: 250px; /* Adjusted margin for sidebar */
 }
 
 .button, .export-button {

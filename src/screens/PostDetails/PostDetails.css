@@ -1,5 +1,5 @@
 /* Base styles for the post details container */
-.post-details {
+.post-details-container {
   display : flex;
   flex-direction: column;
   width:90%;
@@ -14,7 +14,7 @@
 }
 
 /* Styles for the back button */
-.back-button {
+.post-details-container .back-button {
   background: black;
   border: none;
   cursor: pointer;
@@ -25,39 +25,25 @@
   margin-bottom: 20px;
 }
 
-.back-button svg {
+.post-details-container .back-button svg {
   width: 24px;
   height: 24px;
   transition: transform 0.3s ease;
 }
 
-.back-button:hover svg {
+.post-details-container .back-button:hover svg {
   transform: scale(1.1);
 }
 
 /* Style for the headings within the post details */
-.post-details h1 {
+.post-details-container .post-details-header h1 {
   color: #333;
   text-align: right;
   margin-bottom: 20px;
 }
 
-.post-details img {
-  width: 50%;
-  max-width: 35%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.post-details .image-container {
-  text-align: right; /* Right aligns the content (the img element) */
-  background-color: transparent;
-  border: none
-}
-
 /* Styling for the paragraph elements */
-.post-details p {
+.post-details-container .post-details-header p {
   color: #666;
   line-height: 1.6;
   font-size: 16px;
@@ -66,13 +52,13 @@
 }
 
 /* Specific style for the date to make it less prominent */
-.post-details p strong {
+.post-details-container .post-details-header p strong {
   color: #333;
   margin-right: 5px;
 }
 
 /* Styles for the links to make them stand out */
-/* .post-details a {
+.post-details-container .post-details-header a {
   display: inline-block;
   background-color: #007bff;
   color: #ffffff;
@@ -82,21 +68,11 @@
   text-decoration: none;
   text-align: center;
   transition: background-color 0.3s;
-} */
-
-/* Hover effect for links */
-.post-details a:hover {
-  background-color: #0056b3;
 }
 
-/* Additional styling for HTML content in the editor type post */
-.post-details .tiptap {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 95%; /* Reduced width for non-PDF content */
+/* Hover effect for links */
+.post-details-container .post-details-header a:hover {
+  background-color: #0056b3;
 }
 
 /* Styling for the narrow content box */
@@ -104,24 +80,8 @@
   width: 60%; /* Further reduce width for non-PDF content */
 }
 
-.post-details .pdf-button {
-  border: none;
-  background-color: transparent; /* No background for a cleaner look */
-  cursor: pointer; /* Cursor changes to pointer to indicate clickable */
-  padding: 5px; /* Padding to increase the clickable area */
-  display: inline-flex; /* Aligns the icon image properly */
-  align-items: center; /* Center the icon vertically */
-  justify-content: center; /* Center the icon horizontally */
-}
-
-.post-details .pdf-button img {
-  width: 24px; /* Fixed size for consistency */
-  height: 24px;
-  transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
-}
-
 /* Responsive design adjustments */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .post-details {
       padding: 15px;
   }
@@ -139,11 +99,12 @@
   }
 
   .post-details .tiptap, .post-details .narrow-content {
-      width: 80%; /* Full width on smaller screens */
+      width: 80%; 
   }
-}
+}*/
 
 /* Responsive design adjustments */
+/*
 @media (max-width: 375px) {
   .post-details {
       padding: 15px;
@@ -162,6 +123,6 @@
   }
 
   .post-details .tiptap, .post-details .narrow-content {
-      width: 50%; /* Full width on smaller screens */
+      width: 50%; 
   }
-}
+} */
