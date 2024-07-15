@@ -377,7 +377,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           </div>
           <button type="submit" className="submit-add-question"
           >הוספה</button>
-          <button type="button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}><FaTimes /> Close</button>
+          {/* <button type="button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}><FaTimes /> Close</button> */}
         </form>
       </Modal>
       {/* Modal for Editing Question */}
