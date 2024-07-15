@@ -68,6 +68,7 @@
   display: inline-block;
   margin-right: 10px;
   text-justify: center;
+  font-weight: 600;
 
 }
 
@@ -163,7 +164,7 @@ button:hover {
 
 .save-button {
   background-color: #28a745 !important;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 .save-button:hover {

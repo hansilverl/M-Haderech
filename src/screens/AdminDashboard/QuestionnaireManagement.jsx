@@ -71,21 +71,25 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     alert('Firestore operation failed.');
   };
 
-  const handleDeleteQuestion = async (questionId) => {
-    setSelectedQuestion(questionId);
+  const handleDeleteQuestion = async (question) => {
+    setSelectedQuestion(question);
     setDeleteConfirmIsOpen(true);
   };
-
+  
   const confirmDeleteQuestion = async () => {
     try {
-      await deleteDoc(doc(db, 'Questionnaire', selectedQuestion));
-      setQuestions(questions.filter(question => question.id !== selectedQuestion));
+      if (!selectedQuestion || !selectedQuestion.id) {
+        throw new Error('Selected question is not valid.');
+      }
+      await deleteDoc(doc(db, 'Questionnaire', selectedQuestion.id));
+      setQuestions(questions.filter(question => question.id !== selectedQuestion.id));
       setDeleteConfirmIsOpen(false);
       alert('השאלה נמחקה!');
     } catch (error) {
       handleFirestoreError(error);
     }
   };
+
 
   const handleDeleteAnswer = async (questionId, answerId) => {
     setSelectedAnswer({ questionId, answerId });
@@ -262,7 +266,18 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
   const saveNewQuestion = async () => {
     try {
-      const newQuestionDocRef = doc(collection(db, 'Questionnaire'));
+      // Fetch the last used number from the Firestore database
+      const questionCollection = collection(db, 'Questionnaire');
+      const questionSnapshot = await getDocs(questionCollection);
+      const lastQuestion = questionSnapshot.docs
+        .map(questionDoc => ({ id: questionDoc.id, order: questionDoc.data().order }))
+        .sort((a, b) => b.order - a.order)[0];
+
+      const lastUsedNumber = lastQuestion ? parseInt(lastQuestion.id.replace('q', ''), 10) : 0;
+      const newQuestionNumber = lastUsedNumber + 1;
+
+      // Create a new document with the incremented number
+      const newQuestionDocRef = doc(collection(db, 'Questionnaire'), `q${newQuestionNumber}`);
       await setDoc(newQuestionDocRef, {
         q: newQuestionText,
         required: isRequired,
@@ -285,6 +300,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       handleFirestoreError(error);
     }
   };
+
 
   return (
     <div className="questionnaire-management">
@@ -309,7 +325,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                         <div className="question-header">
                           <span>{index + 1}. {question.question}</span>
                           <button onClick={() => handleEditQuestion(question)}><FaEdit style={{ color: 'black' }} /></button>
-                          <button onClick={() => handleDeleteQuestion(question.id)}><FaTrashAlt style={{ color: 'black' }} /></button>
+                          <button onClick={() => handleDeleteQuestion(question)}><FaTrashAlt style={{ color: 'black' }} /></button>
                         </div>
                       </div>
                     )}
@@ -395,55 +411,56 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                 </label>
               </div>
             </div>
-            <h3>תשובות:</h3>
-            <table className="answers-table">
-              <tbody>
-                <tr>
-                  <td className="answers-box">
-                    {selectedQuestion.answers.map((answer) => (
-                      <tr key={answer.id}>
-                        <td>
-                          {editingAnswer && editingAnswer.id === answer.id ? (
-                            <>
-                              <input
-                                type="text"
-                                name="answerText"
-                                value={currentText}
-                                onChange={handleAnswerChange}
-                              />
-                              <input
-                                type="number"
-                                name="answerScore"
-                                value={currentScore}
-                                onChange={handleAnswerChange}
-                              />
-                              <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
-                            </>
-                          ) : (
-                            <>
-                              {answer.text} (ניקוד: {answer.score})
-                            </>
-                          )}
-                        </td>
-                        <td>
-                          {editingAnswer && editingAnswer.id === answer.id ? null : (
-                            <>
-                              <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
-                              <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
-                            </>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="answers-section">
+              <h3>תשובות:</h3>
+              <table className="answers-table">
+                <tbody>
+                  <tr>
+                    <td className="answers-box">
+                      {selectedQuestion.answers.map((answer) => (
+                        <tr key={answer.id}>
+                          <td>
+                            {editingAnswer && editingAnswer.id === answer.id ? (
+                              <>
+                                <input
+                                  type="text"
+                                  name="answerText"
+                                  value={currentText}
+                                  onChange={handleAnswerChange}
+                                />
+                                <input
+                                  type="number"
+                                  name="answerScore"
+                                  value={currentScore}
+                                  onChange={handleAnswerChange}
+                                />
+                                <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                              </>
+                            ) : (
+                              <>
+                                {answer.text} (ניקוד: {answer.score})
+                              </>
+                            )}
+                          </td>
+                          <td>
+                            {editingAnswer && editingAnswer.id === answer.id ? null : (
+                              <>
+                                <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                                <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+                              </>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div>
               {showNewAnswerFields ? (
                 <>
                   <h4 className="add-answer-header">
-                    נא ללחוץ על '+' בסיום
                   </h4>
                   <input
                     type="text"
@@ -457,14 +474,13 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                     value={newAnswerScore}
                     onChange={(e) => setNewAnswerScore(e.target.value)}
                   />
-                  <button type="button" className="add-answer-button" title="הוספת תשובה" onClick={handleAddAnswer}> <FaPlus /> </button>
+                  <button type="button" className="add-answer-button" onClick={() => handleAddAnswer()}>הוספת תשובה</button>
                 </>
               ) : (
-                <button type="button" className="add-answer-button" onClick={() => setShowNewAnswerFields(true)}>הוספת תשובה</button>
+                <button type="button" className="add-answer-button" title="הוספת תשובה" onClick={() => setShowNewAnswerFields(true)}> <FaPlus style={{ color: 'black' }} /></button>
               )}
+              <button type="submit" className="save-button" title="שמירה"> <FontAwesomeIcon icon={faFloppyDisk} /></button>
             </div>
-            <button type="submit" className="save-button" title="שמירה"> <FontAwesomeIcon icon={faFloppyDisk} /></button>
-            {/* <button type="button" className='close-button' onClick={() => setModalIsOpen(false)}><FaTimes style={{ color: 'black' }} /> סגירה</button> */}
           </form>
         </Modal>
       )}
