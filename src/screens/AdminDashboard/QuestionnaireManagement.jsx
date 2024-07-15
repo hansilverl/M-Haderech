@@ -145,25 +145,25 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         ...selectedQuestion.answers,
         { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }
       ];
-  
+
       // Sort the updatedAnswers array by score
       updatedAnswers.sort((a, b) => a.score - b.score);
-  
+
       const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
       setSelectedQuestion(updatedQuestion);
-  
+
       // Update the Firestore document with the new answer
       const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id);
       await updateDoc(questionDocRef, {
         [newAnswerScore]: newAnswerText
       });
-  
+
       setNewAnswerText('');
       setNewAnswerScore('');
       setShowNewAnswerFields(false);
     }
   };
-  
+
 
 
   const handleEditAnswer = (answer) => {
@@ -375,16 +375,14 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               saveQuestionChanges();
             }}>
             <div>
-              <div className="questionCheckbox">
-                <label htmlFor="question">שאלה:</label>
-                <input
-                  type="text"
-                  id="question"
-                  name="question"
-                  value={selectedQuestion.question}
-                  onChange={handleQuestionChange}
-                />
-              </div>
+              <label htmlFor="question">שאלה:</label>
+              <input className="question-input"
+                type="text"
+                id="question"
+                name="question"
+                value={selectedQuestion.question}
+                onChange={handleQuestionChange}
+              />
               <div className="required-checkbox">
                 <label>
                   <input
@@ -398,40 +396,55 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               </div>
             </div>
             <h3>תשובות:</h3>
-            <ul>
-              <div className="answers-box">
-                {selectedQuestion.answers.map((answer) => (
-                  <li key={answer.id}>
-                    {editingAnswer && editingAnswer.id === answer.id ? (
-                      <>
-                        <input
-                          type="text"
-                          name="answerText"
-                          value={currentText}
-                          onChange={handleAnswerChange}
-                        />
-                        <input
-                          type="number"
-                          name="answerScore"
-                          value={currentScore}
-                          onChange={handleAnswerChange}
-                        />
-                        <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
-                      </>
-                    ) : (
-                      <>
-                        {answer.text} (ניקוד: {answer.score})
-                        <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
-                        <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
-                      </>
-                    )}
-                  </li>
-                ))}
-              </div>
-            </ul>
+            <table className="answers-table">
+              <tbody>
+                <tr>
+                  <td className="answers-box">
+                    {selectedQuestion.answers.map((answer) => (
+                      <tr key={answer.id}>
+                        <td>
+                          {editingAnswer && editingAnswer.id === answer.id ? (
+                            <>
+                              <input
+                                type="text"
+                                name="answerText"
+                                value={currentText}
+                                onChange={handleAnswerChange}
+                              />
+                              <input
+                                type="number"
+                                name="answerScore"
+                                value={currentScore}
+                                onChange={handleAnswerChange}
+                              />
+                              <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                            </>
+                          ) : (
+                            <>
+                              {answer.text} (ניקוד: {answer.score})
+                            </>
+                          )}
+                        </td>
+                        <td>
+                          {editingAnswer && editingAnswer.id === answer.id ? null : (
+                            <>
+                              <button type="button" className='editButton' onClick={() => handleEditAnswer(answer)}> <FaEdit style={{ color: 'black' }} /></button>
+                              <button type="button" className='trashButton' onClick={() => handleDeleteAnswer(selectedQuestion.id, answer.id)}> <FaTrashAlt style={{ color: 'black' }} /></button>
+                            </>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <div>
               {showNewAnswerFields ? (
                 <>
+                  <h4 className="add-answer-header">
+                    נא ללחוץ על '+' בסיום
+                  </h4>
                   <input
                     type="text"
                     placeholder="תשובה"
