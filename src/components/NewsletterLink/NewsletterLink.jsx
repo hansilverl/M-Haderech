@@ -35,9 +35,8 @@ const NewsletterLink = () => {
   return (
     <section className="newsletter-section">
       <div className="newsletter-text">
-        <h2>ניוזלטר</h2>
-        <p>כדי להישאר מעודכנים בכל החדשות והעדכונים שלנו, הירשמו לניוזלטר שלנו.</p>
-        <p><strong>קישור לניוזלטר:</strong> <a href={newsletterLink} target="_blank" rel="noopener noreferrer">{newsletterLink}</a></p>
+        <center><h2>חדשות ועדכונים</h2>
+        <p>כדי להישאר מעודכנים בכל החדשות והעדכונים שלנו, הירשמו לרשימת התפוצה שלנו על ידי לחיצה <a href={newsletterLink} target="_blank" rel="noopener noreferrer">כאן</a>.</p></center>
       </div>
     </section>
   );

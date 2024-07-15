@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-
 import './Selector.css'
+
+import React, { useEffect } from 'react'
 
 const Selector = (props) => {
 	const { id, selectFunction, optionValues, optionNames, currentValue, name, disabled } = props

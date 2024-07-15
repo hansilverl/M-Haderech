@@ -4,20 +4,30 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: calc(100% - 250px); /* Adjust based on your navbar width */
   margin-right: 250px; /* Adjust based on your navbar width */
+  width: 100%;
   padding: 30px;
   background-color: inherit;
   min-height: 100vh;
+  box-sizing: border-box;
+  margin-right: 250px; /* Adjusted margin for sidebar */
 }
 
-.questions-container {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.395);
-  padding: 20px;
-  margin-bottom: 30px;
-  justify-content: space-between; /* Adjust as needed */
-  text-align: right;
+.button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px; /* Added margin space below the button */
+}
 
+.button:hover {
+  background-color: #2980b9;
+}
+
+.spacer {
+  height: 20px; /* Add space between the button and the question list */
 }
 
 .question {

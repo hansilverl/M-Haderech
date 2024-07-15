@@ -8,7 +8,7 @@ const allowedFileTypes = {
 	video: ['video/mp4', 'video/avi', 'video/mkv'],
 	audio: ['audio/mpeg', 'audio/wav', 'audio/webm', 'audio/mp3', 'audio/aac'],
 	pdf: ['application/pdf'],
-	compressed: ['application/x-rar-compressed', 'application/zip', 'application/x-zip-compressed'],
+	other: ['*/*'],
 }
 
 const allowedFileExtensions = {
@@ -16,7 +16,7 @@ const allowedFileExtensions = {
 	video: ['mp4', 'avi', 'mkv'],
 	audio: ['mp3', 'wav', 'webm', 'aac'],
 	pdf: ['pdf'],
-	compressed: ['rar', 'zip', '7z'],
+	other: ['*'],
 }
 
 const getSafeDateTimeForFileName = () => {
@@ -61,8 +61,10 @@ const uploadFile = async (file, type) => {
 	const fileType = file.type
 	const fileExtension = file.name.split('.').pop()
 
-	if (!allowedType.includes(fileType)) throw new Error('סוג קובץ לא תואם למבוקש')
-	if (!allowedExtension.includes(fileExtension)) throw new Error('סוג קובץ לא תואם למבוקש')
+	if (!fileType === 'other') {
+		if (!allowedType.includes(fileType)) throw new Error('סוג קובץ לא תואם למבוקש')
+		if (!allowedExtension.includes(fileExtension)) throw new Error('סוג קובץ לא תואם למבוקש')
+	}
 
 	const date = getSafeDateTimeForFileName()
 	const filePath = `${type}s/${date}_${file.name}`

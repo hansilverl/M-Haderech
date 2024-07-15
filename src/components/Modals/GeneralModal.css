@@ -25,16 +25,7 @@
 .general-modal-dialog h2 {
 	margin-top: 0;
 }
-/* .general-modal-dialog h1,
-.general-modal-dialog h2 ,
-.general-modal-dialog h3,
-.general-modal-dialog h4,
-.general-modal-dialog h5,
-.general-modal-dialog h6
-.general-modal-dialog p
-{
-    font-weight: normal;
-} */
+
 .general-modal-dialog form {
 	display: flex;
 	flex-direction: column;
@@ -84,6 +75,6 @@
 	background-color: #ccc;
 }
 
-.modal-actions button:nth-child(2):hover {
+.general-modal-actions button:nth-child(2):hover {
 	background-color: #aaa;
 }

@@ -21,6 +21,7 @@ const AdminUserHistory = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [answerStats, setAnswerStats] = useState({});
   const [answers, setAnswers] = useState({});
+  const [scoreRanges, setScoreRanges] = useState({ low: 0, medium: 0, high: 0 });
 
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -53,6 +54,7 @@ const AdminUserHistory = () => {
         const historyData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         historyData.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds); // Sort by timestamp from newest to oldest
         setHistory(historyData);
+        calculateScoreRanges(historyData);
         calculateAnswerStats(historyData);
         setError(null);
       } catch (error) {
@@ -64,6 +66,20 @@ const AdminUserHistory = () => {
 
     fetchHistory();
   }, [startDate, endDate]);
+
+  const calculateScoreRanges = (historyData) => {
+    const ranges = { low: 0, medium: 0, high: 0 };
+    historyData.forEach(entry => {
+      if (entry.totalScore >= 0 && entry.totalScore <= 19) {
+        ranges.low++;
+      } else if (entry.totalScore >= 20 && entry.totalScore <= 32) {
+        ranges.medium++;
+      } else if (entry.totalScore >= 33 && entry.totalScore <= 60) {
+        ranges.high++;
+      }
+    });
+    setScoreRanges(ranges);
+  };
 
   const calculateAnswerStats = (historyData) => {
     const stats = {};
@@ -120,7 +136,14 @@ const AdminUserHistory = () => {
       <CSVLink data={csvData} filename="history.csv" className="export-button">יצא ל-CSV</CSVLink>
       {error && <p className="error-message">{error}</p>}
       {history.length === 0 && !error && <p className="no-history">אין היסטוריה לשאלונים עבור אימייל זה</p>}
-      <p>סה"כ רשומות היסטוריה: {history.length}</p>
+      <div className="score-ranges">
+        <b>
+        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#2D936C' }}>קל</span> (0-19): {scoreRanges.low}</p>
+        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#F2CD60' }}>בינוני</span> (20-32): {scoreRanges.medium}</p>
+        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#A4303F' }}>קשה</span> (33-60): {scoreRanges.high}</p>
+        <br></br><br></br>
+        <p>סך כל השאלונים שמולאו: {history.length}</p></b>
+      </div>
       <div className="statistics-container">
         <h2>סטטיסטיקות של שאלות (לפי תאריכים נבחרים):</h2>
         {Object.keys(answerStats).map(question => {

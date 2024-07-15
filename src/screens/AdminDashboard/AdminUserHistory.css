@@ -1,10 +1,7 @@
-/* AdminUserHistory.css */
-
 .admin-user-history-container {
-  padding: 20px;
+  width: 90%;
   min-height: 100vh;
   box-sizing: border-box;
-  margin-right: 250px; /* Adjusted margin for sidebar */
 }
 
 .button, .export-button {
@@ -194,6 +191,21 @@
 .error-message {
   color: red;
   margin-top: 10px;
+}
+
+.score-ranges {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.score-ranges p {
+  margin: 5px 0;
+  font-size: 1.2em;
 }
 
 /* Media Queries */

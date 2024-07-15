@@ -16,7 +16,7 @@ const AboutInfo = () => {
   useEffect(() => {
     const fetchAboutInfo = async () => {
       try {
-        const docRef = doc(db, 'miscellaneousUpdated', 'about'); // Adjust document path as per your Firestore structure
+        const docRef = doc(db, 'miscellaneousUpdated', 'about'); 
         const aboutDoc = await getDoc(docRef);
         if (aboutDoc.exists()) {
           setAboutInfo(aboutDoc.data().about);
@@ -48,7 +48,7 @@ const AboutInfo = () => {
 
   const handleSave = async () => {
     try {
-      const docRef = doc(db, 'miscellaneousUpdated', 'about'); // Adjust document path as per your Firestore structure
+      const docRef = doc(db, 'miscellaneousUpdated', 'about'); 
       await updateDoc(docRef, { about: tempAboutInfo });
       setAboutInfo(tempAboutInfo);
       closeModal();

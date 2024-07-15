@@ -1,193 +1,165 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  direction: rtl; /* Right-to-Left */
-  text-align: right; /* Align text to the right */
-  background-color: #f0f0f0;
-  color: #333;
-  overflow-x: hidden; /* Prevent horizontal overflow */
-}
 
 .header {
-  width: 100vw;
-  position: relative;
-  text-align: center;
-  color: #333333ba;
+	width: 100vw;
+	position: relative;
+	text-align: center;
+	color: #333333ba;
 }
 
 .header-image-container {
-  width: 100%;
-  overflow: hidden; /* Prevent overflow */
-  position: relative;
-  text-align: center;
+	width: 100%;
+	overflow: hidden; /* Prevent overflow */
+	position: relative;
+	text-align: center;
 }
 
 .header-image {
-  width: 100%;
-  height: 38vh;
-  /* see more of bottom image */
-  object-fit: cover;
-  object-position: 100% 70%;  /* 100% from the left and 66% from the top */
+	width: 100%;
+	height: 38vh;
+	/* see more of bottom image */
+	object-fit: cover;
+	object-position: 100% 70%; /* 100% from the left and 66% from the top */
 }
 
 .header-text {
-  position: absolute;
-  top: 50%;
-  right: 2%; /* Adjust this value to control the distance from the right edge */
-  transform: translateY(-50%);
-  text-align: right;
+	position: absolute;
+	top: 50%;
+	right: 2%; /* Adjust this value to control the distance from the right edge */
+	transform: translateY(-50%);
+	text-align: right;
 }
 
 .header-text h1 {
-  font-size: 2.5em;
-  margin: 0;
+	font-size: 2.5em;
+	margin: 0;
 }
 
 .header-text p {
-  font-size: 1.2em;
-  margin: 0;
+	font-size: 1.2em;
+	margin: 0;
 }
 
 .fill-form-button {
-  margin-top: 1em;
-  margin-right: 1em;
-  background: #9b59b6;
-  color: #fff;
-  border: none;
-  padding: 1em 2em;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
+	margin-top: 1em;
+	margin-right: 1em;
+	background: #9b59b6;
+	color: #fff;
+	border: none;
+	padding: 1em 2em;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 1em;
 }
 
 .fill-form-button:hover {
-  background-color: #765092;
-  /*white box shadow, imitate glow*/
-  box-shadow: 0 0 15px #f5f5f5;
+	background-color: #765092;
+	/*white box shadow, imitate glow*/
+	box-shadow: 0 0 15px #f5f5f5;
 }
 
 .donate-button {
-  background: #9b59b6; 
-  color: #fff;
-  border: none;
-  padding: 1em 2em;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
+	background: #9b59b6;
+	color: #fff;
+	border: none;
+	padding: 1em 2em;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 1em;
 }
 
 .donate-button:hover {
-  background: #8e44ad; /* A slightly darker tone for hover effect */
+	background: #8e44ad; /* A slightly darker tone for hover effect */
 }
 
 main {
-  padding: 2em;
-  flex: 1; /* Ensures that the main content area takes up available space */
+	padding: 2em;
+	flex: 1; /* Ensures that the main content area takes up available space */
 }
 
 section {
-  margin-bottom: 2em;
-  background: white;
-  padding: 2em;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2em;
+	background: white;
+	padding: 2em;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 section h2 {
-  font-size: 2em;
-  margin-top: 0;
+	font-size: 2em;
+	margin-top: 0;
 }
 
 .service {
-  border: 1px solid #ddd;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-radius: 8px;
-  background: #fafafa;
-}
-
-button {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 1em 2em;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-button:hover {
-  background: #0056b3;
+	border: 1px solid #ddd;
+	padding: 1em;
+	margin-bottom: 1em;
+	border-radius: 8px;
+	background: #fafafa;
 }
 
 nav {
-  background: #333;
-  color: white;
-  padding: 1em;
+	background: #333;
+	color: white;
+	padding: 1em;
 }
 
 nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: flex-end;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: flex-end;
 }
 
 nav ul li {
-  margin-left: 1em;
+	margin-left: 1em;
 }
 
 nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
+	color: white;
+	text-decoration: none;
+	font-size: 1em;
 }
 
 nav ul li a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 1em 0;
-  position: relative; /* Changed from absolute to relative */
-  width: 100%;
-  bottom: 0;
-  margin-top: auto; /* Ensure the footer is pushed to the bottom if there's not enough content */
-}
-
-html, body, #root {
-  height: 100%; /* Ensures the root element takes up full height */
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 1em 0;
+	position: relative; /* Changed from absolute to relative */
+	width: 100%;
+	bottom: 0;
+	margin-top: auto; /* Ensure the footer is pushed to the bottom if there's not enough content */
 }
 
 .homepage {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensures the homepage takes up full viewport height */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh; /* Ensures the homepage takes up full viewport height */
 }
 
 @media (max-width: 768px) {
-  .header-text {
-    margin-top: 1em;
-    right: 0; /* Align text to the right */
-    padding: 0 1em; /* Add padding to the text */
-  }
+	.header-text {
+		margin-top: 1em;
+		right: 0; /* Align text to the right */
+		padding: 0 1em; /* Add padding to the text */
+	}
 
-  .header-text h1 {
-    display: none;
-    font-size: 2em;
-    text-align: right;
-  }
+	.header-text h1 {
+		display: none;
+		font-size: 2em;
+		text-align: right;
+	}
 
-  .header-text p {
-    font-size: 1em;
-  }
+	.header-text p {
+		font-size: 1em;
+	}
 
-  .header-image {
-    height: 20vh;
-  }
+	.header-image {
+		height: 20vh;
+	}
 }

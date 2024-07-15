@@ -14,7 +14,7 @@ const DonationSection = () => {
   return (
     <section id="donate" className="donation-section">
       <div className="donation-text">
-        <h2>תרומה</h2>
+        <h2>תרומות</h2>
         <p>התרומות שלכם עוזרות לנו מאוד. לחצו על הכפתור למטה כדי לתרום.</p>
         <button className="donate-button" onClick={handleDonateClick}>תרמו עכשיו</button>
       </div>

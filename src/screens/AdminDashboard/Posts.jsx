@@ -1,49 +1,53 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './Posts.css';
-import PostAdmin from '../../components/PostAdmin/PostAdmin';
-import usePostsGet, { queryGetAllPostsAdmin } from '../../hooks/usePostsGet';
-import usePostCreate from '../../hooks/usePostCreate';
-import { useNavigate } from 'react-router-dom';
+import './Posts.css'
+
+import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import usePostsGet, { queryGetAllPostsAdmin } from '../../hooks/usePostsGet'
+import usePostCreate from '../../hooks/usePostCreate'
+import PostAdmin from '../../components/PostAdmin/PostAdmin'
 
 const Posts = () => {
 	const query = useRef(queryGetAllPostsAdmin(20))
 	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(query.current)
-	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false);
-	const { postCreateID, startCreate } = usePostCreate();
-	const [needToReload, setNeedToReload] = useState(false);
-	const navigate = useNavigate();
+	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)
+	const { postCreateID, startCreate } = usePostCreate()
+	const [needToReload, setNeedToReload] = useState(false)
+	const navigate = useNavigate()
 
 	const addPostHandler = async (e) => {
-		setCreateButtonDisabled(true);
+		setCreateButtonDisabled(true)
 		startCreate()
-	};
+	}
 
 	useEffect(() => {
 		if (needToReload) reloadGet()
-		setNeedToReload(false);
-	}, [needToReload]);
+		setNeedToReload(false)
+	}, [needToReload])
 
 	useEffect(() => {
 		if (postCreateID) {
-			navigate(`/edit/${postCreateID}`);
+			navigate(`/edit/${postCreateID}`)
 		}
-	}, [postCreateID, navigate]);
+	}, [postCreateID, navigate])
 
 	// Sort posts such that 'post' type comes before 'convention' type
-	const sortedPosts = postsGet ? [...postsGet].sort((a, b) => {
-		if (a.articleType === 'post' && b.articleType !== 'post') return -1;
-		if (a.articleType !== 'post' && b.articleType === 'post') return 1;
-		return 0;
-	}) : [];
+	const sortedPosts = postsGet
+		? [...postsGet].sort((a, b) => {
+				if (a.articleType === 'post' && b.articleType !== 'post') return -1
+				if (a.articleType !== 'post' && b.articleType === 'post') return 1
+				return 0
+		  })
+		: []
 
 	return (
-		<div className='container'>
-			<div className='header'>
+		<div className='admin-dashboard-posts-container'>
+			<div className='admin-dashboard-posts-header'>
 				<button
 					className='add-post-button'
 					onClick={addPostHandler}
 					disabled={isCreateButtonDisabled}>
-					הוספת פוסט
+					הוספת מאמר
 				</button>
 			</div>
 			{loadingGet ? (
@@ -51,7 +55,7 @@ const Posts = () => {
 			) : errorGet ? (
 				<div className='error'>{errorGet.toString()}</div>
 			) : !postsGet ? (
-				<h2 className='error'>הפוסטים לא נמצאו</h2>
+				<h2 className='error'>המאמרים לא נמצאו</h2>
 			) : (
 				<div className='posts-container'>
 					{sortedPosts.map((post, index) => (
@@ -60,7 +64,7 @@ const Posts = () => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}
 
-export default Posts;
+export default Posts
