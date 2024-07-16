@@ -1,56 +1,57 @@
+import './AboutFull.css'
 // src/pages/AboutFull/AboutFull.jsx
-import React, { useState, useEffect } from 'react';
-import { db } from '../../firebase/config';
-import { doc, getDoc } from 'firebase/firestore';
-import './AboutFull.css';
-import logo from '../../assets/logo.png'; // Adjust the path to your logo file
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import usePostsGet from '../../hooks/usePostsGet'
 
+import { db } from '../../firebase/config'
+import { doc, getDoc } from 'firebase/firestore'
+import logo from '../../assets/logo.png' // Adjust the path to your logo file
+
+import { FaArrowRight } from 'react-icons/fa'
+import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
+
+const formatDate = (timestamp) => {
+	if (!timestamp) return ''
+	const date = new Date(timestamp.seconds * 1000) // Convert Firestore timestamp to JavaScript Date object
+	const day = String(date.getDate()).padStart(2, '0')
+	const month = String(date.getMonth() + 1).padStart(2, '0') // getMonth() is zero-based
+	const year = date.getFullYear()
+	return `${day}/${month}/${year}`
+}
 const AboutFull = () => {
-  const [title, setTitle] = useState('');
-  const [subtitle, setSubtitle] = useState('');
-  const [text, setText] = useState('');
-  const [additionalText, setAdditionalText] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const id = 'about-us'
+	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
+	const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchAboutInfo = async () => {
-      try {
-        const docRef = doc(db, 'miscellaneousUpdated', 'about_full');
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setTitle(data.title);
-          setSubtitle(data.subtitle);
-          setText(data.text);
-          setAdditionalText(data.additionalText);
-        } else {
-          setError('לא נמצאה אינפורמציה עלינו.');
-        }
-      } catch (err) {
-        setError('נכשל בטעינת אינפורמציה עלינו.');
-      } finally {
-        setLoading(false);
-      }
-    };
+	return (
+		<div className='post-details-container'>
+			<button className='back-button' onClick={() => navigate(-1)}>
+				<FaArrowRight />
+			</button>
+			{loadingGet ? (
+				<p>טוען...</p>
+			) : errorGet ? (
+				<p>{errorGet.toString()}</p>
+			) : !postsGet ? (
+				<p>המאמר לא נמצא</p>
+			) : (
+				<>
+					<div className='post-details-header'>
+						<h1>{postsGet.title}</h1>
+						<p>
+							<strong>תיאור:</strong> {postsGet.description}
+						</p>
+					</div>
+					<div className='post-details-elements'>
+						{postsGet?.elements.map((element, index) => (
+							<PostElementPresentor key={`element-${index}`} element={element} />
+						))}
+					</div>
+				</>
+			)}
+		</div>
+	)
+}
 
-    fetchAboutInfo();
-  }, []);
-
-  if (loading) return <p>טוען...</p>;
-  if (error) return <p>שגיאה: {error}</p>;
-
-  return (
-    <div className="about-full">
-      <div className="about-full-container">
-        <img src={logo} alt="Logo" className="about-logo-right" />
-        <h1>{title}</h1>
-        <h2 className="subtitle-right">{subtitle}</h2>
-        <p>{text}</p>
-        <p>{additionalText}</p>
-      </div>
-    </div>
-  );
-};
-
-export default AboutFull;
+export default AboutFull

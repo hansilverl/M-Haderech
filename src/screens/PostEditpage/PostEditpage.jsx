@@ -11,8 +11,8 @@ import usePostsGet from '../../hooks/usePostsGet'
 import usePostUpdate from '../../hooks/usePostUpdate'
 import usePostDelete from '../../hooks/usePostDelete'
 
-import Selector from '../../components/Selector/Selector'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
+import TextAreaWithLimit from '../../components/TextAreaWithLimist/TextAreaWithLimit'
 
 const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
@@ -35,7 +35,6 @@ const PostEditPageComp = ({ postID, post }) => {
 		const newPost = {
 			title,
 			description,
-			articleType,
 			published,
 			datePublished,
 			elements,
@@ -87,7 +86,7 @@ const PostEditPageComp = ({ postID, post }) => {
 		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
 		}, 500)
-	}, [elements, published])
+	}, [elements, published, title, description])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
@@ -105,7 +104,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}, [postUpdate, loadingUpdate])
 
 	return (
-		<div className='edit-post-page main-flex-col'>
+		<div className='edit-post-page'>
 			<div className='back-button-container'>
 				<button className='back-button' onClick={() => navigate(-1)}>
 					<FaArrowRight />
@@ -115,48 +114,48 @@ const PostEditPageComp = ({ postID, post }) => {
 				<h1>המאמר לא נמצא</h1>
 			) : (
 				<>
-					<div className='edit-post-header main-flex-col'>
-						<div className='main-flex-row'>
+					<div className='edit-post-header'>
+						<div className='editor-header-input'>
 							<label className='input-label'>כותרת המאמר:</label>
-							<input
-								type='text'
-								placeholder='כותרת'
+							<TextAreaWithLimit
+								className='text-area'
+								limit={60}
 								value={title}
-								onChange={(e) => setTitle(e.target.value)}
+								rows={2}
+								setValue={setTitle}
 							/>
 						</div>
-						<div className='main-flex-row'>
-							<label className='input-label'>תיאור המאמר:</label>
-							<input
-								type='text'
-								placeholder='תיאור'
-								value={description}
-								onChange={(e) => setDescription(e.target.value)}
-							/>
-						</div>
-						<div className='main-flex-row'>
-							<Selector
-								id='post-type'
-								name='סוג המאמר (מאמר או כנס)'
-								value={articleType}
-								selectFunction={setPostType}
-								optionValues={['post', 'convention']}
-								optionNames={['מאמר', 'כנס']}
-							/>
-						</div>
+						{articleType === 'about-us' ? null : (
+							<div className='editor-header-input'>
+								<label className='input-label'>תיאור המאמר:</label>
+								<TextAreaWithLimit
+									className='text-area'
+									limit={100}
+									value={description}
+									rows={3}
+									setValue={setDescription}
+								/>
+							</div>
+						)}
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
-					<div className='buttons-container main-flex-row'>
+					<div className='buttons-container'>
 						<button onClick={forceSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
-						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
-							מחק
+						<button
+							onClick={() => navigate(`/posts/${post.id}`)}
+							disabled={loadingDelete}
+							className='publish-button'>
+							תצוגה מקדימה
 						</button>
 						<button
 							onClick={togglePublished}
 							className={!published ? 'publish-button' : 'unpublish-button'}>
 							{published ? 'בטל פרסום' : 'פרסם'}
+						</button>
+						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
+							מחק
 						</button>
 					</div>
 				</>

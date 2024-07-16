@@ -9,14 +9,12 @@
 	margin-bottom: 15px;
 }
 
-.post-element-presentor video {
+.post-element-presentor .media-container {
 	max-width: 70%;
 	height: auto;
 }
 
 .post-element-presentor img {
-	height: 100%; /* Adjust height to container's height */
-	max-width: 70%;
 	object-fit: contain; /* Ensures image's aspect ratio is maintained */
 }
 
@@ -84,4 +82,12 @@
 		height: 30px;
 		transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
 	}
+}
+
+
+.tiptap-presentor-container.tiptap {
+	width: 100%;
+	color: none;
+	background-color: none;
+	border: none;
 }

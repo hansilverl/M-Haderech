@@ -5,14 +5,15 @@ const MenuBarSelectSize = (props) => {
 	const { editor } = props
 
 	const options = []
-	for (let i = 12; i <= 50; i += 2) {
-		options.push({ value: i, label: `${i}px` })
+	for (let i = 12; i <= 60; i += 2) {
+		options.push({ value: `${i}px`, label: `${i}px` })
 	}
 
 	if (!editor) return null
 
 	const setFontSize = (size) => {
 		if (!size) return
+		console.log(size)
 		editor.chain().focus().setFontSize(size).run()
 	}
 
@@ -29,17 +30,14 @@ const MenuBarSelectSize = (props) => {
 		setFontSize(newValue?.value)
 	}
 
-	const handleInputChange = (inputValue, actionMeta) => {
-		
-	}
+	const handleInputChange = (inputValue, actionMeta) => {}
 
 	const getPlaceHolder = () => {
 		const fontSize = getFontSize()
 
-		if (!fontSize) return 'בחר גודל גופן';
-		return `גודל גופן: ${fontSize}px`;
+		if (!fontSize) return 'בחר גודל גופן'
+		return `גודל גופן: ${fontSize}`
 	}
-
 
 	return (
 		<div className='menu-bar-select-container'>

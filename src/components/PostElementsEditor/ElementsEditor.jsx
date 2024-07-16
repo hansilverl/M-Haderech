@@ -34,6 +34,7 @@ const ElementsEditor = (props) => {
 			resourcePath: '',
 			displayEditor: true,
 			internalIndex: id,
+			dimensions: null,
 			id: `draggable-item-${id}`,
 		}
 
@@ -69,13 +70,14 @@ const ElementsEditor = (props) => {
 		})
 	)
 
-	const handleDragStart = (event) => {
+	const handleDragStart = () => {
 		setDragging(true)
 	}
 
 	const handleDragEnd = (event) => {
 		const { active, over } = event
 
+		setDragging(false)
 		if (!over || active.id === over.id) return
 		const newElements = [...elements]
 		const oldIndex = newElements.findIndex((elem) => elem.id === active.id)
@@ -83,7 +85,7 @@ const ElementsEditor = (props) => {
 
 		const item = newElements.splice(oldIndex, 1)[0]
 		newElements.splice(newIndex, 0, item)
-		setDragging(false)
+
 		setElements(newElements)
 	}
 
@@ -109,7 +111,9 @@ const ElementsEditor = (props) => {
 					})}
 				</SortableContext>
 			</DndContext>
-			<button onClick={createElement}>הוסף</button>
+			<button className='add-element-button' onClick={createElement}>
+				הוסף רכיב
+			</button>
 		</div>
 	)
 }

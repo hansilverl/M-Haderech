@@ -18,6 +18,7 @@ const DEFAULT_LIMIT = 20
 
 const addFileUrls = async (post) => {
 	const { elements } = post
+	if (!elements) return
 	for (const element of elements) {
 		if (element.resourcePath) {
 			element.resourceUrl = await getDownloadURLFromPath(element.resourcePath)
@@ -130,7 +131,6 @@ const usePostsGet = (firebaseQuery) => {
 		}
 	}, [reload, loadMore])
 
-	
 	return { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet }
 }
 

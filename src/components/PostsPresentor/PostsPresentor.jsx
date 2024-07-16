@@ -15,9 +15,11 @@ const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, all
 	const myQuery = buildQuery(type, published, pageSize)
 	const { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet } = usePostsGet(myQuery)
 
+	const typeName = type === 'post' ? 'מאמר' : 'כנס'
+
 	const isNextPageAvailable = () => {
 		if (!filteredPosts) return false
-		if (currentPage * pageSize > filteredPosts.length && !hasMore) return false
+		if (currentPage * pageSize >= filteredPosts.length && !hasMore) return false
 		return true
 	}
 
@@ -31,10 +33,9 @@ const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, all
 
 	useEffect(() => {
 		if (loadingGet || !filteredPosts) return
-
 		const pageStart = (currentPage - 1) * pageSize
 		const pageEnd = pageStart + pageSize
-		if (filteredPosts.length <= pageEnd && hasMore) {
+		if (filteredPosts.length < pageEnd && hasMore) {
 			loadMoreGet()
 			return
 		}
@@ -43,7 +44,6 @@ const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, all
 
 	useEffect(() => {
 		if (loadingGet || !postsGet) return
-
 		setFilteredPosts(
 			postsGet.filter((article) => {
 				if (!searchQuery) return true
@@ -74,7 +74,7 @@ const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, all
 			) : errorGet ? (
 				<h2>{errorGet.toString()}</h2>
 			) : !currentPosts ? (
-				<h2>המאמרים לא נמצאו</h2>
+				<h2>לא נמצאו ${typeName}ים</h2>
 			) : (
 				<div className='presentor-posts-container'>
 					{currentPosts.length === 0 ? (
@@ -97,18 +97,22 @@ const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, all
 			)}
 			{!allowPages ? null : (
 				<div className='posts-pagination-buttons'>
-					<button
-						onClick={() => setCurrentPage(currentPage - 1)}
-						disabled={currentPage <= 1}
-						className='pagination-button'>
-						עמוד הקודם
-					</button>
-					<button
-						onClick={() => setCurrentPage(currentPage + 1)}
-						disabled={!isNextPageAvailable()}
-						className='pagination-button'>
-						עמוד הבא
-					</button>
+					{currentPage <= 1 ? null : (
+						<button
+							onClick={() => setCurrentPage(currentPage - 1)}
+							disabled={currentPage <= 1}
+							className='pagination-button'>
+							עמוד הקודם
+						</button>
+					)}
+					{!isNextPageAvailable() ? null : (
+						<button
+							onClick={() => setCurrentPage(currentPage + 1)}
+							disabled={!isNextPageAvailable()}
+							className='pagination-button'>
+							עמוד הבא
+						</button>
+					)}
 				</div>
 			)}
 		</div>

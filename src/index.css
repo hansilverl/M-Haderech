@@ -1,3 +1,14 @@
+:root {
+	--button-primary-color: #9b59b6;
+	--button-primary-color-hover: #b370cc;
+	--button-primary-color-disabled: #3c3c3c;
+	--primary-color: #3498db;
+	--secondary-color: #2ecc71;
+	--font-size: 16px;
+	--padding: 10px;
+	--admin-sidebar-width: 250px;
+}
+
 html,
 body,
 #root {
@@ -13,6 +24,7 @@ body,
 	background-color: #f0f0f0;
 	color: #333;
 	overflow-x: hidden;
+	min-height: 500px;
 }
 
 code {
@@ -20,7 +32,7 @@ code {
 }
 
 button {
-	background: #9b59b6;
+	background: var(--button-primary-color);
 	color: #fff;
 	border: none;
 	padding: 10px 20px;
@@ -28,10 +40,16 @@ button {
 	cursor: pointer;
 	margin: 10px;
 	font-size: 16px;
+	transition: background-color 0.3s;
 }
 
 button:hover {
-	background: #b370cc;
+	background: var(--button-primary-color-hover);
+}
+
+button:disabled {
+	background: var(--button-primary-color-disabled);
+	cursor: not-allowed;
 }
 
 .main-flex-row {
@@ -48,12 +66,4 @@ button:hover {
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-}
-
-:root {
-	--primary-color: #3498db;
-	--secondary-color: #2ecc71;
-	--font-size: 16px;
-	--padding: 10px;
-	--admin-sidebar-width: 250px;
 }

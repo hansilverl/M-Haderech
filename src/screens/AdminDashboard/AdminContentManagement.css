@@ -3,7 +3,6 @@
 	width: 100%;
 	margin: 0;
 	border: none;
-
 }
 /* Header section */
 .admin-dashboard-posts-container .admin-dashboard-posts-navbar-container {
@@ -19,7 +18,7 @@
 	list-style: none;
 }
 
-.admin-dashboard-posts-navbar-container .admin-dashboard-posts-navbar-menu  {
+.admin-dashboard-posts-navbar-container .admin-dashboard-posts-navbar-menu {
 	list-style: none;
 	display: flex;
 	margin: 0px;
@@ -44,28 +43,38 @@
 	border-radius: 5px;
 }
 
+.admin-dashboard-posts-container .add-post-button-container {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	justify-content: center;
+	align-items: right;
+}
+
 /* Button styles */
-.admin-dashboard-posts-container .add-post-button {
+.add-post-button-container .add-post-button {
+	background-color: var(--button-primary-color);
+	width: fit-content;
 	margin-top: 20px;
-	color: white;
 	border: none;
 	padding: 10px 20px;
+	margin-right: 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 25px;
 	transition: background-color 0.3s;
 }
 
-.admin-dashboard-posts-container .add-post-button:disabled {
-	background-color: #a0a0a0;
+.add-post-button-container .add-post-button:hover {
+	background-color: var(--button-primary-color-hover);
+}
+
+.add-post-button-container .add-post-button:disabled {
 	cursor: not-allowed;
 }
 
-/* .admin-dashboard-posts-container .add-post-button:hover:enabled {
-} */
-
 /* Content section */
-.admin-dashboard-posts-container .posts-container {
+.add-post-button-container .posts-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;

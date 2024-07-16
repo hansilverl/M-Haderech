@@ -61,7 +61,7 @@ const uploadFile = async (file, type) => {
 	const fileType = file.type
 	const fileExtension = file.name.split('.').pop()
 
-	if (!fileType === 'other') {
+	if (fileType !== 'other') {
 		if (!allowedType.includes(fileType)) throw new Error('סוג קובץ לא תואם למבוקש')
 		if (!allowedExtension.includes(fileExtension)) throw new Error('סוג קובץ לא תואם למבוקש')
 	}

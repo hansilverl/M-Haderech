@@ -18,16 +18,24 @@ const PostAdmin = ({ article, setRefresh }) => {
 		}
 	}
 
-	const togglePublished = async () => {
+	const togglePublished = async (publish) => {
+		if (publish === article.published) return
 		article.published = !article.published
-		if (!article.datePublished && article.published) article.datePublished = serverTimestamp()
-		const newPost = { published: article.published, datePublished: article.datePublished }
+		const datePublished =
+			article.published && !article.datePublished ? serverTimestamp() : article.datePublished
+		const newPost = { published: article.published, datePublished }
 		startUpdate(newPost)
 	}
 
 	useEffect(() => {
 		if (postDelete) setRefresh(true)
 	}, [postDelete, article.published])
+
+	useEffect(() => {
+		if (postUpdate) {
+			article.datePublished = postUpdate.datePublished
+		}
+	}, [postUpdate, article.published])
 
 	const navigate = useNavigate(`/edit/${article.id}`)
 
@@ -41,11 +49,11 @@ const PostAdmin = ({ article, setRefresh }) => {
 					מחק
 				</button>
 				{!article.published ? (
-					<button onClick={togglePublished} className='admin-button publish-button'>
+					<button onClick={() => togglePublished(true)} className='admin-button publish-button'>
 						פרסם
 					</button>
 				) : (
-					<button onClick={togglePublished} className='admin-button unpublish-button'>
+					<button onClick={() => togglePublished(false)} className='admin-button unpublish-button'>
 						בטל פרסום
 					</button>
 				)}

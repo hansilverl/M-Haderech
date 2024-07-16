@@ -1,7 +1,8 @@
 // src/screens/AdminDashboard/AdminDashboard.jsx
+import './AdminDashboard.css'
+
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import './AdminDashboard.css'
 import AdminContentManagement from './AdminContentManagement'
 import Users from './Users'
 import Sidebar from '../../components/AdminDashboard/Sidebar'
@@ -9,6 +10,7 @@ import QuestionnaireManagement from './QuestionnaireManagement'
 import Miscellaneous from './Miscellaneous'
 import AdminUserHistory from './AdminUserHistory'
 import AdminExplanation from './AdminExplanation'
+import PostEditPage from '../PostEditpage/PostEditpage'
 
 const AdminDashboard = () => {
 	const location = useLocation()
@@ -28,6 +30,7 @@ const AdminDashboard = () => {
 					<Route exact path='questionnaire' element={<QuestionnaireManagement />} />
 					<Route exact path='miscellaneous' element={<Miscellaneous />} />
 					<Route exact path='history' element={<AdminUserHistory />} />
+					<Route exact path='edit/about-us' element={<PostEditPage />} />
 				</Routes>
 			</div>
 			<Sidebar />
