@@ -11,7 +11,6 @@ Welcome to the **M-Haderech** repository! This README provides detailed instruct
 - [Running the Project](#running-the-project)
 - [Deployment](#deployment)
 - [Usage Instructions](#usage-instructions)
-- [License](#license)
 - [Examples](#examples)
 
 ## Project Overview
@@ -152,9 +151,6 @@ Admin dashboard sidebar for easy navigation between different admin sections.
 
 Certain routes are protected and only accessible to authenticated users or admins.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Examples
 
