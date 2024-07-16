@@ -1,13 +1,14 @@
 .element-editor-container {
+	width: 100%;
 	border: #333 solid 1px;
 	border-radius: 5px;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
 }
 
 .element-editor-container .draggable-post-element {
 	padding: 0px;
+	width: 100%;
 	margin: 0 0 0px 0;
 	background-color: #fff;
 	color: #333;
@@ -15,7 +16,6 @@
 	align-items: center;
 	justify-content: center;
 	margin: 5px;
-	width: 100%;
 }
 
 .element-editor-container .drag-handle {
@@ -23,9 +23,13 @@
 	padding: 2px;
 }
 
-.element-editor-container .element-editor-container {
+.element-editor-container .element-container{
 	width: 100%;
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
+	padding: 20px 0px;
 }
 
 .element-editor-container .element-editor-header {

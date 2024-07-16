@@ -53,3 +53,31 @@
 	background-color: white;
 	color: black;
 }
+
+.toolbar-button-tooltip-container {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	width: fit-content;
+}
+
+.toolbar-button-tooltip-container .tooltip-text {
+	position: fixed;
+	width: 100px;
+	background-color: white;
+	color: black;
+	text-align: center;
+	border-radius: 5px;
+	border-color: #0d0d0d;
+	border: solid 1px;
+	font-size: 12px;
+	padding: 5px 0;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 0.3s;
+	pointer-events: none; /* Prevent tooltip from interfering with mouse events */
+}
+
+.toolbar-button-tooltip-container:hover .tooltip-text {
+	opacity: 1;
+}

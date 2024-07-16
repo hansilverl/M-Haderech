@@ -9,12 +9,16 @@ import TextEditor from '../../TextEditor/TextEditor'
 import ResourceInput from '../../ResourceInput/ResourceInput'
 import GeneralModal from '../../Modals/GeneralModal'
 
+import ResizableComponent from '../ResizableResourceComponent/ResizableResourceComponent'
 
 const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'other']
 const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'אחר']
 
 const ElementEditorComp = (props) => {
-	const { type, content, setContent, resourcePath, setResourcePath } = props
+	const { type, content, setContent, resourcePath, setResourcePath, dimensions, setDimensions } =
+		props
+
+	const [url, setUrl] = useState(null)
 
 	const index = typeValues.indexOf(type)
 	if (index < 0) {
@@ -23,13 +27,24 @@ const ElementEditorComp = (props) => {
 	if (type === 'text') {
 		return <TextEditor content={content} setContent={setContent} />
 	}
+
 	return (
-		<ResourceInput
-			type={type}
-			path={resourcePath}
-			setPath={setResourcePath}
-			title={typeNames[index]}
-		/>
+		<>
+			<ResourceInput
+				type={type}
+				path={resourcePath}
+				setPath={setResourcePath}
+				title={typeNames[index]}
+				url={url}
+				setUrl={setUrl}
+			/>
+			<ResizableComponent
+				mediaType={type}
+				src={url}
+				dimensions={dimensions}
+				setDimensions={setDimensions}
+			/>
+		</>
 	)
 }
 
@@ -47,6 +62,7 @@ const ElementEditor = (props) => {
 	const [content, setContent] = useState(elem.content)
 	const [resourcePath, setResourcePath] = useState(elem.resourcePath)
 	const [displayEditor, setDisplayEditor] = useState(elem.displayEditor)
+	const [dimensions, setDimensions] = useState(elem.dimensions ? elem.dimensions : null)
 	const [isModalActive, setIsModalActive] = useState(false)
 
 	const onDeleteElement = () => {
@@ -59,7 +75,7 @@ const ElementEditor = (props) => {
 	}
 
 	useEffect(() => {
-		if(firstRenderRef.current){
+		if (firstRenderRef.current) {
 			firstRenderRef.current = false
 			return
 		}
@@ -72,6 +88,7 @@ const ElementEditor = (props) => {
 				newElem.content = content
 				newElem.resourcePath = resourcePath
 				newElem.displayEditor = displayEditor
+				newElem.dimensions = dimensions
 				return newElem
 			})
 		}
@@ -81,7 +98,7 @@ const ElementEditor = (props) => {
 		autoSaveTimeout.current = setTimeout(() => {
 			onUpdateElement()
 		}, 1000)
-	}, [type, content, resourcePath, displayEditor])
+	}, [type, content, resourcePath, displayEditor, dimensions])
 
 	useEffect(() => {
 		if (elem != element) updateElement(elem)
@@ -109,14 +126,16 @@ const ElementEditor = (props) => {
 				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'}</button>
 				<button onClick={() => setIsModalActive(true)}>מחק</button>
 			</div>
-			<div className='element-editor-container' display={displayEditor ? 'block' : 'none'}>
+			<div className='element-container'>
 				{!displayEditor || forceHideEditor ? null : (
 					<ElementEditorComp
 						type={type}
 						content={content}
 						resourcePath={resourcePath}
+						dimensions={dimensions}
 						setContent={setContent}
 						setResourcePath={setResourcePath}
+						setDimensions={setDimensions}
 					/>
 				)}
 			</div>

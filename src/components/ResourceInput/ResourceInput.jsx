@@ -4,7 +4,7 @@ import './ResourceInput.css'
 import CustomFileInput from './CustomInput/CustomFileInput'
 
 const ResourceInput = (props) => {
-	const { path, setPath, type, title } = props
+	const { path, setPath, type, title, url, setUrl } = props
 	const {
 		resourcePath,
 		loadingResourcePath,
@@ -15,7 +15,6 @@ const ResourceInput = (props) => {
 	} = useResourceManagement(path)
 
 	const [currentFile, setCurrentFile] = useState(undefined)
-	const [url, setUrl] = useState(undefined)
 
 	const deleteResourceHandler = () => {
 		deleteResource()

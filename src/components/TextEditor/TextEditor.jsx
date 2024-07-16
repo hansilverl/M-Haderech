@@ -65,7 +65,7 @@ const TextEditor = ({ content, setContent }) => {
 	return (
 		<div className='editor-container'>
 			<TextEditorToolBar editor={editor} />
-			<EditorContent editor={editor} />
+			<EditorContent className='tiptap-editor-container' editor={editor} />
 		</div>
 	)
 }

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import usePostCreate from '../../hooks/usePostCreate'
 import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 
-const MAX_PER_PAGE = 6
+const MAX_PER_PAGE = 12
 
 const AdminContentManagement = () => {
 	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)

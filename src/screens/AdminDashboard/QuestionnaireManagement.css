@@ -226,9 +226,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   width: 30vw;
 }
 
-
-
-
 .question-header button:hover {
   transform: scale(1.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

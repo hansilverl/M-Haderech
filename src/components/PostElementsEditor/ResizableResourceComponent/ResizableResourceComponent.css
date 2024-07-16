@@ -1,0 +1,48 @@
+.resizable-container {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #040303;
+	border-radius: 4px;
+}
+
+.resizable-container .media-container {
+	width: fit-content;
+	height: fit-content;
+	overflow: hidden;
+}
+
+.resizable-container .media-container img,
+.resizable-container .media-container video,
+.resizable-container .media-container audio {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+}
+
+.resizable-container .react-resizable-handle {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+	cursor: se-resize;
+}
+
+/* Optional: Add an icon or image to the handle */
+.resizable-container .react-resizable-handle::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}

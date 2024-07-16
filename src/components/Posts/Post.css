@@ -15,7 +15,8 @@
 
 .detailed-post-container .post-image {
 	max-width: 90%;
-	max-height: 270px;
+	max-height: 180px;
+	max-width: 270px;
 	height: auto;
 	border-radius: 8px;
 	align-self: center; /* Center the image if it is smaller than the width */

@@ -2,10 +2,11 @@ import './ToolBarButton.css'
 
 import React, { useState } from 'react'
 
+import ToolbarTooltip from './ToolbarTooltip'
 import GeneralModal from '../../../Modals/GeneralModal'
 
 const ToolBarLinkButton = (props) => {
-	const { isActiveArg, editorFunc, content, editor, className } = props
+	const { isActiveArg, editorFunc, content, editor, className, tooltipText } = props
 
 	let isActive = editor.isActive(isActiveArg)
 	if (editorFunc !== 'setLink') isActive = !isActive
@@ -48,7 +49,7 @@ const ToolBarLinkButton = (props) => {
 	}
 
 	return (
-		<>
+		<ToolbarTooltip text={tooltipText}>
 			<button
 				onClick={clickHandler}
 				disabled={isDisabled()}
@@ -70,7 +71,7 @@ const ToolBarLinkButton = (props) => {
 					placeholder='כתובת אתר'
 				/>
 			</GeneralModal>
-		</>
+		</ToolbarTooltip>
 	)
 }
 

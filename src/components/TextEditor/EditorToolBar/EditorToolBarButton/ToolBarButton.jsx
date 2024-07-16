@@ -1,7 +1,11 @@
 import './ToolBarButton.css'
 
+import React, { useState } from 'react'
+
+import ToolbarTooltip from './ToolbarTooltip'
+
 const ToolBarButton = (props) => {
-	const { isActiveArg, content, editorFunc, editorFuncArg, editor, className } = props
+	const { isActiveArg, content, editorFunc, editorFuncArg, editor, className, tooltipText } = props
 	const activeClass = editor.isActive(isActiveArg) ? 'is-active' : ''
 
 	const clickHandler = () => {
@@ -23,12 +27,16 @@ const ToolBarButton = (props) => {
 	}
 
 	return (
-		<button
-			onClick={clickHandler}
-			disabled={isDisabled()}
-			className={`text-editor-menu-bar-button ${className} ${activeClass}`}>
-			{content}
-		</button>
+		<>
+			<ToolbarTooltip text={tooltipText}>
+				<button
+					onClick={clickHandler}
+					disabled={isDisabled()}
+					className={`text-editor-menu-bar-button ${className} ${activeClass}`}>
+					{content}
+				</button>
+			</ToolbarTooltip>
+		</>
 	)
 }
 
