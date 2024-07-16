@@ -5,11 +5,13 @@ import React, { useState } from 'react';
 const OptionHeaders = ({ options }) => (
     <thead>
         <tr>
-            {Object.keys(options).map((option) => (
-                <th key={option}>
-                    {options[option]}
-                </th>
-            ))}
+            {Object.keys(options)
+                .filter((option) => /^\d+$/.test(option)) // Filter keys that are only numeric
+                .map((option) => (
+                    <th key={option}>
+                        {options[option]}
+                    </th>
+                ))}
         </tr>
     </thead>
 );
@@ -17,25 +19,27 @@ const OptionHeaders = ({ options }) => (
 const OptionCells = ({ options, selectedOption, handleRadioChange, name }) => (
     <tbody>
         <tr>
-            {Object.keys(options).map((option) => (
-                <td
-                    key={option}
-                    className={selectedOption === option ? 'selected' : ''}
-                >
-                    <label className="radio-label">
-                        <input
-                            type="radio"
-                            name={name}
-                            value={option}
-                            checked={selectedOption === option}
-                            onChange={() => handleRadioChange(option)}
-                            className="radio-input"
-                        />
-                        <span className="custom-radio"></span>
-                        <span className="option-vert">{options[option]}</span>
-                    </label>
-                </td>
-            ))}
+            {Object.keys(options)
+                .filter((option) => /^\d+$/.test(option)) // Filter keys that are only numeric
+                .map((option) => (
+                    <td
+                        key={option}
+                        className={selectedOption === option ? 'selected' : ''}
+                    >
+                        <label className="radio-label">
+                            <input
+                                type="radio"
+                                name={name}
+                                value={option}
+                                checked={selectedOption === option}
+                                onChange={() => handleRadioChange(option)}
+                                className="radio-input"
+                            />
+                            <span className="custom-radio"></span>
+                            <span className="option-vert">{options[option]}</span>
+                        </label>
+                    </td>
+                ))}
         </tr>
     </tbody>
 );
