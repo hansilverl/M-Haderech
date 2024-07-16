@@ -23,10 +23,11 @@
 }
 
 .navbar-logo {
+  margin-right: 1em;
   flex-direction: flex-end;
   order: -1;
   display: flex;
-  margin-right: 3em !important;
+  /* margin-right: 3em !important; not important anymore xD */
 }
 
 .navbar-logo img {
@@ -258,6 +259,7 @@
     justify-content: center;
     align-items: center;
     margin-top: -2em;
+    margin-right: 0;
   }
 
   .navbar-logo img {

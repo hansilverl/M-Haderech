@@ -34,6 +34,7 @@
 	margin: 0;
 }
 
+
 .header-text p {
 	font-size: 1.2em;
 	margin: 0;
@@ -154,6 +155,11 @@ footer {
 		font-size: 2em;
 		text-align: right;
 	}
+
+	.header-text h3 {
+		display: none;
+	}
+	
 
 	.header-text p {
 		font-size: 1em;

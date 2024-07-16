@@ -262,6 +262,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
 
   const handleAddQuestion = async () => {
+    setNewQuestionText(''); // Reset the newQuestionText state
     setAddQuestionModalIsOpen(true);
   };
 
