@@ -75,7 +75,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     setSelectedQuestion(question);
     setDeleteConfirmIsOpen(true);
   };
-  
+
   const confirmDeleteQuestion = async () => {
     try {
       if (!selectedQuestion || !selectedQuestion.id) {
@@ -89,13 +89,13 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       handleFirestoreError(error);
     }
   };
-  
 
 
   const handleDeleteAnswer = async (questionId, answerId) => {
     setSelectedAnswer({ questionId, answerId });
     setDeleteConfirmIsOpen(true);
   };
+
   const confirmDeleteAnswer = async () => {
     const { questionId, answerId } = selectedAnswer;
     try {
@@ -136,6 +136,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       handleFirestoreError(error);
     }
   };
+
+
 
   const handleEditQuestion = (question) => {
     setCurrentText(question.question);
@@ -491,21 +493,31 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           </form>
         </Modal>
       )}
-    
-    {/* Confirm Delete Modal */}
-    {deleteConfirmIsOpen && (
-      <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
-        <button className="close-button" onClick={() => setDeleteConfirmIsOpen(false)}>
-          <FaTimes />
-        </button>
-        <h2>אישור מחיקה</h2>
-        <p>האם אתה בטוח שברצונך למחוק את השאלה?</p>
-        <button onClick={confirmDeleteQuestion}>כן</button>
-        <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
-      </Modal>
-    )}
-  </div>
+
+      {/* Confirm Delete Modal */}
+      {deleteConfirmIsOpen && (
+        <Modal isOpen={deleteConfirmIsOpen} onRequestClose={() => setDeleteConfirmIsOpen(false)} contentLabel="Confirm Delete">
+          <button className="close-button" onClick={() => setDeleteConfirmIsOpen(false)}>
+            <FaTimes />
+          </button>
+          <h2>אישור מחיקה</h2>
+          {selectedAnswer ? (
+            <>
+              <p>האם את בטוחה שברצונך למחוק את התשובה?</p>
+              <button onClick={confirmDeleteAnswer}>כן</button>
+            </>
+          ) : (
+            <>
+              <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
+              <button onClick={confirmDeleteQuestion}>כן</button>
+            </>
+          )}
+          <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
+        </Modal>
+      )}
+    </div>
   );
-};
+}
+
 
 export default QuestionnaireManagement;
