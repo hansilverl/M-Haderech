@@ -18,10 +18,15 @@ const ToolBarLinkButton = (props) => {
 
 	const modalClose = () => {
 		setRequestLinkModalOpen(false)
-		if (link && link !== '') {
-			editor.chain().focus().extendMarkRange('link').setLink({ href: link }).run()
-			setLinkUrl('')
+		if (!link || link === '') {
+			return
 		}
+		let newLink = link
+		if (!newLink.includes('http://') && !newLink.includes('https://')) {
+			newLink = `https://${newLink}`
+		}
+		editor.chain().focus().extendMarkRange('link').setLink({ href: newLink }).run()
+		setLinkUrl('')
 	}
 
 	const clickHandler = () => {

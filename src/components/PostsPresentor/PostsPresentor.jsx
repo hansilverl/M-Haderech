@@ -33,7 +33,6 @@ const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, all
 
 	useEffect(() => {
 		if (loadingGet || !filteredPosts) return
-		console.log('filteredPosts: ', filteredPosts);
 		const pageStart = (currentPage - 1) * pageSize
 		const pageEnd = pageStart + pageSize
 		if (filteredPosts.length < pageEnd && hasMore) {

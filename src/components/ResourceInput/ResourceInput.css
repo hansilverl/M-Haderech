@@ -1,13 +1,13 @@
 .resource-input-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	align-items: right;
 	justify-content: flex-start;
-	align-items: center;
 	padding: 5px;
 	margin: 10px 0;
 	background: #fff;
 	border-radius: 8px;
-	width: fit-content;
+	width: 100%;
 }
 
 .resource-input-container .title {
@@ -21,10 +21,11 @@
 }
 
 .resource-input-container .file-input,
-.resource-input-container .file-info {
+.resource-input-container .file-info-container {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	margin: 0px 10px;
 }
 
 .resource-input-container .file-input {
@@ -37,55 +38,46 @@
 	margin-right: 10px; /* Add some space between the input and the button */
 }
 
-.resource-input-container .upload-button {
-	background-color: #60c879;
-	color: white;
-	border: none;
-	padding: 7px 15px;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s, transform 0.3s;
-}
-
-.resource-input-container .upload-button:hover {
-	background-color: #218838;
-	transform: translateY(-2px);
-}
-
-.resource-input-container .file-info {
+.resource-input-container .file-info-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin-top: 10px; /* Add space between file-info and previous content */
 }
 
-.resource-input-container .file-info h4 {
+.resource-input-container .file-info-container h4 {
 	margin-right: 10px; /* Add space between the text and the link */
 }
 
-.resource-input-container .file-info a {
+.resource-input-container .file-info-container a {
 	color: #007bff;
 	text-decoration: none;
 	margin-right: 10px; /* Add space between the link and the button */
 }
 
-.resource-input-container .file-info a:hover {
+.resource-input-container .file-info-container a:hover {
 	text-decoration: underline;
+}
+
+.resource-input-container .file-info-container button {
+	border: none;
+	padding: 7px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 0px 10px;
+	transition: background-color 0.3s, transform 0.3s;
+}
+.resource-input-container .file-info-container button {
+	transform: translateY(-2px);
 }
 
 .resource-input-container .delete-button-input {
 	background-color: #d44242;
 	color: white;
-	border: none;
-	padding: 6px 13px;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 14px;
 }
 
 .resource-input-container .delete-button-input:hover {
 	background-color: #9b2323;
-	transform: translateY(-2px);
 }
 
 .resource-input-container .status-message {
@@ -95,4 +87,18 @@
 
 .resource-input-container .status-message.error {
 	color: #d44242;
+}
+.resource-input-container .file-input {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-items: center;
+}
+
+.resource-input-container .status-message-container {
+	display: flex;
+	flex-direction: row;
+	align-items: right;
+	justify-items: center;
+	margin-top: 10px;
 }

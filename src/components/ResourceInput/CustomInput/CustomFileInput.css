@@ -1,0 +1,24 @@
+.custom-file-input-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 0px;
+	padding: 0px 5px;
+}
+
+.custom-file-input-container .choose-file-button {
+	background-color: #60c879;
+	color: white;
+	border: none;
+	padding: 7px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 0px 7px;
+	transition: background-color 0.3s, transform 0.3s;
+}
+
+.custom-file-input-container .choose-file-button:hover {
+	background-color: #218838;
+	transform: translateY(-2px);
+}

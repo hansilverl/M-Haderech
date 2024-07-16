@@ -24,27 +24,30 @@ const ElementEditorComp = (props) => {
 	if (index < 0) {
 		return <h2>שגיאה בטעינת עורך האלמנט</h2>
 	}
-	if (type === 'text') {
-		return <TextEditor content={content} setContent={setContent} />
-	}
 
 	return (
-		<>
-			<ResourceInput
-				type={type}
-				path={resourcePath}
-				setPath={setResourcePath}
-				title={typeNames[index]}
-				url={url}
-				setUrl={setUrl}
-			/>
-			<ResizableComponent
-				mediaType={type}
-				src={url}
-				dimensions={dimensions}
-				setDimensions={setDimensions}
-			/>
-		</>
+		<div className='element-comp-container'>
+			{type === 'text' ? (
+				<TextEditor content={content} setContent={setContent} />
+			) : (
+				<>
+					<ResourceInput
+						type={type}
+						path={resourcePath}
+						setPath={setResourcePath}
+						title={typeNames[index]}
+						url={url}
+						setUrl={setUrl}
+					/>
+					<ResizableComponent
+						mediaType={type}
+						src={url}
+						dimensions={dimensions}
+						setDimensions={setDimensions}
+					/>
+				</>
+			)}
+		</div>
 	)
 }
 
@@ -123,22 +126,20 @@ const ElementEditor = (props) => {
 					name='סוג הרכיב'
 					disabled={resourcePath && resourcePath !== '' ? true : false}
 				/>
-				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'}</button>
-				<button onClick={() => setIsModalActive(true)}>מחק</button>
+				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'} עורך</button>
+				<button onClick={() => setIsModalActive(true)}>מחק רכיב</button>
 			</div>
-			<div className='element-container'>
-				{!displayEditor || forceHideEditor ? null : (
-					<ElementEditorComp
-						type={type}
-						content={content}
-						resourcePath={resourcePath}
-						dimensions={dimensions}
-						setContent={setContent}
-						setResourcePath={setResourcePath}
-						setDimensions={setDimensions}
-					/>
-				)}
-			</div>
+			{!displayEditor || forceHideEditor ? null : (
+				<ElementEditorComp
+					type={type}
+					content={content}
+					resourcePath={resourcePath}
+					dimensions={dimensions}
+					setContent={setContent}
+					setResourcePath={setResourcePath}
+					setDimensions={setDimensions}
+				/>
+			)}
 			<GeneralModal
 				isOpen={isModalActive}
 				onRequestClose={() => setIsModalActive(false)}

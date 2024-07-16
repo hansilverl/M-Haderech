@@ -32,20 +32,14 @@ const Post = ({ article }) => {
 		navigate(`/posts/${id}`) // Navigate to the post details page
 	}
 
-	const truncateDescription = (text, wordLimit) => {
-		const words = text.split(' ')
-		if (words.length > wordLimit) {
-			return words.slice(0, wordLimit).join(' ') + '...'
-		}
-		return text
-	}
+	
 
 	return !id ? null : (
 		<div className='detailed-post-container'>
 			{!imageUrl ? null : <img src={imageUrl} alt={title} className='post-image' />}
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{getDateStringFromTimeStamp(datePublished)}</p>
-			<p className='post-description'>{truncateDescription(description, 12)}</p>
+			<p className='post-description'>{description}</p>
 			<button className='post-button' onClick={handleViewPost}>
 				ראה הכל
 			</button>

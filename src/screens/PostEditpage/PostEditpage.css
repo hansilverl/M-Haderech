@@ -11,7 +11,7 @@
 	padding: 20px;
 	align-items: center;
 	justify-content: flex-start;
-	min-height: 900vh;
+	min-height: 90vh;
 }
 
 .edit-post-page .edit-post-header {
@@ -22,13 +22,12 @@
 	width: 100%;
 }
 
-.edit-post-page .edit-post-header .editor-header-input {
+.edit-post-header .editor-header-input {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	padding-right: 100px;
-	width: 60%;
+	width: 75%;
 }
 /* General styles remain unchanged */
 .edit-post-page .edit-post-header select,
@@ -46,13 +45,14 @@
 	/* max-width: 30%; */
 }
 
-.edit-post-page .edit-post-header textarea {
+.edit-post-page .edit-post-header .text-area {
 	padding: 10px; /* Some padding */
 	border: 1px solid #ccc; /* Border */
 	border-radius: 4px; /* Rounded corners */
 	font-size: 16px; /* Font size */
 	line-height: 1.5; /* Line height */
 	width: 100%;
+	resize: none;
 }
 
 .edit-post-page .edit-post-header input:focus,
@@ -87,10 +87,10 @@
 .edit-post-page .edit-post-header button,
 .edit-post-page .buttons-container button {
 	border: none;
-	padding: 10px 20px;
+	padding: 10px 15px;
 	border-radius: 5px;
 	cursor: pointer;
-	margin: 10px;
+	margin: 0px;
 	font-size: 16px;
 }
 
@@ -144,17 +144,19 @@
 }
 
 .edit-post-page .input-label {
+	display: flex;
 	width: fit-content;
 	margin: 0 10px;
 	text-align: right;
 	margin-right: 10px;
 	font-weight: bold;
+	flex-wrap: nowrap;
 }
 
 .edit-post-page .buttons-container {
 	display: flex;
 	flex-direction: row;
-	width: 50%;
+	width: 70%;
 	justify-content: space-around;
 }
 
@@ -167,5 +169,12 @@
 	.input-label {
 		text-align: left;
 		margin-bottom: 5px;
+	}
+	.edit-post-page .buttons-container {
+		width: 100%;
+	}
+
+	.edit-post-header .editor-header-input {
+		width: 100%;
 	}
 }

@@ -27,7 +27,6 @@ const usePostUpdate = (documentID) => {
 		setLoadingUpdate(true)
 		setErrorUpdate(null)
 		try {
-			console.log('postToUpdate: ', postToUpdate);
 			if (postToUpdate?.id) delete postToUpdate.id
 			const p = await postUpdateFunction(documentID, postToUpdate)
 			setPostToUpdate(null)

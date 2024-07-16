@@ -1,6 +1,6 @@
 .detailed-post-container {
 	width: 300px;
-	height: 360px;
+	height: 380px;
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #ddd;
@@ -15,7 +15,7 @@
 
 .detailed-post-container .post-image {
 	max-width: 90%;
-	max-height: 180px;
+	max-height: 150px;
 	max-width: 270px;
 	height: auto;
 	border-radius: 8px;
@@ -23,20 +23,21 @@
 }
 
 .detailed-post-container .post-title {
-	font-size: 1.5em;
-	margin: 0.5em 0;
-	margin-top: 30px;
+	font-size: 20px;
+	margin: 15px 0;
+	margin-top: 12px;
 }
 
 .detailed-post-container .post-date {
 	color: #888;
-	font-size: 0.9em;
-	margin: 0.5em 0;
+	font-size: 14px;
+	margin: 3px 0;
 }
 
 .detailed-post-container .post-description {
-	font-size: 1em;
-	margin: 0.5em 0;
+	font-size: 16px;
+	margin: 5px 0;
+	text-wrap: balance;
 }
 
 .detailed-post-container .post-button {

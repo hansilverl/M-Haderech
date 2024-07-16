@@ -11,8 +11,8 @@ import usePostsGet from '../../hooks/usePostsGet'
 import usePostUpdate from '../../hooks/usePostUpdate'
 import usePostDelete from '../../hooks/usePostDelete'
 
-import Selector from '../../components/Selector/Selector'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
+import TextAreaWithLimit from '../../components/TextAreaWithLimist/TextAreaWithLimit'
 
 const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
@@ -86,7 +86,7 @@ const PostEditPageComp = ({ postID, post }) => {
 		setSaveTimeout.current = setTimeout(() => {
 			handleSave()
 		}, 500)
-	}, [elements, published])
+	}, [elements, published, title, description])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
@@ -117,27 +117,25 @@ const PostEditPageComp = ({ postID, post }) => {
 					<div className='edit-post-header'>
 						<div className='editor-header-input'>
 							<label className='input-label'>כותרת המאמר:</label>
-							<input
-								type='text'
-								placeholder='כותרת'
+							<TextAreaWithLimit
+								className='text-area'
+								limit={60}
 								value={title}
-								onChange={(e) => setTitle(e.target.value)}
+								rows={2}
+								setValue={setTitle}
 							/>
 						</div>
 						{articleType === 'about-us' ? null : (
-							<>
-								<div className='editor-header-input'>
-									<label className='input-label'>תיאור המאמר:</label>
-									<textarea
-										type='text'
-										rows={4}
-										placeholder='תיאור'
-										value={description}
-										style={{ resize: 'none' }}
-										onChange={(e) => setDescription(e.target.value)}
-									/>
-								</div>
-							</>
+							<div className='editor-header-input'>
+								<label className='input-label'>תיאור המאמר:</label>
+								<TextAreaWithLimit
+									className='text-area'
+									limit={100}
+									value={description}
+									rows={3}
+									setValue={setDescription}
+								/>
+							</div>
 						)}
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
@@ -145,13 +143,19 @@ const PostEditPageComp = ({ postID, post }) => {
 						<button onClick={forceSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
-						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
-							מחק
+						<button
+							onClick={() => navigate(`/posts/${post.id}`)}
+							disabled={loadingDelete}
+							className='publish-button'>
+							תצוגה מקדימה
 						</button>
 						<button
 							onClick={togglePublished}
 							className={!published ? 'publish-button' : 'unpublish-button'}>
 							{published ? 'בטל פרסום' : 'פרסם'}
+						</button>
+						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
+							מחק
 						</button>
 					</div>
 				</>

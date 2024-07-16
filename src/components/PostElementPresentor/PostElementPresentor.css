@@ -85,7 +85,8 @@
 }
 
 
-.tiptap-presentor-container .tiptap {
+.tiptap-presentor-container.tiptap {
+	width: 100%;
 	color: none;
 	background-color: none;
 	border: none;

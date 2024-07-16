@@ -16,7 +16,6 @@ const ResizableComponent = ({ mediaType, src, dimensions, setDimensions }) => {
 	}
 
 	const onResize = (e, { size }) => {
-		console.log(size)
 		if (size) setCurrDimensions({ width: size.width, height: size.height })
 	}
 
