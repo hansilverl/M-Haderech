@@ -152,26 +152,19 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         ...selectedQuestion.answers,
         { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }
       ];
-
+  
       // Sort the updatedAnswers array by score
       updatedAnswers.sort((a, b) => a.score - b.score);
-
+  
       const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
       setSelectedQuestion(updatedQuestion);
-
-      // Update the Firestore document with the new answer
-      const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id);
-      await updateDoc(questionDocRef, {
-        [newAnswerScore]: newAnswerText
-      });
-
+  
+      // Reset the input fields
       setNewAnswerText('');
       setNewAnswerScore('');
-      setShowNewAnswerFields(false);
     }
   };
-
-
+  
 
   const handleEditAnswer = (answer) => {
     setEditingAnswer(answer);
