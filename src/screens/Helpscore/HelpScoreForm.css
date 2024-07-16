@@ -210,7 +210,7 @@ body {
 }
 
 /* pseudo element to use as element background: */
-.req_question::after {
+.bordered-container .req_question::after {
     content: "";
     position: absolute;
     z-index: -1;
