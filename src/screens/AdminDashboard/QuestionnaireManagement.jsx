@@ -152,19 +152,19 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         ...selectedQuestion.answers,
         { id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) }
       ];
-  
+
       // Sort the updatedAnswers array by score
       updatedAnswers.sort((a, b) => a.score - b.score);
-  
+
       const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
       setSelectedQuestion(updatedQuestion);
-  
+
       // Reset the input fields
       setNewAnswerText('');
       setNewAnswerScore('');
     }
   };
-  
+
 
   const handleEditAnswer = (answer) => {
     setEditingAnswer(answer);
@@ -508,6 +508,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
         </Modal>
       )}
+
     </div>
   );
 }
