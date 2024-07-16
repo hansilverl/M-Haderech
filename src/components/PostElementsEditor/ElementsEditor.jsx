@@ -69,7 +69,7 @@ const ElementsEditor = (props) => {
 		})
 	)
 
-	const handleDragStart = (event) => {
+	const handleDragStart = () => {
 		setDragging(true)
 	}
 
@@ -109,7 +109,7 @@ const ElementsEditor = (props) => {
 					})}
 				</SortableContext>
 			</DndContext>
-			<button onClick={createElement}>הוסף</button>
+			<button className='add-element-button' onClick={createElement}>הוסף רכיב</button>
 		</div>
 	)
 }

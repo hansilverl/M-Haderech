@@ -1,4 +1,6 @@
 .edit-post-page {
+	display: flex;
+	flex-direction: column;
 	background: white;
 	border: 1px solid #dee2e6;
 	border-radius: 8px;
@@ -7,8 +9,27 @@
 	width: auto;
 	margin: 20px auto;
 	padding: 20px;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: 900vh;
 }
 
+.edit-post-page .edit-post-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: right;
+	width: 100%;
+}
+
+.edit-post-page .edit-post-header .editor-header-input {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding-right: 100px;
+	width: 60%;
+}
 /* General styles remain unchanged */
 .edit-post-page .edit-post-header select,
 .edit-post-page .edit-post-header option,
@@ -23,6 +44,15 @@
 	font-size: 16px;
 	flex: 1; /* Make the input take up remaining space */
 	/* max-width: 30%; */
+}
+
+.edit-post-page .edit-post-header textarea {
+	padding: 10px; /* Some padding */
+	border: 1px solid #ccc; /* Border */
+	border-radius: 4px; /* Rounded corners */
+	font-size: 16px; /* Font size */
+	line-height: 1.5; /* Line height */
+	width: 100%;
 }
 
 .edit-post-page .edit-post-header input:focus,
@@ -64,14 +94,9 @@
 	font-size: 16px;
 }
 
-.edit-post-page .edit-post-header button:hover,
-.edit-post-page .buttons-container button:hover {
-	margin: 0px 10px;
-}
-
 .edit-post-page .edit-post-header button:disabled,
 .edit-post-page .buttons-container button:disabled {
-	background-color: #a0a0a0;
+	background-color: var(--button-primary-color-disabled);
 	cursor: not-allowed;
 }
 
@@ -119,7 +144,7 @@
 }
 
 .edit-post-page .input-label {
-	width: auto;
+	width: fit-content;
 	margin: 0 10px;
 	text-align: right;
 	margin-right: 10px;
@@ -128,8 +153,8 @@
 
 .edit-post-page .buttons-container {
 	display: flex;
-	max-width: 50%;
-	min-width: fit-content;
+	flex-direction: row;
+	width: 50%;
 	justify-content: space-around;
 }
 

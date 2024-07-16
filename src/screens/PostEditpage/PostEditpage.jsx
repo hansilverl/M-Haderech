@@ -35,7 +35,6 @@ const PostEditPageComp = ({ postID, post }) => {
 		const newPost = {
 			title,
 			description,
-			articleType,
 			published,
 			datePublished,
 			elements,
@@ -105,7 +104,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}, [postUpdate, loadingUpdate])
 
 	return (
-		<div className='edit-post-page main-flex-col'>
+		<div className='edit-post-page'>
 			<div className='back-button-container'>
 				<button className='back-button' onClick={() => navigate(-1)}>
 					<FaArrowRight />
@@ -115,8 +114,8 @@ const PostEditPageComp = ({ postID, post }) => {
 				<h1>המאמר לא נמצא</h1>
 			) : (
 				<>
-					<div className='edit-post-header main-flex-col'>
-						<div className='main-flex-row'>
+					<div className='edit-post-header'>
+						<div className='editor-header-input'>
 							<label className='input-label'>כותרת המאמר:</label>
 							<input
 								type='text'
@@ -125,28 +124,24 @@ const PostEditPageComp = ({ postID, post }) => {
 								onChange={(e) => setTitle(e.target.value)}
 							/>
 						</div>
-						<div className='main-flex-row'>
-							<label className='input-label'>תיאור המאמר:</label>
-							<input
-								type='text'
-								placeholder='תיאור'
-								value={description}
-								onChange={(e) => setDescription(e.target.value)}
-							/>
-						</div>
-						<div className='main-flex-row'>
-							<Selector
-								id='post-type'
-								name='סוג המאמר (מאמר או כנס)'
-								value={articleType}
-								selectFunction={setPostType}
-								optionValues={['post', 'convention']}
-								optionNames={['מאמר', 'כנס']}
-							/>
-						</div>
+						{articleType === 'about-us' ? null : (
+							<>
+								<div className='editor-header-input'>
+									<label className='input-label'>תיאור המאמר:</label>
+									<textarea
+										type='text'
+										rows={4}
+										placeholder='תיאור'
+										value={description}
+										style={{ resize: 'none' }}
+										onChange={(e) => setDescription(e.target.value)}
+									/>
+								</div>
+							</>
+						)}
 					</div>
 					<ElementsEditor elements={elements} setElements={setElements} />
-					<div className='buttons-container main-flex-row'>
+					<div className='buttons-container'>
 						<button onClick={forceSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>

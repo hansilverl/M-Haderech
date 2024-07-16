@@ -47,7 +47,6 @@ const ElementEditor = (props) => {
 	const [content, setContent] = useState(elem.content)
 	const [resourcePath, setResourcePath] = useState(elem.resourcePath)
 	const [displayEditor, setDisplayEditor] = useState(elem.displayEditor)
-
 	const [isModalActive, setIsModalActive] = useState(false)
 
 	const onDeleteElement = () => {

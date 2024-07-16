@@ -6,7 +6,7 @@ import './Post.css'
 
 const getDateStringFromTimeStamp = (timeStamp) => {
 	if (!timeStamp) return null
-	const now = timeStamp.toDate()
+	const now = timeStamp?.toDate()
 	const year = now.getFullYear()
 	const month = (now.getMonth() + 1).toString().padStart(2, '0')
 	const day = now.getDate().toString().padStart(2, '0')
@@ -14,7 +14,7 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 }
 
 const Post = ({ article }) => {
-	const { id, title, datePublished, description, elements, articleType } = article
+	const { id, title, datePublished, description, elements } = article
 	const navigate = useNavigate()
 
 	const [imageUrl, setImageUrl] = useState(null)

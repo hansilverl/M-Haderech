@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
 import { doc, setDoc, collection } from 'firebase/firestore'
 
+import { fetchSinglePost } from './usePostsGet'
+
 const postUpdateFunction = async (documentID, postChanges) => {
 	if (!postChanges) throw new Error('No post provided!')
 	const postsCollection = collection(db, 'Posts')
 	const docRef = doc(postsCollection, documentID)
 	await setDoc(docRef, postChanges, { merge: true })
-	return documentID
+	return await fetchSinglePost(documentID)
 }
 
 const usePostUpdate = (documentID) => {
@@ -21,7 +23,7 @@ const usePostUpdate = (documentID) => {
 	}
 
 	const postUpdateHandler = async () => {
-		if(loadingUpdate) return
+		if (loadingUpdate) return
 		setLoadingUpdate(true)
 		setErrorUpdate(null)
 		try {

@@ -6,17 +6,18 @@ import { useNavigate } from 'react-router-dom'
 import usePostCreate from '../../hooks/usePostCreate'
 import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 
-const MAX_PER_PAGE = 12
+const MAX_PER_PAGE = 6
 
 const AdminContentManagement = () => {
 	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)
 	const [type, setType] = useState('post')
+	const [typeName, setTypeName] = useState('מאמר')
 	const { postCreateID, startCreate } = usePostCreate()
 	const navigate = useNavigate()
 
 	const addPostHandler = async (e) => {
 		setCreateButtonDisabled(true)
-		startCreate()
+		startCreate(type)
 	}
 
 	useEffect(() => {
@@ -24,6 +25,14 @@ const AdminContentManagement = () => {
 			navigate(`/edit/${postCreateID}`)
 		}
 	}, [postCreateID, navigate])
+
+	useEffect(() => {
+		if (type === 'post') {
+			setTypeName('מאמר')
+		} else if (type === 'convention') {
+			setTypeName('כנס')
+		}
+	}, [type])
 
 	// Sort posts such that 'post' type comes before 'convention' type
 	return (
@@ -38,6 +47,14 @@ const AdminContentManagement = () => {
 					</li>
 				</ul>
 			</div>
+			<div className='add-post-button-container'>
+				<button
+					className='add-post-button'
+					onClick={addPostHandler}
+					disabled={isCreateButtonDisabled}>
+					{`הוספת ${typeName}`}
+				</button>
+			</div>
 			<PostsPresentor
 				key={type}
 				type={type}
@@ -47,12 +64,6 @@ const AdminContentManagement = () => {
 				allowPages={true}
 				allowSearch={true}
 			/>
-			<button
-				className='add-post-button'
-				onClick={addPostHandler}
-				disabled={isCreateButtonDisabled}>
-				הוספת מאמר
-			</button>
 		</div>
 	)
 }
