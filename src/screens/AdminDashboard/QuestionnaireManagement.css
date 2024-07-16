@@ -189,6 +189,45 @@
   flex-grow: 1;
 }
 
+.add-checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.add-checkbox h1{
+  order: 1;
+}
+
+.required-checkbox-add {
+  /* size and position as newQuestionText */
+  margin-left: 20px;
+  margin-top: 30px;
+
+}
+
+
+body > div.ReactModalPortal > div > div > div > div > label{
+  margin-left: 5px;
+  /* same style as required-checkbox: checkbox */
+}
+
+body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbox]
+{
+  margin-left: 5px;
+}
+
+/* Styling the label for newQuestionText specifically */
+#newQuestionText{
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 30vw;
+}
+
+
+
 
 .question-header button:hover {
   transform: scale(1.1);
@@ -299,10 +338,7 @@ button:hover {
   /* Example style */
 }
 
-/* Styling the label for newQuestionText specifically */
-label[for="question"] {
-  max-width: 30vw;
-}
+
 
 .question-input {
   padding: 10px;
@@ -359,4 +395,64 @@ label[for="question"] {
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 600;
+  /* width should be same as newQuestionText */
+  /* width: 30vw; */
+  margin: 0 auto;
+  display: block;
+  transition: background-color 0.2s ease;
+}
+
+.submit-add-question:hover {
+  background-color: #218838;
+}
+
+/* ... (previous CSS remains unchanged) ... */
+
+.delete-confirm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.delete-confirm-content p {
+  margin: auto;
+  text-align: center;
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
 }

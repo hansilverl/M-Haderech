@@ -84,7 +84,9 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       await deleteDoc(doc(db, 'Questionnaire', selectedQuestion.id));
       setQuestions(questions.filter(question => question.id !== selectedQuestion.id));
       setDeleteConfirmIsOpen(false);
+      setSelectedQuestion(null); // Clear the selectedQuestion state
       alert('השאלה נמחקה!');
+    
     } catch (error) {
       handleFirestoreError(error);
     }
@@ -131,6 +133,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       }));
 
       setDeleteConfirmIsOpen(false);
+      setSelectedAnswer(null); // Clear the selectedAnswer state
       alert('התשובה נמחקה בהצלחה!');
     } catch (error) {
       handleFirestoreError(error);
@@ -165,19 +168,21 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     }
   };
 
-
   const handleEditAnswer = (answer) => {
     setEditingAnswer(answer);
     setCurrentText(answer.text);
     setCurrentScore(answer.score);
   };
-
   const saveEditedAnswer = async () => {
     const updatedAnswers = selectedQuestion.answers.map(answer =>
       answer.id === editingAnswer.id
         ? { ...answer, text: currentText, score: currentScore }
         : answer
     );
+
+    // Sort the updatedAnswers array by score
+    updatedAnswers.sort((a, b) => a.score - b.score);
+
     const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
     setSelectedQuestion(updatedQuestion);
     setEditingAnswer(null);
@@ -342,13 +347,26 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         <button className="close-button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}>
           <FaTimes />
         </button>
-
+        <div className="add-checkbox">
         <h2>הוספת שאלה חדשה</h2>
+        <div className="required-checkbox-add">
+            <label>
+              <input
+                type="checkbox"
+                name="isRequired"
+                checked={isRequired}
+                onChange={(e) => setIsRequired(e.target.checked)}
+              />
+              שאלת חובה
+            </label>
+          </div>
+        </div>
         <form className="add-question-form"
           onSubmit={(e) => {
             e.preventDefault();
             saveNewQuestion();
           }}>
+
           <div>
             <label htmlFor="newQuestionText">שאלה: </label>
             <input
@@ -359,17 +377,6 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
               onChange={(e) => setNewQuestionText(e.target.value)}
               required
             />
-          </div>
-          <div className="required-checkbox">
-            <label>
-              <input
-                type="checkbox"
-                name="isRequired"
-                checked={isRequired}
-                onChange={(e) => setIsRequired(e.target.checked)}
-              />
-              שאלת חובה
-            </label>
           </div>
           <button type="submit" className="submit-add-question"
           >הוספה</button>
@@ -496,18 +503,24 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
             <FaTimes />
           </button>
           <h2>אישור מחיקה</h2>
+          <div className="delete-confirm-content">
           {selectedAnswer ? (
             <>
               <p>האם את בטוחה שברצונך למחוק את התשובה?</p>
-              <button onClick={confirmDeleteAnswer}>כן</button>
+
+              <button className="delete-button"
+              onClick={confirmDeleteAnswer}>כן</button>
             </>
           ) : (
             <>
               <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
-              <button onClick={confirmDeleteQuestion}>כן</button>
+              <button className="delete-button"
+               onClick={confirmDeleteQuestion}>כן</button>
             </>
           )}
-          <button onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
+          <button className="cancel-button"
+          onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
+          </div>
         </Modal>
       )}
 
