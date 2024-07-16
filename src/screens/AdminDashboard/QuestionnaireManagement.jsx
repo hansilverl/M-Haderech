@@ -300,6 +300,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
   return (
     <div className="questionnaire-management">
+      <h4>שימי לב! ניתן לגרור את השאלה כדי לשנות את הסדר</h4>
       {loading ? (
         <p>Loading questions...</p>
       ) : error ? (
@@ -479,6 +480,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                   </table>
                 </div>
               </div>
+              <h5></h5>
             </div>
             <div>
               <button type="submit" className="save-button" title="שמירה"> שמירת שינויים <FontAwesomeIcon icon={faFloppyDisk} /></button>
