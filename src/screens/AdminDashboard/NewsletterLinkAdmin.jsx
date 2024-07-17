@@ -67,7 +67,7 @@ const NewsletterLinkAdmin = () => {
   return (
     <div className="newsletter-link">
       <div className="newsletter-link-content">
-        <p><strong>קישור לרשימת תפוצה:</strong> {newsletterLink}</p>
+        {/* <p><strong>קישור לרשימת תפוצה:</strong> {newsletterLink}</p> */}
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 

@@ -64,7 +64,7 @@ const AboutInfo = () => {
   return (
     <div className="about-info">
       <div className="about-info-content">
-        <p>{aboutInfo}</p>
+        {/* <p>{aboutInfo}</p> */}
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 

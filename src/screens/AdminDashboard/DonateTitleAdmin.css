@@ -1,10 +1,7 @@
 /* src/components/DonateTitleAdmin/DonateTitleAdmin.css */
 
 .donate-title-admin {
-    background: #f5f5f5;
-    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     text-align: center;
     box-sizing: border-box;
@@ -19,19 +16,6 @@
     margin: 0 0 10px;
   }
   
-  button.update-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  
-  button.update-button:hover {
-    background-color: #2980b9;
-  }
   
   .modal-overlay {
     position: fixed;
@@ -43,6 +27,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: right;
   }
   
   .modal-content {
@@ -75,7 +60,8 @@
   .modal-content form label {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: right;
+    font-weight: bold;
   }
   
   .modal-content form input {
@@ -83,6 +69,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 5px;
+    width: 100%;
   }
   
   .modal-actions {
@@ -91,7 +78,8 @@
     margin-top: 10px;
   }
   
-  .modal-actions button {
+  .modal-actions button , .save-changes {
+    background-color: #28a74b;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -99,7 +87,7 @@
   }
   
   .modal-actions button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
   }
   
   .modal-actions button:nth-child(2) {

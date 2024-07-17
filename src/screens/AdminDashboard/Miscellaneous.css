@@ -36,7 +36,7 @@
   background: #fff; /* Background color for sections */
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s; /* Smooth transition for hover effect */
   position: relative; /* For the tooltip positioning */
 }
@@ -69,7 +69,7 @@
   z-index: 1;
 }
 
-.admin-miscellaneous-container button.update-button {
+.admin-miscellaneous-container button.update-button , .update-button , .admin-miscellaneous-container .update-button {
   background-color: #3498db;
   color: white;
   border: none;
@@ -78,8 +78,55 @@
   display: block;
   margin: 10px 0; /* Adjust margin to be under h2 */
   padding: 10px 20px;
+  width: 100% !important;
 }
 
 .admin-miscellaneous-container button.update-button:hover {
   background-color: #2980b9;
+}
+
+
+.modal-actions button {
+  background-color: #28a74b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  /* one item on each corner */
+  justify-content: space-between;
+}
+
+.modal-actions button.save-changes{
+  background-color: #28a74b;
+  color: white;
+  font-weight: 400;
+
+}
+
+.modal-actions button.cancel-changes{
+  background-color:#555;
+  color: white;
+  font-weight: 400;
+}
+
+.modal-field input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.new-field{
+  display: flex;
+  flex-direction: column;
+}
+
+.new-field .wide-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }

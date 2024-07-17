@@ -234,6 +234,7 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* all buttons on page, but not on whole website */
 button {
   border: none;
   cursor: pointer;
