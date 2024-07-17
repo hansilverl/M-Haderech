@@ -33,10 +33,6 @@ const Miscellaneous = () => {
 					<AboutInfo />
 				</div>
 				<div className='section'>
-					<h2>קצת עלינו</h2>
-					<AboutFullAdmin />
-				</div>
-				<div className='section'>
 					<h2>קישורי תרומה</h2>
 					<DonationLink />
 				</div>
@@ -49,7 +45,7 @@ const Miscellaneous = () => {
 					<NewsletterLinkAdmin />
 				</div>
 				<div className='section'>
-					<h2>כותרת ותת כותרת לעמוד תרומה</h2>
+					<h2>כיתוב עמוד תרומה</h2>
 					<DonateTitleAdmin />
 				</div>
 			</div>

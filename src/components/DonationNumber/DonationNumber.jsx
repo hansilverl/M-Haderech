@@ -66,7 +66,6 @@ const DonationNumber = () => {
   return (
     <div className="donation-number">
       <div className="donation-number-content">
-        <p><strong>מספר תרומה:</strong> {donationNumber}</p>
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 

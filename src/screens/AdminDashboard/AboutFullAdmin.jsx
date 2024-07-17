@@ -82,10 +82,10 @@ const AboutFullAdmin = () => {
   return (
     <div className="admin-section">
       <div className="admin-content">
-        <p><strong>כותרת:</strong> {title}</p>
+        {/* <p><strong>כותרת:</strong> {title}</p>
         <p><strong>תת כותרת:</strong> {subtitle}</p>
         <p><strong>טקסט:</strong> {text}</p>
-        <p><strong>טקסט נוסף:</strong> {additionalText}</p>
+        <p><strong>טקסט נוסף:</strong> {additionalText}</p> */}
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 
