@@ -28,7 +28,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
 	const [elements, setElements] = useState(post.elements ? post.elements : [])
 	const [saveButtonPressed, setSaveButtonPressed] = useState(false)
-	const [showModal, setShowModal] = useState(false)
+	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const [saveButtonText, setSaveButtonText] = useState('שמור')
 	const navigate = useNavigate()
@@ -154,7 +154,7 @@ const PostEditPageComp = ({ postID, post }) => {
 							{published ? 'בטל פרסום' : 'פרסם'}
 						</button>
 						<button
-							onClick={() => setShowModal(true)}
+							onClick={() => setIsModalOpen(true)}
 							disabled={loadingDelete}
 							className='delete-button'>
 							מחק
@@ -162,18 +162,19 @@ const PostEditPageComp = ({ postID, post }) => {
 					</div>
 				</>
 			)}
-			{!showModal ? null : (
+			{!isModalOpen ? null : (
 				<GeneralModal
 					title='האם ברצונך למחוק את המאמר?'
 					confirmName='מחק'
 					cancelName='ביטול'
-					isOpen={true}
-					onRequestClose={() => setShowModal(false)}
+					isOpen={isModalOpen}
+					isEnterPossible={false}
+					onRequestClose={() => setIsModalOpen(false)}
 					handleConfirm={() => {
 						handleDelete()
-						setShowModal(false)
+						setIsModalOpen(false)
 					}}
-					handleCancel={() => setShowModal(false)}>
+					handleCancel={() => setIsModalOpen(false)}>
 					<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
 					<p>האם אתה בטוח שברצונך להמשיך?</p>
 				</GeneralModal>
