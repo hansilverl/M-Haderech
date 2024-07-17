@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import './NewsletterLink.css';
 
 const NewsletterLink = () => {
@@ -33,12 +35,15 @@ const NewsletterLink = () => {
   if (error) return <p>שגיאה: {error}</p>;
 
   return (
-    <section className="newsletter-section">
-      <div className="newsletter-text">
-        <center><h2>חדשות ועדכונים</h2>
-        <p>כדי להישאר מעודכנים בכל החדשות והעדכונים שלנו, הירשמו לרשימת התפוצה שלנו על ידי לחיצה <a href={newsletterLink} target="_blank" rel="noopener noreferrer">כאן</a>.</p></center>
+    <a href={newsletterLink} target="_blank" rel="noopener noreferrer" className="corner-popup">
+      <div className="icon-container">
+        <FontAwesomeIcon icon={faEnvelope} className="closed-envelope" />
+        <FontAwesomeIcon icon={faEnvelopeOpen} className="open-envelope" />
+        <div className="tooltip-nl">
+          הצטרפי לרשימת תפוצה!
+        </div>
       </div>
-    </section>
+    </a>
   );
 };
 

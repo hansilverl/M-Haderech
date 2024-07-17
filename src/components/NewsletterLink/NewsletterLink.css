@@ -1,38 +1,83 @@
 /* src/components/NewsletterLink/NewsletterLink.css */
 
-.newsletter-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2em;
-    background: #ffffff;
-    margin-bottom: 2em;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .newsletter-text {
-    flex: 1;
-    text-align: right;
-    padding-right: 2em;
-  }
-  
-  .newsletter-text h2 {
-    font-size: 2em;
-    margin-bottom: 1em;
-  }
-  
-  .newsletter-text p {
-    font-size: 1.2em;
-  }
-  
-  .newsletter-text a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .newsletter-text a:hover {
-    text-decoration: underline;
-  }
-  
+
+.corner-popup {
+  position: fixed;
+  bottom: 25px;
+  left: 25px; /* Changed back to right */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  background-color: #ffffffc2;
+  padding: 20px;
+  /* circle */
+  border-radius: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 50px;
+  width: 50px;
+}
+
+.icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closed-envelope {
+  font-size: 2em;
+  color: #765092;
+  position: absolute;
+}
+
+.open-envelope {
+  display: none;
+  font-size: 2em;
+  color: #765092;
+  position: absolute;
+}
+
+
+.tooltip-nl {
+  display: none;
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: wrap;
+  font-size: 0.9em;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+}
+
+.tooltip-nl::after {
+  content: "";
+  /* chat bubble arrow (a triangle that points down - top connected to the tooltip) */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 10px solid transparent;
+  border-top-color: #ffffff;
+  transform: translateX(-50%);
+
+}
+
+
+.icon-container:hover .closed-envelope {
+  display: none;
+}
+
+.icon-container:hover .open-envelope {
+  display: block;
+}
+
+.icon-container:hover .tooltip-nl {
+  display: block !important;
+}

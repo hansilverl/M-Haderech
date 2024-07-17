@@ -1,12 +1,11 @@
 // src/pages/HomePage/HomePage.js
 import './Homepage.css';
-
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../../components/Footer/Footer';
 import PostsSection from '../../components/PostSection/PostSection';
 import AnalyticsSection from '../../components/AnalyticsSection/AnalyticsSection';
 import DonationSection from '../../components/DonationSection/DonationSection';
-import NewsletterLink from '../../components/NewsletterLink/NewsletterLink';
+import NewsletterLink from '../../components/NewsletterLink/NewsletterLink'; // Import the updated component
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -94,9 +93,9 @@ const HomePage = () => {
         <div ref={analyticsRef}>
           <AnalyticsSection animate={analyticsInView} />
         </div>
-        <NewsletterLink />
         <DonationSection />
       </main>
+      <NewsletterLink /> {/* Add the updated component */}
     </div>
   );
 };
