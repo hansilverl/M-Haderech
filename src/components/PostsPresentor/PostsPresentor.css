@@ -4,6 +4,8 @@
 	align-items: center;
 	justify-content: flex-start;
 	flex-direction: column;
+	--post-grid-width: 350px;
+	--post-grid-gap: 20px;
 }
 
 .general-posts-presentor .posts-pagination-buttons {
@@ -66,8 +68,9 @@
 .general-posts-presentor .presentor-posts-container {
 	display: grid;
 	width: 100%;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
-	grid-template-columns: repeat(auto-fit, 350px);
-	gap: 20px;
+	grid-template-columns: repeat(auto-fit, var(--post-grid-width));
+	grid-auto-rows: minmax(auto, 1fr);
+	grid-gap: var(--post-grid-gap);
 }

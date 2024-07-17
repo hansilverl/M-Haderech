@@ -59,7 +59,6 @@ const AdminContentManagement = () => {
 				key={type}
 				type={type}
 				published={false}
-				pageSize={MAX_PER_PAGE}
 				allowAdmin={true}
 				allowPages={true}
 				allowSearch={true}

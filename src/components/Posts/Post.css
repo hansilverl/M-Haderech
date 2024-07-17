@@ -1,16 +1,14 @@
 .detailed-post-container {
-	width: 300px;
-	height: 380px;
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding: 1em;
 	text-align: right;
-	margin: 1em;
 	background-color: rgb(243, 243, 243);
 	justify-content: space-between;
-	position: relative; /* Add relative positioning for the bubble */
+	align-self: stretch;
+	flex: 1;
 }
 
 .detailed-post-container .post-image {
@@ -26,6 +24,8 @@
 	font-size: 20px;
 	margin: 15px 0;
 	margin-top: 12px;
+	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 .detailed-post-container .post-date {
@@ -38,6 +38,8 @@
 	font-size: 16px;
 	margin: 5px 0;
 	text-wrap: balance;
+	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 .detailed-post-container .post-button {

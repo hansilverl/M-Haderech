@@ -97,17 +97,17 @@ const Navbar = ({ setShowLogin }) => {
 						</Link>
 					</li>
 					<li>
-						<Link to='/posts' className={isActive('/posts')}>
-							מאמרים
-						</Link>
-					</li>
-					<li>
 						<Link to='/about' className={isActive('/about')}>
 							קצת עלינו
 						</Link>
 					</li>
 					<li>
-						<Link to='/convention' className={isActive('/convention')}>
+						<Link to='/articles' className={isActive('/articles')}>
+							מאמרים
+						</Link>
+					</li>
+					<li>
+						<Link to='/conventions' className={isActive('/conventions')}>
 							כנסים
 						</Link>
 					</li>
@@ -147,11 +147,11 @@ const Navbar = ({ setShowLogin }) => {
 						</div>
 						{userDropdownOpen && (
 							<div className='dropdown-menu'>
-								<FontAwesomeIcon icon={faClockRotateLeft} />
+								{/* <FontAwesomeIcon icon={faClockRotateLeft} />
 								<FontAwesomeIcon
 									icon='fa-solid fa-clock-rotate-left'
 									style={{ color: '#ffffff' }}
-								/>
+								/> */}
 								<Link to='/history' onClick={() => setUserDropdownOpen(false)}>
 									היסטוריה
 								</Link>

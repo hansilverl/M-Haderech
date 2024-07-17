@@ -9,13 +9,14 @@
 	margin-bottom: 15px;
 }
 
-.post-element-presentor .media-container {
-	max-width: 70%;
+.post-element-presentor .presentor-media-container {
+	max-width: 90%;
 	height: auto;
 }
 
-.post-element-presentor img {
-	object-fit: contain; /* Ensures image's aspect ratio is maintained */
+.presentor-media-container .presentor-media {
+	width: 100%;
+	height: 100%;
 }
 
 .post-element-presentor .pdf-button {
@@ -87,7 +88,7 @@
 
 .tiptap-presentor-container.tiptap {
 	width: 100%;
-	color: none;
-	background-color: none;
 	border: none;
+	background-color: #ffffff;
+	min-height: auto;
 }

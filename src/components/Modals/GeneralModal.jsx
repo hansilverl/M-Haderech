@@ -10,15 +10,14 @@ const GeneralModal = (props) => {
 	const confirmName = props?.confirmName || 'אישור'
 	const cancelName = props?.cancelName || 'ביטול'
 
-	const handleKeyDown = (event) => {
-		if (event.key === 'Enter') {
-			event.preventDefault()
-			handleConfirm()
-			onRequestClose()
-		}
-	}
-
 	useEffect(() => {
+		const handleKeyDown = (event) => {
+			if (event.key === 'Enter') {
+				event.preventDefault()
+				handleConfirm()
+				onRequestClose()
+			}
+		}
 		if (!isEnterPossible) {
 			window.removeEventListener('keydown', handleKeyDown)
 			return
