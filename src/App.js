@@ -1,7 +1,7 @@
 import 'normalize.css'
 import './App.css'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
 import HomePage from './screens/Homepage/Homepage'
 import Signup from './screens/Signup/Signup'
@@ -20,6 +20,18 @@ import PostDetails from './screens/PostDetails/PostDetails'
 import PostEditpage from './screens/PostEditpage/PostEditpage'
 import Conventions from './screens/Conventions/Conventions'
 import Footer from './components/Footer/Footer'
+
+const ScrollToTop = () => {
+	const { pathname } = useLocation()
+
+
+	useEffect(() => {
+		console.log('test');
+		window.scrollTo(0, 0)
+	}, [pathname])
+
+	return null
+}
 
 function App() {
 	const location = useLocation()
@@ -64,6 +76,7 @@ function App() {
 				</Routes>
 			</div>
 			{!isAdminRoute && <Footer />}
+			<ScrollToTop />
 		</div>
 	)
 }

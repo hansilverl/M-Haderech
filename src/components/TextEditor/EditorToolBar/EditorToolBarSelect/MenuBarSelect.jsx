@@ -13,7 +13,6 @@ const MenuBarSelectSize = (props) => {
 
 	const setFontSize = (size) => {
 		if (!size) return
-		console.log(size)
 		editor.chain().focus().setFontSize(size).run()
 	}
 

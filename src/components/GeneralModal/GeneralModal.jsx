@@ -15,7 +15,6 @@ const GeneralModal = (props) => {
 			if (event.key === 'Enter') {
 				event.preventDefault()
 				if (!isEnterPossible) return
-				console.log('isEnterPossible', isEnterPossible);
 				handleConfirm()
 			}
 		}

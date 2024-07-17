@@ -17,7 +17,6 @@ const ToolBarLinkButton = (props) => {
 	const [requestLinkModalOpen, setRequestLinkModalOpen] = useState(false)
 
 	const handleConfirm = (linkUrl) => {
-		console.log(linkUrl)
 		if (!linkUrl || linkUrl === '') {
 			return
 		}
@@ -34,7 +33,6 @@ const ToolBarLinkButton = (props) => {
 	}
 
 	const clickHandler = () => {
-		console.log('a')
 		if (editorFunc === 'setLink') {
 			setRequestLinkModalOpen(true)
 		} else {

@@ -14,20 +14,18 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const TextElementPresentor = (props) => {
 	const { content } = props
-	return content ? (
+	return !content ? null : (
 		<div
 			className='tiptap-presentor-container tiptap'
 			dangerouslySetInnerHTML={{ __html: content }}
 		/>
-	) : (
-		<h3>לא נמצא טקסט</h3>
 	)
 }
 
 const ResourceElementPresentor = (props) => {
 	const { type, resourceUrl, dimensions } = props
 
-	return (
+	return !resourceUrl ? null : (
 		<div
 			className='presentor-media-container'
 			style={{ maxWidth: dimensions?.width, maxHeight: dimensions?.height }}>
@@ -59,7 +57,7 @@ const PdfElementPresentor = (props) => {
 		setButtonText(presentPdf ? 'הצג קובץ pdf' : 'הסתר קובץ pdf')
 	}
 
-	return (
+	return !resourceUrl ? null : (
 		<div className='pdf-container'>
 			<div className='pdf-buttons-container'>
 				<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
