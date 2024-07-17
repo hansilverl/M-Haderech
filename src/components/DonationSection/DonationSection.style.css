@@ -31,6 +31,7 @@
     cursor: pointer;
     border-radius: 10px;
     font-size: 14px;
+    font-weight: 500;
   }
   
   .donate-button:hover {
