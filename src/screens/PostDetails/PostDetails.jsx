@@ -17,40 +17,45 @@ const formatDate = (timestamp) => {
 	return `${day}/${month}/${year}`
 }
 
-const PostDetails = () => {
-	const { id } = useParams()
+const PostDetails = ({ id: propId }) => {
+	const { id: paramId } = useParams()
+	const id = propId ? propId : paramId
 	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
 	const navigate = useNavigate()
 
 	return (
-		<div className='post-details-container'>
-			<button className='back-button' onClick={() => navigate(-1)}>
-				<FaArrowRight />
-			</button>
-			{loadingGet ? (
-				<p>טוען...</p>
-			) : errorGet ? (
-				<p>{errorGet.toString()}</p>
-			) : !postsGet ? (
-				<p>המאמר לא נמצא</p>
-			) : (
-				<>
-					<div className='post-details-header'>
-						<h1>{postsGet.title}</h1>
-						<p>
-							<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
-						</p>
-						<p>
-							<strong>תיאור:</strong> {postsGet.description}
-						</p>
-					</div>
-					<div className='post-details-elements'>
-						{postsGet?.elements.map((element, index) => (
-							<PostElementPresentor key={`element-${index}`} element={element} />
-						))}
-					</div>
-				</>
-			)}
+		<div className='post-details-external-container'>
+			<div className='post-details-container'>
+				<button className='back-button' onClick={() => navigate(-1)}>
+					<FaArrowRight />
+				</button>
+				{loadingGet ? (
+					<p>טוען...</p>
+				) : errorGet ? (
+					<p>{errorGet.toString()}</p>
+				) : !postsGet ? (
+					<p>המאמר לא נמצא</p>
+				) : (
+					<>
+						<div className='post-details-header'>
+							<h1>{postsGet.title}</h1>
+							{id === 'about-us' ? null : (
+								<p>
+									<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
+								</p>
+							)}
+							<p>
+								<strong></strong> {postsGet.description}
+							</p>
+						</div>
+						<div className='post-details-elements'>
+							{postsGet?.elements.map((element, index) => (
+								<PostElementPresentor key={`element-${index}`} element={element} />
+							))}
+						</div>
+					</>
+				)}
+			</div>
 		</div>
 	)
 }

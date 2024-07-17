@@ -1,4 +1,5 @@
-// src/App.js
+import 'normalize.css'
+import './App.css'
 
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
@@ -13,15 +14,11 @@ import CalculateHelpScore from './screens/Helpscore/CalculateHelpScore'
 import History from './screens/History/History'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import DonatePage from './screens/DonatePage/DonatePage'
-import Posts from './screens/Posts/Posts'
+import Articles from './screens/Posts/Articles'
 import { LoginPopup } from './components/LoginPopup/LoginPopup'
 import PostDetails from './screens/PostDetails/PostDetails'
 import PostEditpage from './screens/PostEditpage/PostEditpage'
-import AboutFull from './screens/AboutFull/AboutFull'
-
-import 'normalize.css'
-import './App.css'
-import Convention from './screens/Conventions/Convention'
+import Conventions from './screens/Conventions/Conventions'
 
 function App() {
 	const location = useLocation()
@@ -32,37 +29,39 @@ function App() {
 		<div className='App'>
 			{!isAdminRoute && <Navbar setShowLogin={setShowLogin} />} {/* Pass setShowLogin */}
 			{showLogin && <LoginPopup setShowLogin={setShowLogin} />}
-			<Routes>
-				<Route exact path='/' element={<HomePage />} />
-				<Route exact path='/about' element={<AboutFull />} />
-				<Route exact path='/signup' element={<Signup />} />
-				<Route exact path='/login' element={<Login />} />
-				<Route exact path='/contact' element={<Contact />} />
-				<Route exact path='/helpScore' element={<HelpScoreForm />} />
-				<Route exact path='/calculateHelpScore' element={<CalculateHelpScore />} />
-				<Route exact path='/edit/:id' element={<PostEditpage />} />
-				<Route
-					exact
-					path='/history'
-					element={
-						<ProtectedRoute>
-							<History />
-						</ProtectedRoute>
-					}
-				/>
-				<Route exact path='/posts' element={<Posts />} />
-				<Route path='/posts/:id' element={<PostDetails />} /> {/* Route for detail of post */}
-				<Route exact path='/donate' element={<DonatePage />} />
-				<Route exact path='/convention' element={<Convention />} />
-				<Route
-					path='/admin/*'
-					element={
-						<ProtectedRoute admin>
-							<AdminDashboard />
-						</ProtectedRoute>
-					}
-				/>
-			</Routes>
+			<div className='App-content'>
+				<Routes>
+					<Route exact path='/' element={<HomePage />} />
+					<Route exact path='/about' element={<PostDetails id={'about-us'} />} />
+					<Route exact path='/signup' element={<Signup />} />
+					<Route exact path='/login' element={<Login />} />
+					<Route exact path='/contact' element={<Contact />} />
+					<Route exact path='/helpScore' element={<HelpScoreForm />} />
+					<Route exact path='/calculateHelpScore' element={<CalculateHelpScore />} />
+					<Route exact path='/edit/:id' element={<PostEditpage />} />
+					<Route
+						exact
+						path='/history'
+						element={
+							<ProtectedRoute>
+								<History />
+							</ProtectedRoute>
+						}
+					/>
+					<Route exact path='/articles' element={<Articles />} />
+					<Route path='/posts/:id' element={<PostDetails />} /> {/* Route for detail of post */}
+					<Route exact path='/donate' element={<DonatePage />} />
+					<Route exact path='/conventions' element={<Conventions />} />
+					<Route
+						path='/admin/*'
+						element={
+							<ProtectedRoute admin>
+								<AdminDashboard />
+							</ProtectedRoute>
+						}
+					/>
+				</Routes>
+			</div>
 		</div>
 	)
 }

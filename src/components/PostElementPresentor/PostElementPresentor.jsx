@@ -28,25 +28,15 @@ const ResourceElementPresentor = (props) => {
 	const { type, resourceUrl, dimensions } = props
 
 	return (
-		<div className='media-container'>
+		<div
+			className='presentor-media-container'
+			style={{ maxWidth: dimensions?.width, maxHeight: dimensions?.height }}>
 			{type === 'image' ? (
-				<img
-					style={{ maxWidth: dimensions?.width, maxHeight: dimensions?.height }}
-					src={resourceUrl}
-					alt={'לא נמצאה תמונה'}
-				/>
+				<img className='presentor-media' src={resourceUrl} alt={'לא נמצאה תמונה'} />
 			) : type === 'video' ? (
-				<video
-					style={{ maxWidth: dimensions?.width, maxHeight: dimensions?.height }}
-					controls
-					src={resourceUrl}
-				/>
+				<video className='presentor-media' controls src={resourceUrl} />
 			) : type === 'audio' ? (
-				<audio
-					style={{ maxWidth: dimensions?.width, maxHeight: dimensions?.height }}
-					controls
-					src={resourceUrl}
-				/>
+				<audio className='presentor-media' controls src={resourceUrl} />
 			) : (
 				<h3>לא נמצא תוכן רכיב</h3>
 			)}

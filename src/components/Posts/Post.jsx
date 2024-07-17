@@ -18,21 +18,28 @@ const Post = ({ article }) => {
 	const navigate = useNavigate()
 
 	const [imageUrl, setImageUrl] = useState(null)
+	const [pdfUrls, setPdfUrls] = useState(null)
 
-	const imagePath = elements?.find((element) => element.type === 'image')?.resourcePath
+	const [imagePath] = useState(elements?.find((element) => element.type === 'image')?.resourcePath)
+	const [pdfPaths] = useState(
+		elements?.filter((element) => element.type === 'pdf')?.map((element) => element.resourcePath)
+	)
+
 	useEffect(() => {
-		const getImageUrl = async () => {
-			const url = await getDownloadURLFromPath(imagePath)
-			setImageUrl(url)
+		const getUrls = async () => {
+			if (imagePath && !imageUrl) setImageUrl(await getDownloadURLFromPath(imagePath))
+
+			if (pdfPaths && !pdfUrls) {
+				const promises = pdfPaths.map(async (path) => await getDownloadURLFromPath(path))
+				setPdfUrls(await Promise.all(promises))
+			}
 		}
-		if (imagePath) getImageUrl()
-	}, [imagePath])
+		getUrls()
+	}, [imagePath, pdfPaths])
 
 	const handleViewPost = () => {
 		navigate(`/posts/${id}`) // Navigate to the post details page
 	}
-
-	
 
 	return !id ? null : (
 		<div className='detailed-post-container'>
@@ -40,6 +47,18 @@ const Post = ({ article }) => {
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{getDateStringFromTimeStamp(datePublished)}</p>
 			<p className='post-description'>{description}</p>
+			{!pdfUrls
+				? null
+				: pdfUrls.map((pdfUrl, index) => (
+						<a
+							key={index}
+							href={pdfUrl}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='post-pdf-button'>
+							<img src={pdfIcon} alt='pdf-icon' className='pdf-icon' />
+						</a>
+				  ))}
 			<button className='post-button' onClick={handleViewPost}>
 				ראה הכל
 			</button>

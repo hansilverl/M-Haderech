@@ -5,7 +5,15 @@ import Post from '../Posts/Post'
 import PostAdmin from '../PostAdmin/PostAdmin'
 import usePostsGet, { buildQuery } from '../../hooks/usePostsGet'
 
-const PostsPresentor = ({ type, published, pageSize, allowAdmin, allowPages, allowSearch }) => {
+const PostsPresentor = ({
+	type,
+	published,
+	pageSize,
+	allowAdmin,
+	allowPages,
+	allowSearch,
+	maxRows,
+}) => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [currentPosts, setCurrentPosts] = useState(null)
 	const [needToReload, setNeedToReload] = useState(false)

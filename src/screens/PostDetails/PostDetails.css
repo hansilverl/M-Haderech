@@ -1,15 +1,25 @@
 /* Base styles for the post details container */
-.post-details-container {
+
+.post-details-external-container {
 	display: flex;
 	flex-direction: column;
-	width: 90%;
-	max-width: 1200px;
-	margin: 20px auto;
+	justify-content: flex-start;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #f5f5f5;
+	width: auto;
 	padding: 20px;
+}
+
+.post-details-external-container .post-details-container {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 20px;
+	width: 90%;
+	margin: 0 0;
 	background-color: #ffffff;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
-	font-family: 'Arial', sans-serif;
 	justify-content: right;
 	align-items: flex-start;
 }
@@ -27,11 +37,19 @@
 	background: black;
 	border: none;
 	cursor: pointer;
+	margin-right: 10px;
 	padding: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 20px;
+}
+
+.post-details-container .post-details-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
 }
 
 .post-details-container .back-button svg {
@@ -89,14 +107,15 @@
 	width: 60%; /* Further reduce width for non-PDF content */
 }
 
-.tiptap-presentor-container .tiptap {
-	display: inline;
-	width: 100%;
-	height: 100%;
-	background-color: none;
-	border: none;
+@media (max-width: 768px) {
+	.post-details-external-container {
+		padding: 0px;
+	}
+	.post-details-external-container .post-details-container {
+		padding: 15px;
+		width: auto;
+	}
 }
-
 /* Responsive design adjustments */
 /* @media (max-width: 768px) {
   .post-details {
@@ -118,7 +137,7 @@
   .post-details .tiptap, .post-details .narrow-content {
       width: 80%; 
   }
-}*/
+} */
 
 /* Responsive design adjustments */
 /*
