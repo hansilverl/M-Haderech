@@ -55,7 +55,7 @@
 
 .general-modal-actions {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	margin-top: 10px;
 	width: 100%; /* Ensure full width for actions */
 }

@@ -7,7 +7,7 @@ import { CSS } from '@dnd-kit/utilities'
 import Selector from '../../Selector/Selector'
 import TextEditor from '../../TextEditor/TextEditor'
 import ResourceInput from '../../ResourceInput/ResourceInput'
-import GeneralModal from '../../Modals/GeneralModal'
+import GeneralModal from '../../GeneralModal/GeneralModal'
 
 import ResizableComponent from '../ResizableResourceComponent/ResizableResourceComponent'
 

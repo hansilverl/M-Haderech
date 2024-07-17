@@ -13,6 +13,7 @@ import usePostDelete from '../../hooks/usePostDelete'
 
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
 import TextAreaWithLimit from '../../components/TextAreaWithLimist/TextAreaWithLimit'
+import GeneralModal from '../../components/GeneralModal/GeneralModal'
 
 const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
@@ -27,6 +28,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
 	const [elements, setElements] = useState(post.elements ? post.elements : [])
 	const [saveButtonPressed, setSaveButtonPressed] = useState(false)
+	const [showModal, setShowModal] = useState(false)
 
 	const [saveButtonText, setSaveButtonText] = useState('שמור')
 	const navigate = useNavigate()
@@ -63,10 +65,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}
 
 	const handleDelete = async () => {
-		const confirmDelete = window.confirm('האם אתה בטוח שברצונך למחוק את המאמר?')
-		if (confirmDelete) {
-			startDelete()
-		}
+		startDelete()
 	}
 
 	const forceSave = () => {
@@ -154,11 +153,30 @@ const PostEditPageComp = ({ postID, post }) => {
 							className={!published ? 'publish-button' : 'unpublish-button'}>
 							{published ? 'בטל פרסום' : 'פרסם'}
 						</button>
-						<button onClick={handleDelete} disabled={loadingDelete} className='delete-button'>
+						<button
+							onClick={() => setShowModal(true)}
+							disabled={loadingDelete}
+							className='delete-button'>
 							מחק
 						</button>
 					</div>
 				</>
+			)}
+			{!showModal ? null : (
+				<GeneralModal
+					title='האם ברצונך למחוק את המאמר?'
+					confirmName='מחק'
+					cancelName='ביטול'
+					isOpen={true}
+					onRequestClose={() => setShowModal(false)}
+					handleConfirm={() => {
+						handleDelete()
+						setShowModal(false)
+					}}
+					handleCancel={() => setShowModal(false)}>
+					<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
+					<p>האם אתה בטוח שברצונך להמשיך?</p>
+				</GeneralModal>
 			)}
 		</div>
 	)
