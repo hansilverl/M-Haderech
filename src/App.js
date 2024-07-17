@@ -21,22 +21,17 @@ import PostEditpage from './screens/PostEditpage/PostEditpage'
 import Conventions from './screens/Conventions/Conventions'
 import Footer from './components/Footer/Footer'
 
-const ScrollToTop = () => {
-	const { pathname } = useLocation()
-
-
-	useEffect(() => {
-		console.log('test');
-		window.scrollTo(0, 0)
-	}, [pathname])
-
-	return null
-}
-
 function App() {
 	const location = useLocation()
 	const isAdminRoute = location.pathname.startsWith('/admin')
 	const [showLogin, setShowLogin] = useState(false) // State to manage LoginPopup visibility
+
+	const { pathname } = useLocation()
+
+	useEffect(() => {
+		console.log('test')
+		window.scrollTo(0, 0)
+	}, [pathname])
 
 	return (
 		<div className='App'>
@@ -76,7 +71,6 @@ function App() {
 				</Routes>
 			</div>
 			{!isAdminRoute && <Footer />}
-			<ScrollToTop />
 		</div>
 	)
 }
