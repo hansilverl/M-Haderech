@@ -77,8 +77,8 @@ const DonateTitleAdmin = () => {
   return (
     <div className="donate-title-admin">
       <div className="donate-title-admin-content">
-        <p><strong>כותרת:</strong> {title}</p>
-        <p><strong>תת כותרת:</strong> {subtitle}</p>
+        {/* <p><strong>כותרת:</strong> {title}</p>
+        <p><strong>תת כותרת:</strong> {subtitle}</p> */}
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 
@@ -112,7 +112,8 @@ const DonateTitleAdmin = () => {
           </div>
         </form>
         <div className="modal-actions">
-          <button onClick={handleSave}>שמור</button>
+          <button className="save-changes"
+           onClick={handleSave}>שמור</button>
           <button onClick={closeModal}>בטל</button>
         </div>
       </Modal>

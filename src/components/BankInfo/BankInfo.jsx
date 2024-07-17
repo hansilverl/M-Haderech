@@ -101,53 +101,59 @@ const BankInfo = () => {
   if (error) return <p>שגיאה: {error}</p>;
 
   return (
-    <div className="bank-info">
-      <div className="bank-info-content">
-        {bankInfo && (
-          <div>
-            {Object.entries(bankInfo).map(([key, value]) => (
-              <p key={key}><strong>{key}:</strong> {value}</p>
-            ))}
+    <div className="stat-item">
+      <div className="stat-label">
+        {/* {bankInfo && Object.entries(bankInfo).map(([key, value]) => (
+          <div key={key} className="stat-field">
+            <p><strong>{key}:</strong> {value}</p>
           </div>
-        )}
-        <button className="update-button" onClick={openModal}>עדכן</button>
+        ))} */}
       </div>
+      <button className="update-button" onClick={openModal}>עדכן</button>
 
-      <Modal
+      <Modal /* Modal for updating bank info */
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        overlayClassName="modal-overlay"
-        className="modal-content"
+        overlayClassName="modal-stat-overlay"
+        className="modal-stat-content"
       >
         <h2>עדכון פרטי בנק</h2>
         <form>
-          {tempBankInfo && Object.entries(tempBankInfo).map(([key, value]) => (
-            <div key={key} className="modal-field">
-              <label>
-                {key}:
-                <input
-                  type="text"
-                  name={key}
-                  value={value}
-                  onChange={handleChange}
-                />
-              </label>
-              <FaTrashAlt className="delete-icon" onClick={() => handleDeleteField(key)} />
-            </div>
-          ))}
-          <div className="new-field">
+          <table className="stat-table" dir="rtl">
+            <tbody>
+              {tempBankInfo && Object.entries(tempBankInfo).map(([key, value]) => (
+                <tr key={key}>
+                  <td>{key}</td>
+                  <td>
+                    <input
+                      type="text"
+                      name={key}
+                      value={value}
+                      onChange={handleChange}
+                    />
+                  </td>
+                  <td>
+                    <FaTrashAlt className="delete-icon" onClick={() => handleDeleteField(key)} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="new-field-stat">
             <h3>הוסף שדה חדש</h3>
             <input
               type="text"
               placeholder="שם השדה"
               value={newField}
               onChange={(e) => setNewField(e.target.value)}
+              className="wide-input-stat"
             />
             <input
               type="text"
               placeholder="תוכן השדה"
               value={newFieldValue}
               onChange={(e) => setNewFieldValue(e.target.value)}
+              className="wide-input-stat"
             />
             <div className="add-field-button">
               <button type="button" onClick={handleAddField}>הוסף שדה</button>
@@ -155,8 +161,8 @@ const BankInfo = () => {
           </div>
         </form>
         <div className="modal-actions">
-          <button onClick={handleSave}>שמור</button>
-          <button onClick={closeModal}>בטל</button>
+        <button className="save-changes" onClick={handleSave}>שמור</button>
+          <button className='cancel-changes' onClick={closeModal}>בטל</button>
         </div>
       </Modal>
 

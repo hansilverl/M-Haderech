@@ -76,9 +76,9 @@ const DonationLink = () => {
   return (
     <div className="donation-link">
       <div className="donation-link-content">
-        <p><strong>קישור תרומה בעברית:</strong> {donationLinkHebrew}</p>
+        {/* <p><strong>קישור תרומה בעברית:</strong> {donationLinkHebrew}</p>
         <br></br>
-        <p><strong>קישור תרומה באנגלית:</strong> {donationLinkEnglish}</p>
+        <p><strong>קישור תרומה באנגלית:</strong> {donationLinkEnglish}</p> */}
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 
