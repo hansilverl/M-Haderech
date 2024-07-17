@@ -29,18 +29,23 @@
   flex-direction: column;
   font-weight: bold;
   color: #555;
+  margin-top: 1rem; /* Added margin-top to label for spacing */
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
   padding: 0.75rem 0;
-  padding-bottom: 0.75rem;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; /* Existing margin-top for spacing */
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
   color: #333;
+}
+
+/* Specific height adjustment for textarea */
+.contact-form textarea {
+  height: 150px; /* Adjust this value to your desired height */
 }
 
 .contact-form button {
