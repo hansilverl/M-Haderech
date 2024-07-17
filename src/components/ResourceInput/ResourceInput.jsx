@@ -4,7 +4,7 @@ import './ResourceInput.css'
 import CustomFileInput from './CustomInput/CustomFileInput'
 
 const ResourceInput = (props) => {
-	const { path, setPath, type, title } = props
+	const { path, setPath, type, title, url, setUrl } = props
 	const {
 		resourcePath,
 		loadingResourcePath,
@@ -15,9 +15,10 @@ const ResourceInput = (props) => {
 	} = useResourceManagement(path)
 
 	const [currentFile, setCurrentFile] = useState(undefined)
-	const [url, setUrl] = useState(undefined)
 
 	const deleteResourceHandler = () => {
+		setCurrentFile(null)
+		setUrl(null)
 		deleteResource()
 	}
 
@@ -29,41 +30,43 @@ const ResourceInput = (props) => {
 
 	useEffect(() => {
 		const setInternalUrl = async () => {
-			if (!resourcePath || resourcePath === '') return
 			const newUrl = await getDownloadURLFromPath(resourcePath)
 			setUrl(newUrl)
 		}
 		setPath(resourcePath)
-		setInternalUrl()
+		if (resourcePath && resourcePath !== '') setInternalUrl()
 	}, [resourcePath])
+
+	useEffect(() => {
+		uploadResourceHandler()
+	}, [currentFile])
 
 	return (
 		<div className='resource-input-container'>
-			<h3 className='title'>קובץ {title}:</h3>
-			{!errorResourcePath ? null : (
-				<h2 className='status-message error'>שגיאה: {errorResourcePath.toString()}</h2>
-			)}
-			{loadingResourcePath ? (
-				<h2 className='status-message'>טוען</h2>
-			) : !path ? (
-				<div className='file-input'>
+			<div className='file-input'>
+				<h3 className='title'>קובץ {title}:</h3>
+				{!path ? (
 					<CustomFileInput setFile={setCurrentFile} />
-					<button onClick={uploadResourceHandler} className='upload-button'>
-						העלה
-					</button>
-				</div>
-			) : (
-				<div className='file-info'>
-					<h5>קיים כבר קובץ</h5>
-					<a href={url} target='_blank' rel='noopener noreferrer'>
-						ניתן לראות כאן
-					</a>
-					<button onClick={deleteResourceHandler} className='delete-button-input'>
-						מחק
-					</button>
-					<button onClick={downloadResource}>הורד</button>
-				</div>
-			)}
+				) : (
+					<div className='file-info-container'>
+						<h5>קיים כבר קובץ</h5>
+						<a href={url} target='_blank' rel='noopener noreferrer'>
+							ניתן לראות כאן
+						</a>
+						<button onClick={deleteResourceHandler} className='delete-button-input'>
+							מחק
+						</button>
+						<button onClick={downloadResource}>הורד</button>
+					</div>
+				)}
+			</div>
+			<div className='status-message-container'>
+				{loadingResourcePath ? (
+					<h2 className='status-message'>טוען</h2>
+				) : !errorResourcePath ? null : (
+					<h2 className='status-message error'>שגיאה: {errorResourcePath.toString()}</h2>
+				)}
+			</div>
 		</div>
 	)
 }

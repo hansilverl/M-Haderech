@@ -1,7 +1,7 @@
 .tiptap {
+	background: white;
 	border-top: 1px solid grey;
 	border-radius: 0.25rem;
-	background: white;
 	min-height: 300px; /* Increased height for a bigger input area */
 	background-color: #f0f0f0;
 	color: #333;

@@ -15,7 +15,7 @@
 }
 
 .posts-pagination-buttons .pagination-button {
-	background-color: #9b59b6;
+	background-color: var(--button-primary-color);
 	border: none;
 	color: white;
 	padding: 10px 20px;
@@ -36,6 +36,10 @@
 
 .posts-pagination-buttons .pagination-button:hover {
 	background-color: #b370cc;
+	transform: scale(1.05);
+}
+.posts-pagination-buttons .pagination-button:disabled {
+	background-color: #575757;
 	transform: scale(1.05);
 }
 .posts-pagination-buttons .pagination-button:focus {

@@ -3,10 +3,21 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	margin : 0px;
+	margin: 0px;
 	margin-bottom: 5px;
 	padding: 0px;
 	border-radius: 1rem;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	width: 100%;
+}
+
+.element-editors-container .add-element-button {
+	background-color: var(--button-primary-color);
+	font-size: 20px;
+	color: white;
+	margin: 15px;
+}
+
+.element-editors-container .add-element-button:hover {
+	background-color: var(--button-primary-color-hover);
 }

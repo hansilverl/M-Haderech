@@ -37,12 +37,14 @@ const TextEditorToolBar = (props) => {
 			<div className='sub-menu-bar'>
 				<div className='sub-group'>
 					<ToolBarButton
+						tooltipText='ביטול'
 						className='use-button'
 						editorFunc={'undo'}
 						editor={editor}
 						content={<FaRedo />}
 					/>
 					<ToolBarButton
+						tooltipText='שחזור'
 						className='use-button'
 						editorFunc={'redo'}
 						editor={editor}
@@ -50,7 +52,7 @@ const TextEditorToolBar = (props) => {
 					/>
 				</div>
 				<div className='sub-group'>
-					<ToolBarButton
+					<ToolBarButton	
 						className='syntax-button'
 						isActiveArg='bold'
 						editorFunc={'toggleBold'}
@@ -81,6 +83,7 @@ const TextEditorToolBar = (props) => {
 				</div>
 				<div className='sub-group'>
 					<ToolBarButton
+						tooltipText='רשימת נקודות'
 						className='syntax-button'
 						isActiveArg={'bulletList'}
 						editorFunc={'toggleBulletList'}
@@ -88,6 +91,7 @@ const TextEditorToolBar = (props) => {
 						content={<FaListUl />}
 					/>
 					<ToolBarButton
+						tooltipText='רשימה ממוספרת'
 						className='syntax-button'
 						isActiveArg={'orderedList'}
 						editorFunc={'toggleOrderedList'}
@@ -100,6 +104,7 @@ const TextEditorToolBar = (props) => {
 			<div className='sub-menu-bar'>
 				<div className='sub-group'>
 					<ToolBarButton
+						tooltipText='כיוון טקסט מימין לשמאל'
 						className='syntax-button'
 						isActiveArg={{ dir: 'rtl' }}
 						editorFunc={'setTextDirection'}
@@ -108,6 +113,7 @@ const TextEditorToolBar = (props) => {
 						content={<MdOutlineFormatTextdirectionRToL />}
 					/>
 					<ToolBarButton
+						tooltipText='כיוון טקסט משמאל לימין'
 						className='syntax-button'
 						isActiveArg={{ dir: 'ltr' }}
 						editorFunc={'setTextDirection'}
@@ -118,6 +124,7 @@ const TextEditorToolBar = (props) => {
 				</div>
 				<div className='sub-group'>
 					<ToolBarButton
+						tooltipText='הצמדת טקסט לימין'
 						className='syntax-button'
 						isActiveArg={{ textAlign: 'right' }}
 						editorFunc={'setTextAlign'}
@@ -126,6 +133,7 @@ const TextEditorToolBar = (props) => {
 						content={<FaAlignRight />}
 					/>
 					<ToolBarButton
+						tooltipText='הצמדת טקסט למרכז'
 						className='syntax-button'
 						isActiveArg={{ textAlign: 'center' }}
 						editorFunc={'setTextAlign'}
@@ -134,6 +142,7 @@ const TextEditorToolBar = (props) => {
 						content={<FaAlignCenter />}
 					/>
 					<ToolBarButton
+						tooltipText='הצמדת טקסט לשמאל'
 						className='syntax-button'
 						isActiveArg={{ textAlign: 'left' }}
 						editorFunc={'setTextAlign'}
@@ -142,6 +151,7 @@ const TextEditorToolBar = (props) => {
 						content={<FaAlignLeft />}
 					/>
 					<ToolBarButton
+						tooltipText='הצמדת טקסט למלא'
 						className='syntax-button'
 						isActiveArg={{ textAlign: 'justify' }}
 						editorFunc={'setTextAlign'}
@@ -152,6 +162,7 @@ const TextEditorToolBar = (props) => {
 				</div>
 				<div className='sub-group'>
 					<ToolBarLinkButton
+						tooltipText='הוספת קישור'
 						className='use-button'
 						isActiveArg={'link'}
 						editorFunc={'setLink'}
@@ -159,6 +170,7 @@ const TextEditorToolBar = (props) => {
 						content={<FaLink />}
 					/>
 					<ToolBarLinkButton
+						tooltipText='הסרת קישור'
 						className='use-button'
 						isActiveArg={'link'}
 						editorFunc={'unsetLink'}

@@ -1,21 +1,22 @@
 .element-editor-container {
+	width: 100%;
 	border: #333 solid 1px;
 	border-radius: 5px;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
+	margin: 10px 0px;
 }
 
 .element-editor-container .draggable-post-element {
 	padding: 0px;
-	margin: 0 0 0px 0;
+	margin: 0;
+	width: 100%;
 	background-color: #fff;
 	color: #333;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin: 5px;
-	width: 100%;
 }
 
 .element-editor-container .drag-handle {
@@ -23,9 +24,12 @@
 	padding: 2px;
 }
 
-.element-editor-container .element-editor-container {
-	width: 100%;
+.element-editor-container .element-comp-container{
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
+	padding: 20px;
 }
 
 .element-editor-container .element-editor-header {
@@ -40,6 +44,10 @@
 	background-color: #c2c2c2;
 }
 
+.element-editor-container .element-editor-header button,
+.element-editor-container .element-editor-header select {
+	margin: 0px 10px;
+}
 .element-editor-container .element-editor-header input {
 	width: fit-content;
 }

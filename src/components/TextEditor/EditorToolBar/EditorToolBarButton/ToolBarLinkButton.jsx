@@ -2,10 +2,11 @@ import './ToolBarButton.css'
 
 import React, { useState } from 'react'
 
+import ToolbarTooltip from './ToolbarTooltip'
 import GeneralModal from '../../../Modals/GeneralModal'
 
 const ToolBarLinkButton = (props) => {
-	const { isActiveArg, editorFunc, content, editor, className } = props
+	const { isActiveArg, editorFunc, content, editor, className, tooltipText } = props
 
 	let isActive = editor.isActive(isActiveArg)
 	if (editorFunc !== 'setLink') isActive = !isActive
@@ -17,10 +18,15 @@ const ToolBarLinkButton = (props) => {
 
 	const modalClose = () => {
 		setRequestLinkModalOpen(false)
-		if (link && link !== '') {
-			editor.chain().focus().extendMarkRange('link').setLink({ href: link }).run()
-			setLinkUrl('')
+		if (!link || link === '') {
+			return
 		}
+		let newLink = link
+		if (!newLink.includes('http://') && !newLink.includes('https://')) {
+			newLink = `https://${newLink}`
+		}
+		editor.chain().focus().extendMarkRange('link').setLink({ href: newLink }).run()
+		setLinkUrl('')
 	}
 
 	const clickHandler = () => {
@@ -48,7 +54,7 @@ const ToolBarLinkButton = (props) => {
 	}
 
 	return (
-		<>
+		<ToolbarTooltip text={tooltipText}>
 			<button
 				onClick={clickHandler}
 				disabled={isDisabled()}
@@ -70,7 +76,7 @@ const ToolBarLinkButton = (props) => {
 					placeholder='כתובת אתר'
 				/>
 			</GeneralModal>
-		</>
+		</ToolbarTooltip>
 	)
 }
 

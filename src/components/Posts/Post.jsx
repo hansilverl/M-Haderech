@@ -6,7 +6,7 @@ import './Post.css'
 
 const getDateStringFromTimeStamp = (timeStamp) => {
 	if (!timeStamp) return null
-	const now = timeStamp.toDate()
+	const now = timeStamp?.toDate()
 	const year = now.getFullYear()
 	const month = (now.getMonth() + 1).toString().padStart(2, '0')
 	const day = now.getDate().toString().padStart(2, '0')
@@ -14,7 +14,7 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 }
 
 const Post = ({ article }) => {
-	const { id, title, datePublished, description, elements, articleType } = article
+	const { id, title, datePublished, description, elements } = article
 	const navigate = useNavigate()
 
 	const [imageUrl, setImageUrl] = useState(null)
@@ -32,20 +32,14 @@ const Post = ({ article }) => {
 		navigate(`/posts/${id}`) // Navigate to the post details page
 	}
 
-	const truncateDescription = (text, wordLimit) => {
-		const words = text.split(' ')
-		if (words.length > wordLimit) {
-			return words.slice(0, wordLimit).join(' ') + '...'
-		}
-		return text
-	}
+	
 
 	return !id ? null : (
 		<div className='detailed-post-container'>
 			{!imageUrl ? null : <img src={imageUrl} alt={title} className='post-image' />}
 			<h3 className='post-title'>{title}</h3>
 			<p className='post-date'>{getDateStringFromTimeStamp(datePublished)}</p>
-			<p className='post-description'>{truncateDescription(description, 12)}</p>
+			<p className='post-description'>{description}</p>
 			<button className='post-button' onClick={handleViewPost}>
 				ראה הכל
 			</button>

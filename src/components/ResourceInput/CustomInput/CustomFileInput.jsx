@@ -21,14 +21,14 @@ const CustomFileInput = ({ setFile }) => {
 	}
 
 	return (
-		<div className='custom-file-input'>
+		<div className='custom-file-input-container'>
 			<input
 				type='file'
 				ref={fileInputRef}
 				onChange={handleFileChange}
 				style={{ display: 'none' }}
 			/>
-			<button type='button' onClick={handleButtonClick} className='choose-file-button'>
+			<button type='choose-file-button' onClick={handleButtonClick} className='choose-file-button'>
 				בחר קובץ
 			</button>
 			<span className='file-name'>{fileName}</span>
