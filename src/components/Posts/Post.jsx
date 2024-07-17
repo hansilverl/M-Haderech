@@ -22,7 +22,9 @@ const Post = ({ article }) => {
 
 	const [imagePath] = useState(elements?.find((element) => element.type === 'image')?.resourcePath)
 	const [pdfPaths] = useState(
-		elements?.filter((element) => element.type === 'pdf')?.map((element) => element.resourcePath)
+		elements
+			?.filter((element) => element.type === 'pdf' && element.resourcePath)
+			?.map((element) => element.resourcePath)
 	)
 
 	useEffect(() => {

@@ -13,25 +13,27 @@ const ToolBarLinkButton = (props) => {
 
 	const activeClass = isActive ? 'is-active' : ''
 
-	const [link, setLinkUrl] = useState('')
+	const [linkUrl, setLinkUrl] = useState('')
 	const [requestLinkModalOpen, setRequestLinkModalOpen] = useState(false)
 
-	const modalClose = () => {
-		setRequestLinkModalOpen(false)
-		if (!link || link === '') {
+	const handleConfirm = (linkUrl) => {
+		if (!linkUrl || linkUrl === '') {
 			return
 		}
-		let newLink = link
+		let newLink = linkUrl
 		if (!newLink.includes('http://') && !newLink.includes('https://')) {
 			newLink = `https://${newLink}`
 		}
 		editor.chain().focus().extendMarkRange('link').setLink({ href: newLink }).run()
-		setLinkUrl('')
+		modalClose()
+	}
+
+	const modalClose = () => {
+		setRequestLinkModalOpen(false)
 	}
 
 	const clickHandler = () => {
 		if (editorFunc === 'setLink') {
-			setLinkUrl('')
 			setRequestLinkModalOpen(true)
 		} else {
 			editor.chain().focus().extendMarkRange('link').unsetLink().run()
@@ -63,16 +65,19 @@ const ToolBarLinkButton = (props) => {
 			</button>
 			<GeneralModal
 				isOpen={requestLinkModalOpen}
+				title='הוספת קישור'
 				onRequestClose={modalClose}
 				handleCancel={modalClose}
-				isEnterPossible={true}
-				handleConfirm={modalClose}>
+				isEnterPossible={false}
+				handleConfirm={() => handleConfirm(linkUrl)}>
 				<label htmlFor='new-link-url'>הכנס קישור</label>
 				<input
 					id='new-link-url'
 					type='text'
-					value={link}
-					onChange={(event) => setLinkUrl(event.target.value)}
+					value={linkUrl}
+					onChange={(event) => {
+						setLinkUrl(event.target.value)
+					}}
 					placeholder='כתובת אתר'
 				/>
 			</GeneralModal>

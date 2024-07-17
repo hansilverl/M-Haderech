@@ -79,6 +79,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 					confirmName='מחק'
 					cancelName='ביטול'
 					isOpen={true}
+					isEnterPossible={false}
 					onRequestClose={() => setShowModal(false)}
 					handleConfirm={() => {
 						deletePost()

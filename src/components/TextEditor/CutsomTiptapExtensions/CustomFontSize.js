@@ -12,18 +12,12 @@ const CustomFontSize = TextStyle.extend({
 					fontSize: {
 						default: null,
 						renderHTML: (attributes) => {
-							console.log('renderHTML', attributes)
 							if (!attributes.fontSize) {
 								return {}
 							}
 							return { style: `font-size: ${attributes.fontSize}` }
 						},
 						parseHTML: (element) => {
-							console.log(
-								'parseHTML',
-								element.style.fontSize,
-								element.style.fontSize.replace(/['"]+/g, '')
-							)
 							return element.style.fontSize.replace(/['"]+/g, '')
 						},
 					},
@@ -37,7 +31,6 @@ const CustomFontSize = TextStyle.extend({
 			setFontSize:
 				(fontSize) =>
 				({ chain }) => {
-					console.log('setFontSize', fontSize)
 					return chain().setMark('textStyle', { fontSize }).run()
 				},
 			unsetFontSize:

@@ -14,14 +14,11 @@ const GeneralModal = (props) => {
 		const handleKeyDown = (event) => {
 			if (event.key === 'Enter') {
 				event.preventDefault()
+				if (!isEnterPossible) return
 				handleConfirm()
-				onRequestClose()
 			}
 		}
-		if (!isEnterPossible) {
-			window.removeEventListener('keydown', handleKeyDown)
-			return
-		}
+
 		if (isOpen) {
 			window.addEventListener('keydown', handleKeyDown)
 		} else {

@@ -110,55 +110,11 @@
 @media (max-width: 768px) {
 	.post-details-external-container {
 		padding: 0px;
+		width: 100%;
 	}
 	.post-details-external-container .post-details-container {
 		padding: 15px;
 		width: auto;
+		align-self: stretch;
 	}
 }
-/* Responsive design adjustments */
-/* @media (max-width: 768px) {
-  .post-details {
-      padding: 15px;
-  }
-
-  .post-details h1 {
-      font-size: 24px;
-  }
-
-  .post-details p {
-      font-size: 14px;
-  }
-
-  .post-details a {
-      padding: 8px 16px;
-  }
-
-  .post-details .tiptap, .post-details .narrow-content {
-      width: 80%; 
-  }
-} */
-
-/* Responsive design adjustments */
-/*
-@media (max-width: 375px) {
-  .post-details {
-      padding: 15px;
-  }
-
-  .post-details h1 {
-      font-size: 24px;
-  }
-
-  .post-details p {
-      font-size: 14px;
-  }
-
-  .post-details a {
-      padding: 8px 16px;
-  }
-
-  .post-details .tiptap, .post-details .narrow-content {
-      width: 50%; 
-  }
-} */

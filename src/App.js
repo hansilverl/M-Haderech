@@ -1,7 +1,7 @@
 import 'normalize.css'
 import './App.css'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
 import HomePage from './screens/Homepage/Homepage'
 import Signup from './screens/Signup/Signup'
@@ -25,6 +25,13 @@ function App() {
 	const location = useLocation()
 	const isAdminRoute = location.pathname.startsWith('/admin')
 	const [showLogin, setShowLogin] = useState(false) // State to manage LoginPopup visibility
+
+	const { pathname } = useLocation()
+
+	useEffect(() => {
+		console.log('test')
+		window.scrollTo(0, 0)
+	}, [pathname])
 
 	return (
 		<div className='App'>
