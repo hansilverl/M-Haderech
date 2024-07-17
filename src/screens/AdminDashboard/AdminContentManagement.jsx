@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import usePostCreate from '../../hooks/usePostCreate'
 import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 
-const MAX_PER_PAGE = 12
-
 const AdminContentManagement = () => {
 	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)
 	const [type, setType] = useState('post')
@@ -62,6 +60,7 @@ const AdminContentManagement = () => {
 				allowAdmin={true}
 				allowPages={true}
 				allowSearch={true}
+				maxRows={4}
 			/>
 		</div>
 	)

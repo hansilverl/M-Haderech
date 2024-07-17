@@ -8,14 +8,16 @@ import Post from '../Posts/Post'
 import usePostDelete from '../../hooks/usePostDelete'
 import usePostUpdate from '../../hooks/usePostUpdate'
 
+import GeneralModal from '../GeneralModal/GeneralModal'
+
 const PostAdmin = ({ article, setRefresh }) => {
 	const { postDelete, startDelete } = usePostDelete(article.id)
 	const { postUpdate, startUpdate } = usePostUpdate(article.id)
 
-	const deletePostButton = async () => {
-		if (window.confirm('Are you sure you want to delete this post?')) {
-			startDelete()
-		}
+	const [showModal, setShowModal] = React.useState(false)
+
+	const deletePost = () => {
+		startDelete()
 	}
 
 	const togglePublished = async (publish) => {
@@ -45,7 +47,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 				<button onClick={() => navigate(`/edit/${article.id}`)} className='admin-button'>
 					ערוך
 				</button>
-				<button onClick={deletePostButton} className='admin-button'>
+				<button onClick={() => setShowModal(true)} className='admin-button'>
 					מחק
 				</button>
 				{!article.published ? (
@@ -71,6 +73,23 @@ const PostAdmin = ({ article, setRefresh }) => {
 			</div>
 			<Post article={article} />
 			<AdminBar id={article.id} />
+			{!showModal ? null : (
+				<GeneralModal
+					title='האם ברצונך למחוק את המאמר?'
+					confirmName='מחק'
+					cancelName='ביטול'
+					isOpen={true}
+					onRequestClose={() => setShowModal(false)}
+					handleConfirm={() => {
+						deletePost()
+						setShowModal(false)
+					}}
+					handleCancel={() => setShowModal(false)}
+				> 
+				<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
+				<p>האם אתה בטוח שברצונך להמשיך?</p>
+				</GeneralModal>
+			)}
 		</div>
 	)
 }

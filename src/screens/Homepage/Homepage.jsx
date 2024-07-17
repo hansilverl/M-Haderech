@@ -97,7 +97,6 @@ const HomePage = () => {
         <NewsletterLink />
         <DonationSection />
       </main>
-      <Footer />
     </div>
   );
 };

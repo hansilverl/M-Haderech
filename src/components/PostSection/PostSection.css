@@ -2,7 +2,7 @@
   padding: 2em;
   background: #ffffff;
   position: relative;
-  min-height: 500px;
+  min-height: fit-content;
 }
 
 .posts-header {
@@ -23,9 +23,13 @@
 }
 
 .view-all-button-container {
-  position: absolute;
-  bottom: 1em; /* Adjust the value to fit your design */
-  left: 1em; /* Adjust the value to fit your design */
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top: 20px;
+  justify-content: left;
+  /* bottom: 1em; 
+  left: 1em;  */
 }
 
 .view-all-button {

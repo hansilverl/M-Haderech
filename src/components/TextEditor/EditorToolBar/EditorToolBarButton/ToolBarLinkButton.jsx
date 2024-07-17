@@ -3,7 +3,7 @@ import './ToolBarButton.css'
 import React, { useState } from 'react'
 
 import ToolbarTooltip from './ToolbarTooltip'
-import GeneralModal from '../../../Modals/GeneralModal'
+import GeneralModal from '../../../GeneralModal/GeneralModal'
 
 const ToolBarLinkButton = (props) => {
 	const { isActiveArg, editorFunc, content, editor, className, tooltipText } = props

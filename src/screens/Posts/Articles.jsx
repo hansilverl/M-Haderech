@@ -10,9 +10,9 @@ const Articles = () => {
 			<PostsPresentor
 				type={'post'}
 				published={true}
-				pageSize={20}
 				allowPages={true}
 				allowSearch={true}
+				maxRows={4}
 			/>
 		</div>
 	)

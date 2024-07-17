@@ -10,9 +10,9 @@ const Conventions = () => {
 			<PostsPresentor
 				type={'convention'}
 				published={true}
-				rowsAmount={4}
 				allowPages={true}
 				allowSearch={true}
+				maxRows={4}
 			/>
 		</div>
 	)

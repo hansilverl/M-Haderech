@@ -119,7 +119,7 @@ const PostsPresentor = (props) => {
 				) : currentPosts.length === 0 ? (
 					<h2>המאמרים לא נמצאו</h2>
 				) : (
-					currentPosts?.map((article, index) =>
+					currentPosts?.map((article) =>
 						allowAdmin ? (
 							<PostAdmin
 								key={article.id}
@@ -128,7 +128,7 @@ const PostsPresentor = (props) => {
 								setRefresh={setNeedToReload}
 							/>
 						) : (
-							<Post key={index} id={article.id} article={article} />
+							<Post key={article.id} id={article.id} article={article} />
 						)
 					)
 				)}

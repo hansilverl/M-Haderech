@@ -244,6 +244,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
     // Check if the order has been changed
     const orderChanged = JSON.stringify(questions) !== JSON.stringify(reorderedQuestions);
+    const lastQuestionsOrder = questions
+    setQuestions(reorderedQuestions);
 
     // Update the order in Firestore
     try {
@@ -251,12 +253,13 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
         const questionDocRef = doc(db, 'Questionnaire', reorderedQuestions[i].id);
         await updateDoc(questionDocRef, { order: i });
       }
-      setQuestions(reorderedQuestions);
+      // setQuestions(reorderedQuestions);
       if (orderChanged) {
         alert('סדר השאלות עודכן בהצלחה!');
       }
     } catch (error) {
       handleFirestoreError(error);
+      setQuestions(lastQuestionsOrder);
     }
   };
 
