@@ -1,24 +1,28 @@
 import './PostsPresentor.css'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Post from '../Posts/Post'
 import PostAdmin from '../PostAdmin/PostAdmin'
 import usePostsGet, { buildQuery } from '../../hooks/usePostsGet'
 
-const PostsPresentor = ({
-	type,
-	published,
-	pageSize,
-	allowAdmin,
-	allowPages,
-	allowSearch,
-	maxRows,
-}) => {
+const DEFAULT_MAX_ROWS = 4
+const PostsPresentor = (props) => {
+	const {
+		type,
+		published,
+		pageSize,
+		allowAdmin,
+		allowPages,
+		allowSearch,
+		maxRows = DEFAULT_MAX_ROWS,
+	} = props
+
 	const [currentPage, setCurrentPage] = useState(1)
 	const [currentPosts, setCurrentPosts] = useState(null)
 	const [needToReload, setNeedToReload] = useState(false)
 	const [searchQuery, setSearchQuery] = useState('')
 	const [filteredPosts, setFilteredPosts] = useState(null)
+	const [maxPosts, setMaxPosts] = useState(pageSize ? pageSize : 1)
 
 	const myQuery = buildQuery(type, published, pageSize)
 	const { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet } = usePostsGet(myQuery)
@@ -27,9 +31,37 @@ const PostsPresentor = ({
 
 	const isNextPageAvailable = () => {
 		if (!filteredPosts) return false
-		if (currentPage * pageSize >= filteredPosts.length && !hasMore) return false
+		if (currentPage * maxPosts >= filteredPosts.length && !hasMore) return false
 		return true
 	}
+
+	const adjustGridItems = () => {
+		const container = document.querySelector('.presentor-posts-container')
+		if (!container) return
+		const styles = getComputedStyle(container)
+		const containerWidthPx = styles.getPropertyValue('width').trim() // Get the full width including padding and borders
+		const itemWidthPx = styles.getPropertyValue('--post-grid-width').trim() // Grid item width + gap (including any padding and border)
+		const gapPx = styles.getPropertyValue('--post-grid-gap').trim()
+
+		const containerWidth = parseInt(containerWidthPx)
+		const itemWidth = parseInt(itemWidthPx)
+		const gap = parseInt(gapPx)
+
+		const itemsPerRow = Math.floor(containerWidth / (itemWidth + gap))
+		const maxItems = itemsPerRow * maxRows
+
+		if (pageSize && pageSize < maxItems) setMaxPosts(pageSize)
+		else setMaxPosts(maxItems)
+	}
+
+	useEffect(() => {
+		window.addEventListener('resize', adjustGridItems)
+
+		adjustGridItems()
+		return () => {
+			window.removeEventListener('resize', adjustGridItems)
+		}
+	}, [])
 
 	useEffect(() => {
 		if (!needToReload) return
@@ -41,14 +73,14 @@ const PostsPresentor = ({
 
 	useEffect(() => {
 		if (loadingGet || !filteredPosts) return
-		const pageStart = (currentPage - 1) * pageSize
-		const pageEnd = pageStart + pageSize
+		const pageStart = (currentPage - 1) * maxPosts
+		const pageEnd = pageStart + maxPosts
 		if (filteredPosts.length < pageEnd && hasMore) {
 			loadMoreGet()
 			return
 		}
 		setCurrentPosts(filteredPosts.slice(pageStart, pageEnd))
-	}, [filteredPosts, currentPage])
+	}, [filteredPosts, currentPage, maxPosts])
 
 	useEffect(() => {
 		if (loadingGet || !postsGet) return
@@ -77,32 +109,30 @@ const PostsPresentor = ({
 					/>
 				</div>
 			)}
-			{loadingGet ? (
-				<h2>טוען...</h2>
-			) : errorGet ? (
-				<h2>{errorGet.toString()}</h2>
-			) : !currentPosts ? (
-				<h2>לא נמצאו ${typeName}ים</h2>
-			) : (
-				<div className='presentor-posts-container'>
-					{currentPosts.length === 0 ? (
-						<h2>המאמרים לא נמצאו</h2>
-					) : (
-						currentPosts?.map((article, index) =>
-							allowAdmin ? (
-								<PostAdmin
-									key={article.id}
-									id={article.id}
-									article={article}
-									setRefresh={setNeedToReload}
-								/>
-							) : (
-								<Post key={index} id={article.id} article={article} />
-							)
+			<div className='presentor-posts-container'>
+				{loadingGet ? (
+					<h2>טוען...</h2>
+				) : errorGet ? (
+					<h2>{errorGet.toString()}</h2>
+				) : !currentPosts ? (
+					<h2>לא נמצאו ${typeName}ים</h2>
+				) : currentPosts.length === 0 ? (
+					<h2>המאמרים לא נמצאו</h2>
+				) : (
+					currentPosts?.map((article, index) =>
+						allowAdmin ? (
+							<PostAdmin
+								key={article.id}
+								id={article.id}
+								article={article}
+								setRefresh={setNeedToReload}
+							/>
+						) : (
+							<Post key={index} id={article.id} article={article} />
 						)
-					)}
-				</div>
-			)}
+					)
+				)}
+			</div>
 			{!allowPages ? null : (
 				<div className='posts-pagination-buttons'>
 					{currentPage <= 1 ? null : (
