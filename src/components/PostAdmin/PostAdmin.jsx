@@ -8,9 +8,13 @@ import Post from '../Posts/Post'
 import usePostDelete from '../../hooks/usePostDelete'
 import usePostUpdate from '../../hooks/usePostUpdate'
 
+import GeneralModal from '../GeneralModal/GeneralModal'
+
 const PostAdmin = ({ article, setRefresh }) => {
 	const { postDelete, startDelete } = usePostDelete(article.id)
 	const { postUpdate, startUpdate } = usePostUpdate(article.id)
+
+	const [showModal, setShowModal] = React.useState(false)
 
 	const deletePostButton = async () => {
 		if (window.confirm('Are you sure you want to delete this post?')) {
@@ -71,6 +75,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 			</div>
 			<Post article={article} />
 			<AdminBar id={article.id} />
+			
 		</div>
 	)
 }

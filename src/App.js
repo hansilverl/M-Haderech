@@ -19,6 +19,7 @@ import { LoginPopup } from './components/LoginPopup/LoginPopup'
 import PostDetails from './screens/PostDetails/PostDetails'
 import PostEditpage from './screens/PostEditpage/PostEditpage'
 import Conventions from './screens/Conventions/Conventions'
+import Footer from './components/Footer/Footer'
 
 function App() {
 	const location = useLocation()
@@ -62,6 +63,7 @@ function App() {
 					/>
 				</Routes>
 			</div>
+			{!isAdminRoute && <Footer />}
 		</div>
 	)
 }
