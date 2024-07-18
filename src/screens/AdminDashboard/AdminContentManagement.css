@@ -34,7 +34,7 @@
 	border: none;
 	padding: 0.5em 1em;
 	cursor: pointer;
-	font-size: 2em;
+	font-size: 20px;
 	transition: background-color 0.3s;
 }
 
@@ -61,7 +61,7 @@
 	margin-right: 20px;
 	border-radius: 5px;
 	cursor: pointer;
-	font-size: 25px;
+	font-size: 20px;
 	transition: background-color 0.3s;
 }
 
@@ -88,6 +88,18 @@
 	color: #333;
 	margin-top: 20px;
 	text-align: center;
+}
+
+.admin-dashboard-posts-container div.detailed-post-container {
+    border-radius: 0;
+    width: 90%;
+    align-self: center;
+}
+
+.admin-dashboard-posts-container div.detailed-post-container:hover {
+	background-color: #f0f0f0;
+	transform: none;
+	box-shadow: none;
 }
 
 @media (max-width: 768px) {
