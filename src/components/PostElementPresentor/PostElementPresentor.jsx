@@ -45,8 +45,8 @@ const ResourceElementPresentor = (props) => {
 const PdfElementPresentor = (props) => {
 	const { resourceUrl } = props
 
-	const [presentPdf, setPresentPdf] = useState(false)
-	const [buttonText, setButtonText] = useState('הצג קובץ pdf')
+	const [presentPdf, setPresentPdf] = useState(true)
+	const [buttonText, setButtonText] = useState('הסתר קובץ pdf')
 
 	const handleOpenPdf = (resourcePath) => {
 		window.open(resourcePath, '_blank')

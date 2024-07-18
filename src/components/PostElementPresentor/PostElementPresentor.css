@@ -5,7 +5,6 @@
 	display: flex; /* Centering the image if needed */
 	justify-content: center; /* Center horizontally */
 	align-items: center; /* Center vertically */
-	border-radius: 10px;
 	margin-bottom: 15px;
 }
 
@@ -40,7 +39,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
+	width: 75%;
 }
 
 .post-element-presentor .text-presentor {
@@ -83,8 +82,11 @@
 		height: 30px;
 		transition: transform 0.3s ease-in-out; /* Smooth transition for feedback */
 	}
-}
 
+	.post-element-presentor .pdf-container {
+		width: 100%;
+	}
+}
 
 .tiptap-presentor-container.tiptap {
 	width: 100%;
