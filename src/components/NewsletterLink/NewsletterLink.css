@@ -17,7 +17,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 50px;
   width: 50px;
-}
+  /* add purple glow around the icon, not inside */
+  filter: drop-shadow(0 0 10px #775092b1);
+  
+  }
 
 .icon-container {
   position: relative;
@@ -37,13 +40,18 @@
   font-size: 2em;
   color: #765092;
   position: absolute;
+  animation-name: openEnvelopeAnimation; /* Reference the defined animation */
+  animation-duration: 2s; /* Adjust this value to control the speed */
+  animation-fill-mode: forwards; /* Keeps the animation state at the end */
+
+
 }
 
 
 .tooltip-nl {
   display: none;
   position: absolute;
-  top: -70px;
+  top: -90px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffffff;
@@ -55,6 +63,10 @@
   z-index: 1000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
+  font-weight: 500;
+  animation-name: openEnvelopeAnimation; /* Reference the defined animation */
+  animation-duration: 2s; /* Adjust this value to control the speed */
+  animation-fill-mode: forwards; /* Keeps the animation state at the end */
 }
 
 .tooltip-nl::after {
@@ -69,6 +81,14 @@
 
 }
 
+@keyframes openEnvelopeAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .icon-container:hover .closed-envelope {
   display: none;

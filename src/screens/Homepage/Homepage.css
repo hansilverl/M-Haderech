@@ -127,16 +127,14 @@ nav ul li a:hover {
 	text-decoration: underline;
 }
 
-footer {
+/*footer {
 	background: #333;
 	color: white;
 	text-align: center;
 	padding: 1em 0;
-	position: relative; /* Changed from absolute to relative */
 	width: 100%;
 	bottom: 0;
-	margin-top: auto; /* Ensure the footer is pushed to the bottom if there's not enough content */
-}
+}*/
 
 .homepage {
 	display: flex;
