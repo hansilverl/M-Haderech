@@ -79,7 +79,7 @@ export default function Login() {
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => setModalIsOpen(false)}
-          className="modal"
+          className="modal-login"
           overlayClassName="modal-overlay"
         >
           <h2>איפוס סיסמה</h2>
