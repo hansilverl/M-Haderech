@@ -40,7 +40,7 @@ const ElementEditorComp = (props) => {
 						url={url}
 						setUrl={setUrl}
 					/>
-					{type === 'document' ? (
+					{type === 'document' || type === 'pdf' ? (
 						<PdfViewer pdfFile={url} />
 					) : (
 						<ResizableComponent
@@ -129,7 +129,7 @@ const ElementEditor = (props) => {
 					optionNames={typeNames}
 					currentValue={type}
 					name='סוג הרכיב'
-					disabled={resourcePath && resourcePath !== '' ? true : false}
+					disabled={resourcePath && resourcePath !== ''  ? true : false}
 				/>
 				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'} עורך</button>
 				<button onClick={() => setIsModalActive(true)}>מחק רכיב</button>
