@@ -19,7 +19,7 @@
 .posts-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  /* justify-content:  */
 }
 
 .view-all-button-container {

@@ -3,6 +3,8 @@ import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
+// closing icon
+import { FaTimes } from 'react-icons/fa';
 
 const Contact = () => {
   const [user_name, setName] = useState('');
@@ -59,62 +61,62 @@ const Contact = () => {
   return (
     <div className="contact-container">
       <div className="contact-header">
-      <h1>דברי איתנו</h1>
-      <h4>אנחנו כאן כדי לשמוע אותך</h4>
+        <h1>דברי איתנו</h1>
+        <h4>אנחנו כאן כדי לשמוע אותך</h4>
       </div>
       <div className="contact-info-container">
-      <form ref={form} className="contact-form" onSubmit={sendEmail}>
-        <label>
-          <span>שם:</span>
-          <input
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-            value={user_name}
-            name="user_name"
-          />
-        </label>
-        <label>
-          <span 
-          >אימייל:</span>
-          <input className="email-label-contact" style={{direction: 'ltr'}}
-            required
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={user_email}
-            name="user_email"
-          />
-        </label>
-        <label>
-          <span>תוכן הודעה:</span>
-          <textarea
-            required
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-            name="message"
-          />
-        </label>
-        <button type="submit">שליחה</button>
-      </form>
-      {loading ? (
-        <p>טוען...</p>
-      ) : error ? (
-        <p>שגיאה: {error}</p>
-      ) : (
-        <div className="contact-info">
-          <h3>זמינות עבורך גם בטלפון</h3>
-          {Object.entries(contactInfo).map(([key, value]) => (
-            <p key={key}><strong>{key}:</strong> {value}</p>
-          ))}
-        </div>
-      )}
-      {modal.visible && (
-        <div className="modal">
-          <p>{modal.message}</p>
-        </div>
-      )}
+        <form ref={form} className="contact-form" onSubmit={sendEmail}>
+          <label>
+            <span>שם:</span>
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              value={user_name}
+              name="user_name"
+            />
+          </label>
+          <label>
+            <span
+            >אימייל:</span>
+            <input className="email-label-contact" style={{ direction: 'ltr' }}
+              required
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={user_email}
+              name="user_email"
+            />
+          </label>
+          <label>
+            <span>תוכן הודעה:</span>
+            <textarea
+              required
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+              name="message"
+            />
+          </label>
+          <button type="submit">שליחה</button>
+        </form>
+        {loading ? (
+          <p>טוען...</p>
+        ) : error ? (
+          <p>שגיאה: {error}</p>
+        ) : (
+          <div className="contact-info">
+            <h3>זמינות עבורך גם בטלפון</h3>
+            {Object.entries(contactInfo).map(([key, value]) => (
+              <p key={key}><strong>{key}:</strong> {value}</p>
+            ))}
+          </div>
+        )}
+        {modal.visible && (
+          <div className="modal">
+            <p>{modal.message}</p>
+            <FaTimes className="close-icon" onClick={() => setModal({ visible: false, message: '' })} />
+          </div>
+        )}
+      </div>
     </div>
-  </div>
   );
-};
-
+}
 export default Contact;
