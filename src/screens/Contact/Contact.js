@@ -110,7 +110,7 @@ const Contact = () => {
           </div>
         )}
         {modal.visible && (
-          <div className="modal">
+          <div className="modal-contact">
             <p>{modal.message}</p>
             <FaTimes className="close-icon" onClick={() => setModal({ visible: false, message: '' })} />
           </div>

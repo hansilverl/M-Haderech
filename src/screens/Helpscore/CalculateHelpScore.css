@@ -32,7 +32,7 @@
     font-size: 16px;
     color: #fff;
     background-color: #a20067;
-    border: 1px solid #650040;
+    border: 1px solid #ac1c74;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 4%;
@@ -42,7 +42,8 @@
 
 
 .score-container button:hover {
-    background-color: #9b59b6;
+    background-color: 
+    #6c4a8c;
 }
 
 .error-message {
@@ -112,7 +113,7 @@
 
 .button-group button {
     font: -apple-system, BlinkMacSystemFont;
-    background-color: #9b59b6;
+    background-color: #bc4287;
     border-radius: 5px;
     color: white;
     padding: 10px 20px;
@@ -121,5 +122,5 @@
 }
 
 .button-group button:hover {
-    background-color: #8e44ad;
+    background-color: #ac1c74;
 }

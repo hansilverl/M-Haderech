@@ -81,9 +81,13 @@
     padding: 10px;
     border-radius: 4px;
     color: white;
-    background-color: #9b59b6;
+    background-color: #bc4287;
     font-size: 15px;
     cursor: pointer;
+}
+
+.login-popup-container button:hover {
+    background-color: #a63a7f;
 }
 
 .login-popup-condition {
@@ -98,9 +102,17 @@
 }
 
 .login-popup p span {
-    color: #9b59b6;
+    color: #bc4287;
     font-weight: 500;
     cursor: pointer;
+}
+
+.reset-password-button {
+    background: #bc4287;
+    color: white;
+    border: none;
+    padding: 10px;
+
 }
 
 .reset-password-link {

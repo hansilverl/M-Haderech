@@ -45,12 +45,12 @@
 
 .icon {
   font-size: 1.5em;
-  color: #9b59b6;
+  color: #bc4287;
   cursor: pointer;
 }
 
 .icon:hover {
-  color: #8e44ad;
+  color: #ac1c74;
 }
 
 .actions {
