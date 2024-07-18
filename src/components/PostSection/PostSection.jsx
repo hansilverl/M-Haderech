@@ -16,11 +16,11 @@ const PostsSection = () => {
 			<div className='posts-header'>
 				<h2>מאמרים</h2>
 			</div>
-			<PostsPresentor type={'post'} published={true} maxRows={1}/>
+			<PostsPresentor className='posts-presentor'
+			 type={'post'} published={true} maxRows={1} />
 			<div className='view-all-button-container'>
 				<button onClick={handleViewAllClick} className='view-all-button'>
-					ראה את כל המאמרים
-				</button>
+					כל המאמרים 				</button>
 			</div>
 		</section>
 	)
