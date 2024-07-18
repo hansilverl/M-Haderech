@@ -23,7 +23,7 @@ const Post = ({ article , disablePostClick}) => {
   const [imagePath] = useState(elements?.find((element) => element.type === 'image')?.resourcePath);
   const [pdfPaths] = useState(
     elements
-      ?.filter((element) => element.type === 'pdf' && element.resourcePath)
+      ?.filter((element) => element.type === 'document' && element.resourcePath)
       ?.map((element) => element.resourcePath)
   );
 

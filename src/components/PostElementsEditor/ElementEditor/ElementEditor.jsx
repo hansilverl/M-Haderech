@@ -87,12 +87,14 @@ const ElementEditor = (props) => {
 			firstRenderRef.current = false
 			return
 		}
+
 		const onUpdateElement = () => {
 			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 			autoSaveTimeout.current = null
 			setElement((elem) => {
 				const newElem = { ...elem }
 				newElem.type = type
+				if (type === 'pdf') newElem.type = 'document'
 				newElem.content = content
 				newElem.resourcePath = resourcePath
 				newElem.displayEditor = displayEditor
@@ -129,7 +131,7 @@ const ElementEditor = (props) => {
 					optionNames={typeNames}
 					currentValue={type}
 					name='סוג הרכיב'
-					disabled={resourcePath && resourcePath !== ''  ? true : false}
+					disabled={resourcePath && resourcePath !== '' ? true : false}
 				/>
 				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'} עורך</button>
 				<button onClick={() => setIsModalActive(true)}>מחק רכיב</button>
