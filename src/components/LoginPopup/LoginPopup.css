@@ -86,6 +86,10 @@
     cursor: pointer;
 }
 
+.login-popup-container button:hover {
+    background-color: #a63a7f;
+}
+
 .login-popup-condition {
     display: flex;
     align-items: center;
@@ -101,6 +105,14 @@
     color: #bc4287;
     font-weight: 500;
     cursor: pointer;
+}
+
+.reset-password-button {
+    background: #bc4287;
+    color: white;
+    border: none;
+    padding: 10px;
+
 }
 
 .reset-password-link {
