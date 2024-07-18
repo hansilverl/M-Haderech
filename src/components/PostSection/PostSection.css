@@ -33,7 +33,7 @@
 }
 
 .view-all-button {
-  background: #9b59b6;
+  background: #bc4287;
   color: white;
   border: none;
   padding: 0.6em 1em;
@@ -43,7 +43,7 @@
 }
 
 .view-all-button:hover {
-  background: #8e44ad;
+  background: #ac1c74;
 }
 
 /* Media query for phone responsive design */

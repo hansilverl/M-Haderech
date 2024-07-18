@@ -81,7 +81,7 @@
     padding: 10px;
     border-radius: 4px;
     color: white;
-    background-color: #9b59b6;
+    background-color: #bc4287;
     font-size: 15px;
     cursor: pointer;
 }
@@ -98,7 +98,7 @@
 }
 
 .login-popup p span {
-    color: #9b59b6;
+    color: #bc4287;
     font-weight: 500;
     cursor: pointer;
 }

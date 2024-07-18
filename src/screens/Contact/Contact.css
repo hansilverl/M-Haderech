@@ -39,8 +39,11 @@
 
 
 .contact-container h1 {
-  color: #650040;
-  margin-top:0;
+  background: linear-gradient(90deg, #9326cc, #ac1c74
+  , #d14699);
+  background-clip: text;
+  color: transparent;
+  margin-top:-5px;
   margin-bottom: 0.5px; /* Added margin-bottom for spacing */
 }
 
@@ -98,7 +101,7 @@
 .contact-form button {
   width: 100%;
   padding: 0.6em 1em;
-  background-color: #9b59b6;
+  background-color: #9c5cb3;
   color: white;
   border: none;
   cursor: pointer;
@@ -107,7 +110,7 @@
 }
 
 .contact-form button:hover {
-  background-color: #8e44ad;
+  background-color: #b42c7c;
 }
 
 #root > div > div > div > div.contact-info-container > form > label:nth-child(2) > input[type=email] {
@@ -136,11 +139,11 @@
 .contact-info p {
   margin: 0.5rem 0;
   font-size: 1rem;
-  color: #650040;
+  color: #ac1c74;
 }
 
 .contact-info strong {
-  color: #650040;
+  color: #ac1c74;
 }
 
 .contact-container {
@@ -180,4 +183,8 @@
   background: linear-gradient(90deg, #9326cc, #7330b7, #d14699, #574ebf, #6b43c9);
   background-clip: text, border-box;
   -webkit-background-clip: text;
+}
+
+.delete-icon-history{
+  color: #333;
 }

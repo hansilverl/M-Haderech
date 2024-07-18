@@ -29,14 +29,14 @@
 
 .closed-envelope {
   font-size: 2em;
-  color: #765092;
+  color: #b42c7c;
   position: absolute;
 }
 
 .open-envelope {
   display: none;
   font-size: 2em;
-  color: #765092;
+  color: #b42c7c;
   position: absolute;
   animation-name: openEnvelopeAnimation; /* Reference the defined animation */
   animation-duration: 0.6s; /* Adjust this value to control the speed */
