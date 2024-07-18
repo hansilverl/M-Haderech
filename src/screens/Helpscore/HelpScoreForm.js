@@ -38,7 +38,7 @@ const HelpScoreForm = () => {
                 }
             });
             // validation error is in class component "requiredFieldsErrorMsg"
-            setValidationError('אנא מלאי את כל הסעיפים המסומנים ב*');
+            setValidationError('כדי לקבל תוצאות, אי אפשר לדלג על השאלות המסומנות ב*');
             setShake(prev => !prev);
             if (errorMessageRef.current) {
                 errorMessageRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -61,7 +61,8 @@ const HelpScoreForm = () => {
     return (
         <form onSubmit={handleSubmit} className="help-score-form">
             <div className="help-score-form-header">
-            <h2> ציון היפראמזיס - HELP SCORE</h2>
+            <h2> מבדק היפרמאזיס אישי 
+            </h2>
             {description && <p className="questionnaire-description">{description}</p>}
             <div className="bordered-container">
                 {questions.map((question) => (

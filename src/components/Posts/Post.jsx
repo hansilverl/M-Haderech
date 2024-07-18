@@ -13,7 +13,7 @@ const getDateStringFromTimeStamp = (timeStamp) => {
   return `${day}/${month}/${year}`;
 };
 
-const Post = ({ article , disablePostClick}) => {
+const Post = ({ article }) => {
   const { id, title, datePublished, description, elements } = article;
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Post = ({ article , disablePostClick}) => {
   const [imagePath] = useState(elements?.find((element) => element.type === 'image')?.resourcePath);
   const [pdfPaths] = useState(
     elements
-      ?.filter((element) => element.type === 'document' && element.resourcePath)
+      ?.filter((element) => element.type === 'pdf' && element.resourcePath)
       ?.map((element) => element.resourcePath)
   );
 
@@ -40,17 +40,16 @@ const Post = ({ article , disablePostClick}) => {
   }, [imagePath, pdfPaths]);
 
   const handleViewPost = () => {
-	if(disablePostClick) return
     navigate(`/posts/${id}`); // Navigate to the post details page
   };
 
   return !id ? null : (
     <div className="detailed-post-container" onClick={handleViewPost}>
-	  <div className="title-date-container">
+      {!imageUrl ? null : <img src={imageUrl} alt={title} className="post-image" />}
+      <div className="title-date-container">
       <h3 className="post-title">{title}</h3>
       <p className="post-date">{getDateStringFromTimeStamp(datePublished)}</p>
-	  </div>
-	  {!imageUrl ? null : <img src={imageUrl} alt={title} className="post-image" />}
+      </div>
       <p className="post-description">{description}</p>
       {!pdfUrls
         ? null
