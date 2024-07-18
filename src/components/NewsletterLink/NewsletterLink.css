@@ -65,6 +65,8 @@
   animation-name: openEnvelopeAnimation; /* Reference the defined animation */
   animation-duration: 0.6s; /* Adjust this value to control the speed */
   animation-fill-mode: forwards; /* Keeps the animation state at the end */
+  color:#724086
+
 }
 
 .tooltip-nl::after {

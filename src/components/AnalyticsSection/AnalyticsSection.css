@@ -40,7 +40,8 @@
 .countup-number {
   font-size: 48px;
   font-weight: bold;
-  color: #bc4287;
+  color:#724086;
+
   animation: grow 1s ease-in-out;
   margin-bottom: 10px; /* Add margin to separate from text */
 }
