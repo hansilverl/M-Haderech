@@ -30,7 +30,7 @@ body {
     width: auto;
     max-width: 70%;
     margin: 0 auto;
-    padding-top: 4vh;
+    padding-top: 2vh;
     padding-bottom: 10vh;
     position: relative;
     /* Ensure the form is positioned relative for pseudo-element */
@@ -289,10 +289,32 @@ body {
     display: none !important;
 }
 
+.bordered-container h2 {
+    text-align: center;
+}
+
+.help-score-form-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* src/screens/Helpscore/HelpScoreForm.css */
+.questionnaire-description {
+    /* wrap and break the text if needed */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-align: right; 
+    /* same margin as the question text */
+    margin: 0 4%;
+    padding-bottom: 1%;
+}
+
 @media screen and (max-width: 768px) {
 
     .help-score-form {
-        padding-top: 5vh;
+        padding-top: 2vh;
         padding-bottom: 5vh;
     }
 
@@ -302,7 +324,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-left: 2.39em;
+        /* padding-left: 2.39em; */
     }
 
     .option-vert {
@@ -310,14 +332,15 @@ body {
     }
 
     .q-container {
-        /* justify-content: right;
-        align-items: right; */
+        align-items: right; 
         width: 100%;
         /* Ensure full width for proper alignment */
         display: flex;
         flex-direction: column;
         align-items: center;
         /* Align to the right within the container */
+        margin: auto 0;
+
     }
 
     .question-text {
@@ -327,13 +350,17 @@ body {
         overflow-wrap: break-word;
         hyphens: auto;
         flex-wrap: wrap;
+        margin-top: 1rem;
+        /* margin right will align the text with q-table */
+        margin-right: 4%;
+    
 
     }
 
     .q-table {
         display: inline-block;
         /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-        /* align-self: right; */
+        align-self: center;
     }
 
     .q-table thead {
@@ -390,10 +417,15 @@ body {
         background-color: #ffdfdf80;
         top: -0.05em;
         bottom: 1em;
-        left: -1em;
-        right: 4%;
+        margin-right: 0.1em;
         border-radius: 6px;
         padding: 0.5rem;
         padding-left: 1rem;
     }
+
+    .questionnaire-description {
+        display: none;
+    }
+
+    
 }

@@ -6,7 +6,7 @@ import Question from '../../components/helpScore/Question';
 import './HelpScoreForm.css';
 
 const HelpScoreForm = () => {
-    const { questions, loading, error } = useHelpScore();
+    const { questions, description, loading, error } = useHelpScore();
     const [answers, setAnswers] = useState({});
     const [validationError, setValidationError] = useState(null);
     const [shake, setShake] = useState(false);
@@ -60,6 +60,9 @@ const HelpScoreForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="help-score-form">
+            <div className="help-score-form-header">
+            <h2> ציון היפראמזיס - HELP SCORE</h2>
+            {description && <p className="questionnaire-description">{description}</p>}
             <div className="bordered-container">
                 {questions.map((question) => (
                     <Question
@@ -70,6 +73,7 @@ const HelpScoreForm = () => {
                 ))}
                 <button type="submit">שליחה</button>
                 {validationError && <p key={shake} ref={errorMessageRef} className="requiredFieldsErrorMsg">{validationError}</p>}
+            </div>
             </div>
         </form>
     );
