@@ -29,7 +29,6 @@ function App() {
 	const { pathname } = useLocation()
 
 	useEffect(() => {
-		console.log('test')
 		window.scrollTo(0, 0)
 	}, [pathname])
 
@@ -70,7 +69,7 @@ function App() {
 					/>
 				</Routes>
 			</div>
-			{!isAdminRoute && <Footer />}
+			{/* {!isAdminRoute && <Footer />} */}
 		</div>
 	)
 }

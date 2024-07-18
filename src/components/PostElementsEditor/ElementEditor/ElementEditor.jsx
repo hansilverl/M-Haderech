@@ -10,9 +10,10 @@ import ResourceInput from '../../ResourceInput/ResourceInput'
 import GeneralModal from '../../GeneralModal/GeneralModal'
 
 import ResizableComponent from '../ResizableResourceComponent/ResizableResourceComponent'
+import PdfViewer from '../../PdfViewer/PdfViewer'
 
-const typeValues = ['text', 'image', 'video', 'audio', 'pdf', 'other']
-const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'pdf', 'אחר']
+const typeValues = ['text', 'image', 'video', 'audio', 'document', 'other']
+const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מסמך pdf', 'אחר']
 
 const ElementEditorComp = (props) => {
 	const { type, content, setContent, resourcePath, setResourcePath, dimensions, setDimensions } =
@@ -39,12 +40,16 @@ const ElementEditorComp = (props) => {
 						url={url}
 						setUrl={setUrl}
 					/>
-					<ResizableComponent
-						mediaType={type}
-						src={url}
-						dimensions={dimensions}
-						setDimensions={setDimensions}
-					/>
+					{type === 'document' ? (
+						<PdfViewer pdfFile={url} />
+					) : (
+						<ResizableComponent
+							mediaType={type}
+							src={url}
+							dimensions={dimensions}
+							setDimensions={setDimensions}
+						/>
+					)}
 				</>
 			)}
 		</div>
