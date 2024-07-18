@@ -14,6 +14,7 @@ import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons';
 Modal.setAppElement('#root'); // Adjust this selector to your app's root element
 
 const QuestionnaireManagement = ({ questionnaireId }) => {
+  const [description, setDescription] = useState('');
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -38,22 +39,29 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       try {
         const questionCollection = collection(db, 'Questionnaire');
         const questionSnapshot = await getDocs(questionCollection);
-        const questionList = questionSnapshot.docs.map(questionDoc => {
-          const data = questionDoc.data();
-          return {
-            id: questionDoc.id,
-            question: data.q,
-            required: data.required || false,
-            order: data.order || 0,
-            answers: Object.entries(data)
-              .filter(([key, value]) => key !== 'q' && key !== 'required' && key !== 'order')
-              .map(([key, value]) => ({
-                id: key,
-                text: value,
-                score: parseInt(key, 10),
-              })),
-          };
-        }).sort((a, b) => a.order - b.order); // Sort questions by order
+        const questionList = questionSnapshot.docs
+          .filter(questionDoc => questionDoc.id.startsWith('q')) // Filter documents by id starting with 'q'
+          .map(questionDoc => {
+            const data = questionDoc.data();
+            return {
+              id: questionDoc.id,
+              question: data.q,
+              required: data.required || false,
+              order: data.order || 0,
+              answers: Object.entries(data)
+                .filter(([key, value]) => key !== 'q' && key !== 'required' && key !== 'order')
+                .map(([key, value]) => ({
+                  id: key,
+                  text: value,
+                  score: parseInt(key, 10),
+                })),
+            };
+          }).sort((a, b) => a.order - b.order); // Sort questions by order
+        // Fetch the description
+        const descriptionDoc = await getDoc(doc(db, 'Questionnaire', 'description'));
+        const descriptionData = descriptionDoc.exists() ? descriptionDoc.data().text : '';
+        setDescription(descriptionData);
+
         setQuestions(questionList);
         setLoading(false);
       } catch (err) {
@@ -86,7 +94,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
       setDeleteConfirmIsOpen(false);
       setSelectedQuestion(null); // Clear the selectedQuestion state
       alert('השאלה נמחקה!');
-    
+
     } catch (error) {
       handleFirestoreError(error);
     }
@@ -306,9 +314,42 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
     }
   };
 
+  // Description editing functions
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const saveDescription = async () => {
+    try {
+      const descriptionDocRef = doc(db, 'Questionnaire', 'description');
+      await setDoc(descriptionDocRef, { text: description });
+      alert('התיאור עודכן בהצלחה!');
+    } catch (error) {
+      handleFirestoreError(error);
+    }
+  };
+
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
 
   return (
     <div className="questionnaire-management">
+      <h1>ניהול שאלון</h1>
+      <div className="description-section">
+        <h3>תיאור:</h3>
+        <div className="description-actions">
+        <textarea className="description-textarea"
+         value={description} onChange={handleDescriptionChange} rows="2" cols="50" />
+        <button className="save-description"
+         onClick={saveDescription}>עדכון</button>
+         </div>
+      </div>
+      <br />
       <h4>שימי לב! ניתן לגרור את השאלה כדי לשנות את הסדר</h4>
       {loading ? (
         <p>Loading questions...</p>
@@ -352,8 +393,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           <FaTimes />
         </button>
         <div className="add-checkbox">
-        <h2>הוספת שאלה חדשה</h2>
-        <div className="required-checkbox-add">
+          <h2>הוספת שאלה חדשה</h2>
+          <div className="required-checkbox-add">
             <label>
               <input
                 type="checkbox"
@@ -508,22 +549,22 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
           </button>
           <h2>אישור מחיקה</h2>
           <div className="delete-confirm-content">
-          {selectedAnswer ? (
-            <>
-              <p>האם את בטוחה שברצונך למחוק את התשובה?</p>
+            {selectedAnswer ? (
+              <>
+                <p>האם את בטוחה שברצונך למחוק את התשובה?</p>
 
-              <button className="delete-button"
-              onClick={confirmDeleteAnswer}>כן</button>
-            </>
-          ) : (
-            <>
-              <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
-              <button className="delete-button"
-               onClick={confirmDeleteQuestion}>כן</button>
-            </>
-          )}
-          <button className="cancel-button"
-          onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
+                <button className="delete-button"
+                  onClick={confirmDeleteAnswer}>כן</button>
+              </>
+            ) : (
+              <>
+                <p>האם את בטוחה שברצונך למחוק את השאלה?</p>
+                <button className="delete-button"
+                  onClick={confirmDeleteQuestion}>כן</button>
+              </>
+            )}
+            <button className="cancel-button"
+              onClick={() => setDeleteConfirmIsOpen(false)}>לא</button>
           </div>
         </Modal>
       )}
