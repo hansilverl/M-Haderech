@@ -4,19 +4,30 @@ import { storage } from '../firebase/config'
 import { ref, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 const allowedFileTypes = {
-	image: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'],
-	video: ['video/mp4', 'video/avi', 'video/mkv'],
-	audio: ['audio/mpeg', 'audio/wav', 'audio/webm', 'audio/mp3', 'audio/aac'],
-	pdf: ['application/pdf'],
-	other: ['*/*'],
-}
+	image: {
+		jpg: 'image/jpeg',
+		jpeg: 'image/jpeg',
+		png: 'image/png',
+		gif: 'image/gif',
+		webp: 'image/webp',
+	},
 
-const allowedFileExtensions = {
-	image: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-	video: ['mp4', 'avi', 'mkv'],
-	audio: ['mp3', 'wav', 'webm', 'aac'],
-	pdf: ['pdf'],
-	other: ['*'],
+	video: {
+		mp4: 'video/mp4',
+		avi: 'video/avi',
+		mkv: 'video/mkv',
+	},
+
+	audio: {
+		mp3: 'audio/mpeg',
+		wav: 'audio/wav',
+		webm: 'audio/webm',
+		aac: 'audio/aac',
+	},
+
+	document: {
+		pdf: 'application/pdf',
+	},
 }
 
 const getSafeDateTimeForFileName = () => {
@@ -54,16 +65,12 @@ const deleteObjectByFilePath = async (url) => {
 const uploadFile = async (file, type) => {
 	if (!file) throw new Error('לא נבחר קובץ')
 
-	const allowedType = allowedFileTypes[type]
-	const allowedExtension = allowedFileExtensions[type]
-	if (!allowedType || !allowedExtension) throw new Error('לא נבחר סוג קובץ אפשרי')
-
-	const fileType = file.type
-	const fileExtension = file.name.split('.').pop()
-
-	if (fileType !== 'other') {
-		if (!allowedType.includes(fileType)) throw new Error('סוג קובץ לא תואם למבוקש')
-		if (!allowedExtension.includes(fileExtension)) throw new Error('סוג קובץ לא תואם למבוקש')
+	if (type !== 'other') {
+		const allowedTypes = allowedFileTypes[type]
+		if (!allowedTypes) throw new Error('לא נבחר סוג קובץ אפשרי')
+		const fileType = file.type
+		const fileExtension = file.name.split('.').pop()
+		if (allowedTypes[fileExtension] !== fileType) throw new Error('סוג קובץ לא תואם למבוקש')
 	}
 
 	const date = getSafeDateTimeForFileName()
@@ -77,7 +84,6 @@ const uploadFile = async (file, type) => {
 const downloadFile = async (filePath) => {
 	if (!filePath) throw new Error('Invalid file path')
 	const url = await getDownloadURLFromPath(filePath)
-
 	window.open(url, '_blank')
 }
 

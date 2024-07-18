@@ -71,7 +71,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 				}`}>
 				{article.articleType === 'post' ? 'מאמר' : 'כנס'}
 			</div>
-			<Post article={article} />
+			<Post article={article} disablePostClick={true} />
 			<AdminBar id={article.id} />
 			{!showModal ? null : (
 				<GeneralModal
@@ -85,10 +85,9 @@ const PostAdmin = ({ article, setRefresh }) => {
 						deletePost()
 						setShowModal(false)
 					}}
-					handleCancel={() => setShowModal(false)}
-				> 
-				<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
-				<p>האם אתה בטוח שברצונך להמשיך?</p>
+					handleCancel={() => setShowModal(false)}>
+					<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
+					<p>האם אתה בטוח שברצונך להמשיך?</p>
 				</GeneralModal>
 			)}
 		</div>

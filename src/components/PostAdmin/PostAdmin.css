@@ -20,6 +20,12 @@
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.admin-post-container .detailed-post-container:hover {
+	background-color: #f0f0f0;
+	transform: none;
+	box-shadow: 0;
+}
+
 /* Admin bar styling */
 .admin-post-container .admin-bar {
 	display: flex;

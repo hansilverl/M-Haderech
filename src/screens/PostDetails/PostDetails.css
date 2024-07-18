@@ -113,7 +113,7 @@
 		width: 100%;
 	}
 	.post-details-external-container .post-details-container {
-		padding: 15px;
+		padding: 15px 0px;
 		width: auto;
 		align-self: stretch;
 	}
