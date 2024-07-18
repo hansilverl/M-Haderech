@@ -10,16 +10,14 @@
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  background-color: #ffffffc2;
+  background-color: #ffffffd3;
   padding: 20px;
   /* circle */
   border-radius: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 50px;
   width: 50px;
-  /* add purple glow around the icon, not inside */
-  filter: drop-shadow(0 0 10px #775092b1);
-  
+  border: 1px solid #7750926f;  
   }
 
 .icon-container {
@@ -41,7 +39,7 @@
   color: #765092;
   position: absolute;
   animation-name: openEnvelopeAnimation; /* Reference the defined animation */
-  animation-duration: 2s; /* Adjust this value to control the speed */
+  animation-duration: 0.6s; /* Adjust this value to control the speed */
   animation-fill-mode: forwards; /* Keeps the animation state at the end */
 
 
@@ -65,7 +63,7 @@
   border: 1px solid #ccc;
   font-weight: 500;
   animation-name: openEnvelopeAnimation; /* Reference the defined animation */
-  animation-duration: 2s; /* Adjust this value to control the speed */
+  animation-duration: 0.6s; /* Adjust this value to control the speed */
   animation-fill-mode: forwards; /* Keeps the animation state at the end */
 }
 
