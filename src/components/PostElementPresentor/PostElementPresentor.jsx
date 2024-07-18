@@ -87,7 +87,7 @@ const ElementPicker = ({ element }) => {
 			return (
 				<ResourceElementPresentor type={type} resourceUrl={resourceUrl} dimensions={dimensions} />
 			)
-		case 'pdf':
+		case 'document':
 			return <PdfElementPresentor resourceUrl={resourceUrl} />
 		case 'other':
 			return <OtherElementPresentor resourceUrl={resourceUrl} />

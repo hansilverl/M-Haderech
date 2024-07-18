@@ -1,32 +1,40 @@
 .pdf-div {
 	background-color: #dedede;
-	margin-top: 50px;
+	margin-top: 0px;
+
 	width: 100%;
+	border-radius: 20px;
 }
 
 .pdf-div .pdf-document {
-
-	padding: 50px;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: stretch;
+	margin: 25px;
+	border-radius: 10px;
 }
 
-.react-pdf__Page__canvas {
-	margin-bottom: 50px;
-	margin: 0 auto;
-    align-items: center;
-    background-color: #dedede;
-	width: 70% !important;
-	height: auto !important;
+.pdf-document .pdf-page {
+	border-radius: 10px;
+	width: 100%;
+	height: fit-content;
+	justify-content: stretch;
+}
+
+.pdf-page .react-pdf__Page__canvas {
+	width: 100% !important;
+	height: fit-content !important;
 }
 
 @media (max-width: 768px) {
-	.pdf-div .pdf-document {
+	.pdf-div,
+	.pdf-div .pdf-document,
+	.pdf-document .pdf-page {
 		padding: 0px;
+		margin: 0px;
 	}
 	.react-pdf__Page__canvas {
-		margin-bottom: 50px;
-		margin: 0 auto;
 		width: 100% !important;
 		height: 100% !important;
 	}
