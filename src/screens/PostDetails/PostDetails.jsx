@@ -26,9 +26,9 @@ const PostDetails = ({ id: propId }) => {
 	return (
 		<div className='post-details-external-container'>
 			<div className='post-details-container'>
-				<button className='back-button' onClick={() => navigate(-1)}>
+				{/* <button className='back-button' onClick={() => navigate(-1)}>
 					<FaArrowRight />
-				</button>
+				</button> */}
 				{loadingGet ? (
 					<p>טוען...</p>
 				) : errorGet ? (
