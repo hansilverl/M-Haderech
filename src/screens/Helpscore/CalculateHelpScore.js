@@ -117,15 +117,15 @@ const CalculateHelpScore = () => {
         <div className="score-container unique-background">
             <h1>תודה על מילוי השאלון.</h1>
             <div className="score-result">
-                <p>התוצאה שלך:</p>
+                <p> הניקוד שקיבלת:</p>
                 <div className="user-score">{score}</div>
             </div>
             <div className="score-description">
                 <p>רמת היפרמזיס: {scoreDescription(score)}</p>
             </div>
             <div className="button-wrapper">
-                <button onClick={saveHistory}>שמור</button>
-                <button onClick={() => navigate('/helpscore')}>חזור לטופס</button>
+                <button onClick={saveHistory}>לשמור להשוואה</button>
+                <button onClick={() => navigate('/helpscore')}>חזרה לטופס</button>
             </div>
 
             <Modal
@@ -135,7 +135,7 @@ const CalculateHelpScore = () => {
                 className="Modal"
                 overlayClassName="Overlay"
             >
-                <h2>אנא התחבר כדי לשמור את הציון שלך</h2>
+                <h2>עדיין לא נרשמת? מחכים לך!</h2>
                 <input
                     type="email"
                     value={email}
@@ -155,8 +155,8 @@ const CalculateHelpScore = () => {
                     data-error-message="יש למלא סיסמה."
                 />
                 <div className="button-group">
-                    <button onClick={handleLogin}>התחבר</button>
-                    <button onClick={() => setShowLoginModal(false)} className="cancel-button">בטל</button>
+                    <button onClick={handleLogin}>התחברות</button>
+                    <button onClick={() => setShowLoginModal(false)} className="cancel-button">ביטול</button>
                 </div>
                 {formError && <p className="error-message">{formError}</p>}
             </Modal>
@@ -168,10 +168,11 @@ const CalculateHelpScore = () => {
                 className="Modal"
                 overlayClassName="Overlay"
             >
-                <h2>נשמר בהצלחה</h2>
+                <h3>מחכים לך באיזור האישי שלך
+                כדי שתוכלי לעקוב ולהשוות נתונים </h3>
                 <div className="button-group">
-                    <button onClick={() => navigate('/history')}>צפה בהיסטוריה</button>
-                    <button onClick={() => navigate('/helpscore')} className="cancel-button">חזור לטופס</button>
+                    <button onClick={() => navigate('/history')}>צפיה בהיסטוריה</button>
+                    <button onClick={() => navigate('/helpscore')} className="cancel-button">חזרה לטופס</button>
                 </div>
             </Modal>
         </div>

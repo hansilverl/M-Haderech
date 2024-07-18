@@ -115,7 +115,8 @@ const DonatePage = () => {
         <div className="info-box">
           <FaPhone className="info-icon" />
           <h2>מספר תרומה</h2>
-          <h4>לתרומה בטלפון התקשרו:</h4>
+          <h4>לתרומה טלפונית חייגו: 
+          </h4>
           <p>{donationNumber}</p>
         </div>
       </div>

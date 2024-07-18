@@ -42,7 +42,7 @@ const Contact = () => {
       .sendForm('service_6ookygf', 'template_srcbp0v', form.current, 'twD4H2uyQGkEbZmZ-')
       .then(
         () => {
-          setModal({ visible: true, message: 'ההודעה נשלחה בהצלחה!' });
+          setModal({ visible: true, message: 'לחיים! קיבלנו, נחזור אליך בקרוב.' });
           setName('');
           setEmail('');
           setMessage('');
@@ -58,7 +58,11 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <h2>צור קשר</h2>
+      <div className="contact-header">
+      <h1>דברי איתנו</h1>
+      <h4>אנחנו כאן כדי לשמוע אותך</h4>
+      </div>
+      <div className="contact-info-container">
       <form ref={form} className="contact-form" onSubmit={sendEmail}>
         <label>
           <span>שם:</span>
@@ -70,8 +74,9 @@ const Contact = () => {
           />
         </label>
         <label>
-          <span>אימייל:</span>
-          <input
+          <span 
+          >אימייל:</span>
+          <input className="email-label-contact" style={{direction: 'ltr'}}
             required
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -96,7 +101,7 @@ const Contact = () => {
         <p>שגיאה: {error}</p>
       ) : (
         <div className="contact-info">
-          <h3>פרטי קשר:</h3>
+          <h3>זמינות עבורך גם בטלפון</h3>
           {Object.entries(contactInfo).map(([key, value]) => (
             <p key={key}><strong>{key}:</strong> {value}</p>
           ))}
@@ -108,6 +113,7 @@ const Contact = () => {
         </div>
       )}
     </div>
+  </div>
   );
 };
 
