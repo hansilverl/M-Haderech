@@ -43,6 +43,7 @@
 	border-radius: 5px;
 }
 
+
 .admin-dashboard-posts-container .add-post-button-container {
 	display: flex;
 	flex-direction: column;
@@ -64,6 +65,7 @@
 	font-size: 20px;
 	transition: background-color 0.3s;
 }
+
 
 .add-post-button-container .add-post-button:hover {
 	background-color: var(--button-primary-color-hover);
