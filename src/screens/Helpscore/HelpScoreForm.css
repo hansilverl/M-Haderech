@@ -157,7 +157,8 @@ body {
 }
 
 .radio-input:checked+.custom-radio::after {
-    transform: translate(-50%, -50%) scale(1.2);    /* slightly larger than the radio button */
+    transform: translate(-50%, -50%) scale(1.2);
+    /* slightly larger than the radio button */
     content: "✔";
     font-size: 0.5em;
     font-weight: bold;
@@ -209,25 +210,23 @@ body {
     background-color: #a20067;
 }
 
-/* pseudo element to use as element background: */
+.req_question {
+    position: relative;
+    /* background-color: #ffdfe080;  */
+    z-index: 0; /* Ensure the pseudo-element is behind the element */
+}
+
+/* Adjust the pseudo-element to act as a backdrop */
 .bordered-container .req_question::after {
     content: "";
     position: absolute;
     z-index: -1;
-    /* make sure it's behind the element */
-    /* use border as background, should be width of option table */
-    /* cover the element , until the end of option table , use % to make it responsive */
     background-color: #ffdfdf80;
     top: 6%;
     bottom: 6%;
     left: 5%;
     right: 3%;
     border-radius: 6px;
-}
-
-.req_question {
-    position: relative;
-    /* background-color: #ffdfe080;  */
 }
 
 .req_question .radio-input+.custom-radio {
@@ -328,7 +327,7 @@ body {
         overflow-wrap: break-word;
         hyphens: auto;
         flex-wrap: wrap;
-        
+
     }
 
     .q-table {
