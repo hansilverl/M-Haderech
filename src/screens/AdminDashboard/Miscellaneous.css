@@ -70,7 +70,7 @@
 }
 
 .admin-miscellaneous-container button.update-button , .update-button , .admin-miscellaneous-container .update-button {
-  background-color: #3498db;
+  background-color: #7b4b8e;
   color: white;
   border: none;
   cursor: pointer;
@@ -82,7 +82,8 @@
 }
 
 .admin-miscellaneous-container button.update-button:hover {
-  background-color: #2980b9;
+  background-color: #634585;
+
 }
 
 

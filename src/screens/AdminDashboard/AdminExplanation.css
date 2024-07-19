@@ -58,13 +58,14 @@
   top: 0;
   bottom: 0;
   width: 10px;
-  background-color: #ac1c74; /* Purple color */
+  background-color: #724086; /* Purple color */
   border-top-left-radius: 5px; /* Match the border-radius of the category item */
   border-bottom-left-radius: 5px; /* Match the border-radius of the category item */
 }
 
 .category-item strong {
-  color: #ac1c74; /* Change to purple */
+  color:#724086
+; /* Change to dark blue */
   margin-left: 15px; /* Add padding to avoid overlap with the strip */
 }
 
