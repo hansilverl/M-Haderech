@@ -34,7 +34,6 @@ const TextEditorToolBar = (props) => {
 
 	return (
 		<div className='text-editor-menu-bar' editor={editor}>
-			<div className='first-two-mb'>
 			<div className={'sub-menu-bar'}>
 				<div className='sub-group'>
 					<ToolBarButton
@@ -180,7 +179,7 @@ const TextEditorToolBar = (props) => {
 					/>
 				</div>
 			</div>
-			</div>
+			{/* </div> */}
 			<div className='sub-menu-bar'>
 				<MenuBarSelectSize editor={editor} />
 			</div>

@@ -1,14 +1,16 @@
 .text-editor-menu-bar {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: flex-start;
-	align-items: flex-start;
-	width: fit-content;
-	margin: 0px 10px;
-	padding: 10px;
+	align-items: center;
+	width: 99.5%;
+	margin: 0px;
+	padding: 0px;
+	/*here*/
 	background-color: #f3f3f3;
 	border-radius: 5px;
 }
+
 
 .text-editor-menu-bar .sub-menu-bar {
 	 float: right;
@@ -27,4 +29,12 @@
 	justify-content: flex-start;
 	margin: 0px;
 	padding: 0px 5px;
+}
+
+/* from about half-screen width, display the sub-group as a column */
+@media (max-width: 888px) {
+	.text-editor-menu-bar{
+		flex-direction: column;
+		margin: 0px;
+	}
 }
