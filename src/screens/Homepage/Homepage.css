@@ -121,6 +121,7 @@ nav ul {
 	margin: 0;
 	display: flex;
 	justify-content: flex-end;
+	font-weight: 500;
 }
 
 nav ul li {
