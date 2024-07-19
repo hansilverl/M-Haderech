@@ -119,6 +119,7 @@ const Statistics = () => {
         className="modal-stat-content"
       >
         <h2>עדכון סטטיסטיקות</h2>
+        <h4>אין להוסיף תווים נוספים מלבד מספרים. המערכת תדאג להפריד מספרים באמצעות פסיקים בצורה אוטומטית.</h4>
         <form>
           <table className="stat-table" dir="rtl">
             <tbody>
