@@ -39,7 +39,7 @@ const ElementEditorComp = (props) => {
 	if (index < 0) {
 		return <h2>שגיאה בטעינת עורך האלמנט</h2>
 	}
-	
+
 	return (
 		<div className='element-comp-container'>
 			{type === 'text' ? (
@@ -73,7 +73,7 @@ const ElementEditorComp = (props) => {
 }
 
 const ElementEditor = (props) => {
-	const { element, deleteElement, updateElement, forceHideEditor } = props
+	const { element, deleteElement, updateElement, forceHideEditor, setForceSave } = props
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 		id: element?.id,
 	})
@@ -107,6 +107,9 @@ const ElementEditor = (props) => {
 		const onUpdateElement = () => {
 			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 			autoSaveTimeout.current = null
+
+			let forceSave = false
+
 			setElement((elem) => {
 				const newElem = { ...elem }
 				newElem.type = type
@@ -117,13 +120,15 @@ const ElementEditor = (props) => {
 				newElem.dimensions = dimensions
 				return newElem
 			})
+
+			if (forceSave && setForceSave) setForceSave(true)
 		}
 
 		if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 
 		autoSaveTimeout.current = setTimeout(() => {
 			onUpdateElement()
-		}, 1000)
+		}, 500)
 	}, [type, content, resourcePath, displayEditor, dimensions])
 
 	useEffect(() => {
@@ -150,8 +155,8 @@ const ElementEditor = (props) => {
 					disabled={resourcePath && resourcePath !== '' ? true : false}
 				/>
 				<div className='element-editor-buttons'>
-				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתרת' : 'הצגת'} עורך</button>
-				<button onClick={() => setIsModalActive(true)}>מחיקת רכיב</button>
+					<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתרת' : 'הצגת'} עורך</button>
+					<button onClick={() => setIsModalActive(true)}>מחיקת רכיב</button>
 				</div>
 			</div>
 			{!displayEditor || forceHideEditor ? null : (

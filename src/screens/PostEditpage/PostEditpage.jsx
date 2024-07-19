@@ -20,16 +20,14 @@ const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
 	const { postDelete, loadingDelete, startDelete } = usePostDelete(postID)
 
-	const setSaveTimeout = useRef(null)
-	const firstRender = useRef(true)
 	const [articleType, setPostType] = useState(post.articleType ? post.articleType : 'article')
 	const [title, setTitle] = useState(post.title ? post.title : '')
 	const [description, setDescription] = useState(post.description ? post.description : '')
 	const [published, setPublished] = useState(post.published ? post.published : false)
 	const [datePublished, setDatePublished] = useState(post.datePublished ? post.datePublished : null)
 	const [elements, setElements] = useState(post.elements ? post.elements : [])
-	const [saveButtonPressed, setSaveButtonPressed] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [forceSave, setForceSave] = useState(false)
 
 	const [saveButtonText, setSaveButtonText] = useState('שמירה')
 	const navigate = useNavigate()
@@ -51,11 +49,9 @@ const PostEditPageComp = ({ postID, post }) => {
 	}
 
 	const handleSave = () => {
-		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
-		setSaveTimeout.current = null
 		const postAdditions = getNewPost()
 		startUpdate(postAdditions)
-		if (saveButtonPressed) setSaveButtonText('שומר..')
+		setSaveButtonText('שומר..')
 	}
 
 	const togglePublished = async () => {
@@ -69,39 +65,29 @@ const PostEditPageComp = ({ postID, post }) => {
 		startDelete()
 	}
 
-	const forceSave = () => {
-		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
-		setSaveTimeout.current = null
-		setSaveButtonPressed(true)
+	const saveButton = () => {
 		handleSave()
 	}
-
-	useEffect(() => {
-		if (firstRender.current) {
-			firstRender.current = false
-			return
-		}
-
-		if (setSaveTimeout.current) clearTimeout(setSaveTimeout.current)
-		setSaveTimeout.current = setTimeout(() => {
-			handleSave()
-		}, 500)
-	}, [elements, published, title, description])
 
 	useEffect(() => {
 		if (postDelete) navigate('/admin/posts')
 	}, [postDelete, navigate])
 
 	useEffect(() => {
-		if (loadingUpdate) return
-		if (postUpdate && saveButtonPressed) {
+		if (postUpdate) {
 			setSaveButtonText('נשמר בהצלחה')
 			setTimeout(() => {
 				setSaveButtonText('שמירה')
 			}, 3000)
-			setSaveButtonPressed(false)
 		}
-	}, [postUpdate, loadingUpdate])
+	}, [postUpdate])
+
+	useEffect(() => {
+		if (forceSave) {
+			setForceSave(false)
+			handleSave()
+		}
+	}, [forceSave, handleSave])
 
 	return (
 		<div key={postID} className='edit-post-page'>
@@ -143,10 +129,10 @@ const PostEditPageComp = ({ postID, post }) => {
 						postID={postID}
 						elements={elements}
 						setElements={setElements}
+						setForceSave={setForceSave}
 					/>
 					<div className='buttons-container'>
-						<button className='save-post-button'
-						 onClick={forceSave} disabled={loadingUpdate}>
+						<button className='save-post-button' onClick={saveButton} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
 						<button
@@ -191,7 +177,7 @@ const PostEditPageComp = ({ postID, post }) => {
 }
 
 const PostEditPage = ({ postID }) => {
-	console.log(postID);
+	console.log(postID)
 	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(postID)
 	const [refresh, setRefresh] = useState(false)
 

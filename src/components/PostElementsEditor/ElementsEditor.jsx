@@ -21,9 +21,10 @@ import ElementEditor from './ElementEditor/ElementEditor'
 import { deleteObjectByFilePath } from '../../hooks/useResourceManagement'
 
 const ElementsEditor = (props) => {
-	const {postID, elements, setElements } = props
+	const { postID, elements, setElements, setForceSave } = props
 	const [dragging, setDragging] = useState(false)
 
+	const [forceSave, setForceSave2] = useState(false)
 	const createElement = () => {
 		let id = 0
 		while (elements.find((elem) => elem.id === `draggable-item-${id}`)) id++
@@ -44,8 +45,10 @@ const ElementsEditor = (props) => {
 	const updateElement = (element) => {
 		const index = elements.findIndex((elem) => elem.id === element.id)
 		const newElements = [...elements]
+		const oldElement = newElements[index]
 		newElements[index] = element
 		setElements(newElements)
+		if (oldElement.resourcePath !== element.resourcePath) setForceSave(true)
 	}
 
 	const deleteElement = (element) => {
