@@ -108,7 +108,7 @@ const History = () => {
 
   const graphOptions = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     onClick: (e, elements) => {
       if (elements.length > 0) {
         const index = elements[0].index;
