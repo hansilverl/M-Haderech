@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 20px); /* Full height minus some padding */
+  width: 90%;
+  height: 100vh;
   padding: 20px;
   box-sizing: border-box; /* Ensure padding is included in the height calculation */
   /* margin-right: 250px; */
@@ -14,8 +15,7 @@
   padding: 40px; /* Increased padding for a bigger box */
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1000px; /* Increased max-width */
+  width: 90vw; /* Adjusted width */
 }
 
 .welcome-header {
@@ -34,6 +34,7 @@
   list-style-type: none;
   padding: 0;
   font-size: 1.0em; /* Increased font size */
+  text-indent: 10px; /* Indent text for better readability */
 }
 
 .available-text{

@@ -4,9 +4,8 @@ import './AdminExplanation.css';
 const AdminExplanation = () => {
   return (
     <div className="admin-explanation" dir="rtl">
-      <h1 className="welcome-header">ברוכים הבאים ללוח המחוונים של המנהל</h1>
+      <h1 className="welcome-header">ברוכות הבאות ללוח הניהול</h1>
       <p className="intro-text">כאן תוכלו לנהל את האתר ולבצע פעולות שונות בהתאם לקטגוריות המפורטות:</p>
-      <p className="available-text">לוח המחוונים זמין רק למחשבים</p>
       <ul className="category-list">
         <li className="category-item"><strong>מאמרים:</strong> ניהול המאמרים של האתר, כולל יצירה, עריכה ומחיקה של מאמרים.</li>
         <li className="category-item"><strong>משתמשים:</strong> ניהול המשתמשים הרשומים באתר, כולל הגדרת הרשאות, איפוס סיסמאות ומחיקה.</li>
