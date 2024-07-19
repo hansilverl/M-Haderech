@@ -180,4 +180,13 @@ nav ul li a:hover {
 	.header-image {
 		height: 20vh;
 	}
+
+	.fill-form-button{
+		/* since it's closer to the nav bar, the colour clashes with the nav bar */
+		background-color: #a04598;
+	}
+
+	.fill-form-button:hover {
+		background: #ac1c74;
+	}
 }
