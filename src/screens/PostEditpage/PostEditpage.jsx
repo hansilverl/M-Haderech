@@ -31,7 +31,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	const [saveButtonPressed, setSaveButtonPressed] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
-	const [saveButtonText, setSaveButtonText] = useState('שמור')
+	const [saveButtonText, setSaveButtonText] = useState('שמירה')
 	const navigate = useNavigate()
 
 	const getNewPost = () => {
@@ -55,7 +55,7 @@ const PostEditPageComp = ({ postID, post }) => {
 		setSaveTimeout.current = null
 		const postAdditions = getNewPost()
 		startUpdate(postAdditions)
-		if (saveButtonPressed) setSaveButtonText('שומר')
+		if (saveButtonPressed) setSaveButtonText('שומר..')
 	}
 
 	const togglePublished = async () => {
@@ -97,7 +97,7 @@ const PostEditPageComp = ({ postID, post }) => {
 		if (postUpdate && saveButtonPressed) {
 			setSaveButtonText('נשמר בהצלחה')
 			setTimeout(() => {
-				setSaveButtonText('שמור')
+				setSaveButtonText('שמירה')
 			}, 3000)
 			setSaveButtonPressed(false)
 		}
@@ -145,7 +145,8 @@ const PostEditPageComp = ({ postID, post }) => {
 						setElements={setElements}
 					/>
 					<div className='buttons-container'>
-						<button onClick={forceSave} disabled={loadingUpdate}>
+						<button className='save-post-button'
+						 onClick={forceSave} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
 						<button

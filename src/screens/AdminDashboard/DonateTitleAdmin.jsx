@@ -113,7 +113,7 @@ const DonateTitleAdmin = () => {
         </form>
         <div className="modal-actions">
           <button className="save-changes"
-           onClick={handleSave}>שמור</button>
+           onClick={handleSave}>שמירה</button>
           <button onClick={closeModal}>בטל</button>
         </div>
       </Modal>

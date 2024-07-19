@@ -92,12 +92,21 @@
 	cursor: pointer;
 	margin: 0px;
 	font-size: 16px;
+	font-weight: 550;
 }
 
 .edit-post-page .edit-post-header button:disabled,
 .edit-post-page .buttons-container button:disabled {
 	background-color: var(--button-primary-color-disabled);
 	cursor: not-allowed;
+}
+
+#root > div > div > div > div.admin-dashboard-content > div > div.buttons-container{
+	font-weight: 550;
+}
+
+.save-post-button{
+	background-color: #60c879;
 }
 
 /* Specific button styles */
@@ -110,11 +119,13 @@
 }
 
 .edit-post-page .publish-button {
-	background-color: #60c879;
+	background-color:#cda5b4;
+	color: #333;
 }
 
 .edit-post-page .publish-button:hover {
-	background-color: #218838;
+	background-color: #a12367;
+	color: white;
 }
 
 .edit-post-page .unpublish-button {
@@ -158,6 +169,7 @@
 	flex-direction: row;
 	width: 70%;
 	justify-content: space-around;
+	font-weight: 550;
 }
 
 @media (max-width: 768px) {

@@ -496,7 +496,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
                           <td>
                             {editingAnswer && editingAnswer.id === answer.id ? (
                               <div className="edit-answer-buttons">
-                                <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמור</button>
+                                <button type="button" className='save-answer' onClick={saveEditedAnswer}>שמירה</button>
                               </div>
                             ) : (
                               <>

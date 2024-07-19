@@ -163,7 +163,7 @@ const Statistics = () => {
           </div>
         </form>
         <div className="modal-actions">
-        <button className="save-changes" onClick={handleSave}>שמור</button>
+        <button className="save-changes" onClick={handleSave}>שמירה</button>
         <button className='cancel-changes' onClick={closeModal}>בטל</button>
         </div>
       </Modal>

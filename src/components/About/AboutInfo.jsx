@@ -86,7 +86,7 @@ const AboutInfo = () => {
           </div>
         </form>
         <div className="modal-actions">
-          <button onClick={handleSave}>שמור</button>
+          <button onClick={handleSave}>שמירה</button>
           <button onClick={closeModal}>בטל</button>
         </div>
       </Modal>
