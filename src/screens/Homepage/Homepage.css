@@ -78,7 +78,7 @@
 }
 
 .donate-button:hover {
-	background: #ac1c74;
+	background: #b42c7c;
 	/* A slightly darker tone for hover effect */
 }
 
@@ -187,6 +187,6 @@ nav ul li a:hover {
 	}
 
 	.fill-form-button:hover {
-		background: #ac1c74;
+		background: #b42c7c;
 	}
 }
