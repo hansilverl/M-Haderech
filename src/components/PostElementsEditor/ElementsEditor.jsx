@@ -21,7 +21,7 @@ import ElementEditor from './ElementEditor/ElementEditor'
 import { deleteObjectByFilePath } from '../../hooks/useResourceManagement'
 
 const ElementsEditor = (props) => {
-	const { elements, setElements } = props
+	const {postID, elements, setElements } = props
 	const [dragging, setDragging] = useState(false)
 
 	const createElement = () => {
@@ -100,7 +100,7 @@ const ElementsEditor = (props) => {
 					{elements.map((element, index) => {
 						return (
 							<ElementEditor
-								key={element.id}
+								key={`${postID}-${element.id}`}
 								index={index}
 								element={element}
 								updateElement={updateElement}

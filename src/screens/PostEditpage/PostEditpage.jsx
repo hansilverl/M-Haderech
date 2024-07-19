@@ -104,7 +104,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	}, [postUpdate, loadingUpdate])
 
 	return (
-		<div className='edit-post-page'>
+		<div key={postID} className='edit-post-page'>
 			<div className='back-button-container'>
 				<button className='back-button' onClick={() => navigate(-1)}>
 					<FaArrowRight />
@@ -138,7 +138,12 @@ const PostEditPageComp = ({ postID, post }) => {
 							</div>
 						)}
 					</div>
-					<ElementsEditor elements={elements} setElements={setElements} />
+					<ElementsEditor
+						key={postID}
+						postID={postID}
+						elements={elements}
+						setElements={setElements}
+					/>
 					<div className='buttons-container'>
 						<button onClick={forceSave} disabled={loadingUpdate}>
 							{saveButtonText}
@@ -184,8 +189,8 @@ const PostEditPageComp = ({ postID, post }) => {
 	)
 }
 
-const PostEditPage = () => {
-	const { id: postID } = useParams()
+const PostEditPage = ({ postID }) => {
+	console.log(postID);
 	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(postID)
 	const [refresh, setRefresh] = useState(false)
 
@@ -204,10 +209,15 @@ const PostEditPage = () => {
 			<p>{errorGet.toString()}</p>
 		</>
 	) : postsGet ? (
-		<PostEditPageComp postID={postID} post={postsGet} setRefresh={setRefresh} />
+		<PostEditPageComp key={postID} postID={postID} post={postsGet} setRefresh={setRefresh} />
 	) : (
 		<h2>המאמר לא נמצא</h2>
 	)
 }
 
-export default PostEditPage
+const PostEditPageContainer = () => {
+	const { id } = useParams()
+	return <PostEditPage key={id} postID={id} />
+}
+
+export default PostEditPageContainer
