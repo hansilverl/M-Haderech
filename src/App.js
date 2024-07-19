@@ -45,7 +45,6 @@ function App() {
 					<Route exact path='/contact' element={<Contact />} />
 					<Route exact path='/helpScore' element={<HelpScoreForm />} />
 					<Route exact path='/calculateHelpScore' element={<CalculateHelpScore />} />
-					<Route exact path='/edit/:id' element={<PostEditpage />} />
 					<Route
 						exact
 						path='/history'
