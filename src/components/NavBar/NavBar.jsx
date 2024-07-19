@@ -112,6 +112,11 @@ const Navbar = ({ setShowLogin }) => {
 						</Link>
 					</li>
 					<li>
+						<Link to='/thanks' className={isActive('/thanks')}>
+							תודות
+						</Link>
+					</li>
+					<li>
 						<Link
 							to='/helpScore'
 							onClick={() => setNavbarOpen(false)}

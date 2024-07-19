@@ -37,6 +37,12 @@ const Sidebar = () => {
 						</Link>
 					</li>
 					<li>
+						<Link to='/edit/thanks' onClick={closeSidebar}>
+							<FaRegNewspaper className='sidebar-icon' />
+							<span>ערוך תודות</span>
+						</Link>
+					</li>
+					<li>
 						<Link to='/admin/users' onClick={closeSidebar}>
 							<FaUsers className='sidebar-icon' />
 							<span>משתמשים</span>
