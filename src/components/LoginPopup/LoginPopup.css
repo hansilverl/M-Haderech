@@ -133,3 +133,78 @@
 .switcher {
     font-size: 1.1em;
 }
+
+.modal-password {
+    width: 25%; /* Adjust width as needed */
+    height: 35%; /* Adjust height as needed */
+    max-width: 600px; /* Ensure it doesn't get too wide on larger screens */
+    max-height: 400px; /* Ensure it doesn't get too tall on larger screens */
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-password-header h2 {
+    font-size: 1.2em; /* Make the title smaller */
+}
+
+.modal-password-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.modal-password-header img {
+    width: 16px;
+    cursor: pointer;
+}
+
+.modal-password-body {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Increase gap between elements */
+}
+
+.modal-password-body label {
+    margin-left: 20px;
+    flex-direction: column;
+    gap: 5px; /* Add space between the label and the input */
+}
+
+.modal-password-body input {
+    margin-right: 20px;
+    width: 60%;
+    max-width: 70%;
+
+}
+
+.reset-password-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px; /* Increase margin above buttons */
+}
+
+.reset-password-buttons button {
+    background-color: #a04598;
+    color: white;
+    border: none;
+    padding: 5px; /* Adjust padding for better spacing */
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 5px;
+    font-size: small;
+    max-width: 30%;
+}
+
+.reset-password-buttons button:hover {
+    background-color: #a63a7f;
+}
+
+
