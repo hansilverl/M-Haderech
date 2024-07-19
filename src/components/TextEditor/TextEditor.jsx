@@ -17,7 +17,7 @@ import he from 'he'
 
 import TextEditorToolBar from './EditorToolBar/TextEditorToolBar'
 
-const TextEditor = ({ content, setContent }) => {
+const TextEditor = ({ content, setContent, isDisabled }) => {
 	const extensions = [
 		TextDirection.configure({
 			types: ['heading', 'paragraph', 'orderedList', 'bulletList', 'listItem'],
@@ -54,7 +54,7 @@ const TextEditor = ({ content, setContent }) => {
 	]
 
 	const onUpdate = ({ editor }) => {
-		const text = he.encode(editor.getHTML())
+		const text = editor.getHTML()
 		setContent(text)
 	}
 
@@ -64,15 +64,14 @@ const TextEditor = ({ content, setContent }) => {
 	const editor = useEditor({
 		extensions: extensions,
 		content: he.decode(content),
+		editable: isDisabled ? false : true,
 		onUpdate,
-		onPaste: onPaste,
 	})
-
 
 	return (
 		<div className='editor-container'>
-			<TextEditorToolBar editor={editor} />
-			<EditorContent className='tiptap-editor-container' editor={editor} />
+			{!isDisabled && <TextEditorToolBar editor={editor} />}
+			<EditorContent className={`tiptap-editor-container ${isDisabled ? 'disabled' : ''}`} editor={editor} />
 		</div>
 	)
 }
