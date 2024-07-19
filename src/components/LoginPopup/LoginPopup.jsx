@@ -144,27 +144,33 @@ export const LoginPopup = ({ setShowLogin }) => {
       </form>
 
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        className="modal"
-        overlayClassName="modal-overlay"
-        parentSelector={() => document.querySelector('.login-popup')}
-      >
-        <h2>איפוס סיסמה</h2>
-        <label>
-          <span>אימייל:</span>
-          <input
-            type="email"
-            name="resetEmail"
-            value={resetEmail}
-            onChange={(e) => setResetEmail(e.target.value)}
-          />
-        </label>
-        <div className="reset-password-buttons">
-          <button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
-          <button onClick={() => setModalIsOpen(false)}>סגור</button>
-        </div>
-      </Modal>
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          className="modal-password"
+          overlayClassName="modal-overlay"
+          parentSelector={() => document.querySelector('.login-popup')}
+        >
+          <div className="modal-password-header">
+            <h2>איפוס סיסמה</h2>
+            <img onClick={() => setModalIsOpen(false)} src={crossButton} alt='close' />
+          </div>
+          <div className="modal-password-body">
+            <label>
+              <span>אימייל:</span>
+              <input
+                type="email"
+                name="resetEmail"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+              />
+            </label>
+            <div className="reset-password-buttons">
+              <button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
+              <button onClick={() => setModalIsOpen(false)}>סגור</button>
+            </div>
+          </div>
+        </Modal>
+
     </div>
   );
 };
