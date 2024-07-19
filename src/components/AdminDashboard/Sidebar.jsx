@@ -18,7 +18,7 @@ const Sidebar = () => {
 		<>
 			<div className={`sidebar ${isOpen ? 'open' : ''}`}>
 				<div className='sidebar-header'>
-					<h2>לוח מחוונים של מנהל</h2>
+					<h2>ניהול</h2>
 					<button className='close-btn' onClick={toggleSidebar}>
 						<FaTimes />
 					</button>

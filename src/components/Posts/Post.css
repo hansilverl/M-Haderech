@@ -3,7 +3,7 @@
 	flex-direction: column;
 	border: 1px solid #ddd;
 	border-radius: 8px;
-	padding: 1em;
+	padding: 0.5em;
 	text-align: right;
 	background-color: rgb(243, 243, 243);
 	justify-content: space-between;
@@ -11,76 +11,74 @@
 	flex: 1;
 	cursor: pointer;
 	transition: background-color 0.3s;
-}
-
-.detailed-post-container:hover {
+	width: 20em;
+	margin-bottom: 1em;
+  }
+  
+  .detailed-post-container:hover {
 	background-color: #f0f0f0;
 	transform: scale(1.01);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-
-.detailed-post-container .post-image {
+  .detailed-post-container .post-image {
 	max-width: 90%;
 	max-height: 150px;
 	max-width: 270px;
 	height: auto;
 	border-radius: 8px;
 	align-self: center;
-	/* Center the image if it is smaller than the width */
-}
-
-.detailed-post-container .post-title {
+  }
+  
+  .detailed-post-container .post-title {
 	font-size: 20px;
-	/* margin: 15px 0; */
-	margin-top: 12px;
-	margin-bottom: 0;
+	/* only need right and left margins , top and bottom are set to 0 */
+	margin: 0 0 0.5em 0;
 	word-break: break-all;
 	overflow-wrap: break-word;
-}
+  }
 
-.detailed-post-container .post-date {
-	color: #888;
-	font-size: 14px;
-}
-
-.detailed-post-container .title-date-container{
+  .detailed-post-container .title-date-container {
+	margin-top: 2px;
 	display: flex;
 	justify-content: space-between;
+	align-items:first baseline;
+  }
+  
 
-}
-
-.detailed-post-container .post-description {
+  .detailed-post-container .post-date {
+	color: #888;
+	font-size: 14px;
+	margin: 0; /* Remove top margin */
+  }
+  
+  .detailed-post-container .post-description {
 	font-size: 16px;
 	margin: 5px 0;
 	text-wrap: balance;
 	word-break: break-all;
 	overflow-wrap: break-word;
-}
-
-.detailed-post-container .post-button {
+  }
+  
+  .detailed-post-container .post-button {
 	border: none;
 	padding: 0.6em 1em;
 	cursor: pointer;
 	border-radius: 5px;
-	background: #9b59b6;
+	background: #a04598;
 	color: #fff;
-	border: none;
 	padding: 0.5em 1em;
-	cursor: pointer;
 	font-size: 11px;
 	max-width: 40%;
-	/* Adjust the width to fill the container */
 	margin-top: auto;
-	/* This pushes the button to the bottom */
 	flex-direction: flex-end;
-}
-
-.detailed-post-container .post-button:hover {
+  }
+  
+  .detailed-post-container .post-button:hover {
 	background: #653a76;
-}
-
-.detailed-post-container .post-pdf-button {
+  }
+  
+  .detailed-post-container .post-pdf-button {
 	background: transparent;
 	border: none;
 	padding: 0.5em 1em;
@@ -94,16 +92,15 @@
 	overflow: hidden;
 	display: inline-block;
 	margin-right: 10px;
+  }
   
-}
-
-.detailed-post-container .post-pdf-button img {
+  .detailed-post-container .post-pdf-button img {
 	display: block;
 	width: 24px;
 	height: 24px;
-}
-
-/* Prevent background change on hover */
-.detailed-post-container .post-pdf-button:hover {
+  }
+  
+  .detailed-post-container .post-pdf-button:hover {
 	background: transparent;
-}
+  }
+  

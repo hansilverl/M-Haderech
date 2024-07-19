@@ -17,7 +17,7 @@ const AnalyticsSection = ({ animate }) => {
   return (
     <section id="analytics" className="analytics-section">
       <div className="analytics-text">
-        <h2>נתונים של העמותה</h2>
+        <h2>נתוני העמותה</h2>
       </div>
       <div className="analytics-numbers">
         {sortedStatistics.map(([key, value]) => (

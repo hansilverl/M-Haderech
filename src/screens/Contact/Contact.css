@@ -7,51 +7,92 @@
   background-color: #f5f5f5;
 }
 
+.contact-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  gap: 2rem;
+}
+
 .contact-form {
   background: white;
   padding: 2rem;
+  padding-top: 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 300px;
   max-width: 100%;
-  margin-bottom: 2rem;
   align-items: center;
+  align-self: center;
 }
 
-.contact-form h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  color: #333;
+.contact-header {
+  padding: 1rem;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.contact-container h1 {
+  color: #ac1c74;
+  margin-top: -5px;
+  margin-bottom: 0.5px;
+}
+
+.contact-container h4 {
+  color: #650040;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .contact-form label {
   display: flex;
   flex-direction: column;
-  font-weight: bold;
+  font-weight: 500;
   color: #555;
-  margin-top: 1rem; /* Added margin-top to label for spacing */
+  margin-top: 0.1rem;
+  text-align: right;
+}
+
+.contact-form label span {
+  color: #724086;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 1.2px;
+  gap: 20px;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 0.75rem 0;
-  margin-top: 0.5rem; /* Existing margin-top for spacing */
+  height: 1rem;
+  padding: 0.5rem 0;
+  margin-top: 0.01rem;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
   color: #333;
+  overflow-y: auto;
+  resize: vertical;
+  max-height: 100px;
 }
 
-/* Specific height adjustment for textarea */
+.contact-form input,
 .contact-form textarea {
-  height: 150px; /* Adjust this value to your desired height */
+  text-indent: 10px;
+}
+
+.contact-form textarea {
+  height: 150px;
 }
 
 .contact-form button {
   width: 100%;
   padding: 0.6em 1em;
-  background-color: #9b59b6;
+  background-color: #a04598;
   color: white;
   border: none;
   cursor: pointer;
@@ -60,56 +101,101 @@
 }
 
 .contact-form button:hover {
-  background-color: #8e44ad;
+  background-color: #ac1c74;
+}
+
+#root > div > div > div > div.contact-info-container > form > label:nth-child(2) > input[type=email] {
+  text-align: left;
+  text-justify: auto;
 }
 
 .contact-info {
   background: white;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  max-width: 100%;
+  width: 230px;
+  height: fit-content;
   text-align: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 70%;
+  margin-left: -4%;
+  box-shadow: 0 14px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  clip-path: polygon(0% 0%, 70% 0%, 85% 25%, 100% 50%, 85% 75%, 70% 100%, 0% 100%);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-indent: 10px;
+}
+
+/* css for all text in contact-info */
+.contact-info h3, .contact-info p, .contact-info strong {
+  margin: 0 auto;
 }
 
 .contact-info h3 {
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-  color: #333;
+  font-size: 1.15rem;
+  color: #a20067;
 }
 
 .contact-info p {
-  margin: 0.5rem 0;
   font-size: 1rem;
-  color: #555;
+  color: #ac1c74;
 }
 
 .contact-info strong {
-  color: #333;
+  color: #ac1c74;
 }
 
 .contact-container {
   position: relative;
 }
 
-.modal {
+.modal-contact {
+  font-size: 1em;
   position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
+  align-self: center;
   background-color: white;
   padding: 40px;
-  border: 2px solid black;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.278);
   z-index: 1000;
-  width: 60%;
-  max-width: 600px;
   text-align: center;
+  border-radius: 10px;
+  width: 300px;
+  max-width: 100%;
+  align-items: center;
+  align-self: center;
+  margin-top: 0.5rem;
+  top: 40%;
 }
 
-.modal p {
+.modal p,
+#root > div > div > div > div.contact-info-container > div.modal-contact > p {
+  color: transparent;
   margin: 0;
   font-size: 2em;
-  font-weight: bold;
+  font-weight: 550;
+  background: linear-gradient(90deg, #9326cc, #7330b7, #d14699, #574ebf, #6b43c9);
+  background-clip: text, border-box;
+  -webkit-background-clip: text;
+}
+
+.delete-icon-history {
+  color: #333;
+}
+
+@media (max-width: 840px) {
+  .contact-info-container {
+    flex-direction: column; /* Change to column on small screens */
+  }
+
+  .contact-info {
+    position: relative; /* Change position to relative */
+    left: auto; /* Reset left positioning */
+    bottom: auto; /* Reset bottom positioning */
+    margin-left: 0; /* Reset margin */
+    margin-top: 2rem; /* Add some margin on top */
+    clip-path: none; /* Remove clip-path */
+    border-radius: 10px; /* Add border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow */
+  }
 }

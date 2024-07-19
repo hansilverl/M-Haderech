@@ -2,7 +2,7 @@
 
 .navbar {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
-  background: #9b59b6;
+  background: #a04598;
   color: white;
   padding: 1em 0;
   position: sticky;
@@ -59,7 +59,7 @@
 .navbar-menu li a.active-link {
   font-weight: bold;
   background-color: #f5f5f5;
-  color: #765092;
+  color: #b42c7c;
   border-radius: 5px;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -112,7 +112,7 @@
 
 .navbar-menu li a:hover
 {
-  /* background-color: #765092; */
+  /* background-color: #b42c7c; */
   text-decoration: underline;
 }
 
@@ -128,7 +128,7 @@
 }
 
 .admin-logout {
-  background-color: #765092;
+  background-color: #b42c7c;
   border-radius: 15px;
 }
 
@@ -230,7 +230,7 @@
 
 .dropdown-menu a:hover,
 .dropdown-menu:hover  .logout-button:hover {
-  color: #9b59b6;
+  color: #a04598;
   font-weight: 550;
 
 }
@@ -303,10 +303,10 @@
     position: absolute;
     top: 60px;
     right: 0;
-    background: #9b59b6;
+    background: #a04598;
     padding: 1em 0;
     /*purple box shadow*/
-    box-shadow: 0 4px 8px #9b59b6;
+    box-shadow: 0 4px 8px #a04598;
     text-align: right;
     z-index: 999;
   }

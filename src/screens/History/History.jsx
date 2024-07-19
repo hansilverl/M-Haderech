@@ -95,10 +95,10 @@ const History = () => {
         data: history.map(entry => entry.totalScore).reverse(),
         backgroundColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
           entry.totalScore >= 20 ? '#F2CD60' :
-          '#2D936C').reverse(),
+            '#2D936C').reverse(),
         borderColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
           entry.totalScore >= 20 ? '#F2CD60' :
-          '#2D936C').reverse(),
+            '#2D936C').reverse(),
         borderWidth: 1,
         categoryPercentage: 0.99,
         barPercentage: 0.99,
@@ -107,6 +107,8 @@ const History = () => {
   };
 
   const graphOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
     onClick: (e, elements) => {
       if (elements.length > 0) {
         const index = elements[0].index;
@@ -216,11 +218,14 @@ const History = () => {
   return (
     <div className="history-container">
       <div className="graph-container">
-        <h2>התקדמות ציונים</h2>
-        <p className="graph-description">הגרף מציג את זמן מילוי השאלון לעומת הציון</p>
+        <h2>היסטוריית ההיפרמאזיס שלך
+        </h2>
+        <p className="graph-description">
+          הגרף מציג את כל הנתונים על מצב ההיפרמאזיס שלך
+          לפי זמן מילוי המבדק והניקוד האישי שלך.
+        </p>
         <div className="graph-background">
-          <Bar data={graphData} options={graphOptions} />
-        </div>
+          <Bar data={graphData} options={graphOptions} />        </div>
       </div>
       <h1>היסטוריה של השאלונים שלי</h1>
       <div className="filter-container">
@@ -253,7 +258,7 @@ const History = () => {
             {history.map((entry, index) => (
               <div key={index} className="history-entry">
                 <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry)}>
-                  <FontAwesomeIcon icon={faTrashAlt} />
+                  <FontAwesomeIcon icon={faTrashAlt} className="delete-icon-history" />
                 </span>
                 <h2>{new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
                 <p className="total-score">ציון כולל: {entry.totalScore}</p>

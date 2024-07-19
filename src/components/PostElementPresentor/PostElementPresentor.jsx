@@ -47,7 +47,7 @@ const PdfElementPresentor = (props) => {
 	const { resourceUrl } = props
 
 	const [presentPdf, setPresentPdf] = useState(true)
-	const [buttonText, setButtonText] = useState('הסתר קובץ pdf')
+	const [buttonText, setButtonText] = useState('הסתרת קובץ pdf')
 
 	const handleOpenPdf = (resourcePath) => {
 		window.open(resourcePath, '_blank')
@@ -55,14 +55,14 @@ const PdfElementPresentor = (props) => {
 
 	const handleShowPdf = () => {
 		setPresentPdf(!presentPdf)
-		setButtonText(presentPdf ? 'הצג קובץ pdf' : 'הסתר קובץ pdf')
+		setButtonText(presentPdf ? 'הצגת הקובץ pdf' : 'הסתרת הקובץ pdf')
 	}
 
 	return !resourceUrl ? null : (
 		<div className='pdf-container'>
 			<div className='pdf-buttons-container'>
 				<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
-					פתח קובץ
+					פתיחת קובץ
 					<img src={pdfIcon} alt='Open PDF' />
 				</button>
 				<button onClick={handleShowPdf}>{buttonText}</button>

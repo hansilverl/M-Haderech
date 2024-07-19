@@ -12,14 +12,14 @@
 }
 
 .donate-page h1 {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-size: 2.5em;
   color: #333;
   font-family: 'Arial', sans-serif;
 }
 
 .donate-page p {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-size: 1.2em;
   color: #666;
   font-family: 'Arial', sans-serif;
@@ -64,7 +64,7 @@
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 2em;
-  color: #3498db;
+  color: #634585;
 }
 
 .info-box h2 {
@@ -89,7 +89,7 @@
 }
 
 .info-box a {
-  color: #3498db;
+  color: #7c689b;
   text-decoration: none;
 }
 

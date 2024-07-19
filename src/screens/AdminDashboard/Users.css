@@ -29,12 +29,12 @@
 
 .users-table th, .users-table td {
   padding: 10px;
-  text-align: left;
   border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
 .users-table th {
-  background-color: #2c3e50;
+  background-color: #a12367;
   color: white;
 }
 

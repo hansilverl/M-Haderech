@@ -38,7 +38,7 @@
 
 .available-text{
   font-size: 1.0em;
-  color: #8e44ad;
+  color: #ac1c74;
 }
 
 .category-item {
@@ -48,6 +48,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative; /* Needed for the purple strip */
+  text-align: right; /* Align text to the right */
 }
 
 .category-item::before {
@@ -57,13 +58,14 @@
   top: 0;
   bottom: 0;
   width: 10px;
-  background-color: #8e44ad; /* Purple color */
+  background-color: #724086; /* Purple color */
   border-top-left-radius: 5px; /* Match the border-radius of the category item */
   border-bottom-left-radius: 5px; /* Match the border-radius of the category item */
 }
 
 .category-item strong {
-  color: #8e44ad; /* Change to purple */
+  color:#724086
+; /* Change to dark blue */
   margin-left: 15px; /* Add padding to avoid overlap with the strip */
 }
 

@@ -194,11 +194,11 @@ body {
 .help-score-form button[type="submit"] {
     font-family: 'IBM Plex Sans Hebrew';
     font-weight: bold;
-    background-color: #9b59b6;
+    background-color: #a04598;
     color: white;
     border: none;
     border-radius: 5px;
-    border: 1px solid #650040;
+    border: 1px solid #ac1c74;
     box-shadow: none;
     cursor: pointer;
     /* percentage values are relative to the parent element */

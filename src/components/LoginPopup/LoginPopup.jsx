@@ -6,7 +6,7 @@ import { useSignup } from '../../hooks/useSignup';
 import { auth } from '../../firebase/config';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import useFirebaseErrorTranslation from '../../hooks/useFirebaseErrorTranslation';
-import crossButton from '../../assets/cross_icon.png'; 
+import crossButton from '../../assets/cross_icon.png';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
@@ -160,8 +160,10 @@ export const LoginPopup = ({ setShowLogin }) => {
             onChange={(e) => setResetEmail(e.target.value)}
           />
         </label>
-        <button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
-        <button onClick={() => setModalIsOpen(false)}>סגור</button>
+        <div className="reset-password-buttons">
+          <button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
+          <button onClick={() => setModalIsOpen(false)}>סגור</button>
+        </div>
       </Modal>
     </div>
   );
