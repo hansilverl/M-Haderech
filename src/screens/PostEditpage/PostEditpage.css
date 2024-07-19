@@ -106,7 +106,7 @@
 }
 
 .edit-post-page .save-post-button {
-	background-color: #60c879;
+	background-color: forestgreen;
 }
 
 .edit-post-page .save-post-button:hover {
@@ -123,12 +123,12 @@
 }
 
 .edit-post-page .publish-button {
-	background-color:#a64e7d;
+	background-color:#80787c;
 	color: white;
 }
 
 .edit-post-page .publish-button:hover {
-	background-color: #a12367;
+	background-color: #666262;
 	color: white;
 }
 
@@ -171,9 +171,19 @@
 .edit-post-page .buttons-container {
 	display: flex;
 	flex-direction: row;
-	width: 70%;
-	justify-content: space-around;
+	width: 101%;
+	justify-content: center;
+	gap: 10px;
 	font-weight: 550;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	padding: 10px;
+	/* bottom of modal: */
+	position: sticky;
+	background-color: white;
+	bottom: 0;
+
+
 }
 
 @media (max-width: 768px) {

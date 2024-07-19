@@ -149,8 +149,8 @@ const ElementEditor = (props) => {
 					name='סוג הרכיב'
 					disabled={resourcePath && resourcePath !== '' ? true : false}
 				/>
-				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתר' : 'הצג'} עורך</button>
-				<button onClick={() => setIsModalActive(true)}>מחק רכיב</button>
+				<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתרת' : 'הצגת'} עורך</button>
+				<button onClick={() => setIsModalActive(true)}>מחיקת רכיב</button>
 			</div>
 			{!displayEditor || forceHideEditor ? null : (
 				<ElementEditorComp

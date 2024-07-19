@@ -7,13 +7,13 @@
 	margin-bottom: 5px;
 	padding: 0px;
 	border-radius: 1rem;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 	width: 100%;
 }
 
 .element-editors-container .add-element-button {
 	background-color: var(--button-primary-color);
-	font-size: 20px;
+	font-size: 1.2em;
 	color: white;
 	margin: 15px;
 }

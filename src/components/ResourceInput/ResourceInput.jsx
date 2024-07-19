@@ -49,7 +49,7 @@ const ResourceInput = (props) => {
 					<CustomFileInput setFile={setCurrentFile} />
 				) : (
 					<div className='file-info-container'>
-						<h5>קיים כבר קובץ</h5>
+						{/* <h5>קיים כבר קובץ</h5> */}
 						<a href={url} target='_blank' rel='noopener noreferrer'>
 							ניתן לראות כאן
 						</a>
