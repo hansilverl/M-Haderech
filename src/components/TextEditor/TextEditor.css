@@ -11,8 +11,13 @@
 	padding: 0px 10px;
 }
 
+.editor-container .disabled .tiptap{
+	pointer-events: none;
+	border: none;
+	background-color: #ffffff;
+}
+
 .tiptap:focus {
-	/* border: none; */
 	outline: 1px solid black;
 }
 

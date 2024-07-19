@@ -6,6 +6,7 @@ import { pdfjs } from 'react-pdf'
 
 import PdfViewer from '../PdfViewer/PdfViewer'
 import pdfIcon from '../../assets/pdf-file.png'
+import TextEditor from '../TextEditor/TextEditor'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -15,10 +16,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const TextElementPresentor = (props) => {
 	const { content } = props
 	return !content ? null : (
-		<div
-			className='tiptap-presentor-container tiptap'
-			dangerouslySetInnerHTML={{ __html: content }}
-		/>
+		<TextEditor content={content} isDisabled={true} />
 	)
 }
 
