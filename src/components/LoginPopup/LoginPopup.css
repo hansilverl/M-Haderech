@@ -81,7 +81,7 @@
     padding: 10px;
     border-radius: 4px;
     color: white;
-    background-color: #bc4287;
+    background-color: #a04598;
     font-size: 15px;
     cursor: pointer;
 }
@@ -102,13 +102,13 @@
 }
 
 .login-popup p span {
-    color: #bc4287;
+    color: #a04598;
     font-weight: 500;
     cursor: pointer;
 }
 
 .reset-password-button {
-    background: #bc4287;
+    background: #a04598;
     color: white;
     border: none;
     padding: 10px;

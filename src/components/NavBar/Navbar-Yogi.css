@@ -2,7 +2,7 @@
 
 .navbar {
   font-family: -apple-system,system-ui,BlinkMacSystemFont,Arial, Helvetica, sans-serif;
-  background: #bc4287;
+  background: #a04598;
   color: white;
   padding: 1em 0;
   position: sticky; /* Fixed navbar */
@@ -127,7 +127,7 @@
     position: absolute;
     top: 60px;
     right: 0;
-    background: #bc4287;
+    background: #a04598;
     padding: 1em 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: right;

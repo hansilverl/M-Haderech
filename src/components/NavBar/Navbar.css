@@ -2,7 +2,7 @@
 
 .navbar {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
-  background: #bc4287;
+  background: #a04598;
   color: white;
   padding: 1em 0;
   position: sticky;
@@ -230,7 +230,7 @@
 
 .dropdown-menu a:hover,
 .dropdown-menu:hover  .logout-button:hover {
-  color: #bc4287;
+  color: #a04598;
   font-weight: 550;
 
 }
@@ -303,10 +303,10 @@
     position: absolute;
     top: 60px;
     right: 0;
-    background: #bc4287;
+    background: #a04598;
     padding: 1em 0;
     /*purple box shadow*/
-    box-shadow: 0 4px 8px #bc4287;
+    box-shadow: 0 4px 8px #a04598;
     text-align: right;
     z-index: 999;
   }
