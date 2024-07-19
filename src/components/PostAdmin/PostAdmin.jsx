@@ -1,3 +1,4 @@
+// src/components/PostAdmin/PostAdmin.jsx
 import './PostAdmin.css'
 
 import React, { useEffect } from 'react'

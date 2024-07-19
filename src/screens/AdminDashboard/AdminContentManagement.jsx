@@ -1,3 +1,4 @@
+// src/screens/AdminDashboard/AdminContentManagement.jsx
 import './AdminContentManagement.css'
 
 import React, { useState, useEffect } from 'react'

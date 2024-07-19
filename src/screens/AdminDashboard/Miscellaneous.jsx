@@ -8,7 +8,6 @@ import DonationLink from '../../components/DonationLink/DonationLink';
 import DonationNumber from '../../components/DonationNumber/DonationNumber';
 import NewsletterLinkAdmin from '../AdminDashboard/NewsletterLinkAdmin';
 import DonateTitleAdmin from '../AdminDashboard/DonateTitleAdmin';
-import AboutFullAdmin from '../AdminDashboard/AboutFullAdmin';
 import './Miscellaneous.css';
 
 const Miscellaneous = () => {
