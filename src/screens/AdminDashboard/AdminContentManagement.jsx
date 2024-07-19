@@ -21,7 +21,7 @@ const AdminContentManagement = () => {
 
 	useEffect(() => {
 		if (postCreateID) {
-			navigate(`/edit/${postCreateID}`)
+			navigate(`/admin/edit/${postCreateID}`)
 		}
 	}, [postCreateID, navigate])
 
