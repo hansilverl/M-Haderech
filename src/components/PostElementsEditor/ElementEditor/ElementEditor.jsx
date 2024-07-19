@@ -12,6 +12,9 @@ import GeneralModal from '../../GeneralModal/GeneralModal'
 import ResizableComponent from '../ResizableResourceComponent/ResizableResourceComponent'
 import PdfViewer from '../../PdfViewer/PdfViewer'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsUpDownLeftRight } from '@fortawesome/free-solid-svg-icons'
+
 const typeValues = ['text', 'image', 'video', 'audio', 'document', 'other']
 const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מסמך pdf', 'אחר']
 
@@ -143,8 +146,9 @@ const ElementEditor = (props) => {
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} className='element-editor-container'>
 			<div className='element-editor-header'>
-				<span className='drag-handle' {...listeners}>
-					☰
+				<span className='drag-handle'
+					{...listeners}>
+					<FontAwesomeIcon icon={faArrowsUpDownLeftRight} />
 				</span>
 				<Selector
 					selectFunction={setType}

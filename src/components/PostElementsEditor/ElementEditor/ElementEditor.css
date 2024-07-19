@@ -21,7 +21,13 @@
 
 .element-editor-container .drag-handle {
 	cursor: grab;
-	padding: 2px;
+	padding: 4px;
+}
+
+.element-editor-container .drag-handle:hover {
+	background-color: #f0f0f0b4;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .element-editor-container .element-comp-container{
@@ -49,4 +55,17 @@
 }
 .element-editor-container .element-editor-header input {
 	width: fit-content;
+}
+
+.element-editor-container .element-editor-buttons button{
+	font-weight: bold;
+}
+
+.element-editor-buttons button:hover{
+	transition: background-color 1s, transform 1s;
+	background-color: #ececec;
+	color: var(--button-primary-color);
+	font-weight: bold;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
