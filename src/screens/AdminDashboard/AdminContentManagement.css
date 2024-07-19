@@ -69,6 +69,7 @@
 
 .add-post-button-container .add-post-button:hover {
 	background-color: var(--button-primary-color-hover);
+	background-color: #218838;
 }
 
 .add-post-button-container .add-post-button:disabled {

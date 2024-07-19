@@ -18,7 +18,7 @@
 }
 
 .posts-pagination-buttons .pagination-button {
-	background-color: var(--button-primary-color);
+	background-color: #218838;
 	border: none;
 	color: white;
 	padding: 10px 20px;
