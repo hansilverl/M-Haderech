@@ -165,7 +165,7 @@ export const LoginPopup = ({ setShowLogin }) => {
               />
             </label>
             <div className="reset-password-buttons">
-              <button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
+              <button onClick={handleResetPassword}>קבלת אימייל לאיפוס סיסמה</button>
               <button onClick={() => setModalIsOpen(false)}>סגור</button>
             </div>
           </div>
