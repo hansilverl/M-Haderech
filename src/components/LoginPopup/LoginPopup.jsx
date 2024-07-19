@@ -156,7 +156,7 @@ export const LoginPopup = ({ setShowLogin }) => {
           </div>
           <div className="modal-password-body">
             <label>
-              <span>אימייל:</span>
+              <span>מייל:</span>
               <input
                 type="email"
                 name="resetEmail"
@@ -164,10 +164,10 @@ export const LoginPopup = ({ setShowLogin }) => {
                 onChange={(e) => setResetEmail(e.target.value)}
               />
             </label>
-            <div className="reset-password-buttons">
-              <button onClick={handleResetPassword}>קבלת אימייל לאיפוס סיסמה</button>
-              <button onClick={() => setModalIsOpen(false)}>סגור</button>
-            </div>
+            {/* <div className="reset-password-buttons"> */}
+              <button className="reset-password-modal-button"
+               onClick={handleResetPassword}> קבלת מייל לאיפוס סיסמא</button>
+            {/* </div> */}
           </div>
         </Modal>
 
