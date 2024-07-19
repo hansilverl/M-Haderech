@@ -105,8 +105,12 @@
 	font-weight: 550;
 }
 
-.save-post-button{
+.edit-post-page .save-post-button {
 	background-color: #60c879;
+}
+
+.edit-post-page .save-post-button:hover {
+	background-color: #218838;
 }
 
 /* Specific button styles */
@@ -119,8 +123,8 @@
 }
 
 .edit-post-page .publish-button {
-	background-color:#cda5b4;
-	color: #333;
+	background-color:#a64e7d;
+	color: white;
 }
 
 .edit-post-page .publish-button:hover {
@@ -129,7 +133,7 @@
 }
 
 .edit-post-page .unpublish-button {
-	background-color: #d44242;
+	background-color: #c82333;
 }
 
 .edit-post-page .unpublish-button:hover {
