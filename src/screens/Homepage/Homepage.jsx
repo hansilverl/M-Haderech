@@ -68,8 +68,7 @@ const HomePage = () => {
     <div className="homepage" dir="rtl">
       <header className="header">
         <div className="header-image-container">
-          <img src={headerImage} alt="Em Haderech" className="header-image" />
-          {/* <img src="https://images.unsplash.com/photo-1505679208891-9ab12ee61dc1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Em Haderech" className="header-image" /> */}
+        <img src={headerImage} alt="Em Haderech" className="header-image" />
           <div className="header-text">
             <h1>ברוכות הבאות לאם הדרך </h1>
             <h3>
