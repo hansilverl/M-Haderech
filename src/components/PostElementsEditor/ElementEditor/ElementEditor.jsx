@@ -167,7 +167,7 @@ const ElementEditor = (props) => {
 				isOpen={isModalActive}
 				onRequestClose={() => setIsModalActive(false)}
 				title='האם אתה בטוח למחוק רכיב זה?'
-				confirmName='מחק'
+				confirmName='מחיקה'
 				cancelName='ביטול'
 				handleCancel={() => setIsModalActive(false)}
 				handleConfirm={() => onDeleteElement()}>

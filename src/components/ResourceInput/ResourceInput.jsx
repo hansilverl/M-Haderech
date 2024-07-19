@@ -54,9 +54,8 @@ const ResourceInput = (props) => {
 							ניתן לראות כאן
 						</a>
 						<button onClick={deleteResourceHandler} className='delete-button-input'>
-							מחק
-						</button>
-						<button onClick={downloadResource}>הורד</button>
+							מחיקה						</button>
+						<button onClick={downloadResource}>הורדה</button>
 					</div>
 				)}
 			</div>

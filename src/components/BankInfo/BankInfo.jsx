@@ -175,7 +175,7 @@ const BankInfo = () => {
         <h2>אישור מחיקה</h2>
         <p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
         <div className="modal-actions">
-          <button onClick={confirmDeleteField}>מחק</button>
+          <button onClick={confirmDeleteField}>מחיקה</button>
           <button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
         </div>
       </Modal>

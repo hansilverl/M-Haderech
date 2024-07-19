@@ -46,18 +46,17 @@ const PostAdmin = ({ article, setRefresh }) => {
 		return (
 			<div id={article.id} className='admin-bar'>
 				<button onClick={() => navigate(`/admin/edit/${article.id}`)} className='admin-button'>
-					ערוך
+					עריכה
 				</button>
 				<button onClick={() => setShowModal(true)} className='admin-button'>
-					מחק
+					מחיקה
 				</button>
 				{!article.published ? (
 					<button onClick={() => togglePublished(true)} className='admin-button publish-button'>
-						פרסם
-					</button>
+						פירסום					</button>
 				) : (
 					<button onClick={() => togglePublished(false)} className='admin-button unpublish-button'>
-						בטל פרסום
+						ביטול פרסום
 					</button>
 				)}
 			</div>
@@ -77,7 +76,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 			{!showModal ? null : (
 				<GeneralModal
 					title='האם ברצונך למחוק את המאמר?'
-					confirmName='מחק'
+					confirmName='מחיקה'
 					cancelName='ביטול'
 					isOpen={true}
 					isEnterPossible={false}
@@ -88,7 +87,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 					}}
 					handleCancel={() => setShowModal(false)}>
 					<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
-					<p>האם אתה בטוח שברצונך להמשיך?</p>
+					<p>האם Fברצונך להמשיך?</p>
 				</GeneralModal>
 			)}
 		</div>

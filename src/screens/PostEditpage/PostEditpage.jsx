@@ -158,13 +158,13 @@ const PostEditPageComp = ({ postID, post }) => {
 						<button
 							onClick={togglePublished}
 							className={!published ? 'publish-button' : 'unpublish-button'}>
-							{published ? 'בטל פרסום' : 'פרסם'}
+							{published ? 'ביטול פרסום' : 'פרסום'}
 						</button>
 						<button
 							onClick={() => setIsModalOpen(true)}
 							disabled={loadingDelete}
 							className='delete-button'>
-							מחק
+							מחיקה
 						</button>
 					</div>
 				</>
@@ -172,7 +172,7 @@ const PostEditPageComp = ({ postID, post }) => {
 			{!isModalOpen ? null : (
 				<GeneralModal
 					title='האם ברצונך למחוק את המאמר?'
-					confirmName='מחק'
+					confirmName='מחיקה'
 					cancelName='ביטול'
 					isOpen={isModalOpen}
 					isEnterPossible={false}
