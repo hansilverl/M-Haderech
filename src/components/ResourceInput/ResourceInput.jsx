@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useResourceManagement, { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
 import './ResourceInput.css'
 import CustomFileInput from './CustomInput/CustomFileInput'
+import { FaDownload } from 'react-icons/fa'
 
 const ResourceInput = (props) => {
 	const { path, setPath, type, title, url, setUrl } = props
@@ -54,8 +55,12 @@ const ResourceInput = (props) => {
 							ניתן לראות כאן
 						</a>
 						<button onClick={deleteResourceHandler} className='delete-button-input'>
-							מחיקה						</button>
-						<button onClick={downloadResource}>הורדה</button>
+							מחיקה</button>
+						<button className="download-button"  alt="הורדת קובץ"
+							onClick={downloadResource}>
+							{/*download icon:*/}
+							<FaDownload />
+							</button>
 					</div>
 				)}
 			</div>
