@@ -45,7 +45,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 	const AdminBar = () => {
 		return (
 			<div id={article.id} className='admin-bar'>
-				<button onClick={() => navigate(`/edit/${article.id}`)} className='admin-button'>
+				<button onClick={() => navigate(`/admin/edit/${article.id}`)} className='admin-button'>
 					ערוך
 				</button>
 				<button onClick={() => setShowModal(true)} className='admin-button'>

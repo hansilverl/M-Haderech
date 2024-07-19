@@ -10,7 +10,7 @@ import QuestionnaireManagement from './QuestionnaireManagement'
 import Miscellaneous from './Miscellaneous'
 import AdminUserHistory from './AdminUserHistory'
 import AdminExplanation from './AdminExplanation'
-import PostEditPage from '../PostEditpage/PostEditpage'
+import PostEditPageContainer from '../PostEditpage/PostEditpage'
 
 const AdminDashboard = () => {
 	const location = useLocation()
@@ -30,8 +30,7 @@ const AdminDashboard = () => {
 					<Route exact path='questionnaire' element={<QuestionnaireManagement />} />
 					<Route exact path='miscellaneous' element={<Miscellaneous />} />
 					<Route exact path='history' element={<AdminUserHistory />} />
-					<Route exact path='edit/about-us' element={<PostEditPage />} />
-					<Route exact path='edit/thanks' element={<PostEditPage />} />
+					<Route exact path='edit/:id' element={<PostEditPageContainer />} />
 				</Routes>
 			</div>
 			<Sidebar />
