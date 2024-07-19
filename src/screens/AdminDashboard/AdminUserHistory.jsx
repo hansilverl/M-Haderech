@@ -10,7 +10,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import './AdminUserHistory.css';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // Adjust this selector to your app's root element
+Modal.setAppElement('#root'); 
 
 const AdminUserHistory = () => {
   const [startDate, setStartDate] = useState('');
@@ -52,7 +52,7 @@ const AdminUserHistory = () => {
 
         const querySnapshot = await getDocs(q);
         const historyData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        historyData.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds); // Sort by timestamp from newest to oldest
+        historyData.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
         setHistory(historyData);
         calculateScoreRanges(historyData);
         calculateAnswerStats(historyData);
@@ -116,7 +116,7 @@ const AdminUserHistory = () => {
 
   return (
     <div className="admin-user-history-container">
-      <h1>צפייה בהיסטוריית שאלונים</h1>
+      <h1>צפייה בהיסטוריית מבדקים</h1>
       <div className="filter-container">
         <label className="date-label">תאריך התחלה:</label>
         <input
@@ -135,14 +135,14 @@ const AdminUserHistory = () => {
       </div>
       <CSVLink data={csvData} filename="history.csv" className="export-button">יצא ל-CSV</CSVLink>
       {error && <p className="error-message">{error}</p>}
-      {history.length === 0 && !error && <p className="no-history">אין היסטוריה לשאלונים עבור אימייל זה</p>}
+      {history.length === 0 && !error && <p className="no-history">אין היסטוריה.</p>}
       <div className="score-ranges">
         <b>
-        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#2D936C' }}>קל</span> (0-19): {scoreRanges.low}</p>
-        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#F2CD60' }}>בינוני</span> (20-32): {scoreRanges.medium}</p>
-        <p>סך כל השאלונים בתוצאת מצב <span style={{ color: '#A4303F' }}>קשה</span> (33-60): {scoreRanges.high}</p>
+        <p>סך כל המבדקים בתוצאת מצב <span style={{ color: '#2D936C' }}>קל</span> (0-19): {scoreRanges.low}</p>
+        <p>סך כל המבדקים בתוצאת מצב <span style={{ color: '#F2CD60' }}>בינוני</span> (20-32): {scoreRanges.medium}</p>
+        <p>סך כל המבדקים בתוצאת מצב <span style={{ color: '#A4303F' }}>קשה</span> (33-60): {scoreRanges.high}</p>
         <br></br><br></br>
-        <p>סך כל השאלונים שמולאו: {history.length}</p></b>
+        <p>סך כל המבדקים שמולאו: {history.length}</p></b>
       </div>
       <div className="statistics-container">
         <h2>סטטיסטיקות של שאלות (לפי תאריכים נבחרים):</h2>

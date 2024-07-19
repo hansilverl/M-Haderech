@@ -87,7 +87,7 @@ const Contact = () => {
             />
           </label>
           <label>
-            <span>תוכן הודעה:</span>
+            <span>כל מה שתרצו לשאול:</span>
             <textarea
               required
               onChange={(e) => setMessage(e.target.value)}
