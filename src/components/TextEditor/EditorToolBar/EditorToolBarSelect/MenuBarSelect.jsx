@@ -34,7 +34,7 @@ const MenuBarSelectSize = (props) => {
 	const getPlaceHolder = () => {
 		const fontSize = getFontSize()
 
-		if (!fontSize) return 'בחר גודל גופן'
+		if (!fontSize) return 'בחירת גודל גופן'
 		return `גודל גופן: ${fontSize}`
 	}
 

@@ -3,9 +3,11 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	margin: 0px;
+	margin: 0 auto;
 	padding: 0px;
+	left: 1;
 }
+
 
 .text-editor-menu-bar .menu-bar-select,
 .text-editor-menu-bar .menu-bar-option {
@@ -36,3 +38,5 @@
 	background-color: white; /* Ensuring background is white */
 	font-size: 16px; /* Reasonable font size */
 }
+
+

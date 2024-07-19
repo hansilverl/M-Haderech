@@ -3,12 +3,15 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	width: 99.5%;
+	width: 100%;
 	margin: 0px;
-	padding: 0px;
+	padding-bottom: 5px;
+	padding-top: 5px;
 	/*here*/
 	background-color: #f3f3f3;
-	border-radius: 5px;
+	border-radius: 0;
+	gap: 2px;
+
 }
 
 
@@ -31,10 +34,10 @@
 	padding: 0px 5px;
 }
 
-/* from about half-screen width, display the sub-group as a column */
-@media (max-width: 888px) {
+/* from about square */
+@media (max-width: 1114px) {
 	.text-editor-menu-bar{
 		flex-direction: column;
-		margin: 0px;
+		justify-content: flex-start;
 	}
 }
