@@ -61,7 +61,7 @@ const PdfElementPresentor = (props) => {
 		<div className='pdf-container'>
 			<div className='pdf-buttons-container'>
 				<button onClick={() => handleOpenPdf(resourceUrl)} className='pdf-button'>
-					פתח קובץ
+					פתיחת קובץ
 					<img src={pdfIcon} alt='Open PDF' />
 				</button>
 				<button onClick={handleShowPdf}>{buttonText}</button>
