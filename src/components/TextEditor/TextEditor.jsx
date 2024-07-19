@@ -54,6 +54,7 @@ const TextEditor = ({ content, setContent, isDisabled }) => {
 	]
 
 	const onUpdate = ({ editor }) => {
+		if (isDisabled) return
 		const text = editor.getHTML()
 		setContent(text)
 	}
@@ -71,7 +72,10 @@ const TextEditor = ({ content, setContent, isDisabled }) => {
 	return (
 		<div className='editor-container'>
 			{!isDisabled && <TextEditorToolBar editor={editor} />}
-			<EditorContent className={`tiptap-editor-container ${isDisabled ? 'disabled' : ''}`} editor={editor} />
+			<EditorContent
+				className={`tiptap-editor-container ${isDisabled ? 'disabled' : ''}`}
+				editor={editor}
+			/>
 		</div>
 	)
 }
