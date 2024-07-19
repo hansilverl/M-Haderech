@@ -64,6 +64,12 @@
 	padding: 15px;
 }
 
+.post-element-presentor img {
+	width: auto;
+	height: auto;
+	object-fit: contain; /* Ensures image's aspect ratio is maintained */
+}
+
 @media (max-width: 768px) {
 	.post-element-presentor video {
 		max-width: 100%;

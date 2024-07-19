@@ -3,7 +3,7 @@ import { ResizableBox } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 import './ResizableResourceComponent.css'
 
-const ResizableComponent = ({ mediaType, src, dimensions, setDimensions }) => {
+const ResizableComponent = ({ mediaType, src, dimensions, setDimensions, maxWidth, maxHeight }) => {
 	const [currDimensions, setCurrDimensions] = useState(dimensions)
 	const saveTimeout = useRef(null)
 
@@ -35,7 +35,7 @@ const ResizableComponent = ({ mediaType, src, dimensions, setDimensions }) => {
 			height={currDimensions.height}
 			onResize={onResize}
 			minConstraints={[70, 70]}
-			maxConstraints={[900, 700]}>
+			maxConstraints={[maxWidth, maxHeight]}>
 			<div className='media-container'>
 				{mediaType === 'image' && <img src={src} alt='resizable' />}
 				{mediaType === 'video' && <video controls src={src}></video>}

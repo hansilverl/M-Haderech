@@ -20,12 +20,26 @@ const ElementEditorComp = (props) => {
 		props
 
 	const [url, setUrl] = useState(null)
+	const [imageSize, setImageSize] = useState({ width: 800, height: 800 })
+
+	const getImageSize = (url) => {
+		const img = new Image()
+		img.onload = () => {
+			setImageSize({ width: img.width, height: img.height })
+		}
+		img.src = url
+	}
 
 	const index = typeValues.indexOf(type)
+
+	useEffect(() => {
+		if (type === 'image' && url) getImageSize(url)
+	}, [url])
+
 	if (index < 0) {
 		return <h2>שגיאה בטעינת עורך האלמנט</h2>
 	}
-
+	
 	return (
 		<div className='element-comp-container'>
 			{type === 'text' ? (
@@ -48,6 +62,8 @@ const ElementEditorComp = (props) => {
 							src={url}
 							dimensions={dimensions}
 							setDimensions={setDimensions}
+							maxWidth={imageSize.width}
+							maxHeight={imageSize.height}
 						/>
 					)}
 				</>

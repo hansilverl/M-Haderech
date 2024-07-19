@@ -31,6 +31,7 @@ const AdminDashboard = () => {
 					<Route exact path='miscellaneous' element={<Miscellaneous />} />
 					<Route exact path='history' element={<AdminUserHistory />} />
 					<Route exact path='edit/about-us' element={<PostEditPage />} />
+					<Route exact path='edit/thanks' element={<PostEditPage />} />
 				</Routes>
 			</div>
 			<Sidebar />

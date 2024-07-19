@@ -39,6 +39,7 @@ function App() {
 				<Routes>
 					<Route exact path='/' element={<HomePage />} />
 					<Route exact path='/about' element={<PostDetails id={'about-us'} />} />
+					<Route exact path='/thanks' element={<PostDetails id={'thanks'} />} />
 					<Route exact path='/signup' element={<Signup />} />
 					<Route exact path='/login' element={<Login />} />
 					<Route exact path='/contact' element={<Contact />} />

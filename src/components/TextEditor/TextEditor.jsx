@@ -13,6 +13,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import TextDirection from 'tiptap-text-direction'
 import Link from '@tiptap/extension-link'
 import CustomFontSize from './CutsomTiptapExtensions/CustomFontSize'
+import he from 'he'
 
 import TextEditorToolBar from './EditorToolBar/TextEditorToolBar'
 
@@ -53,14 +54,20 @@ const TextEditor = ({ content, setContent }) => {
 	]
 
 	const onUpdate = ({ editor }) => {
-		setContent(editor.getHTML())
+		const text = he.encode(editor.getHTML())
+		setContent(text)
 	}
 
+	const onPaste = (content) => {
+		return
+	}
 	const editor = useEditor({
 		extensions: extensions,
-		content: content,
+		content: he.decode(content),
 		onUpdate,
+		onPaste: onPaste,
 	})
+
 
 	return (
 		<div className='editor-container'>

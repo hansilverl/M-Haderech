@@ -39,7 +39,7 @@ const PostDetails = ({ id: propId }) => {
 					<>
 						<div className='post-details-header'>
 							<h1>{postsGet.title}</h1>
-							{id === 'about-us' ? null : (
+							{postsGet.articleType === 'special' ? null : (
 								<p>
 									<strong>תאריך פרסום:</strong> {formatDate(postsGet.dateAdded)}
 								</p>

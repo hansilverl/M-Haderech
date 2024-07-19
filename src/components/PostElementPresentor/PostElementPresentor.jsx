@@ -25,10 +25,11 @@ const TextElementPresentor = (props) => {
 const ResourceElementPresentor = (props) => {
 	const { type, resourceUrl, dimensions } = props
 
+	console.log(dimensions);
 	return !resourceUrl ? null : (
 		<div
 			className='presentor-media-container'
-			style={{ maxWidth: dimensions?.width, maxHeight: dimensions?.height }}>
+			style={{ width: dimensions?.width, height: dimensions?.height }}>
 			{type === 'image' ? (
 				<img className='presentor-media' src={resourceUrl} alt={'לא נמצאה תמונה'} />
 			) : type === 'video' ? (
