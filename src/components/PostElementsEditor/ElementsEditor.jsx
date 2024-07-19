@@ -112,7 +112,7 @@ const ElementsEditor = (props) => {
 				</SortableContext>
 			</DndContext>
 			<button className='add-element-button' onClick={createElement}>
-				הוסף רכיב
+				הוספת רכיב
 			</button>
 		</div>
 	)
