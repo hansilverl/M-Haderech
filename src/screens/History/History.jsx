@@ -95,10 +95,10 @@ const History = () => {
         data: history.map(entry => entry.totalScore).reverse(),
         backgroundColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
           entry.totalScore >= 20 ? '#F2CD60' :
-            '#2D936C').reverse(),
+          '#2D936C').reverse(),
         borderColor: history.map(entry => entry.totalScore >= 33 ? '#A4303F' :
           entry.totalScore >= 20 ? '#F2CD60' :
-            '#2D936C').reverse(),
+          '#2D936C').reverse(),
         borderWidth: 1,
         categoryPercentage: 0.99,
         barPercentage: 0.99,
@@ -107,8 +107,6 @@ const History = () => {
   };
 
   const graphOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
     onClick: (e, elements) => {
       if (elements.length > 0) {
         const index = elements[0].index;
@@ -122,7 +120,7 @@ const History = () => {
         categoryPercentage: 1.0,
         title: {
           display: true,
-          text: 'זמן מילוי השאלון',
+          text: 'זמן מילוי המבדק',
           font: {
             size: 16,
             weight: 'bold',
@@ -218,16 +216,13 @@ const History = () => {
   return (
     <div className="history-container">
       <div className="graph-container">
-        <h2>היסטוריית ההיפרמאזיס שלך
-        </h2>
-        <p className="graph-description">
-          הגרף מציג את כל הנתונים על מצב ההיפרמאזיס שלך
-          לפי זמן מילוי המבדק והניקוד האישי שלך.
-        </p>
+        <h2>התקדמות ציונים</h2>
+        <p className="graph-description">הגרף מציג את זמן מילוי המבדק לעומת הציון</p>
         <div className="graph-background">
-          <Bar data={graphData} options={graphOptions} />        </div>
+          <Bar data={graphData} options={graphOptions} />
+        </div>
       </div>
-      <h1>היסטוריה של השאלונים שלי</h1>
+      <h1>כל המבדקים שלי</h1>
       <div className="filter-container">
         <label className="filter-start-date">תאריך התחלה:</label>
         <input
@@ -247,9 +242,9 @@ const History = () => {
       {error && <p className="error-no-history">{error}</p>}
       {history.length === 0 && !error ? (
         <div>
-          <p className="no-history">אין לך היסטוריה</p>
+          <p className="no-history">אין לך מבדקים</p>
           <button className="fill-questionnaire-button" onClick={() => window.location.href = '/helpScore'}>
-            מלא שאלון
+            מלא מבדק
           </button>
         </div>
       ) : (
@@ -257,8 +252,8 @@ const History = () => {
           <div className="history-grid">
             {history.map((entry, index) => (
               <div key={index} className="history-entry">
-                <span className="delete-icon" title="מחיקת שאלון" onClick={() => handleDelete(entry)}>
-                  <FontAwesomeIcon icon={faTrashAlt} className="delete-icon-history" />
+                <span className="delete-icon" title="מחיקת מבדק" onClick={() => handleDelete(entry)}>
+                  <FontAwesomeIcon icon={faTrashAlt} />
                 </span>
                 <h2>{new Date(entry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
                 <p className="total-score">ציון כולל: {entry.totalScore}</p>
@@ -282,7 +277,7 @@ const History = () => {
               className="responses-modal"
               overlayClassName="responses-overlay"
             >
-              <h2>תשובות לשאלון מ- {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
+              <h2>תשובות למבדק מ- {new Date(selectedEntry.timestamp.seconds * 1000).toLocaleDateString('he-IL')}</h2>
               <div className="response-list">
                 {selectedEntry.responses.map((response, idx) => (
                   <div key={idx} className="response-item">
