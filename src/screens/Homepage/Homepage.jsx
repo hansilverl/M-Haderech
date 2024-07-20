@@ -1,10 +1,9 @@
-// src/pages/HomePage/HomePage.js
 import './Homepage.css';
 import React, { useState, useEffect, useRef } from 'react';
 import PostsSection from '../../components/PostSection/PostSection';
 import AnalyticsSection from '../../components/AnalyticsSection/AnalyticsSection';
 import DonationSection from '../../components/DonationSection/DonationSection';
-import NewsletterLink from '../../components/NewsletterLink/NewsletterLink'; // Import the updated component
+import NewsletterLink from '../../components/NewsletterLink/NewsletterLink';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -68,7 +67,7 @@ const HomePage = () => {
     <div className="homepage" dir="rtl">
       <header className="header">
         <div className="header-image-container">
-        <img src={headerImage} alt="Em Haderech" className="header-image" />
+          <img src={headerImage} alt="Em Haderech" className="header-image" />
           <div className="header-text">
             <h1>ברוכות הבאות לאם הדרך </h1>
             <h3>
@@ -80,14 +79,17 @@ const HomePage = () => {
       </header>
       <main>
         <section id="about">
-          <h2>להכיר היפרמאזיס אחרת 
-          </h2>
+          <h2>להכיר היפרמאזיס אחרת</h2>
           {loading ? (
             <p>טוען...</p>
           ) : error ? (
             <p>שגיאה: {error}</p>
           ) : (
-            <h3><p>{aboutInfo}</p></h3>
+            <div className="about-content">
+              {aboutInfo.split('\n').map((paragraph, index) => (
+                <>{paragraph}<br /></>
+              ))}
+            </div>
           )}
         </section>
         <PostsSection />
@@ -96,7 +98,7 @@ const HomePage = () => {
         </div>
         <DonationSection />
       </main>
-      <NewsletterLink /> {/* Add the updated component */}
+      <NewsletterLink />
     </div>
   );
 };

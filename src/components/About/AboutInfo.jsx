@@ -65,7 +65,6 @@ const AboutInfo = () => {
   return (
     <div className="about-info">
       <div className="about-info-content">
-        {/* <p>{aboutInfo}</p> */}
         <button className="update-button" onClick={openModal}>עדכן</button>
       </div>
 
@@ -82,6 +81,8 @@ const AboutInfo = () => {
               <textarea
                 value={tempAboutInfo}
                 onChange={handleChange}
+                rows="10"
+                cols="50"
               />
             </label>
           </div>
