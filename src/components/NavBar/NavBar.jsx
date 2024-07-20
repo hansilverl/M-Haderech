@@ -103,12 +103,12 @@ const Navbar = ({ setShowLogin }) => {
 					</li>
 					<li>
 						<Link to='/articles' className={isActive('/articles')}>
-							מאמרים
+							בלוג
 						</Link>
 					</li>
 					<li>
 						<Link to='/conventions' className={isActive('/conventions')}>
-							כנסים
+							אירועים
 						</Link>
 					</li>
 					<li>

@@ -6,7 +6,7 @@ import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 const Articles = () => {
 	return (
 		<div className='articles-posts-screen'>
-			<h1>מאמרים</h1>
+			<h1>בלוג</h1>
 			<PostsPresentor
 				type={'post'}
 				published={true}

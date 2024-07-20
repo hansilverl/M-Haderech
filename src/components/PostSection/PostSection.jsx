@@ -14,12 +14,12 @@ const PostsSection = () => {
 	return (
 		<section id='posts' className='posts-section'>
 			<div className='posts-header'>
-				<h2>מאמרים</h2>
+				<h2>בלוג</h2>
 			</div>
 			<PostsPresentor className='posts-presentor' type={'post'} published={true} maxRows={1} />
 			<div className='view-all-button-container'>
 				<button onClick={handleViewAllClick} className='view-all-button'>
-					כל המאמרים{' '}
+					הצגת {' '}
 				</button>
 			</div>
 		</section>

@@ -59,6 +59,7 @@ const PostEditPageComp = ({ postID, post }) => {
 			setDatePublished(serverTimestamp())
 		}
 		setPublished(!published)
+		setForceSave(true)
 	}
 
 	const handleDelete = async () => {
@@ -87,7 +88,7 @@ const PostEditPageComp = ({ postID, post }) => {
 			setForceSave(false)
 			handleSave()
 		}
-	}, [forceSave, handleSave])
+	}, [forceSave, published, handleSave])
 
 	return (
 		<div key={postID} className='edit-post-page'>
@@ -141,11 +142,13 @@ const PostEditPageComp = ({ postID, post }) => {
 							className='publish-button'>
 							תצוגה מקדימה
 						</button>
-						<button
-							onClick={togglePublished}
-							className={!published ? 'publish-button' : 'unpublish-button'}>
-							{published ? 'ביטול פרסום' : 'פרסום'}
-						</button>
+						{articleType === 'special' ? null : (
+							<button
+								onClick={togglePublished}
+								className={!published ? 'publish-button' : 'unpublish-button'}>
+								{published ? 'ביטול פרסום' : 'פרסום'}
+							</button>
+						)}
 						<button
 							onClick={() => setIsModalOpen(true)}
 							disabled={loadingDelete}

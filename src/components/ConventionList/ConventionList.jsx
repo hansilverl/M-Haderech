@@ -26,7 +26,7 @@ const ConventionsList = () => {
 			) : errorGet ? (
 				<div className='error'>{errorGet.toString()}</div>
 			) : conventions.length === 0 ? (
-				<h2 className='error'>אין כנסים</h2>
+				<h2 className='error'>אין אירועים</h2>
 			) : (
 				<div className='conventions-container'>
 					{conventions.map((convention, index) => (

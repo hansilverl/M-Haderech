@@ -85,7 +85,7 @@ const usePostsGet = (firebaseQuery) => {
 		setError(null)
 
 		try {
-			if (isLoadMore && (!hasMore || !lastFetch)) throw new Error('אין עוד מאמרים')
+			if (isLoadMore && (!hasMore || !lastFetch)) throw new Error('אין עוד  בבלוג')
 
 			if (!firebaseQuery) throw new Error('לא התקבלה שאילתה!')
 			if (typeof firebaseQuery === 'string') {

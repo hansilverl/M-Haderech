@@ -39,10 +39,10 @@ const AdminContentManagement = () => {
 			<div className='admin-dashboard-posts-navbar-container'>
 				<ul className='admin-dashboard-posts-navbar-menu'>
 					<li className={type === 'post' ? 'active-tab' : ''}>
-						<button onClick={() => setType('post')}>מאמרים</button>
+						<button onClick={() => setType('post')}>בלוג</button>
 					</li>
 					<li className={type === 'convention' ? 'active-tab' : ''}>
-						<button onClick={() => setType('convention')}>כנסים</button>
+						<button onClick={() => setType('convention')}>אירועים</button>
 					</li>
 				</ul>
 			</div>
