@@ -1,3 +1,4 @@
+// src/screens/Helpscore/CalculateHelpScore.js
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './CalculateHelpScore.css';
@@ -122,11 +123,34 @@ const CalculateHelpScore = () => {
             </div>
             <div className="score-description">
                 <p>רמת היפרמזיס: {scoreDescription(score)}</p>
+
+            </div>
+            <div className="info-score">
+                <p>תיאור הציון: {scoreDescription(score)}</p>
+                <p>
+                    {score <= 19 && (
+                        <>
+                            ציון קל מסמן כי המטופלת חולה מאוד, אינה מסוגלת לאכול כמות נורמלית, ומתקשה לתפקד אך עשויה להיות מסוגלת לבצע חלק מהפעילויות. תמיכה וטיפול רפואי עשויים למנוע התקדמות לתסמינים חמורים יותר.
+                        </>
+                    )}
+                    {score > 19 && score <= 32 && (
+                        <>
+                            ציון בינוני מסמן כי המטופלת אינה מסוגלת לאכול/לשתות באופן נורמלי או לבצע את רוב פעילויותיה הרגילות. היא עשויה להיות לא מסוגלת לטפל במשפחתה ואפילו בעצמה ולהזדקק למנוחה נוספת. סיבוכים המשפיעים הן על האם והן על הילד עלולים להתרחש אם לא מטופלים כראוי. ההתמודדות קשה וסביר להניח שנדרשת תמיכה בבריאות הנפש כדי להפחית טראומה. נדרשת התערבות אגרסיבית למקרים בינוניים עד חמורים, כולל תוספי ויטמינים, במיוחד B1.
+                        </>
+                    )}
+                    {score > 32 && (
+                        <>
+                            ציון קשה מסמן כי החולה נמצא בסיכון הגבוה ביותר לסיבוכים חמורים לאם ולילד, במיוחד אם תת-תזונה נמשכת מעבר לטרימסטר הראשון. מנוחה היא קריטית כדי למנוע החמרה.
+                        </>
+                    )}
+                </p>
             </div>
             <div className="button-wrapper">
                 <button onClick={saveHistory}>לשמור להשוואה</button>
                 <button onClick={() => navigate('/helpscore')}>חזרה לטופס</button>
             </div>
+            <button className="contact-calc-button"
+             onClick={() => navigate('./contact')}>צרי קשר</button>
 
             <Modal
                 isOpen={showLoginModal}
