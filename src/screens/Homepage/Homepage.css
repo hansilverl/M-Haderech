@@ -97,6 +97,8 @@ main {
 	flex: 1;
 }
 
+
+
 section {
 	margin-bottom: 2em;
 	background: white;
@@ -104,6 +106,7 @@ section {
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 
 section h2 {
 	font-size: 2em;

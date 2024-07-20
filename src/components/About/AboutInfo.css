@@ -14,7 +14,15 @@
     margin-bottom: 20px;
 }
 
+#about > h2 {
+	margin-bottom: 0.3em;
+}
 
+
+#about > div br {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
 
 .modal-overlay {
     position: fixed;

@@ -99,7 +99,7 @@ const HomePage = () => {
           ) : (
             <div className="about-content">
               {aboutInfo.split('\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
+                <>{paragraph}<br /></>
               ))}
             </div>
           )}
