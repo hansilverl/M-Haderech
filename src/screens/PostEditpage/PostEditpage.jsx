@@ -42,7 +42,7 @@ const PostEditPageComp = ({ postID, post }) => {
 		}
 
 		for (const key in newPost) {
-			if (!newPost[key] && newPost[key] !== false) delete newPost[key]
+			if (newPost[key] === undefined || newPost[key] === null) delete newPost[key]
 		}
 
 		return newPost
