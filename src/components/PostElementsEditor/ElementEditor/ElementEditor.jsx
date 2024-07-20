@@ -143,6 +143,15 @@ const ElementEditor = (props) => {
 		transition,
 	}
 
+	const deleteElementButtonHandler = () => {
+		if (content === '' && resourcePath === '') {
+			onDeleteElement()
+			return
+		}
+
+		setIsModalActive(true)
+	}
+
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} className='element-editor-container'>
 			<div className='element-editor-header'>
@@ -159,7 +168,7 @@ const ElementEditor = (props) => {
 				/>
 				<div className='element-editor-buttons'>
 					<button onClick={toggleDisplayEditor}>{displayEditor ? 'הסתרת' : 'הצגת'} עורך</button>
-					<button onClick={() => setIsModalActive(true)}>מחיקת רכיב</button>
+					<button onClick={deleteElementButtonHandler}>מחיקת רכיב</button>
 				</div>
 			</div>
 			{!displayEditor || forceHideEditor ? null : (
