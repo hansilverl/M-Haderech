@@ -72,7 +72,7 @@ const HomePage = () => {
           <div className="header-text">
             <h1>ברוכות הבאות לאם הדרך </h1>
             <h3>
-              ידע ותמיכה במחלת היפראמזיס
+              היפרמאזיס - אפשר לחיות עם זה
             </h3>
             <button onClick={handleFormClick} className="fill-form-button">מילוי שאלון</button>
           </div>
