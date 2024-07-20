@@ -88,7 +88,8 @@ const OtherElementPresentor = (props) => {
 const ElementPicker = ({ element }) => {
 	const { type, content, resourceUrl, dimensions, resourcePath } = element
 
-	const fileName = resourcePath.split('/').pop().substring(20)
+	const fileName = resourcePath?.split('/')?.pop()?.substring(20)
+	
 	switch (type) {
 		case 'text':
 			return <TextElementPresentor content={content} />
