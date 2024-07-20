@@ -34,7 +34,6 @@
 	font-size: 20px;
 	/* only need right and left margins , top and bottom are set to 0 */
 	margin: 0 0 0.5em 0;
-	word-break: break-all;
 	overflow-wrap: break-word;
   }
 
@@ -56,7 +55,6 @@
 	font-size: 16px;
 	margin: 5px 0;
 	text-wrap: balance;
-	word-break: break-all;
 	overflow-wrap: break-word;
   }
   

@@ -18,14 +18,13 @@ function PdfViewer({ pdfFile }) {
 					.map((page) => {
 						return (
 							<div className='pdf-page' key={`page-div-${page}`}>
-								<p>
-									עמוד {page} מ {numPages}
-								</p>
+								<p>{numPages <= 1 ? null : `עמוד ${page} מ %{numPages}`}</p>
 								<Page
 									key={`page-${page}`}
 									pageNumber={page}
 									renderTextLayer={false}
 									renderAnnotationLayer={false}
+									scale={9}
 								/>
 							</div>
 						)

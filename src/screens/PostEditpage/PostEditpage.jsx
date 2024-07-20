@@ -106,7 +106,7 @@ const PostEditPageComp = ({ postID, post }) => {
 							<label className='input-label'>כותרת המאמר:</label>
 							<TextAreaWithLimit
 								className='text-area'
-								limit={60}
+								limit={100}
 								value={title}
 								rows={2}
 								setValue={setTitle}
@@ -117,7 +117,7 @@ const PostEditPageComp = ({ postID, post }) => {
 								<label className='input-label'>תיאור המאמר:</label>
 								<TextAreaWithLimit
 									className='text-area'
-									limit={100}
+									limit={200}
 									value={description}
 									rows={3}
 									setValue={setDescription}

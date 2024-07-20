@@ -9,6 +9,7 @@ import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 
 const AdminContentManagement = () => {
 	const [isCreateButtonDisabled, setCreateButtonDisabled] = useState(false)
+	
 	const [type, setType] = useState('post')
 	const [typeName, setTypeName] = useState('מאמר')
 	const { postCreateID, startCreate } = usePostCreate()
@@ -42,7 +43,7 @@ const AdminContentManagement = () => {
 						<button onClick={() => setType('post')}>בלוג</button>
 					</li>
 					<li className={type === 'convention' ? 'active-tab' : ''}>
-						<button onClick={() => setType('convention')}>אירועים</button>
+						<button onClick={() => setType('convention')}>כנסים</button>
 					</li>
 				</ul>
 			</div>
