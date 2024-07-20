@@ -1,14 +1,13 @@
 import './TextAreaWithLimit.css'
 
-import React, { useState } from 'react'
+import React from 'react'
 
 const TextAreaWithLimit = (props) => {
-	const { limit, value, setValue, rows, className } = props
+	const { limit, value, setValue, rows } = props
 
 	const handleChange = (event) => {
-		if (event.target.value.length <= limit) {
-			setValue(event.target.value)
-		}
+		if (event.target.value.length > limit) return
+		setValue(event.target.value ? event.target.value : '')
 	}
 
 	return (
