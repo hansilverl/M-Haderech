@@ -30,7 +30,7 @@ const AdminContentManagement = () => {
 		if (type === 'post') {
 			setTypeName('מאמר')
 		} else if (type === 'convention') {
-			setTypeName('כנס')
+			setTypeName('אירוע')
 		}
 	}, [type])
 
@@ -43,7 +43,7 @@ const AdminContentManagement = () => {
 						<button onClick={() => setType('post')}>בלוג</button>
 					</li>
 					<li className={type === 'convention' ? 'active-tab' : ''}>
-						<button onClick={() => setType('convention')}>כנסים</button>
+						<button onClick={() => setType('convention')}>אירועים</button>
 					</li>
 				</ul>
 			</div>

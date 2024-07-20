@@ -13,7 +13,6 @@ import TextAlign from '@tiptap/extension-text-align'
 import TextDirection from 'tiptap-text-direction'
 import Link from '@tiptap/extension-link'
 import CustomFontSize from './CutsomTiptapExtensions/CustomFontSize'
-import he from 'he'
 
 import TextEditorToolBar from './EditorToolBar/TextEditorToolBar'
 
@@ -64,7 +63,6 @@ const TextEditor = ({ content, setContent, isDisabled }) => {
 	}
 	const editor = useEditor({
 		extensions: extensions,
-		content: he.decode(content),
 		editable: isDisabled ? false : true,
 		onUpdate,
 	})

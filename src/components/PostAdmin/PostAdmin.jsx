@@ -69,7 +69,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 				className={`post-type-bubble ${
 					article.articleType === 'post' ? 'posttype' : 'convention'
 				}`}>
-				{article.articleType === 'post' ? 'מאמר' : 'כנס'}
+				{article.articleType === 'post' ? 'מאמר' : 'אירוע'}
 			</div>
 			<Post article={article} disablePostClick={true} />
 			<AdminBar id={article.id} />
