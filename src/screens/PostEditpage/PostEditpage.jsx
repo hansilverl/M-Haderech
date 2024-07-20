@@ -180,7 +180,6 @@ const PostEditPageComp = ({ postID, post }) => {
 }
 
 const PostEditPageContainer = ({ postID }) => {
-	console.log(postID)
 	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(postID)
 	const [refresh, setRefresh] = useState(false)
 

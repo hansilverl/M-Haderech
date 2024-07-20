@@ -23,7 +23,6 @@ const TextElementPresentor = (props) => {
 const ResourceElementPresentor = (props) => {
 	const { type, resourceUrl, dimensions } = props
 
-	console.log(dimensions);
 	return !resourceUrl ? null : (
 		<div
 			className='presentor-media-container'
