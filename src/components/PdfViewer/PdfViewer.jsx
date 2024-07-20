@@ -24,7 +24,7 @@ function PdfViewer({ pdfFile }) {
 									pageNumber={page}
 									renderTextLayer={false}
 									renderAnnotationLayer={false}
-									scale={9}
+									scale={2}
 								/>
 							</div>
 						)

@@ -59,7 +59,7 @@ const ElementEditorComp = (props) => {
 					/>
 					{type === 'document' || type === 'pdf' ? (
 						<PdfViewer pdfFile={url} />
-					) : (
+					) : type === 'other' ? null : (
 						<ResizableComponent
 							mediaType={type}
 							src={url}
