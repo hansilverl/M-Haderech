@@ -74,7 +74,7 @@ const HomePage = () => {
             <h3>
               היפרמאזיס - אפשר לחיות עם זה
             </h3>
-            <button onClick={handleFormClick} className="fill-form-button">מילוי שאלון</button>
+            <button onClick={handleFormClick} className="fill-form-button">מילוי מבדק</button>
           </div>
         </div>
       </header>

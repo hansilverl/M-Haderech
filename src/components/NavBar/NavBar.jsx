@@ -121,7 +121,7 @@ const Navbar = ({ setShowLogin }) => {
 							to='/helpScore'
 							onClick={() => setNavbarOpen(false)}
 							className={isActive('/helpScore')}>
-							מילוי שאלון
+							מילוי מבדק
 						</Link>
 					</li>
 					<li>

@@ -51,7 +51,7 @@ const Sidebar = () => {
 					<li>
 						<Link to='/admin/questionnaire' onClick={closeSidebar}>
 							<FaQuestionCircle className='sidebar-icon' />
-							<span>ניהול שאלון</span>
+							<span>ניהול מבדק</span>
 						</Link>
 					</li>
 					<li>
@@ -63,7 +63,7 @@ const Sidebar = () => {
 					<li>
 						<Link to='/admin/history' onClick={closeSidebar}>
 							<FaHistory className='sidebar-icon' />
-							<span>צפייה בהיסטוריית שאלונים</span>
+							<span>צפייה בהיסטוריית מבדקים</span>
 						</Link>
 					</li>
 					<li>
