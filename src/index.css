@@ -31,7 +31,7 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-button {
+/* button {
 	background: var(--button-primary-color);
 	color: #fff;
 	border: none;
@@ -50,9 +50,8 @@ button:hover {
 }
 
 button:disabled {
-	background: var(--button-primary-color-disabled);
 	cursor: not-allowed;
-}
+} */
 
 .main-flex-row {
 	display: flex;

@@ -48,9 +48,6 @@ const PostAdmin = ({ article, setRefresh }) => {
 				<button onClick={() => navigate(`/admin/edit/${article.id}`)} className='admin-button'>
 					עריכה
 				</button>
-				<button onClick={() => setShowModal(true)} className='admin-button'>
-					מחיקה
-				</button>
 				{!article.published ? (
 					<button onClick={() => togglePublished(true)} className='admin-button publish-button'>
 						פירסום					</button>
@@ -59,6 +56,9 @@ const PostAdmin = ({ article, setRefresh }) => {
 						ביטול פרסום
 					</button>
 				)}
+				<button onClick={() => setShowModal(true)} className='admin-button delete-button'>
+					מחיקה
+				</button>
 			</div>
 		)
 	}

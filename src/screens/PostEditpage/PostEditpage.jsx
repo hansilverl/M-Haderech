@@ -136,12 +136,6 @@ const PostEditPageComp = ({ postID, post }) => {
 						<button className='save-post-button' onClick={saveButton} disabled={loadingUpdate}>
 							{saveButtonText}
 						</button>
-						<button
-							onClick={() => navigate(`/posts/${post.id}`)}
-							disabled={loadingDelete}
-							className='publish-button'>
-							תצוגה מקדימה
-						</button>
 						{articleType === 'special' ? null : (
 							<button
 								onClick={togglePublished}
@@ -149,6 +143,12 @@ const PostEditPageComp = ({ postID, post }) => {
 								{published ? 'ביטול פרסום' : 'פרסום'}
 							</button>
 						)}
+						<button
+							onClick={() => navigate(`/posts/${post.id}`)}
+							disabled={loadingDelete}
+							className='unpublish-button'>
+							תצוגה מקדימה
+						</button>
 						<button
 							onClick={() => setIsModalOpen(true)}
 							disabled={loadingDelete}
@@ -179,8 +179,7 @@ const PostEditPageComp = ({ postID, post }) => {
 	)
 }
 
-const PostEditPage = ({ postID }) => {
-	console.log(postID)
+const PostEditPageContainer = ({ postID }) => {
 	const { postsGet, loadingGet, errorGet, reloadGet } = usePostsGet(postID)
 	const [refresh, setRefresh] = useState(false)
 
@@ -205,9 +204,9 @@ const PostEditPage = ({ postID }) => {
 	)
 }
 
-const PostEditPageContainer = () => {
+const PostEditPage = () => {
 	const { id } = useParams()
-	return <PostEditPage key={id} postID={id} />
+	return <PostEditPageContainer key={id} postID={id} />
 }
 
-export default PostEditPageContainer
+export default PostEditPage
