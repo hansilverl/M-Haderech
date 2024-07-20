@@ -101,7 +101,7 @@
 	cursor: not-allowed;
 }
 
-#root > div > div > div > div.admin-dashboard-content > div > div.buttons-container{
+#root > div > div > div > div.admin-dashboard-content > div > div.buttons-container {
 	font-weight: 550;
 }
 
@@ -123,21 +123,25 @@
 }
 
 .edit-post-page .publish-button {
-	background-color:#80787c;
+	background-color: forestgreen;
 	color: white;
 }
 
 .edit-post-page .publish-button:hover {
-	background-color: #666262;
+	background-color: #218838;
 	color: white;
 }
 
+.edit-post-page .publish-button:disabled {
+	background-color: #218838;
+}
+
 .edit-post-page .unpublish-button {
-	background-color: #c82333;
+	background-color: #80787c;
 }
 
 .edit-post-page .unpublish-button:hover {
-	background-color: #9b2323;
+	background-color: #666262;
 }
 
 .edit-post-page .back-button-container {
@@ -182,8 +186,6 @@
 	position: sticky;
 	background-color: white;
 	bottom: 0;
-
-
 }
 
 @media (max-width: 768px) {

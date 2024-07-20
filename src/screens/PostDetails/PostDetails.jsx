@@ -17,9 +17,7 @@ const formatDate = (timestamp) => {
 	return `${day}/${month}/${year}`
 }
 
-const PostDetails = ({ id: propId }) => {
-	const { id: paramId } = useParams()
-	const id = propId ? propId : paramId
+const PostDetailsContainer = ({ id }) => {
 	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
 	const navigate = useNavigate()
 
@@ -58,6 +56,12 @@ const PostDetails = ({ id: propId }) => {
 			</div>
 		</div>
 	)
+}
+
+const PostDetails = ({ id: postID }) => {
+	const { id: paramId } = useParams()
+	const id = postID ? postID : paramId
+	return <PostDetailsContainer key={id} id={id} />
 }
 
 export default PostDetails

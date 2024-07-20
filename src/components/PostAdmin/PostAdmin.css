@@ -55,6 +55,14 @@
 	cursor: not-allowed;
 }
 
+.admin-post-container .admin-button.delete-button {
+	background-color: #dc3545;
+}
+
+.admin-post-container .admin-button.delete-button:hover {
+	background-color: #c82333;
+}
+
 /* Specific button styling for publish/unpublish */
 .admin-post-container .publish-button {
 	background-color: #59a66b;
@@ -62,14 +70,6 @@
 
 .admin-post-container .publish-button:hover {
 	background-color: #218838;
-}
-
-.admin-post-container .unpublish-button {
-	background-color: #dc3545;
-}
-
-.admin-post-container .unpublish-button:hover {
-	background-color: #c82333;
 }
 
 .admin-post-container .post-type-bubble {
