@@ -103,7 +103,9 @@ const Contact = () => {
           <p>שגיאה: {error}</p>
         ) : (
           <div className="contact-info">
-            <h3>זמינות עבורך גם בטלפון</h3>
+            <h3>
+              זמינות גם:
+            </h3>
             {Object.entries(contactInfo).map(([key, value]) => (
               <p key={key}><strong>{key}:</strong> {value}</p>
             ))}
