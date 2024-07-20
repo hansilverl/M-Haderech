@@ -116,7 +116,7 @@ const CalculateHelpScore = () => {
 
     return (
         <div className="score-container unique-background">
-            <h1>תודה על מילוי השאלון.</h1>
+            <h1>תודה על מילוי המבדק.</h1>
             <div className="score-result">
                 <p> הניקוד שקיבלת:</p>
                 <div className="user-score">{score}</div>
