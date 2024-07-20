@@ -4,7 +4,15 @@ import React, { useEffect } from 'react'
 import Modal from 'react-modal'
 
 const GeneralModal = (props) => {
-	const { children, isOpen, isEnterPossible, onRequestClose, handleCancel, handleConfirm } = props
+	const {
+		children,
+		isOpen,
+		isEnterPossible,
+		onRequestClose,
+		handleCancel,
+		handleConfirm,
+		isWarning,
+	} = props
 
 	const title = props?.title || 'הודעה כללית'
 	const confirmName = props?.confirmName || 'אישור'
@@ -38,8 +46,16 @@ const GeneralModal = (props) => {
 			<h1>{title}</h1>
 			{children}
 			<div className='general-modal-actions'>
-				<button onClick={handleConfirm}>{confirmName}</button>
-				<button onClick={handleCancel}>{cancelName}</button>
+				<button
+					className={`confirm-button ${isWarning ? 'warning-button' : ''}`}
+					onClick={handleConfirm}>
+					{confirmName}
+				</button>
+				<button
+					className={`cancel-button ${isWarning ? 'warning-button' : ''}`}
+					onClick={handleCancel}>
+					{cancelName}
+				</button>
 			</div>
 		</Modal>
 	)

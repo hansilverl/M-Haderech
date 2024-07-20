@@ -64,6 +64,7 @@ const ToolBarLinkButton = (props) => {
 				{content}
 			</button>
 			<GeneralModal
+				isWarning={true}
 				isOpen={requestLinkModalOpen}
 				title='הוספת קישור'
 				onRequestClose={modalClose}

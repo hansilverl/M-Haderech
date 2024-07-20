@@ -146,8 +146,7 @@ const ElementEditor = (props) => {
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} className='element-editor-container'>
 			<div className='element-editor-header'>
-				<span className='drag-handle'
-					{...listeners}>
+				<span className='drag-handle' {...listeners}>
 					<FontAwesomeIcon icon={faArrowsUpDownLeftRight} />
 				</span>
 				<Selector
@@ -175,6 +174,7 @@ const ElementEditor = (props) => {
 				/>
 			)}
 			<GeneralModal
+				isWarning={true}
 				isOpen={isModalActive}
 				onRequestClose={() => setIsModalActive(false)}
 				title='האם אתה בטוח למחוק רכיב זה?'

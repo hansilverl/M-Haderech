@@ -78,6 +78,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 					title='האם ברצונך למחוק את המאמר?'
 					confirmName='מחיקה'
 					cancelName='ביטול'
+					isWarning={true}
 					isOpen={true}
 					isEnterPossible={false}
 					onRequestClose={() => setShowModal(false)}
