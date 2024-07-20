@@ -1,4 +1,3 @@
-// src/components/NavBar/NavBar.jsx
 import React, { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
@@ -19,7 +18,6 @@ const Navbar = ({ setShowLogin }) => {
 	const [navbarOpen, setNavbarOpen] = useState(false)
 	const [userDropdownOpen, setUserDropdownOpen] = useState(false)
 	const [modalIsOpen, setModalIsOpen] = useState(false)
-	const [resetEmail, setResetEmail] = useState('')
 	const { logout } = useLogout()
 	const { user, isAdmin } = useAuthStatus()
 	const translateErrorToHebrew = useFirebaseErrorTranslation()
@@ -62,15 +60,19 @@ const Navbar = ({ setShowLogin }) => {
 	}
 
 	const handleResetPassword = () => {
-		sendPasswordResetEmail(auth, resetEmail)
-			.then(() => {
-				alert('אימייל לאיפוס סיסמה נשלח אליך.')
-				setModalIsOpen(false)
-			})
-			.catch((error) => {
-				console.error('Error object:', error)
-				alert('אירעה שגיאה בשליחת האימייל: ' + translateErrorToHebrew(error.code))
-			})
+		if (user && user.email) {
+			sendPasswordResetEmail(auth, user.email)
+				.then(() => {
+					alert('אימייל לאיפוס סיסמה נשלח אליך.')
+					setModalIsOpen(false)
+				})
+				.catch((error) => {
+					console.error('Error object:', error)
+					alert('אירעה שגיאה בשליחת האימייל: ' + translateErrorToHebrew(error.code))
+				})
+		} else {
+			alert('לא ניתן לאפס סיסמה. נא להתחבר קודם.')
+		}
 	}
 
 	const isActive = (path) => {
@@ -152,15 +154,10 @@ const Navbar = ({ setShowLogin }) => {
 						</div>
 						{userDropdownOpen && (
 							<div className='dropdown-menu'>
-								{/* <FontAwesomeIcon icon={faClockRotateLeft} />
-								<FontAwesomeIcon
-									icon='fa-solid fa-clock-rotate-left'
-									style={{ color: '#ffffff' }}
-								/> */}
 								<Link to='/history' onClick={() => setUserDropdownOpen(false)}>
 									היסטוריה
 								</Link>
-								<Link onClick={() => setModalIsOpen(true)}>איפוס סיסמא</Link>
+								<Link onClick={handleResetPassword}>איפוס סיסמא</Link>
 								{isAdmin && (
 									<Link to='/admin' onClick={() => setUserDropdownOpen(false)}>
 										ניהול
@@ -178,25 +175,6 @@ const Navbar = ({ setShowLogin }) => {
 					</span>
 				)}
 			</div>
-
-			<Modal
-				isOpen={modalIsOpen}
-				onRequestClose={() => setModalIsOpen(false)}
-				className='modal'
-				overlayClassName='modal-overlay'>
-				<h2>איפוס סיסמה</h2>
-				<label>
-					<span>אימייל:</span>
-					<input
-						type='email'
-						name='resetEmail'
-						value={resetEmail}
-						onChange={(e) => setResetEmail(e.target.value)}
-					/>
-				</label>
-				<button onClick={handleResetPassword}>שלח אימייל לאיפוס סיסמה</button>
-				<button onClick={() => setModalIsOpen(false)}>סגור</button>
-			</Modal>
 		</nav>
 	)
 }
