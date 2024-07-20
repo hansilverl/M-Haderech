@@ -1,6 +1,6 @@
 :root {
 	--button-primary-color: #a04598;
-	--button-primary-color-hover: #765092
+	--button-primary-color-hover: #765092;
 	--button-primary-color-disabled: #3c3c3c;
 	--primary-color: #3498db;
 	--secondary-color: #2ecc71;
@@ -45,6 +45,8 @@ button {
 
 button:hover {
 	background: var(--button-primary-color-hover);
+	cursor: pointer;
+	color: #fff;
 }
 
 button:disabled {
