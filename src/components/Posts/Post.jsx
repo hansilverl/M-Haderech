@@ -45,12 +45,14 @@ const Post = ({ article }) => {
 
   return !id ? null : (
     <div className="detailed-post-container" onClick={handleViewPost}>
-      {!imageUrl ? null : <img src={imageUrl} alt={title} className="post-image" />}
       <div className="title-date-container">
       <h3 className="post-title">{title}</h3>
       <p className="post-date">{getDateStringFromTimeStamp(datePublished)}</p>
       </div>
+      {!imageUrl ? null : <img src={imageUrl} alt={title} className="post-image" />}
+
       <p className="post-description">{description}</p>
+      
       {!pdfUrls
         ? null
         : pdfUrls.map((pdfUrl, index) => (
