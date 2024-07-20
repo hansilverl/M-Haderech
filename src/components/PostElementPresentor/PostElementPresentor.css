@@ -42,6 +42,18 @@
 	width: 75%;
 }
 
+.post-element-presentor .other-element-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+}
+
+.other-element-container .download-button{
+	margin: 0 10px;
+}
+
 .post-element-presentor .text-presentor {
 	margin-top: 20px;
 	padding: 15px;

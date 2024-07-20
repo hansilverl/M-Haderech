@@ -28,7 +28,7 @@ const PostsPresentor = (props) => {
 
 	const { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet } = usePostsGet(myQuery)
 
-	const typeName = type === 'post' ? 'מאמר' : 'כנס'
+	const typeName = type === 'post' ? 'מאמר' : 'אירוע'
 
 	const isNextPageAvailable = () => {
 		if (!filteredPosts) return false

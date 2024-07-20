@@ -1,4 +1,3 @@
-import { Extension } from '@tiptap/core'
 import TextStyle from '@tiptap/extension-text-style'
 
 const CustomFontSize = TextStyle.extend({

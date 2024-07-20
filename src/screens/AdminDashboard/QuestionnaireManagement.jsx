@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { collection, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc, deleteField } from 'firebase/firestore';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import './QuestionnaireManagement.css';
 import Modal from 'react-modal';
-import { FaTrashAlt, FaEdit, FaTimes, FaPlus } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit, FaTimes } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons';
 

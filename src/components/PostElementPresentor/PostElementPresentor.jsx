@@ -7,6 +7,7 @@ import { pdfjs } from 'react-pdf'
 import PdfViewer from '../PdfViewer/PdfViewer'
 import pdfIcon from '../../assets/pdf-file.png'
 import TextEditor from '../TextEditor/TextEditor'
+import { FaDownload } from 'react-icons/fa'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -15,9 +16,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const TextElementPresentor = (props) => {
 	const { content } = props
-	return !content ? null : (
-		<TextEditor content={content} isDisabled={true} />
-	)
+	return !content ? null : <TextEditor content={content} isDisabled={true} />
 }
 
 const ResourceElementPresentor = (props) => {
@@ -70,12 +69,26 @@ const PdfElementPresentor = (props) => {
 }
 
 const OtherElementPresentor = (props) => {
-	const { resourceUrl } = props
-	return <embed src={resourceUrl} />
+	const { resourceUrl, fileName } = props
+
+	const downloadResource = () => {
+		window.open(resourceUrl, '_blank')
+	}
+
+	return (
+		<div className='other-element-container'>
+			<p>{fileName}</p>
+			<button className='download-button' alt='הורדת קובץ' onClick={downloadResource}>
+				<FaDownload />
+			</button>
+		</div>
+	)
 }
 
 const ElementPicker = ({ element }) => {
-	const { type, content, resourceUrl, dimensions } = element
+	const { type, content, resourceUrl, dimensions, resourcePath } = element
+
+	const fileName = resourcePath.split('/').pop().substring(20)
 	switch (type) {
 		case 'text':
 			return <TextElementPresentor content={content} />
@@ -88,7 +101,7 @@ const ElementPicker = ({ element }) => {
 		case 'document':
 			return <PdfElementPresentor resourceUrl={resourceUrl} />
 		case 'other':
-			return <OtherElementPresentor resourceUrl={resourceUrl} />
+			return <OtherElementPresentor resourceUrl={resourceUrl} fileName={fileName} />
 		default:
 			return null
 	}
