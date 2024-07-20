@@ -19,7 +19,7 @@ const PostsSection = () => {
 			<PostsPresentor className='posts-presentor' type={'post'} published={true} maxRows={1} />
 			<div className='view-all-button-container'>
 				<button onClick={handleViewAllClick} className='view-all-button'>
-					הצגת {' '}
+					הצגת הכל
 				</button>
 			</div>
 		</section>
