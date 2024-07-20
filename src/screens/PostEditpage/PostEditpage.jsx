@@ -160,6 +160,7 @@ const PostEditPageComp = ({ postID, post }) => {
 			)}
 			{!isModalOpen ? null : (
 				<GeneralModal
+					isWarning={true}
 					title='האם ברצונך למחוק את המאמר?'
 					confirmName='מחיקה'
 					cancelName='ביטול'

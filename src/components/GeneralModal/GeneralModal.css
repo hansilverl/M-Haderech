@@ -78,3 +78,30 @@
 .general-modal-actions button:nth-child(2):hover {
 	background-color: #aaa;
 }
+
+.general-modal-actions .confirm-button {
+	background-color: #4caf50;
+	color: white;
+}
+
+.general-modal-actions .confirm-button:hover {
+	background-color: #3e8e41;
+}
+
+.general-modal-actions .confirm-button.warning-button {
+	background-color: #dc3545;
+	color: white;
+}
+
+.general-modal-actions .confirm-button.warning-button:hover {
+	background-color: #c82333;
+}
+
+.general-modal-actions .cancel-button.warning-button {
+	background-color: #4caf50;
+	color: white;
+}
+
+.general-modal-actions .cancel-button.warning-button:hover {
+	background-color: #3e8e41;
+}
