@@ -17,7 +17,6 @@ import DonatePage from './screens/DonatePage/DonatePage'
 import Articles from './screens/Posts/Articles'
 import { LoginPopup } from './components/LoginPopup/LoginPopup'
 import PostDetails from './screens/PostDetails/PostDetails'
-import PostEditpage from './screens/PostEditpage/PostEditpage'
 import Conventions from './screens/Conventions/Conventions'
 
 function App() {
