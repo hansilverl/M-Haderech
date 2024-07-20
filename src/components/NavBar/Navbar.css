@@ -165,6 +165,7 @@
   display: block;
   /* color of box shadow 9b59b6 */
   box-shadow: 0 4px 8px #9c59b65e;
+  margin-top: -0.5em; /* cover desc */
 }
 
 /* add a pointer (chat bubble like) up arrow to the dropdown */
