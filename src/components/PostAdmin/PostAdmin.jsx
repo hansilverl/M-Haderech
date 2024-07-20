@@ -88,7 +88,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 					}}
 					handleCancel={() => setShowModal(false)}>
 					<p>לאחר פעולה זו, לא יהיה ניתן לשחזר את תוכן מאמר זה</p>
-					<p>האם Fברצונך להמשיך?</p>
+					<p>האם ברצונך להמשיך?</p>
 				</GeneralModal>
 			)}
 		</div>
