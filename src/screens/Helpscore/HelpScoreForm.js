@@ -61,7 +61,7 @@ const HelpScoreForm = () => {
     return (
         <form onSubmit={handleSubmit} className="help-score-form">
             <div className="help-score-form-header">
-            <h2> מבדק היפרמאזיס אישי 
+            <h2> מבדק היפרמאזיס(HG) אישי 
             </h2>
             {description && <p className="questionnaire-description">{description}</p>}
             <div className="bordered-container">
