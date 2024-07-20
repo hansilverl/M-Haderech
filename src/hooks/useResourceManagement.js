@@ -68,8 +68,8 @@ const uploadFile = async (file, type) => {
 	if (type !== 'other') {
 		const allowedTypes = allowedFileTypes[type]
 		if (!allowedTypes) throw new Error('לא נבחר סוג קובץ אפשרי')
-		const fileType = file.type
-		const fileExtension = file.name.split('.').pop()
+		const fileType = file.type.toLowerCase()
+		const fileExtension = file.name.split('.').pop().toLowerCase()
 		if (allowedTypes[fileExtension] !== fileType) throw new Error('סוג קובץ לא תואם למבוקש')
 	}
 
