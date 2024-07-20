@@ -25,6 +25,7 @@ const PostsPresentor = (props) => {
 	const [maxPosts, setMaxPosts] = useState(pageSize ? pageSize : 1)
 
 	const myQuery = buildQuery(type, published, pageSize)
+
 	const { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet } = usePostsGet(myQuery)
 
 	const typeName = type === 'post' ? 'מאמר' : 'כנס'

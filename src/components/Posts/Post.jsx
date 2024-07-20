@@ -23,7 +23,7 @@ const Post = ({ article }) => {
   const [imagePath] = useState(elements?.find((element) => element.type === 'image')?.resourcePath);
   const [pdfPaths] = useState(
     elements
-      ?.filter((element) => element.type === 'pdf' && element.resourcePath)
+      ?.filter((element) => element.type === 'document' && element.resourcePath)
       ?.map((element) => element.resourcePath)
   );
 
@@ -34,6 +34,7 @@ const Post = ({ article }) => {
       if (pdfPaths && !pdfUrls) {
         const promises = pdfPaths.map(async (path) => await getDownloadURLFromPath(path));
         setPdfUrls(await Promise.all(promises));
+        console.log(pdfUrls);
       }
     };
     getUrls();
