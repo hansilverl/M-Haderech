@@ -6,7 +6,7 @@ import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 const Conventions = () => {
 	return (
 		<div className='conventions-posts-screen'>
-			<h1>כנסים</h1>
+			<h1>אירועים</h1>
 			<PostsPresentor
 				type={'convention'}
 				published={true}

@@ -117,7 +117,7 @@ const PostsPresentor = (props) => {
 				) : !currentPosts ? (
 					<h2>לא נמצאו ${typeName}ים</h2>
 				) : currentPosts.length === 0 ? (
-					<h2>המאמרים לא נמצאו</h2>
+					<h2>לא נמצאו ${typeName}ים</h2>
 				) : (
 					currentPosts?.map((article) =>
 						allowAdmin ? (
