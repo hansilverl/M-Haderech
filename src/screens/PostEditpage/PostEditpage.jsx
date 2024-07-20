@@ -90,6 +90,7 @@ const PostEditPageComp = ({ postID, post }) => {
 		}
 	}, [forceSave, published, handleSave])
 
+	console.log(post)
 	return (
 		<div key={postID} className='edit-post-page'>
 			<div className='back-button-container'>
@@ -112,18 +113,16 @@ const PostEditPageComp = ({ postID, post }) => {
 								setValue={setTitle}
 							/>
 						</div>
-						{articleType === 'about-us' ? null : (
-							<div className='editor-header-input'>
-								<label className='input-label'>תיאור המאמר:</label>
-								<TextAreaWithLimit
-									className='text-area'
-									limit={200}
-									value={description}
-									rows={3}
-									setValue={setDescription}
-								/>
-							</div>
-						)}
+						<div className='editor-header-input'>
+							<label className='input-label'>תיאור המאמר:</label>
+							<TextAreaWithLimit
+								className='text-area'
+								limit={200}
+								value={description}
+								rows={3}
+								setValue={setDescription}
+							/>
+						</div>
 					</div>
 					<ElementsEditor
 						key={postID}

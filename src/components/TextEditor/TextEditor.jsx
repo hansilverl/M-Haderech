@@ -64,6 +64,7 @@ const TextEditor = ({ content, setContent, isDisabled }) => {
 	const editor = useEditor({
 		extensions: extensions,
 		editable: isDisabled ? false : true,
+		content: content,
 		onUpdate,
 	})
 
