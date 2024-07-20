@@ -1,3 +1,4 @@
+// src/components/About/AboutInfo.jsx
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';

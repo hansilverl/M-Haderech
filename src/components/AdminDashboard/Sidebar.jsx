@@ -55,15 +55,15 @@ const Sidebar = () => {
 						</Link>
 					</li>
 					<li>
-						<Link to='/admin/miscellaneous' onClick={closeSidebar}>
-							<FaCog className='sidebar-icon' />
-							<span>שונות</span>
-						</Link>
-					</li>
-					<li>
 						<Link to='/admin/history' onClick={closeSidebar}>
 							<FaHistory className='sidebar-icon' />
 							<span>צפייה בהיסטוריית מבדקים</span>
+						</Link>
+					</li>
+					<li>
+						<Link to='/admin/miscellaneous' onClick={closeSidebar}>
+							<FaCog className='sidebar-icon' />
+							<span>שונות</span>
 						</Link>
 					</li>
 					<li>
