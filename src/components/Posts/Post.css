@@ -40,6 +40,7 @@
   .detailed-post-container .title-date-container {
 	margin-top: 2px;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items:first baseline;
   }
@@ -49,6 +50,7 @@
 	color: #888;
 	font-size: 14px;
 	margin: 0; /* Remove top margin */
+	align-self: flex-start;
   }
   
   .detailed-post-container .post-description {
