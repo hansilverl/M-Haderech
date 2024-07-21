@@ -72,7 +72,7 @@ const DonationLink = () => {
 
   if (loading) return <p>טוען...</p>;
   if (error) return <p>שגיאה: {error}</p>;
-
+  
   return (
     <div className="donation-link">
       <div className="donation-link-content">
