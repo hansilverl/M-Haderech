@@ -18,7 +18,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tiptap/extension-bullet-list": "^2.4.0",
     "@tiptap/extension-color": "^2.4.0",
-    "@tiptap/extension-link": "^2.4.0",
+    "@tiptap/extension-link": "^2.5.4",
     "@tiptap/extension-list-item": "^2.4.0",
     "@tiptap/extension-ordered-list": "^2.4.0",
     "@tiptap/extension-text-align": "^2.4.0",

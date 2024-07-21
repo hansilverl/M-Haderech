@@ -46,6 +46,7 @@ const TextEditor = ({ content, setContent, isDisabled }) => {
 			HTMLAttributes: {
 				target: '_blank', // Open links in a new tab
 				rel: 'noopener noreferrer',
+				class: 'tiptap-custom-link'
 			},
 		}),
 		TextStyle.extend(),
