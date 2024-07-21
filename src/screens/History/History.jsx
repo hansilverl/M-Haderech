@@ -107,6 +107,8 @@ const History = () => {
   };
 
   const graphOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     onClick: (e, elements) => {
       if (elements.length > 0) {
         const index = elements[0].index;
@@ -126,10 +128,15 @@ const History = () => {
             weight: 'bold',
           },
         },
+        ticks: {
+          font: {
+            size: window.innerWidth < 600 ? 10 : 12,
+          },
+        },
       },
       y: {
         beginAtZero: true,
-        display: true, // Show y-axis labels
+        display: true,
         title: {
           display: true,
           text: 'ניקוד',
@@ -137,14 +144,14 @@ const History = () => {
             size: 16,
             weight: 'bold',
           },
-          padding: { bottom: 20 }, // Add some padding for the rotation
+          padding: { bottom: 20 },
           rotation: 270,
         },
         ticks: {
-          display: false, // Hide y-axis ticks
+          display: false,
         },
         grid: {
-          display: false, // Hide background grid
+          display: false,
         },
       },
     },
@@ -158,13 +165,13 @@ const History = () => {
               {
                 text: '0-19',
                 fillStyle: '#2D936C',
-                strokeStyle: '#2D936C', // Border color for the legend item
-                lineWidth: 1, // Border width for the legend item
+                strokeStyle: '#2D936C',
+                lineWidth: 1,
                 hidden: false,
                 index: 0,
               },
               {
-                text: '20-32',  // medium score
+                text: '20-32',
                 fillStyle: '#F2CD60',
                 strokeStyle: '#F2CD60',
                 lineWidth: 1,
@@ -172,7 +179,7 @@ const History = () => {
                 index: 1,
               },
               {
-                text: '33-60',  // high score
+                text: '33-60',
                 fillStyle: '#A4303F',
                 strokeStyle: '#A4303F',
                 lineWidth: 1,
@@ -198,10 +205,11 @@ const History = () => {
     layout: {
       padding: {
         top: 20,
-        bottom: 80, // Add more space between the legend and the graph        
+        bottom: 80,
       },
     },
   };
+  
 
   const handleMouseEnter = (e) => {
     const x = e.clientX + 10;
