@@ -39,6 +39,7 @@ const PostsPresentor = (props) => {
 	const adjustGridItems = () => {
 		const container = document.querySelector('.presentor-posts-container')
 		if (!container) return
+
 		const styles = getComputedStyle(container)
 		const containerWidthPx = styles.getPropertyValue('width').trim() // Get the full width including padding and borders
 		const itemWidthPx = styles.getPropertyValue('--post-grid-width').trim() // Grid item width + gap (including any padding and border)
@@ -48,7 +49,7 @@ const PostsPresentor = (props) => {
 		const itemWidth = parseInt(itemWidthPx)
 		const gap = parseInt(gapPx)
 
-		const itemsPerRow = Math.floor(containerWidth / (itemWidth + gap))
+		const itemsPerRow = Math.max(1, Math.floor(containerWidth / (itemWidth + gap + 2)))
 		const maxItems = itemsPerRow * maxRows
 
 		if (pageSize && pageSize < maxItems) setMaxPosts(pageSize)
@@ -116,9 +117,9 @@ const PostsPresentor = (props) => {
 				) : errorGet ? (
 					<h2>{errorGet.toString()}</h2>
 				) : !currentPosts ? (
-					<h2>לא נמצאו ${typeName}ים</h2>
+					<h2>לא נמצאו {typeName}ים</h2>
 				) : currentPosts.length === 0 ? (
-					<h2>לא נמצאו ${typeName}ים</h2>
+					<h2>לא נמצאו {typeName}ים</h2>
 				) : (
 					currentPosts?.map((article) =>
 						allowAdmin ? (
