@@ -35,6 +35,7 @@
   width: 100%;
   max-width: 1200px;
   align-items: stretch;
+  flex-direction: row;
 }
 
 .info-box {
@@ -95,4 +96,88 @@
 
 .info-box a:hover {
   text-decoration: underline;
+}
+
+/* Responsive Styles */
+
+@media (max-width: 1200px) {
+  .info-container {
+    flex-wrap: wrap;
+  }
+
+  .info-box {
+    margin: 10px;
+    flex: 1 1 calc(50% - 40px);
+  }
+}
+
+@media (max-width: 768px) {
+  .info-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-box {
+    margin: 10px 0;
+    width: 90%;
+  }
+
+  .donate-page h1 {
+    font-size: 2em;
+  }
+
+  .donate-page p {
+    font-size: 1em;
+  }
+
+  .info-box h2 {
+    font-size: 1.5em;
+  }
+
+  .info-box h4 {
+    font-size: 1em;
+  }
+
+  .info-box p {
+    font-size: 1em;
+  }
+
+  .info-icon {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .donate-page {
+    padding: 10px 10px 0 10px;
+  }
+
+  .info-box {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .donate-page h1 {
+    font-size: 1.5em;
+  }
+
+  .donate-page p {
+    font-size: 0.9em;
+  }
+
+  .info-box h2 {
+    font-size: 1.3em;
+  }
+
+  .info-box h4 {
+    font-size: 0.9em;
+  }
+
+  .info-box p {
+    font-size: 0.9em;
+  }
+
+  .info-icon {
+    font-size: 1.3em;
+  }
 }
