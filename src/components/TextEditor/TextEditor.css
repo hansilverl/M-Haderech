@@ -11,6 +11,10 @@
 	padding: 0px 10px;
 }
 
+.tiptap .tiptap-custom-link{
+	pointer-events: auto;
+}
+
 .tiptap-editor-container {
 	border-radius:0;
 }
