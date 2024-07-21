@@ -13,7 +13,7 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 	return `${day}/${month}/${year}`
 }
 
-const Post = ({ article }) => {
+const Post = ({ article, onPostClick }) => {
 	const { id, title, datePublished, description, elements } = article
 	const navigate = useNavigate()
 
@@ -41,7 +41,11 @@ const Post = ({ article }) => {
 	}, [imagePath, pdfPaths])
 
 	const handleViewPost = () => {
-		navigate(`/posts/${id}`) // Navigate to the post details page
+		if (onPostClick) {
+			onPostClick()
+		} else {
+			navigate(`/posts/${id}`)
+		}
 	}
 
 	return !id ? null : (

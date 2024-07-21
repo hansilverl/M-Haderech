@@ -1,4 +1,3 @@
-// src/components/PostAdmin/PostAdmin.jsx
 import './PostAdmin.css'
 
 import React, { useEffect } from 'react'
@@ -16,6 +15,8 @@ const PostAdmin = ({ article, setRefresh }) => {
 	const { postUpdate, startUpdate } = usePostUpdate(article.id)
 
 	const [showModal, setShowModal] = React.useState(false)
+
+	const navigate = useNavigate()
 
 	const deletePost = () => {
 		startDelete()
@@ -40,17 +41,20 @@ const PostAdmin = ({ article, setRefresh }) => {
 		}
 	}, [postUpdate, article.published])
 
-	const navigate = useNavigate(`/edit/${article.id}`)
+	const handlePostClick = () => {
+		navigate(`/admin/edit/${article.id}`)
+	}
 
 	const AdminBar = () => {
 		return (
 			<div id={article.id} className='admin-bar'>
-				<button onClick={() => navigate(`/admin/edit/${article.id}`)} className='admin-button'>
-					עריכה
+				<button onClick={() => navigate(`/posts/${article.id}`)} className='admin-button'>
+					תצוגה מקדימה
 				</button>
 				{!article.published ? (
 					<button onClick={() => togglePublished(true)} className='admin-button publish-button'>
-						פירסום					</button>
+						פירסום
+					</button>
 				) : (
 					<button onClick={() => togglePublished(false)} className='admin-button unpublish-button'>
 						ביטול פרסום
@@ -71,7 +75,7 @@ const PostAdmin = ({ article, setRefresh }) => {
 				}`}>
 				{article.articleType === 'post' ? 'מאמר' : 'אירוע'}
 			</div>
-			<Post article={article} disablePostClick={true} />
+			<Post article={article} onPostClick={handlePostClick} />
 			<AdminBar id={article.id} />
 			{!showModal ? null : (
 				<GeneralModal
