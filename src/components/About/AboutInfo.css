@@ -18,6 +18,9 @@
 	margin-bottom: 0.3em;
 }
 
+#about > div{
+    font-size: 1.2em;
+}
 
 #about > div br {
     margin-bottom: 40px;
@@ -35,6 +38,7 @@
     justify-content: center;
     align-items: center;
 }
+
 
 .modal-content {
     background: white;

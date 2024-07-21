@@ -150,7 +150,7 @@ const CalculateHelpScore = () => {
                 <button onClick={() => navigate('/helpscore')}>חזרה לטופס</button>
             </div>
             <button className="contact-calc-button"
-             onClick={() => navigate('./contact')}>צרי קשר</button>
+             onClick={() => navigate('/contact')}>צרי קשר</button>
 
             <Modal
                 isOpen={showLoginModal}
