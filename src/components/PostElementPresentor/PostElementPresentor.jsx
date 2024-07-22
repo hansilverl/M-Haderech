@@ -2,17 +2,12 @@ import '../TextEditor/TextEditor.css'
 import './PostElementPresentor.css'
 
 import React, { useState } from 'react'
-import { pdfjs } from 'react-pdf'
 
 import PdfViewer from '../PdfViewer/PdfViewer'
 import pdfIcon from '../../assets/pdf-file.png'
 import TextEditor from '../TextEditor/TextEditor'
 import { FaDownload } from 'react-icons/fa'
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-	'pdfjs-dist/build/pdf.worker.min.mjs',
-	import.meta.url
-).toString()
 
 const TextElementPresentor = (props) => {
 	const { content } = props
@@ -42,6 +37,7 @@ const ResourceElementPresentor = (props) => {
 const PdfElementPresentor = (props) => {
 	const { resourceUrl } = props
 
+	console.log(resourceUrl)
 	const [presentPdf, setPresentPdf] = useState(true)
 	const [buttonText, setButtonText] = useState('הסתרת קובץ pdf')
 
@@ -89,20 +85,29 @@ const ElementPicker = ({ element }) => {
 	const { type, content, resourceUrl, dimensions, resourcePath } = element
 
 	const fileName = resourcePath?.split('/')?.pop()?.substring(20)
-	
+
+	if (!resourceUrl) return null
+
 	switch (type) {
 		case 'text':
-			return <TextElementPresentor content={content} />
+			return <TextElementPresentor key={resourceUrl} content={content} />
 		case 'image':
 		case 'video':
 		case 'audio':
 			return (
-				<ResourceElementPresentor type={type} resourceUrl={resourceUrl} dimensions={dimensions} />
+				<ResourceElementPresentor
+					key={resourceUrl}
+					type={type}
+					resourceUrl={resourceUrl}
+					dimensions={dimensions}
+				/>
 			)
 		case 'document':
-			return <PdfElementPresentor resourceUrl={resourceUrl} />
+			return <PdfElementPresentor key={resourceUrl} resourceUrl={resourceUrl} />
 		case 'other':
-			return <OtherElementPresentor resourceUrl={resourceUrl} fileName={fileName} />
+			return (
+				<OtherElementPresentor key={resourceUrl} resourceUrl={resourceUrl} fileName={fileName} />
+			)
 		default:
 			return null
 	}

@@ -1,14 +1,15 @@
+import './History.css';
+
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { db } from '../../firebase/config';
 import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import { Bar } from 'react-chartjs-2';
-import 'chart.js/auto';
-import 'chartjs-adapter-date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import './History.css';
+import 'chart.js/auto';
+import 'chartjs-adapter-date-fns';
 
 const History = () => {
   const [history, setHistory] = useState([]);
