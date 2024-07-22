@@ -3,10 +3,14 @@ import { pdfjs } from 'react-pdf'
 import { useState } from 'react'
 import { Document, Page } from 'react-pdf'
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-	'pdfjs-dist/build/pdf.worker.min.mjs',
-	import.meta.url
-).toString()
+// deployment
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
+
+// local run
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+// 	'pdfjs-dist/build/pdf.worker.min.mjs',
+// 	import.meta.url
+// ).toString()
 
 function PdfViewer({ pdfFile }) {
 	const [numPages, setNumPages] = useState()
