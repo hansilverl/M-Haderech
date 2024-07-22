@@ -37,7 +37,6 @@ const ResourceElementPresentor = (props) => {
 const PdfElementPresentor = (props) => {
 	const { resourceUrl } = props
 
-	console.log(resourceUrl)
 	const [presentPdf, setPresentPdf] = useState(true)
 	const [buttonText, setButtonText] = useState('הסתרת קובץ pdf')
 

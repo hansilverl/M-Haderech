@@ -39,7 +39,6 @@ const getSafeDateTimeForFileName = () => {
 	const minutes = now.getMinutes().toString().padStart(2, '0')
 	const seconds = now.getSeconds().toString().padStart(2, '0')
 	const fullDate = `${year}.${month}.${day}_${hours}:${minutes}:${seconds}`
-	console.log(fullDate.length);
 	return fullDate
 }
 const getDownloadURLFromPath = async (path) => {

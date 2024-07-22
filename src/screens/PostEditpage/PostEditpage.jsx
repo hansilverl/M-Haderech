@@ -90,7 +90,6 @@ const PostEditPageComp = ({ postID, post }) => {
 		}
 	}, [forceSave, published, handleSave])
 
-	console.log(post)
 	return (
 		<div key={postID} className='edit-post-page'>
 			<div className='back-button-container'>

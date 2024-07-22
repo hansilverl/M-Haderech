@@ -34,7 +34,6 @@ const Post = ({ article, onPostClick }) => {
 			if (pdfPaths && !pdfUrls) {
 				const promises = pdfPaths.map(async (path) => await getDownloadURLFromPath(path))
 				setPdfUrls(await Promise.all(promises))
-				console.log(pdfUrls)
 			}
 		}
 		getUrls()
