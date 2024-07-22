@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 
 // deployment
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}`
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@latest/build/pdf.worker.min.mjs`
 
 // local
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
