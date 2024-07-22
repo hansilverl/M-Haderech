@@ -1,19 +1,21 @@
-import './Conventions.css';
+import './Conventions.css'
 
 import React from 'react'
 import PostsPresentor from '../../components/PostsPresentor/PostsPresentor'
 
 const Conventions = () => {
 	return (
-		<div className='conventions-posts-screen'>
-			<h1>אירועים</h1>
-			<PostsPresentor
-				type={'convention'}
-				published={true}
-				allowPages={true}
-				allowSearch={true}
-				maxRows={4}
-			/>
+		<div className='general-container'>
+			<div className='conventions-posts-screen'>
+				<h1>אירועים</h1>
+				<PostsPresentor
+					type={'convention'}
+					published={true}
+					allowPages={true}
+					allowSearch={true}
+					maxRows={4}
+				/>
+			</div>
 		</div>
 	)
 }

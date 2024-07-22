@@ -89,7 +89,7 @@ const HomePage = () => {
           </div>
         </div>
       </header>
-      <main>
+      <main className="general-container">
         <section id="about">
           <h2>להכיר היפרמאזיס אחרת</h2>
           {loading ? (

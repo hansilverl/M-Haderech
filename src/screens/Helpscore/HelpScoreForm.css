@@ -312,10 +312,10 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-
     .help-score-form {
         padding-top: 2vh;
         padding-bottom: 5vh;
+        max-width: 85%;
     }
 
     .bordered-container {
@@ -373,7 +373,7 @@ body {
         margin-bottom: 1rem;
         border: 1px solid #a9a9a9;
         border-bottom: none;
-        width: 60vw;
+        width: 73vw;
     }
 
     .q-table td {
@@ -426,6 +426,4 @@ body {
     .questionnaire-description {
         display: none;
     }
-
-    
 }

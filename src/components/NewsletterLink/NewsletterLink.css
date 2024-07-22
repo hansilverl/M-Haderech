@@ -1,103 +1,97 @@
 /* src/components/NewsletterLink/NewsletterLink.css */
 
-
 .corner-popup {
-  position: fixed;
-  bottom: 25px;
-  left: 25px; /* Changed back to right */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1000;
-  background-color: #ffffffd3;
-  padding: 20px;
-  /* circle */
-  border-radius: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 50px;
-  width: 50px;
-  border: 1px solid #7750926f;  
-  }
+	position: fixed;
+	bottom: 25px;
+	left: 25px; /* Changed back to right */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 1000;
+	background-color: #ffffffd3;
+	padding: 20px;
+	/* circle */
+	border-radius: 100%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	height: 50px;
+	width: 50px;
+	border: 1px solid #7750926f;
+}
 
 .icon-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .closed-envelope {
-  font-size: 2em;
-  color: #b42c7c;
-  position: absolute;
+	font-size: 2em;
+	color: #b42c7c;
+	position: absolute;
 }
 
 .open-envelope {
-  display: none;
-  font-size: 2em;
-  color: #b42c7c;
-  position: absolute;
-  animation-name: openEnvelopeAnimation; /* Reference the defined animation */
-  animation-duration: 0.6s; /* Adjust this value to control the speed */
-  animation-fill-mode: forwards; /* Keeps the animation state at the end */
-
-
+	display: none;
+	font-size: 2em;
+	color: #b42c7c;
+	position: absolute;
+	animation-name: openEnvelopeAnimation; /* Reference the defined animation */
+	animation-duration: 0.6s; /* Adjust this value to control the speed */
+	animation-fill-mode: forwards; /* Keeps the animation state at the end */
 }
 
-
 .tooltip-nl {
-  display: none;
-  position: absolute;
-  top: -90px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffffff;
-  color: #333;
-  padding: 5px 10px;
-  border-radius: 5px;
-  white-space: wrap;
-  font-size: 0.9em;
-  z-index: 1000;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
-  font-weight: 500;
-  animation-name: openEnvelopeAnimation; /* Reference the defined animation */
-  animation-duration: 0.6s; /* Adjust this value to control the speed */
-  animation-fill-mode: forwards; /* Keeps the animation state at the end */
-  color:#724086
-
+	display: none;
+	position: absolute;
+	top: -90px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #ffffff;
+	color: #333;
+	padding: 5px 10px;
+	border-radius: 5px;
+	white-space: wrap;
+	font-size: 0.9em;
+	z-index: 1000;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border: 1px solid #ccc;
+	font-weight: 500;
+	animation-name: openEnvelopeAnimation; /* Reference the defined animation */
+	animation-duration: 0.6s; /* Adjust this value to control the speed */
+	animation-fill-mode: forwards; /* Keeps the animation state at the end */
+	color: #724086;
 }
 
 .tooltip-nl::after {
-  content: "";
-  /* chat bubble arrow (a triangle that points down - top connected to the tooltip) */
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  border: 10px solid transparent;
-  border-top-color: #ffffff;
-  transform: translateX(-50%);
-
+	content: '';
+	/* chat bubble arrow (a triangle that points down - top connected to the tooltip) */
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	border: 10px solid transparent;
+	border-top-color: #ffffff;
+	transform: translateX(-50%);
 }
 
 @keyframes openEnvelopeAnimation {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .icon-container:hover .closed-envelope {
-  display: none;
+	display: none;
 }
 
 .icon-container:hover .open-envelope {
-  display: block;
+	display: block;
 }
 
 .icon-container:hover .tooltip-nl {
-  display: block !important;
+	display: block !important;
 }

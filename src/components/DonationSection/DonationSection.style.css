@@ -2,7 +2,6 @@
     display: flex;
     justify-content:space-evenly;
     align-items: center;
-    padding: 2em;
     background: #ffffff;
   }
   
@@ -46,4 +45,8 @@
   }
   
 
-  
+@media screen and (max-width: 768px) {
+    .donation-text {
+      padding-right: 5vw;
+    }
+}
