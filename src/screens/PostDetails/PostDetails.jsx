@@ -2,8 +2,6 @@ import './PostDetails.css'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { FaArrowRight } from 'react-icons/fa'
 
 import usePostsGet from '../../hooks/usePostsGet'
 import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
@@ -19,14 +17,10 @@ const formatDate = (timestamp) => {
 
 const PostDetailsContainer = ({ id }) => {
 	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
-	const navigate = useNavigate()
 
 	return (
-		<div className='post-details-external-container'>
+		<div className='post-details-external-container general-container'>
 			<div className='post-details-container'>
-				{/* <button className='back-button' onClick={() => navigate(-1)}>
-					<FaArrowRight />
-				</button> */}
 				{loadingGet ? (
 					<p>טוען...</p>
 				) : errorGet ? (

@@ -12,7 +12,6 @@
 	overflow: hidden;
 	position: relative;
 	text-align: center;
-	background-color: #f0f0f0; /* Placeholder background color */
 }
 
 .image-placeholder {
@@ -92,13 +91,6 @@
 	background: #b42c7c;
 }
 
-main {
-	padding: 2em;
-	flex: 1;
-}
-
-
-
 section {
 	margin-bottom: 2em;
 	background: white;
@@ -106,7 +98,6 @@ section {
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 
 section h2 {
 	font-size: 2em;
@@ -157,8 +148,18 @@ nav ul li a:hover {
 }
 
 @media (max-width: 768px) {
+	section {
+		margin-bottom: 4vw;
+		padding: 4vw;
+	}
+
+	.header-image-container {
+		height: 24vh;
+		min-height: 175px;
+	}
+
 	.header-text {
-		margin-top: 1em;
+		margin-top: 3.3em;
 		right: 0;
 		padding: 0 1em;
 	}
@@ -179,6 +180,7 @@ nav ul li a:hover {
 
 	.header-image {
 		height: 20vh;
+		min-height: 140px;
 	}
 
 	.fill-form-button {

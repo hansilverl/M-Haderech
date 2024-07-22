@@ -5,23 +5,21 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	min-height: 100vh;
-	background-color: #f5f5f5;
 	width: auto;
-	padding: 20px;
+	padding: var(--padding-general);
 }
 
 .post-details-external-container .post-details-container {
 	display: flex;
 	flex-direction: column;
-	padding: 10px 20px;
-	width: 90%;
-	margin: 0 0;
+	width: auto;
+	align-self: stretch;
 	background-color: #ffffff;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 	justify-content: right;
 	align-items: flex-start;
+	padding: 20px;
 }
 
 .post-details-container .post-details-elements {
@@ -29,7 +27,8 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: auto;
+	align-self: stretch;
 }
 
 /* Styles for the back button */
@@ -109,12 +108,11 @@
 
 @media (max-width: 768px) {
 	.post-details-external-container {
-		padding: 0px;
-		width: 100%;
+		width: auto;
 	}
 	.post-details-external-container .post-details-container {
-		padding: 15px 0px;
 		width: auto;
 		align-self: stretch;
+		padding: 4vw;
 	}
 }
