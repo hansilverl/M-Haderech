@@ -17,7 +17,6 @@ const formatDate = (timestamp) => {
 
 const PostDetailsContainer = ({ id }) => {
 	const { postsGet, loadingGet, errorGet } = usePostsGet(id)
-	console.log(postsGet);
 
 	return (
 		<div className='post-details-external-container general-container'>

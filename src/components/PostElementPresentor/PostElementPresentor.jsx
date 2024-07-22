@@ -10,7 +10,6 @@ import { FaDownload } from 'react-icons/fa'
 
 const TextElementPresentor = (props) => {
 	const { content } = props
-	console.log(content)
 	return !content ? null : <TextEditor content={content} isDisabled={true} />
 }
 
