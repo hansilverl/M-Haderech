@@ -8,9 +8,9 @@ import pdfIcon from '../../assets/pdf-file.png'
 import TextEditor from '../TextEditor/TextEditor'
 import { FaDownload } from 'react-icons/fa'
 
-
 const TextElementPresentor = (props) => {
 	const { content } = props
+	console.log(content)
 	return !content ? null : <TextEditor content={content} isDisabled={true} />
 }
 
@@ -85,11 +85,9 @@ const ElementPicker = ({ element }) => {
 
 	const fileName = resourcePath?.split('/')?.pop()?.substring(20)
 
-	if (!resourceUrl) return null
-
 	switch (type) {
 		case 'text':
-			return <TextElementPresentor key={resourceUrl} content={content} />
+			return <TextElementPresentor key={content?.substring(0, 20)} content={content} />
 		case 'image':
 		case 'video':
 		case 'audio':
