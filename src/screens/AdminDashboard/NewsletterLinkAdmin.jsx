@@ -62,9 +62,6 @@ const NewsletterLinkAdmin = () => {
     }
   };
 
-  if (loading) return <LoadingSpinner />
-  if (error) return <p>שגיאה: {error}</p>;
-
   return (
     <div className="newsletter-link">
       <div className="newsletter-link-content">

@@ -99,94 +99,103 @@ const Statistics = () => {
 		}
 	}
 
-	if (loading) return <LoadingSpinner />
-	if (error) return <p>שגיאה: {error}</p>
-
 	return (
 		<div className='stat-item'>
-			<div className='stat-label'>
-				{/* {statistics && Object.entries(statistics).map(([key, value]) => (
-          <div key={key} className="stat-field">
-            <p><strong>{key}:</strong> {value}</p>
-          </div>
-        ))} */}
-			</div>
-			<button className='update-button' onClick={openModal}>
-				עדכן
-			</button>
+			{loading && <LoadingSpinner />}
+			{error && <p>שגיאה: {error}</p>}
+			{!loading && !error && (
+				<>
+					{/* <div className='stat-label'>
+						{statistics &&
+							Object.entries(statistics).map(([key, value]) => (
+								<div key={key} className='stat-field'>
+									<p>
+										<strong>{key}:</strong> {value}
+									</p>
+								</div>
+							))}
+					</div> */}
+					<button className='update-button' onClick={openModal}>
+						עדכן
+					</button>
 
-			<Modal /* Modal for updating statistics */
-				isOpen={modalIsOpen}
-				onRequestClose={closeModal}
-				overlayClassName='modal-stat-overlay'
-				className='modal-stat-content'>
-				<h2>עדכון סטטיסטיקות</h2>
-				<h4>
-					אין להוסיף תווים נוספים מלבד מספרים. המערכת תדאג להפריד מספרים באמצעות פסיקים בצורה
-					אוטומטית.
-				</h4>
-				<form>
-					<table className='stat-table' dir='rtl'>
-						<tbody>
-							{tempStatistics &&
-								Object.entries(tempStatistics).map(([key, value]) => (
-									<tr key={key}>
-										<td>{key}</td>
-										<td>
-											<input type='text' name={key} value={value} onChange={handleChange} />
-										</td>
-										<td>
-											<FaTrashAlt className='delete-icon' onClick={() => handleDeleteField(key)} />
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</table>
-					<div className='new-field-stat'>
-						<h3>הוסף שדה חדש</h3>
-						<input
-							type='text'
-							placeholder='שם השדה'
-							value={newField}
-							onChange={(e) => setNewField(e.target.value)}
-							className='wide-input-stat'
-						/>
-						<input
-							type='text'
-							placeholder='תוכן השדה'
-							value={newFieldValue}
-							onChange={(e) => setNewFieldValue(e.target.value)}
-							className='wide-input-stat'
-						/>
-						<div className='add-field-button'>
-							<button type='button' onClick={handleAddField}>
-								הוסף שדה
+					<Modal /* Modal for updating statistics */
+						isOpen={modalIsOpen}
+						onRequestClose={closeModal}
+						overlayClassName='modal-stat-overlay'
+						className='modal-stat-content'>
+						<h2>עדכון סטטיסטיקות</h2>
+						<h4>
+							אין להוסיף תווים נוספים מלבד מספרים. המערכת תדאג להפריד מספרים באמצעות פסיקים בצורה
+							אוטומטית.
+						</h4>
+						<form>
+							<table className='stat-table' dir='rtl'>
+								<tbody>
+									{tempStatistics &&
+										Object.entries(tempStatistics).map(([key, value]) => (
+											<tr key={key}>
+												<td>{key}</td>
+												<td>
+													<input type='text' name={key} value={value} onChange={handleChange} />
+												</td>
+												<td>
+													<FaTrashAlt
+														className='delete-icon'
+														onClick={() => handleDeleteField(key)}
+													/>
+												</td>
+											</tr>
+										))}
+								</tbody>
+							</table>
+							<div className='new-field-stat'>
+								<h3>הוסף שדה חדש</h3>
+								<input
+									type='text'
+									placeholder='שם השדה'
+									value={newField}
+									onChange={(e) => setNewField(e.target.value)}
+									className='wide-input-stat'
+								/>
+								<input
+									type='text'
+									placeholder='תוכן השדה'
+									value={newFieldValue}
+									onChange={(e) => setNewFieldValue(e.target.value)}
+									className='wide-input-stat'
+								/>
+								<div className='add-field-button'>
+									<button type='button' onClick={handleAddField}>
+										הוסף שדה
+									</button>
+								</div>
+							</div>
+						</form>
+						<div className='modal-actions'>
+							<button className='save-changes' onClick={handleSave}>
+								שמירה
+							</button>
+							<button className='cancel-changes' onClick={closeModal}>
+								בטל
 							</button>
 						</div>
-					</div>
-				</form>
-				<div className='modal-actions'>
-					<button className='save-changes' onClick={handleSave}>
-						שמירה
-					</button>
-					<button className='cancel-changes' onClick={closeModal}>
-						בטל
-					</button>
-				</div>
-			</Modal>
+					</Modal>
 
-			<Modal
-				isOpen={deleteConfirmIsOpen}
-				onRequestClose={() => setDeleteConfirmIsOpen(false)}
-				overlayClassName='modal-overlay'
-				className='modal-content'>
-				<h2>אישור מחיקה</h2>
-				<p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
-				<div className='modal-actions'>
-					<button onClick={confirmDeleteField}>מחק</button>
-					<button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
-				</div>
-			</Modal>
+					<Modal
+						isOpen={deleteConfirmIsOpen}
+						onRequestClose={() => setDeleteConfirmIsOpen(false)}
+						overlayClassName='modal-overlay'
+						className='modal-content'>
+						<h2>אישור מחיקה</h2>
+						<p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
+						<div className='modal-actions'>
+							<button onClick={confirmDeleteField}>מחק</button>
+							<button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
+						</div>
+					</Modal>
+				</>
+			)}
 		</div>
 	)
 }

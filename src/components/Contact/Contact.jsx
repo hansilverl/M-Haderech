@@ -98,84 +98,90 @@ const Contact = () => {
 		}
 	}
 
-	if (loading) return <LoadingSpinner />
-	if (error) return <p>שגיאה: {error}</p>
-
 	return (
 		<div className='contact-item'>
-			<button className='update-button' onClick={openModal}>
-				עדכן
-			</button>
+			{loading && <LoadingSpinner />}
+			{error && <p>שגיאה: {error}</p>}
+			{!loading && !error && (
+				<>
+					<button className='update-button' onClick={openModal}>
+						עדכן
+					</button>
 
-			<Modal
-				isOpen={modalIsOpen}
-				onRequestClose={closeModal}
-				overlayClassName='modal-contact-overlay'
-				className='modal-contact-content'>
-				<h2>עדכון פרטי קשר</h2>
-				<form>
-					<table className='contact-table' dir='rtl'>
-						<tbody>
-							{tempContactInfo &&
-								Object.entries(tempContactInfo).map(([key, value]) => (
-									<tr key={key}>
-										<td>{key}</td>
-										<td>
-											<input type='text' name={key} value={value} onChange={handleChange} />
-										</td>
-										<td>
-											<FaTrashAlt className='delete-icon' onClick={() => handleDeleteField(key)} />
-										</td>
-									</tr>
-								))}
-						</tbody>
-					</table>
-					<div className='new-field-contact'>
-						<h3>הוסף שדה חדש</h3>
-						<input
-							type='text'
-							placeholder='שם השדה'
-							value={newField}
-							onChange={(e) => setNewField(e.target.value)}
-							className='wide-input-contact'
-						/>
-						<input
-							type='text'
-							placeholder='תוכן השדה'
-							value={newFieldValue}
-							onChange={(e) => setNewFieldValue(e.target.value)}
-							className='wide-input-contact'
-						/>
-						<div className='add-field-button'>
-							<button type='button' onClick={handleAddField}>
-								הוסף שדה
+					<Modal
+						isOpen={modalIsOpen}
+						onRequestClose={closeModal}
+						overlayClassName='modal-contact-overlay'
+						className='modal-contact-content'>
+						<h2>עדכון פרטי קשר</h2>
+						<form>
+							<table className='contact-table' dir='rtl'>
+								<tbody>
+									{tempContactInfo &&
+										Object.entries(tempContactInfo).map(([key, value]) => (
+											<tr key={key}>
+												<td>{key}</td>
+												<td>
+													<input type='text' name={key} value={value} onChange={handleChange} />
+												</td>
+												<td>
+													<FaTrashAlt
+														className='delete-icon'
+														onClick={() => handleDeleteField(key)}
+													/>
+												</td>
+											</tr>
+										))}
+								</tbody>
+							</table>
+							<div className='new-field-contact'>
+								<h3>הוסף שדה חדש</h3>
+								<input
+									type='text'
+									placeholder='שם השדה'
+									value={newField}
+									onChange={(e) => setNewField(e.target.value)}
+									className='wide-input-contact'
+								/>
+								<input
+									type='text'
+									placeholder='תוכן השדה'
+									value={newFieldValue}
+									onChange={(e) => setNewFieldValue(e.target.value)}
+									className='wide-input-contact'
+								/>
+								<div className='add-field-button'>
+									<button type='button' onClick={handleAddField}>
+										הוסף שדה
+									</button>
+								</div>
+							</div>
+						</form>
+						<div className='modal-actions'>
+							<button className='save-changes' onClick={handleSave}>
+								שמירה
+							</button>
+
+							<button className='cancel-changes' onClick={closeModal}>
+								בטל
 							</button>
 						</div>
-					</div>
-				</form>
-				<div className='modal-actions'>
-					<button className='save-changes' onClick={handleSave}>
-						שמירה
-					</button>
+					</Modal>
 
-					<button className='cancel-changes' onClick={closeModal}>
-						בטל
-					</button>
-				</div>
-			</Modal>
-
-			<Modal
-				isOpen={deleteConfirmIsOpen}
-				onRequestClose={() => setDeleteConfirmIsOpen(false)}
-				overlayClassName='modal-overlay'
-				className='modal-content'>
-				<h2>אישור מחיקה</h2>
-				<p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
-				<div className='modal-actions'>
-					<button onClick={confirmDeleteField}>מחק</button>
-					<button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
-				</div>
-			</Modal>
+					<Modal
+						isOpen={deleteConfirmIsOpen}
+						onRequestClose={() => setDeleteConfirmIsOpen(false)}
+						overlayClassName='modal-overlay'
+						className='modal-content'>
+						<h2>אישור מחיקה</h2>
+						<p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
+						<div className='modal-actions'>
+							<button onClick={confirmDeleteField}>מחק</button>
+							<button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
+						</div>
+					</Modal>
+				</>
+			)}
 		</div>
 	)
 }

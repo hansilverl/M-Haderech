@@ -22,13 +22,10 @@ const PostDetailsContainer = ({ id }) => {
 	return (
 		<div className='post-details-external-container general-container'>
 			<div className='post-details-container'>
-				{loadingGet ? (
-					<LoadingSpinner />
-				) : errorGet ? (
-					<p>{errorGet.toString()}</p>
-				) : !postsGet ? (
-					<p>המאמר לא נמצא</p>
-				) : (
+				{loadingGet && <LoadingSpinner />}
+				{errorGet && <p>שגיאה: {errorGet}</p>}
+				{!postsGet && <h2>המאמר לא נמצא</h2>}
+				{postsGet && (
 					<>
 						<div className='post-details-header'>
 							<h1>{postsGet.title}</h1>

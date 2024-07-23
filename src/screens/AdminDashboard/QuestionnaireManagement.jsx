@@ -332,318 +332,316 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 		}
 	}
 
-	if (loading) {
-		return <LoadingSpinner />
-	}
-
-	if (error) {
-		return <div className='error'>{error}</div>
-	}
-
 	return (
 		<div className='questionnaire-management'>
-			<h1>ניהול שאלון</h1>
-			<div className='description-section'>
-				<h3>תיאור:</h3>
-				<div className='description-actions'>
-					<textarea
-						className='description-textarea'
-						value={description}
-						onChange={handleDescriptionChange}
-						rows='2'
-						cols='50'
-					/>
-					<button className='save-description' onClick={saveDescription}>
-						עדכון
-					</button>
-				</div>
-			</div>
-			<br />
-			<h4>שימי לב! ניתן לגרור את השאלה כדי לשנות את הסדר</h4>
-			{loading ? (
-				<p>Loading questions...</p>
-			) : error ? (
-				<p>{error}</p>
-			) : (
-				<DragDropContext onDragEnd={onDragEnd}>
-					<Droppable droppableId='questions'>
-						{(provided) => (
-							<div
-								{...provided.droppableProps}
-								ref={provided.innerRef}
-								className='questions-container'>
-								{questions.map((question, index) => (
-									<Draggable key={question.id} draggableId={question.id} index={index}>
-										{(provided) => (
-											<div
-												className='question'
-												ref={provided.innerRef}
-												{...provided.draggableProps}
-												{...provided.dragHandleProps}>
-												<div className='question-header'>
-													<span>
-														{index + 1}. {question.question}
-													</span>
-													<button onClick={() => handleEditQuestion(question)}>
-														<FaEdit style={{ color: 'black' }} />
-													</button>
-													<button onClick={() => handleDeleteQuestion(question)}>
-														<FaTrashAlt style={{ color: 'black' }} />
-													</button>
-												</div>
-											</div>
-										)}
-									</Draggable>
-								))}
-								{provided.placeholder}
-								{isReordering && <FontAwesomeIcon icon={faBars} style={{ color: 'black' }} />}
-							</div>
-						)}
-					</Droppable>
-					<button className='add-question-button' onClick={handleAddQuestion}>
-						הוספת שאלה
-					</button>
-				</DragDropContext>
-			)}
+			{loading && <LoadingSpinner />}
+			{error && <p>שגיאה: {error}</p>}
+			{!loading && !error && (
+				<>
+					<h1>ניהול שאלון</h1>
+					<div className='description-section'>
+						<h3>תיאור:</h3>
+						<div className='description-actions'>
+							<textarea
+								className='description-textarea'
+								value={description}
+								onChange={handleDescriptionChange}
+								rows='2'
+								cols='50'
+							/>
+							<button className='save-description' onClick={saveDescription}>
+								עדכון
+							</button>
+						</div>
+					</div>
+					<br />
+					<h4>שימי לב! ניתן לגרור את השאלה כדי לשנות את הסדר</h4>
+					{loading ? (
+						<p>Loading questions...</p>
+					) : error ? (
+						<p>{error}</p>
+					) : (
+						<DragDropContext onDragEnd={onDragEnd}>
+							<Droppable droppableId='questions'>
+								{(provided) => (
+									<div
+										{...provided.droppableProps}
+										ref={provided.innerRef}
+										className='questions-container'>
+										{questions.map((question, index) => (
+											<Draggable key={question.id} draggableId={question.id} index={index}>
+												{(provided) => (
+													<div
+														className='question'
+														ref={provided.innerRef}
+														{...provided.draggableProps}
+														{...provided.dragHandleProps}>
+														<div className='question-header'>
+															<span>
+																{index + 1}. {question.question}
+															</span>
+															<button onClick={() => handleEditQuestion(question)}>
+																<FaEdit style={{ color: 'black' }} />
+															</button>
+															<button onClick={() => handleDeleteQuestion(question)}>
+																<FaTrashAlt style={{ color: 'black' }} />
+															</button>
+														</div>
+													</div>
+												)}
+											</Draggable>
+										))}
+										{provided.placeholder}
+										{isReordering && <FontAwesomeIcon icon={faBars} style={{ color: 'black' }} />}
+									</div>
+								)}
+							</Droppable>
+							<button className='add-question-button' onClick={handleAddQuestion}>
+								הוספת שאלה
+							</button>
+						</DragDropContext>
+					)}
 
-			{/* Modal for Adding New Question */}
-			<Modal
-				isOpen={addQuestionModalIsOpen}
-				onRequestClose={() => {
-					setAddQuestionModalIsOpen(false)
-					resetInputFields()
-				}}
-				contentLabel='Add New Question'>
-				<button
-					className='close-button'
-					onClick={() => {
-						setAddQuestionModalIsOpen(false)
-						resetInputFields()
-					}}>
-					<FaTimes />
-				</button>
-				<div className='add-checkbox'>
-					<h2>הוספת שאלה חדשה</h2>
-					<div className='required-checkbox-add'>
-						<label>
-							<input
-								type='checkbox'
-								name='isRequired'
-								checked={isRequired}
-								onChange={(e) => setIsRequired(e.target.checked)}
-							/>
-							שאלת חובה
-						</label>
-					</div>
-				</div>
-				<form
-					className='add-question-form'
-					onSubmit={(e) => {
-						e.preventDefault()
-						saveNewQuestion()
-					}}>
-					<div>
-						<label htmlFor='newQuestionText'>שאלה: </label>
-						<input
-							type='text'
-							id='newQuestionText'
-							name='newQuestionText'
-							value={newQuestionText}
-							onChange={(e) => setNewQuestionText(e.target.value)}
-							required
-						/>
-					</div>
-					<button type='submit' className='submit-add-question'>
-						הוספה
-					</button>
-					{/* <button type="button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}><FaTimes /> Close</button> */}
-				</form>
-			</Modal>
-			{/* Modal for Editing Question */}
-			{selectedQuestion && (
-				<Modal
-					isOpen={modalIsOpen}
-					onRequestClose={() => {
-						setModalIsOpen(false)
-						resetInputFields()
-					}}
-					contentLabel='Edit Question'>
-					<button
-						className='close-button'
-						onClick={() => {
-							setModalIsOpen(false)
+					{/* Modal for Adding New Question */}
+					<Modal
+						isOpen={addQuestionModalIsOpen}
+						onRequestClose={() => {
+							setAddQuestionModalIsOpen(false)
 							resetInputFields()
-						}}>
-						<FaTimes />
-					</button>
-					<h2> עריכת שאלה</h2>
-					<form
-						className='edit-question-form'
-						onSubmit={(e) => {
-							e.preventDefault()
-							saveQuestionChanges()
-						}}>
-						<div>
-							<label htmlFor='question'>שאלה: </label>
-							<input
-								className='question-input'
-								type='text'
-								id='question'
-								name='question'
-								value={selectedQuestion.question}
-								onChange={handleQuestionChange}
-							/>
-							<div className='required-checkbox'>
+						}}
+						contentLabel='Add New Question'>
+						<button
+							className='close-button'
+							onClick={() => {
+								setAddQuestionModalIsOpen(false)
+								resetInputFields()
+							}}>
+							<FaTimes />
+						</button>
+						<div className='add-checkbox'>
+							<h2>הוספת שאלה חדשה</h2>
+							<div className='required-checkbox-add'>
 								<label>
 									<input
 										type='checkbox'
-										name='required'
-										checked={selectedQuestion.required}
-										onChange={handleQuestionChange}
+										name='isRequired'
+										checked={isRequired}
+										onChange={(e) => setIsRequired(e.target.checked)}
 									/>
-									חובה
+									שאלת חובה
 								</label>
 							</div>
 						</div>
-						<div className='answers-section'>
-							<h3>תשובות:</h3>
-							<div className='answers-table-wrapper'>
-								<div className='answers-table-container'>
-									<table className='answers-table'>
-										<tbody>
-											{selectedQuestion.answers.map((answer) => (
-												<tr key={answer.id} className='edit-answer-row'>
-													<td>
-														{editingAnswer && editingAnswer.id === answer.id ? (
+						<form
+							className='add-question-form'
+							onSubmit={(e) => {
+								e.preventDefault()
+								saveNewQuestion()
+							}}>
+							<div>
+								<label htmlFor='newQuestionText'>שאלה: </label>
+								<input
+									type='text'
+									id='newQuestionText'
+									name='newQuestionText'
+									value={newQuestionText}
+									onChange={(e) => setNewQuestionText(e.target.value)}
+									required
+								/>
+							</div>
+							<button type='submit' className='submit-add-question'>
+								הוספה
+							</button>
+							{/* <button type="button" onClick={() => { setAddQuestionModalIsOpen(false); resetInputFields(); }}><FaTimes /> Close</button> */}
+						</form>
+					</Modal>
+					{/* Modal for Editing Question */}
+					{selectedQuestion && (
+						<Modal
+							isOpen={modalIsOpen}
+							onRequestClose={() => {
+								setModalIsOpen(false)
+								resetInputFields()
+							}}
+							contentLabel='Edit Question'>
+							<button
+								className='close-button'
+								onClick={() => {
+									setModalIsOpen(false)
+									resetInputFields()
+								}}>
+								<FaTimes />
+							</button>
+							<h2> עריכת שאלה</h2>
+							<form
+								className='edit-question-form'
+								onSubmit={(e) => {
+									e.preventDefault()
+									saveQuestionChanges()
+								}}>
+								<div>
+									<label htmlFor='question'>שאלה: </label>
+									<input
+										className='question-input'
+										type='text'
+										id='question'
+										name='question'
+										value={selectedQuestion.question}
+										onChange={handleQuestionChange}
+									/>
+									<div className='required-checkbox'>
+										<label>
+											<input
+												type='checkbox'
+												name='required'
+												checked={selectedQuestion.required}
+												onChange={handleQuestionChange}
+											/>
+											חובה
+										</label>
+									</div>
+								</div>
+								<div className='answers-section'>
+									<h3>תשובות:</h3>
+									<div className='answers-table-wrapper'>
+										<div className='answers-table-container'>
+											<table className='answers-table'>
+												<tbody>
+													{selectedQuestion.answers.map((answer) => (
+														<tr key={answer.id} className='edit-answer-row'>
+															<td>
+																{editingAnswer && editingAnswer.id === answer.id ? (
+																	<input
+																		type='text'
+																		name='answerText'
+																		value={currentText}
+																		onChange={handleAnswerChange}
+																	/>
+																) : (
+																	<>{answer.text}</>
+																)}
+															</td>
+															<td>
+																{editingAnswer && editingAnswer.id === answer.id ? (
+																	<input
+																		type='number'
+																		name='answerScore'
+																		value={currentScore}
+																		onChange={handleAnswerChange}
+																	/>
+																) : (
+																	<>ניקוד: {answer.score}</>
+																)}
+															</td>
+															<td>
+																{editingAnswer && editingAnswer.id === answer.id ? (
+																	<div className='edit-answer-buttons'>
+																		<button
+																			type='button'
+																			className='save-answer'
+																			onClick={saveEditedAnswer}>
+																			שמירה
+																		</button>
+																	</div>
+																) : (
+																	<>
+																		<button
+																			type='button'
+																			className='editButton'
+																			onClick={() => handleEditAnswer(answer)}>
+																			{' '}
+																			<FaEdit style={{ color: 'black' }} />
+																		</button>
+																		<button
+																			type='button'
+																			className='trashButton'
+																			onClick={() =>
+																				handleDeleteAnswer(selectedQuestion.id, answer.id)
+																			}>
+																			{' '}
+																			<FaTrashAlt style={{ color: 'black' }} />
+																		</button>
+																	</>
+																)}
+															</td>
+														</tr>
+													))}
+													<tr className='new-answer-row'>
+														<td>
 															<input
 																type='text'
-																name='answerText'
-																value={currentText}
-																onChange={handleAnswerChange}
+																placeholder='תשובה'
+																value={newAnswerText}
+																onChange={(e) => setNewAnswerText(e.target.value)}
 															/>
-														) : (
-															<>{answer.text}</>
-														)}
-													</td>
-													<td>
-														{editingAnswer && editingAnswer.id === answer.id ? (
+														</td>
+														<td>
 															<input
 																type='number'
-																name='answerScore'
-																value={currentScore}
-																onChange={handleAnswerChange}
+																placeholder='ניקוד'
+																value={newAnswerScore}
+																onChange={(e) => setNewAnswerScore(e.target.value)}
 															/>
-														) : (
-															<>ניקוד: {answer.score}</>
-														)}
-													</td>
-													<td>
-														{editingAnswer && editingAnswer.id === answer.id ? (
-															<div className='edit-answer-buttons'>
-																<button
-																	type='button'
-																	className='save-answer'
-																	onClick={saveEditedAnswer}>
-																	שמירה
-																</button>
-															</div>
-														) : (
-															<>
-																<button
-																	type='button'
-																	className='editButton'
-																	onClick={() => handleEditAnswer(answer)}>
-																	{' '}
-																	<FaEdit style={{ color: 'black' }} />
-																</button>
-																<button
-																	type='button'
-																	className='trashButton'
-																	onClick={() =>
-																		handleDeleteAnswer(selectedQuestion.id, answer.id)
-																	}>
-																	{' '}
-																	<FaTrashAlt style={{ color: 'black' }} />
-																</button>
-															</>
-														)}
-													</td>
-												</tr>
-											))}
-											<tr className='new-answer-row'>
-												<td>
-													<input
-														type='text'
-														placeholder='תשובה'
-														value={newAnswerText}
-														onChange={(e) => setNewAnswerText(e.target.value)}
-													/>
-												</td>
-												<td>
-													<input
-														type='number'
-														placeholder='ניקוד'
-														value={newAnswerScore}
-														onChange={(e) => setNewAnswerScore(e.target.value)}
-													/>
-												</td>
-												<td>
-													<button
-														type='button'
-														className='add-answer-button'
-														onClick={handleAddAnswer}>
-														הוספת תשובה
-													</button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+														</td>
+														<td>
+															<button
+																type='button'
+																className='add-answer-button'
+																onClick={handleAddAnswer}>
+																הוספת תשובה
+															</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<h5></h5>
 								</div>
-							</div>
-							<h5></h5>
-						</div>
-						<div>
-							<button type='submit' className='save-button' title='שמירה'>
-								{' '}
-								שמירת שינויים <FontAwesomeIcon icon={faFloppyDisk} />
+								<div>
+									<button type='submit' className='save-button' title='שמירה'>
+										{' '}
+										שמירת שינויים <FontAwesomeIcon icon={faFloppyDisk} />
+									</button>
+								</div>
+							</form>
+						</Modal>
+					)}
+
+					{/* Confirm Delete Modal */}
+					{deleteConfirmIsOpen && (
+						<Modal
+							isOpen={deleteConfirmIsOpen}
+							onRequestClose={() => setDeleteConfirmIsOpen(false)}
+							contentLabel='Confirm Delete'>
+							<button className='close-button' onClick={() => setDeleteConfirmIsOpen(false)}>
+								<FaTimes />
 							</button>
-						</div>
-					</form>
-				</Modal>
-			)}
+							<h2>אישור מחיקה</h2>
+							<div className='delete-confirm-content'>
+								{selectedAnswer ? (
+									<>
+										<p>האם את בטוחה שברצונך למחוק את התשובה?</p>
 
-			{/* Confirm Delete Modal */}
-			{deleteConfirmIsOpen && (
-				<Modal
-					isOpen={deleteConfirmIsOpen}
-					onRequestClose={() => setDeleteConfirmIsOpen(false)}
-					contentLabel='Confirm Delete'>
-					<button className='close-button' onClick={() => setDeleteConfirmIsOpen(false)}>
-						<FaTimes />
-					</button>
-					<h2>אישור מחיקה</h2>
-					<div className='delete-confirm-content'>
-						{selectedAnswer ? (
-							<>
-								<p>האם את בטוחה שברצונך למחוק את התשובה?</p>
-
-								<button className='delete-button' onClick={confirmDeleteAnswer}>
-									כן
+										<button className='delete-button' onClick={confirmDeleteAnswer}>
+											כן
+										</button>
+									</>
+								) : (
+									<>
+										<p>האם את בטוחה שברצונך למחוק את השאלה?</p>
+										<button className='delete-button' onClick={confirmDeleteQuestion}>
+											כן
+										</button>
+									</>
+								)}
+								<button className='cancel-button' onClick={() => setDeleteConfirmIsOpen(false)}>
+									לא
 								</button>
-							</>
-						) : (
-							<>
-								<p>האם את בטוחה שברצונך למחוק את השאלה?</p>
-								<button className='delete-button' onClick={confirmDeleteQuestion}>
-									כן
-								</button>
-							</>
-						)}
-						<button className='cancel-button' onClick={() => setDeleteConfirmIsOpen(false)}>
-							לא
-						</button>
-					</div>
-				</Modal>
+							</div>
+						</Modal>
+					)}
+				</>
 			)}
 		</div>
 	)

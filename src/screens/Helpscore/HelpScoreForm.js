@@ -55,35 +55,33 @@ const HelpScoreForm = () => {
 		navigate('/calculateHelpScore', { state: { answers } })
 	}
 
-	if (loading) {
-		return <LoadingSpinner />
-	}
-
-	if (error) {
-		return <div>Error: {error.message}</div>
-	}
-
 	return (
 		<form onSubmit={handleSubmit} className='help-score-form'>
-			<div className='help-score-form-header'>
-				<h2> מבדק היפרמאזיס (HG) אישי</h2>
-				{description && <p className='questionnaire-description'>{description}</p>}
-				<div className='bordered-container'>
-					{questions.map((question) => (
-						<Question
-							key={question.id}
-							question={question}
-							onRadioChange={(option) => handleRadioChange(question.id, option)}
-						/>
-					))}
-					<button type='submit'>שליחה</button>
-					{validationError && (
-						<p key={shake} ref={errorMessageRef} className='requiredFieldsErrorMsg'>
-							{validationError}
-						</p>
-					)}
-				</div>
-			</div>
+			{loading && <LoadingSpinner />}
+			{error && <p>שגיאה: {error}</p>}
+			{!loading && !error && (
+				<>
+					<div className='help-score-form-header'>
+						<h2> מבדק היפרמאזיס (HG) אישי</h2>
+						{description && <p className='questionnaire-description'>{description}</p>}
+						<div className='bordered-container'>
+							{questions.map((question) => (
+								<Question
+									key={question.id}
+									question={question}
+									onRadioChange={(option) => handleRadioChange(question.id, option)}
+								/>
+							))}
+							<button type='submit'>שליחה</button>
+							{validationError && (
+								<p key={shake} ref={errorMessageRef} className='requiredFieldsErrorMsg'>
+									{validationError}
+								</p>
+							)}
+						</div>
+					</div>
+				</>
+			)}
 		</form>
 	)
 }

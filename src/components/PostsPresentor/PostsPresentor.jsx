@@ -4,7 +4,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Post from '../Posts/Post'
 import PostAdmin from '../PostAdmin/PostAdmin'
 import usePostsGet, { buildQuery } from '../../hooks/usePostsGet'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const DEFAULT_MAX_ROWS = 4
 const PostsPresentor = (props) => {
@@ -113,15 +113,11 @@ const PostsPresentor = (props) => {
 				</div>
 			)}
 			<div className='presentor-posts-container'>
-				{loadingGet ? (
-					<LoadingSpinner />
-				) : errorGet ? (
-					<h2>{errorGet.toString()}</h2>
-				) : !currentPosts ? (
-					<h2>לא נמצאו {typeName}ים</h2>
-				) : currentPosts.length === 0 ? (
-					<h2>לא נמצאו {typeName}ים</h2>
-				) : (
+				{loadingGet && <LoadingSpinner />}
+				{errorGet && <p>שגיאה: {errorGet}</p>}
+				{!currentPosts || (currentPosts.length === 0 && <h2>לא נמצאו {typeName}ים</h2>)}
+				{currentPosts &&
+					currentPosts.length > 0 &&
 					currentPosts?.map((article) =>
 						allowAdmin ? (
 							<PostAdmin
@@ -133,8 +129,7 @@ const PostsPresentor = (props) => {
 						) : (
 							<Post key={article.id} id={article.id} article={article} />
 						)
-					)
-				)}
+					)}
 			</div>
 			{!allowPages ? null : (
 				<div className='posts-pagination-buttons'>
