@@ -2,8 +2,8 @@
 
 .corner-popup {
 	position: fixed;
-	bottom: 25px;
-	left: 25px; /* Changed back to right */
+	bottom: 3vw;
+	left: 3vw; /* Changed back to right */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -14,8 +14,10 @@
 	/* circle */
 	border-radius: 100%;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	height: 50px;
-	width: 50px;
+	width: 10vw;
+	height: 10vw;
+	max-width: 50px;
+	max-height: 50px;
 	border: 1px solid #7750926f;
 }
 

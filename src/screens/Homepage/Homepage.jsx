@@ -98,10 +98,10 @@ const HomePage = () => {
 					{!loading && !error && (
 						<div className='about-content'>
 							{aboutInfo.split('\n').map((paragraph, index) => (
-								<>
+								<div key={`about-info-${index}`}>
 									{paragraph}
 									<br />
-								</>
+								</div>
 							))}
 						</div>
 					)}
