@@ -24,7 +24,7 @@ const PostDetailsContainer = ({ id }) => {
 			<div className='post-details-container'>
 				{loadingGet && <LoadingSpinner />}
 				{errorGet && <p>שגיאה: {errorGet}</p>}
-				{!postsGet && <h2>המאמר לא נמצא</h2>}
+				{!loadingGet && !postsGet && <h2>המאמר לא נמצא</h2>}
 				{postsGet && (
 					<>
 						<div className='post-details-header'>

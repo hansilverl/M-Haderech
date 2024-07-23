@@ -186,10 +186,10 @@ const PostEditPageContainer = ({ postID }) => {
 	}, [refresh, reloadGet])
 
 	return (
-		<div>
+		<div className='edit-post-page-external-container'>
 			{loadingGet && <LoadingSpinner />}
 			{errorGet && <p>שגיאה: {errorGet}</p>}
-			{!postsGet && <h2>המאמר לא נמצא</h2>}
+			{!loadingGet && !postsGet && <h2>המאמר לא נמצא</h2>}
 			{postsGet && (
 				<PostEditPageComp key={postID} postID={postID} post={postsGet} setRefresh={setRefresh} />
 			)}
