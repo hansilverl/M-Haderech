@@ -356,11 +356,9 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 					</div>
 					<br />
 					<h4>שימי לב! ניתן לגרור את השאלה כדי לשנות את הסדר</h4>
-					{loading ? (
-						<p>Loading questions...</p>
-					) : error ? (
-						<p>{error}</p>
-					) : (
+					{loading && <LoadingSpinner />}
+					{error && <p>שגיאה: {error}</p>}
+					{!loading && !error && (
 						<DragDropContext onDragEnd={onDragEnd}>
 							<Droppable droppableId='questions'>
 								{(provided) => (

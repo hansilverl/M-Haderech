@@ -98,11 +98,9 @@ const Contact = () => {
 					</label>
 					<button type='submit'>שליחה</button>
 				</form>
-				{loading ? (
-					<LoadingSpinner />
-				) : error ? (
-					<p>שגיאה: {error}</p>
-				) : (
+				{loading && <LoadingSpinner />}
+				{error && <p>שגיאה: {error}</p>}
+				{!loading && !error && (
 					<div className='contact-info'>
 						<h3>זמינות גם:</h3>
 						{Object.entries(contactInfo).map(([key, value]) => (

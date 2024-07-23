@@ -93,11 +93,9 @@ const HomePage = () => {
 			<main className='general-container'>
 				<section id='about'>
 					<h2>להכיר היפרמאזיס אחרת</h2>
-					{loading ? (
-						<LoadingSpinner />
-					) : error ? (
-						<p>שגיאה: {error}</p>
-					) : (
+					{loading && <LoadingSpinner />}
+					{error && <p>שגיאה: {error}</p>}
+					{!loading && !error && (
 						<div className='about-content'>
 							{aboutInfo.split('\n').map((paragraph, index) => (
 								<>

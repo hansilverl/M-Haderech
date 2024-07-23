@@ -90,11 +90,9 @@ const DonatePage = () => {
 
 	return (
 		<div className='donate-page'>
-			{loading ? (
-				<LoadingSpinner />
-			) : error ? (
-				<p>שגיאה: {error}</p>
-			) : (
+			{loading && <LoadingSpinner />}
+			{error && <p>שגיאה: {error}</p>}
+			{!loading && !error && (
 				<>
 					<h1>{title}</h1>
 					<p>{subtitle}</p>
