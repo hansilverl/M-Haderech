@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { FaUniversity, FaLink, FaPhone } from 'react-icons/fa';
 import './DonatePage.css';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const DonatePage = () => {
   const [bankInfo, setBankInfo] = useState(null);
@@ -86,7 +87,7 @@ const DonatePage = () => {
     fetchData();
   }, []);
 
-  if (loading) return <p>טוען...</p>;
+  if (loading) return <LoadingSpinner />
   if (error) return <p>שגיאה: {error}</p>;
 
   return (

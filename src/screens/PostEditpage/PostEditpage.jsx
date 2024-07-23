@@ -15,6 +15,7 @@ import usePostDelete from '../../hooks/usePostDelete'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
 import TextAreaWithLimit from '../../components/TextAreaWithLimist/TextAreaWithLimit'
 import GeneralModal from '../../components/GeneralModal/GeneralModal'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
@@ -190,7 +191,7 @@ const PostEditPageContainer = ({ postID }) => {
 	}, [refresh, reloadGet])
 
 	return loadingGet ? (
-		<h2>טוען...</h2>
+		<LoadingSpinner />
 	) : errorGet ? (
 		<>
 			<h2>המאמר לא נמצא</h2>

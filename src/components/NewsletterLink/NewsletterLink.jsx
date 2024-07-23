@@ -5,6 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import './NewsletterLink.css';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const NewsletterLink = () => {
   const [newsletterLink, setNewsletterLink] = useState('');
@@ -31,7 +32,7 @@ const NewsletterLink = () => {
     fetchNewsletterLink();
   }, []);
 
-  if (loading) return <p>טוען...</p>;
+  if (loading) return <LoadingSpinner />
   if (error) return <p>שגיאה: {error}</p>;
 
   return (

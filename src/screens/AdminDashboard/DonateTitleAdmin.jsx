@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Modal from 'react-modal';
 import './DonateTitleAdmin.css';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 Modal.setAppElement('#root');
 
@@ -71,7 +72,7 @@ const DonateTitleAdmin = () => {
     }
   };
 
-  if (loading) return <p>טוען...</p>;
+  if (loading) return <LoadingSpinner />
   if (error) return <p>שגיאה: {error}</p>;
 
   return (

@@ -5,6 +5,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Modal from 'react-modal';
 import { FaPhone } from 'react-icons/fa';
 import './DonationNumber.css';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 Modal.setAppElement('#root');
 
@@ -60,7 +61,7 @@ const DonationNumber = () => {
     }
   };
 
-  if (loading) return <p>טוען...</p>;
+  if (loading) return <LoadingSpinner />
   if (error) return <p>שגיאה: {error}</p>;
 
   return (

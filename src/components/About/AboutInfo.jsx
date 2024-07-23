@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Modal from 'react-modal';
 import './AboutInfo.css';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 Modal.setAppElement('#root');
 
@@ -59,7 +60,7 @@ const AboutInfo = () => {
     }
   };
 
-  if (loading) return <p>טוען...</p>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <p>שגיאה: {error}</p>;
 
   return (

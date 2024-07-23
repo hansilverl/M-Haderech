@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import usePostsGet from '../../hooks/usePostsGet'
 import PostElementPresentor from '../../components/PostElementPresentor/PostElementPresentor'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const formatDate = (timestamp) => {
 	if (!timestamp) return ''
@@ -22,7 +23,7 @@ const PostDetailsContainer = ({ id }) => {
 		<div className='post-details-external-container general-container'>
 			<div className='post-details-container'>
 				{loadingGet ? (
-					<p>טוען...</p>
+					<LoadingSpinner />
 				) : errorGet ? (
 					<p>{errorGet.toString()}</p>
 				) : !postsGet ? (

@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import Convention from './Convention';
-import usePostsGet, { queryGetAllPostsAdmin } from '../../hooks/usePostsGet';
-import './ConventionsList.css';
+import React, { useState, useEffect } from 'react'
+import Convention from './Convention'
+import usePostsGet, { queryGetAllPostsAdmin } from '../../hooks/usePostsGet'
+import './ConventionsList.css'
 
 const ConventionsList = () => {
-	const query = queryGetAllPostsAdmin(20);
-	const { postsGet, loadingGet, errorGet, postsGetHandler } = usePostsGet(query);
-	const [conventions, setConventions] = useState([]);
+	const query = queryGetAllPostsAdmin(20)
+	const { postsGet, loadingGet, errorGet, postsGetHandler } = usePostsGet(query)
+	const [conventions, setConventions] = useState([])
 
 	useEffect(() => {
 		if (postsGet) {
-			const filteredConventions = postsGet.filter(post => post.articleType === 'convention');
-			setConventions(filteredConventions);
+			const filteredConventions = postsGet.filter((post) => post.articleType === 'convention')
+			setConventions(filteredConventions)
 		}
-	}, [postsGet]);
+	}, [postsGet])
 
 	useEffect(() => {
-		postsGetHandler(20);
-	}, []);
+		postsGetHandler(20)
+	}, [])
 
 	return (
 		<div className='container'>
 			{loadingGet ? (
-				<div className='loading'>טוען...</div>
+				<LoadingSpinner />
 			) : errorGet ? (
 				<div className='error'>{errorGet.toString()}</div>
 			) : conventions.length === 0 ? (
@@ -35,7 +35,7 @@ const ConventionsList = () => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}
 
-export default ConventionsList;
+export default ConventionsList

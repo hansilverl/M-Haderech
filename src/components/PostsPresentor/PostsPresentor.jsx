@@ -4,6 +4,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Post from '../Posts/Post'
 import PostAdmin from '../PostAdmin/PostAdmin'
 import usePostsGet, { buildQuery } from '../../hooks/usePostsGet'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const DEFAULT_MAX_ROWS = 4
 const PostsPresentor = (props) => {
@@ -113,7 +114,7 @@ const PostsPresentor = (props) => {
 			)}
 			<div className='presentor-posts-container'>
 				{loadingGet ? (
-					<h2>טוען...</h2>
+					<LoadingSpinner />
 				) : errorGet ? (
 					<h2>{errorGet.toString()}</h2>
 				) : !currentPosts ? (

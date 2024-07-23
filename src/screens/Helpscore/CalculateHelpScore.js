@@ -8,6 +8,7 @@ import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore
 import { useLogin } from '../../hooks/useLogin';
 import useFirebaseErrorTranslation from '../../hooks/useFirebaseErrorTranslation';
 import Modal from 'react-modal';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 Modal.setAppElement('#root');
 
@@ -111,7 +112,7 @@ const CalculateHelpScore = () => {
     };
 
     if (score === null || authLoading) {
-        return <div>טוען...</div>;
+        return <LoadingSpinner />
     }
 
     return (
