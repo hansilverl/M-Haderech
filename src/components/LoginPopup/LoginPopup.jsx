@@ -79,6 +79,7 @@ export const LoginPopup = ({ setShowLogin }) => {
         setShowLogin(false); // Close the modal only if signup is successful
       }
     } catch (error) {
+      console.log(error);
       setAuthError(translateErrorToHebrew(error.code));
     }
   };
