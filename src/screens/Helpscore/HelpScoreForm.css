@@ -3,427 +3,426 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&display=swap');
 
 body {
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Tahoma', 'IBM Plex Sans Hebrew', Arial, Helvetica;
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Tahoma', 'IBM Plex Sans Hebrew', Arial,
+		Helvetica;
 }
-
 
 .help-score-form::before {
-    content: '';
-    position: fixed;
-    /* Fixed position to cover the entire viewport */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #f2f2f2;
-    /* Semi-transparent black backdrop */
-    z-index: -1;
-    /* Ensure it is behind the form content */
+	content: '';
+	position: fixed;
+	/* Fixed position to cover the entire viewport */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #f2f2f2;
+	/* Semi-transparent black backdrop */
+	z-index: -1;
+	/* Ensure it is behind the form content */
 }
 
-
 .help-score-form {
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    width: auto;
-    max-width: 70%;
-    margin: 0 auto;
-    padding-top: 2vh;
-    padding-bottom: 10vh;
-    position: relative;
-    /* Ensure the form is positioned relative for pseudo-element */
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: auto;
+	max-width: 70%;
+	margin: 0 auto;
+	padding-top: 2vh;
+	padding-bottom: 10vh;
+	position: relative;
+	/* Ensure the form is positioned relative for pseudo-element */
 }
 
 .bordered-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ffffff4b;
-    z-index: -1;
-    /* Ensure it is behind the form content */
-    border-radius: 5px;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ffffff4b;
+	z-index: -1;
+	/* Ensure it is behind the form content */
+	border-radius: 5px;
 }
 
 .bordered-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1.56px solid #a9a9a9cf;
-    padding: 2% 0;
-    width: 100%;
-    position: relative;
-    /* Ensure the form is positioned relative for pseudo-element */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 1.56px solid #a9a9a9cf;
+	padding: 2% 0;
+	width: 100%;
+	position: relative;
+	/* Ensure the form is positioned relative for pseudo-element */
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
 }
 
 .q-container {
-    width: 100%;
-    padding: 1%;
-    word-wrap: break-word;
+	width: 100%;
+	padding: 1%;
+	word-wrap: break-word;
 }
 
 .question-text {
-    /* make weight just a bit thicker for accessibility */
-    font-weight: 500;
-    font-size: 1em;
-    margin: auto 4%;
-    margin-bottom: 0.7%;
-    padding: 0.5% 0;
-    color: #333;
-    text-align: right;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    width: 90%;
-    max-width: 90%;
-    /* Limit the width to ensure it doesn't overtake the container */
-    box-sizing: border-box;
-
+	/* make weight just a bit thicker for accessibility */
+	font-weight: 500;
+	font-size: 1em;
+	margin: auto 4%;
+	margin-bottom: 0.7%;
+	padding: 0.5% 0;
+	color: #333;
+	text-align: right;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	hyphens: auto;
+	width: 90%;
+	max-width: 90%;
+	/* Limit the width to ensure it doesn't overtake the container */
+	box-sizing: border-box;
 }
 
 .q-table {
-    display: table;
-    margin: auto 4%;
-    padding: 2%;
-    border-collapse: collapse;
-    width: 90%;
-    table-layout: fixed;
-    margin-bottom: 2%;
+	display: table;
+	margin: auto 4%;
+	padding: 2%;
+	border-collapse: collapse;
+	width: 90%;
+	table-layout: fixed;
+	margin-bottom: 2%;
 }
 
 .q-table thead,
 .q-table th {
-    /* the two may be used interchangeably in the context of this page */
-    background-color: #e6e5e5;
-    padding: auto 2.2%;
+	/* the two may be used interchangeably in the context of this page */
+	background-color: #e6e5e5;
+	padding: auto 2.2%;
 }
 
 .q-table th,
 .q-table td {
-    border: 1.5px solid #a9a9a9;
-    text-align: center;
-    word-wrap: break-word;
-    padding: 0.5% 1%;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
-    font-weight: 500;
+	border: 1.5px solid #a9a9a9;
+	text-align: center;
+	word-wrap: break-word;
+	padding: 0.5% 1%;
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, 'IBM Plex Sans Hebrew';
+	font-weight: 500;
 }
 
 .q-table td {
-    padding: 1% 1%;
+	padding: 1% 1%;
 }
 
 .q-table td:hover {
-    /* background-color: #f2f2f2;  */
-    background-color: #f1f8ff;
+	/* background-color: #f2f2f2;  */
+	background-color: #f1f8ff;
 }
 
 .q-table .selected {
-    background-color: #dfefff80;
+	background-color: #dfefff80;
 }
 
 .q-table td.selected:hover {
-    background-color: #dfefff80;
+	background-color: #dfefff80;
 }
 
 .radio-input {
-    display: none;
+	display: none;
 }
 
 .custom-radio {
-    display: inline-block;
-    position: relative;
-    width: 0.85em;
-    height: 0.85em;
-    min-width: 0.85em;
-    /* must be set to prevent the radio button from shrinking */
-    border: 3px solid #a9a9a9;
-    border-radius: 50%;
-    background-color: #cccccc9e;
-    box-shadow: inset 0 0 0 2px #fff;
+	display: inline-block;
+	position: relative;
+	width: 0.85em;
+	height: 0.85em;
+	min-width: 0.85em;
+	/* must be set to prevent the radio button from shrinking */
+	border: 3px solid #a9a9a9;
+	border-radius: 50%;
+	background-color: #cccccc9e;
+	box-shadow: inset 0 0 0 2px #fff;
 }
 
-.radio-input:checked+.custom-radio {
-    border-color: forestgreen;
-    background-color: #dfefff80;
-    box-shadow: none;
+.radio-input:checked + .custom-radio {
+	border-color: forestgreen;
+	background-color: #dfefff80;
+	box-shadow: none;
 }
 
-.radio-input:checked+.custom-radio::after {
-    transform: translate(-50%, -50%) scale(1.2);
-    /* slightly larger than the radio button */
-    content: "✔";
-    font-size: 0.5em;
-    font-weight: bold;
-    border-radius: 50%;
-    color: forestgreen;
-    display: block;
-    position: absolute;
-    /* aligns the checkmark to the center of the radio button */
-    top: 50%;
-    left: 50%;
-    /* moves the checkmark to the center of the radio button */
-    font-size: 0.7em;
-    /* slightly smaller than the radio button */
+.radio-input:checked + .custom-radio::after {
+	transform: translate(-50%, -50%) scale(1.2);
+	/* slightly larger than the radio button */
+	content: '✔';
+	font-size: 0.5em;
+	font-weight: bold;
+	border-radius: 50%;
+	color: forestgreen;
+	display: block;
+	position: absolute;
+	/* aligns the checkmark to the center of the radio button */
+	top: 50%;
+	left: 50%;
+	/* moves the checkmark to the center of the radio button */
+	font-size: 0.7em;
+	/* slightly smaller than the radio button */
 }
 
 .custom-radio:hover {
-    border-color: #a9a9a9;
-    cursor: pointer;
+	border-color: #a9a9a9;
+	cursor: pointer;
 }
 
 .radio-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .required {
-    /*asterisk for required fields*/
-    color: #790000;
-    margin-left: 4px;
+	/*asterisk for required fields*/
+	color: #790000;
+	margin-left: 4px;
 }
 
-.help-score-form button[type="submit"] {
-    font-family: 'IBM Plex Sans Hebrew';
-    font-weight: bold;
-    background-color: #a04598;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    border: 1px solid #ac1c74;
-    box-shadow: none;
-    cursor: pointer;
-    /* percentage values are relative to the parent element */
-    padding: 1% 2%;
-    margin: 2% 0;
+.help-score-form button[type='submit'] {
+	font-family: 'IBM Plex Sans Hebrew';
+	font-weight: bold;
+	background-color: #a04598;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	border: 1px solid #ac1c74;
+	box-shadow: none;
+	cursor: pointer;
+	/* percentage values are relative to the parent element */
+	padding: 1% 2%;
+	margin: 2% 0;
 }
 
-.help-score-form button[type="submit"]:hover {
-    background-color: #a20067;
+.help-score-form button[type='submit']:hover {
+	background-color: #a20067;
 }
 
 .req_question {
-    position: relative;
-    /* background-color: #ffdfe080;  */
-    z-index: 0; /* Ensure the pseudo-element is behind the element */
+	position: relative;
+	/* background-color: #ffdfe080;  */
+	z-index: 0; /* Ensure the pseudo-element is behind the element */
 }
 
 /* Adjust the pseudo-element to act as a backdrop */
 .bordered-container .req_question::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    background-color: #ffdfdf80;
-    top: 6%;
-    bottom: 6%;
-    left: 5%;
-    right: 3%;
-    border-radius: 6px;
+	content: '';
+	position: absolute;
+	z-index: -1;
+	background-color: #ffdfdf80;
+	top: 6%;
+	bottom: 6%;
+	left: 5%;
+	right: 3%;
+	border-radius: 6px;
 }
 
-.req_question .radio-input+.custom-radio {
-    /* bit darker shade than the default */
-    border-color: #a9a9a9;
+.req_question .radio-input + .custom-radio {
+	/* bit darker shade than the default */
+	border-color: #a9a9a9;
 }
 
-.req_question .radio-input:checked+.custom-radio {
-    border-color: forestgreen;
+.req_question .radio-input:checked + .custom-radio {
+	border-color: forestgreen;
 }
 
 /* change the question-text of required questions to red */
 .req_question .question-text {
-    margin-left: 2%;
-    /* align the text with table */
-    color: #790000;
+	margin-left: 2%;
+	/* align the text with table */
+	color: #790000;
 }
 
 .req_question td,
 .req_question th {
-    border: 1.59px solid #790000;
-    table-layout: fixed;
+	border: 1.59px solid #790000;
+	table-layout: fixed;
 }
 
 @keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
+	0% {
+		transform: translateX(0);
+	}
 
-    20% {
-        transform: translateX(-2px) rotate(0deg);
-    }
+	20% {
+		transform: translateX(-2px) rotate(0deg);
+	}
 
-    40% {
-        transform: translateX(2px) rotate(0deg);
-    }
+	40% {
+		transform: translateX(2px) rotate(0deg);
+	}
 
-    60% {
-        transform: translateX(-2px) rotate(0deg);
-    }
+	60% {
+		transform: translateX(-2px) rotate(0deg);
+	}
 
-    80% {
-        transform: translateX(2px) rotate(0deg);
-    }
+	80% {
+		transform: translateX(2px) rotate(0deg);
+	}
 
-    100% {
-        transform: translateX(0) rotate(0deg);
-    }
+	100% {
+		transform: translateX(0) rotate(0deg);
+	}
 }
 
 .requiredFieldsErrorMsg {
-    color: #790000;
-    font-weight: bold;
-    font-size: 14px;
-    /*this line should slightly "shake" the error message to draw attention to it*/
-    animation: shake 0.3s;
+	color: #790000;
+	font-weight: bold;
+	font-size: 14px;
+	/*this line should slightly "shake" the error message to draw attention to it*/
+	animation: shake 0.3s;
 }
 
 .option-vert {
-    display: none !important;
+	display: none !important;
 }
 
 .bordered-container h2 {
-    text-align: center;
+	text-align: center;
 }
 
-.help-score-form-header{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.help-score-form-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 /* src/screens/Helpscore/HelpScoreForm.css */
 .questionnaire-description {
-    /* wrap and break the text if needed */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: right; 
-    /* same margin as the question text */
-    margin: 0 4%;
-    padding-bottom: 1%;
+	/* wrap and break the text if needed */
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	hyphens: auto;
+	text-align: right;
+	/* same margin as the question text */
+	margin: 0 4%;
+	padding-bottom: 1%;
 }
 
 @media screen and (max-width: 768px) {
-    .help-score-form {
-        padding-top: 2vh;
-        padding-bottom: 5vh;
-        max-width: 85%;
-    }
+	.help-score-form button[type='submit'] {
+		width: 73vw;
+		align-self: center;
+	}
+	.help-score-form {
+		padding-top: 2vh;
+		padding-bottom: 5vh;
+		max-width: 85%;
+	}
 
-    .bordered-container {
-        width: 100%;
-        padding: 1%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* padding-left: 2.39em; */
-    }
+	.bordered-container {
+		width: 100%;
+		padding: 1%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/* padding-left: 2.39em; */
+	}
 
-    .option-vert {
-        display: block !important;
-    }
+	.option-vert {
+		display: block !important;
+	}
 
-    .q-container {
-        align-items: right; 
-        width: 100%;
-        /* Ensure full width for proper alignment */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* Align to the right within the container */
-        margin: auto 0;
+	.q-container {
+		align-items: right;
+		width: 100%;
+		/* Ensure full width for proper alignment */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/* Align to the right within the container */
+		margin: auto 0;
+	}
 
-    }
+	.question-text {
+		width: 90%;
+		/* like the table */
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		hyphens: auto;
+		flex-wrap: wrap;
+		margin-top: 1rem;
+		/* margin right will align the text with q-table */
+		margin-right: 4%;
+	}
 
-    .question-text {
-        width: 90%;
-        /* like the table */
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        flex-wrap: wrap;
-        margin-top: 1rem;
-        /* margin right will align the text with q-table */
-        margin-right: 4%;
-    
+	.q-table {
+		display: inline-block;
+		/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+		align-self: center;
+	}
 
-    }
+	.q-table thead {
+		display: none;
+	}
 
-    .q-table {
-        display: inline-block;
-        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-        align-self: center;
-    }
+	.q-table tr {
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		display: block;
+		margin-bottom: 1rem;
+		border: 1px solid #a9a9a9;
+		border-bottom: none;
+		width: 73vw;
+	}
 
-    .q-table thead {
-        display: none;
-    }
+	.q-table td {
+		display: flex;
+		align-items: right;
+		padding: 0.5rem;
+		border: 1px solid #a9a9a9;
+		text-align: right;
+		border: none;
+		border-bottom: 1px solid #a9a9a9;
+	}
 
-    .q-table tr {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: block;
-        margin-bottom: 1rem;
-        border: 1px solid #a9a9a9;
-        border-bottom: none;
-        width: 73vw;
-    }
+	.radio-label {
+		display: flex;
+		justify-content: space-between;
+	}
 
-    .q-table td {
-        display: flex;
-        align-items: right;
-        padding: 0.5rem;
-        border: 1px solid #a9a9a9;
-        text-align: right;
-        border: none;
-        border-bottom: 1px solid #a9a9a9;
-    }
+	.custom-radio {
+		margin-left: 1rem;
+		width: 0.85em;
+		min-width: 0.85em;
+		height: 0.85em;
+		min-height: 0.85em;
+	}
 
-    .radio-label {
-        display: flex;
-        justify-content: space-between;
-    }
+	.option-text {
+		margin-left: 1rem;
+		display: inline-block;
+		/* margin-right: auto; */
+		overflow-wrap: break-word;
+	}
 
-    .custom-radio {
-        margin-left: 1rem;
-        width: 0.85em;
-        min-width: 0.85em;
-        height: 0.85em;
-        min-height: 0.85em;
-    }
+	/* pseudo element to use as element background: */
+	.req_question::after {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		/* make sure it's behind the element */
+		/* use border as background, should be width of option table */
+		/* cover the element , until the end of option table , use % to make it responsive */
+		background-color: #ffdfdf80;
+		top: -0.05em;
+		bottom: 1em;
+		margin-right: 0.1em;
+		border-radius: 6px;
+		padding: 0.5rem;
+		padding-left: 1rem;
+	}
 
-    .option-text {
-        margin-left: 1rem;
-        display: inline-block;
-        /* margin-right: auto; */
-        overflow-wrap: break-word;
-    }
-
-    /* pseudo element to use as element background: */
-    .req_question::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        /* make sure it's behind the element */
-        /* use border as background, should be width of option table */
-        /* cover the element , until the end of option table , use % to make it responsive */
-        background-color: #ffdfdf80;
-        top: -0.05em;
-        bottom: 1em;
-        margin-right: 0.1em;
-        border-radius: 6px;
-        padding: 0.5rem;
-        padding-left: 1rem;
-    }
-
-    .questionnaire-description {
-        display: none;
-    }
+	.questionnaire-description {
+		display: none;
+	}
 }

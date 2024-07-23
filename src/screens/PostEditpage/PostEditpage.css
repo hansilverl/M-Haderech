@@ -1,3 +1,12 @@
+.edit-post-page-external-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	padding: var(--padding-general);
+}
+
 .edit-post-page {
 	display: flex;
 	flex-direction: column;
@@ -5,13 +14,9 @@
 	border: 1px solid #dee2e6;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	width: 90%;
-
-	margin: 20px auto;
-	padding: 20px;
 	align-items: center;
+	padding: 10px;
 	justify-content: flex-start;
-	min-height: 90vh;
 }
 
 .edit-post-page .edit-post-header {

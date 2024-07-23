@@ -2,6 +2,7 @@ import './PdfViewer.css'
 
 import { useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 // deployment
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@latest/build/pdf.worker.min.mjs`
@@ -21,7 +22,11 @@ function PdfViewer({ pdfFile }) {
 
 	return (
 		<div className='pdf-div'>
-			<Document className='pdf-document' file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
+			<Document
+				className='pdf-document'
+				file={pdfFile}
+				onLoadSuccess={onDocumentLoadSuccess}
+				loading={<LoadingSpinner />}>
 				{Array.apply(null, Array(numPages))
 					.map((x, i) => i + 1)
 					.map((page) => {

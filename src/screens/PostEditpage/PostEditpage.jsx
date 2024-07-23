@@ -15,6 +15,7 @@ import usePostDelete from '../../hooks/usePostDelete'
 import ElementsEditor from '../../components/PostElementsEditor/ElementsEditor'
 import TextAreaWithLimit from '../../components/TextAreaWithLimist/TextAreaWithLimit'
 import GeneralModal from '../../components/GeneralModal/GeneralModal'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const PostEditPageComp = ({ postID, post }) => {
 	const { postUpdate, loadingUpdate, startUpdate } = usePostUpdate(postID)
@@ -92,11 +93,6 @@ const PostEditPageComp = ({ postID, post }) => {
 
 	return (
 		<div key={postID} className='edit-post-page'>
-			<div className='back-button-container'>
-				<button className='back-button' onClick={() => navigate(-1)}>
-					<FaArrowRight />
-				</button>
-			</div>
 			{!post ? (
 				<h1>המאמר לא נמצא</h1>
 			) : (
@@ -189,17 +185,15 @@ const PostEditPageContainer = ({ postID }) => {
 		}
 	}, [refresh, reloadGet])
 
-	return loadingGet ? (
-		<h2>טוען...</h2>
-	) : errorGet ? (
-		<>
-			<h2>המאמר לא נמצא</h2>
-			<p>{errorGet.toString()}</p>
-		</>
-	) : postsGet ? (
-		<PostEditPageComp key={postID} postID={postID} post={postsGet} setRefresh={setRefresh} />
-	) : (
-		<h2>המאמר לא נמצא</h2>
+	return (
+		<div className='edit-post-page-external-container'>
+			{loadingGet && <LoadingSpinner />}
+			{errorGet && <p>שגיאה: {errorGet}</p>}
+			{!loadingGet && !postsGet && <h2>המאמר לא נמצא</h2>}
+			{postsGet && (
+				<PostEditPageComp key={postID} postID={postID} post={postsGet} setRefresh={setRefresh} />
+			)}
+		</div>
 	)
 }
 

@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Modal from 'react-modal';
 import './NewsletterLinkAdmin.css';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 Modal.setAppElement('#root');
 
@@ -60,9 +61,6 @@ const NewsletterLinkAdmin = () => {
       alert('שגיאה בעדכון קישור לרשימת תפוצה.');
     }
   };
-
-  if (loading) return <p>טוען...</p>;
-  if (error) return <p>שגיאה: {error}</p>;
 
   return (
     <div className="newsletter-link">
