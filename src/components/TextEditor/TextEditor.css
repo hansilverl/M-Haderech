@@ -1,11 +1,9 @@
 .tiptap {
 	background: white;
 	border-top: 1px solid rgba(128, 128, 128, 0.559);
-	/* border-radius: 0.25rem; */
-	min-height: 300px; /* Increased height for a bigger input area */
+	min-height: 300px;
 	background-color: #f0f0f0;
 	color: #333;
-	/* margin: 5px; */
 	width: auto;
 	text-align: right;
 	padding: 0px 10px;
@@ -23,6 +21,8 @@
 	pointer-events: none;
 	border: none;
 	background-color: #ffffff;
+	min-height: 0px;
+	height: fit-content;
 }
 
 .tiptap:focus {
