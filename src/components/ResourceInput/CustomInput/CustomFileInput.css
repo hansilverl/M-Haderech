@@ -4,7 +4,13 @@
 	align-items: center;
 	justify-content: flex-start;
 	margin: 0px;
-	padding: 0px 5px;
+}
+
+.custom-file-input-div {
+	padding: 20px;
+	border: black 2px dashed;
+	border-radius: 10px;
+
 }
 
 .custom-file-input-container .choose-file-button {
@@ -21,4 +27,20 @@
 .custom-file-input-container .choose-file-button:hover {
 	background-color: #218838;
 	transform: translateY(-2px);
+}
+
+.custom-file-input-container .file-info-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.custom-file-input-container .drag-message {
+	margin: 5px;
+}
+
+.custom-file-input-container .drag-error-message {
+	color: red;
+	font-weight: bold;
 }

@@ -16,7 +16,8 @@
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	align-items: center;
 	padding: 10px;
-	justify-content: flex-start;
+	align-self: stretch;
+	justify-content: stretch;
 }
 
 .edit-post-page .edit-post-header {
@@ -31,7 +32,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	align-items: center;
+	align-self: auto;
 	width: 75%;
 }
 /* General styles remain unchanged */
@@ -178,18 +179,16 @@
 }
 
 .edit-post-page .buttons-container {
-	display: flex;
+	display: inline-flex;
 	flex-direction: row;
-	width: 101%;
+	width: auto;
+	align-self: stretch;
 	justify-content: center;
 	gap: 10px;
 	font-weight: 550;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
-	padding: 10px;
 	/* bottom of modal: */
-	position: sticky;
-	background-color: white;
+	position: relative;
 	bottom: 0;
 }
 
@@ -203,11 +202,9 @@
 		text-align: left;
 		margin-bottom: 5px;
 	}
-	.edit-post-page .buttons-container {
-		width: 100%;
-	}
 
 	.edit-post-header .editor-header-input {
-		width: 100%;
+		width: auto;
+		align-self: stretch;
 	}
 }
