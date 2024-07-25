@@ -13,6 +13,7 @@
 .resource-input-container .title {
 	text-align: right;
 	font-size: 16px;
+	margin-left: 10px;
 }
 
 .resource-input-container h3 {

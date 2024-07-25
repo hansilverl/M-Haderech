@@ -1,11 +1,28 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import './CustomFileInput.css' // Import the CSS file for styling
+import Dropzone from 'react-dropzone'
 
 const CustomFileInput = ({ setFile }) => {
-	const [fileName, setFileName] = useState('לא נבחר קובץ')
-	const fileInputRef = useRef(null)
+	const onDrop = useCallback((acceptedFiles) => {
+		console.log(acceptedFiles)
+		if (acceptedFiles.length > 1) {
+			setError('אפשר להעלות רק קובץ אחד')
+			return
+		}
+		setError(null)
+		setFile(acceptedFiles[0])
+		return
+	}, [])
+
+	const [error, setError] = useState(null)
+	const [fileName, setFileName] = useState(null)
+
 
 	const handleFileChange = (event) => {
+		if (event.target.files.length > 1) {
+			setError('אפשר להעלות רק קובץ אחד')
+			return
+		}
 		const file = event.target.files[0]
 		if (file) {
 			setFileName(file.name)
@@ -16,22 +33,30 @@ const CustomFileInput = ({ setFile }) => {
 		}
 	}
 
-	const handleButtonClick = () => {
-		fileInputRef.current.click()
-	}
-
 	return (
 		<div className='custom-file-input-container'>
-			<input
-				type='file'
-				ref={fileInputRef}
-				onChange={handleFileChange}
-				style={{ display: 'none' }}
-			/>
-			<button type='choose-file-button' onClick={handleButtonClick} className='choose-file-button'>
-				בחר קובץ
-			</button>
-			<span className='file-name'>{fileName}</span>
+			<Dropzone onDrop={onDrop}>
+				{({ getRootProps, getInputProps }) => (
+					<div className='custom-file-input-div' {...getRootProps()}>
+						<input
+							type='file'
+							onChange={handleFileChange}
+							style={{ display: 'none' }}
+							{...getInputProps()}
+						/>
+						<div className='file-info-container'>
+							{fileName && <p className='file-name'>{fileName}</p>}
+							{!fileName && (
+								<>
+									<p className='drag-message'>לא נבחר קובץ</p>
+									<p className='drag-message'>גרור קובץ או לחץ כאן לבחירת קובץ</p>
+								</>
+							)}
+							{error && <p className='drag-error-message'>{error}</p>}
+						</div>
+					</div>
+				)}
+			</Dropzone>
 		</div>
 	)
 }
