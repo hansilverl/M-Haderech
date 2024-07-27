@@ -76,7 +76,10 @@ const uploadFile = async (file, types) => {
 	const generalFileType = fileType.split('/')[0]
 	const fileExtension = file.name.split('.').pop().toLowerCase()
 
-	if (!('other' in types) && !(generalFileType in types))
+	console.log(fileType, generalFileType, fileExtension, types)
+	console.log(types.includes(generalFileType))
+
+	if (!types.includes('other') && !types.includes(generalFileType))
 		throw new Error(`הקובץ ${file.name} אינו חוקי`)
 
 	if (!('other' in types)) {
