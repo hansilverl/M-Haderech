@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { db, collectionNames } from '../firebase/config'
-import { getDownloadURLFromPath } from './useResourceManagement'
+import { getDownloadURLFromPath } from './useResourcesMgmt' 
 import {
 	collection,
 	query,

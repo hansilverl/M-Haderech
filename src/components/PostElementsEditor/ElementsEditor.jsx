@@ -18,7 +18,7 @@ import {
 } from '@dnd-kit/sortable'
 import ElementEditor from './ElementEditor/ElementEditor'
 
-import { deleteObjectByFilePath } from '../../hooks/useResourceManagement'
+import { deleteObjectByFilePath } from '../../hooks/useResourcesMgmt'
 
 const ElementsEditor = (props) => {
 	const { postID, elements, setElements, setForceSave } = props

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { db } from '../firebase/config'
 import { doc, deleteDoc, collection } from 'firebase/firestore'
 
-import { deleteObjectByFilePath } from './useResourceManagement'
+import { deleteObjectByFilePath } from './useResourcesMgmt'
 import { fetchSinglePost } from './usePostsGet'
 import { elements } from 'chart.js'
 

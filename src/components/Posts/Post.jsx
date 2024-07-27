@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import pdfIcon from '../../assets/pdf-file.png'
-import { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
+import { getDownloadURLFromPath } from '../../hooks/useResourcesMgmt'
 import './Post.css'
 
 const getDateStringFromTimeStamp = (timeStamp) => {

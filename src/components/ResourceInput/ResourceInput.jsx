@@ -1,43 +1,44 @@
-import React, { useEffect, useState } from 'react'
-import useResourceManagement, { getDownloadURLFromPath } from '../../hooks/useResourceManagement'
 import './ResourceInput.css'
+
+import React, { useEffect, useState } from 'react'
+import useResourcesMgmt, { getDownloadURLFromPath } from '../../hooks/useResourcesMgmt'
 import CustomFileInput from './CustomInput/CustomFileInput'
 import { FaDownload } from 'react-icons/fa'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const ResourceInput = (props) => {
 	const { path, setPath, type, title, url, setUrl } = props
 	const {
-		resourcePath,
-		loadingResourcePath,
-		errorResourcePath,
-		deleteResource,
-		uploadResource,
+		resourcesPaths,
+		loadingResourcesMgmt,
+		errorResourcesMgmt,
+		deleteResources,
+		uploadResources,
 		downloadResource,
-	} = useResourceManagement(path)
+	} = useResourcesMgmt([path])
 
 	const [currentFile, setCurrentFile] = useState(undefined)
 
 	const deleteResourceHandler = () => {
 		setCurrentFile(null)
 		setUrl(null)
-		deleteResource()
+		deleteResources()
 	}
 
 	const uploadResourceHandler = async () => {
 		if (!currentFile) return
-		if (path) await deleteResource()
-		await uploadResource(currentFile, type)
+		if (path) await deleteResources([path])
+		await uploadResources([currentFile], [type])
 	}
 
 	useEffect(() => {
 		const setInternalUrl = async () => {
-			const newUrl = await getDownloadURLFromPath(resourcePath)
+			const newUrl = await getDownloadURLFromPath(resourcesPaths[0])
 			setUrl(newUrl)
 		}
-		setPath(resourcePath)
-		if (resourcePath && resourcePath !== '') setInternalUrl()
-	}, [resourcePath])
+		setPath(resourcesPaths[0])
+		if (resourcesPaths && resourcesPaths !== '') setInternalUrl()
+	}, [resourcesPaths])
 
 	useEffect(() => {
 		uploadResourceHandler()
@@ -66,10 +67,10 @@ const ResourceInput = (props) => {
 				)}
 			</div>
 			<div className='status-message-container'>
-				{loadingResourcePath ? (
+				{loadingResourcesMgmt ? (
 					<LoadingSpinner />
-				) : !errorResourcePath ? null : (
-					<h2 className='status-message error'>שגיאה: {errorResourcePath.toString()}</h2>
+				) : !errorResourcesMgmt ? null : (
+					<h2 className='status-message error'>שגיאה: {errorResourcesMgmt.toString()}</h2>
 				)}
 			</div>
 		</div>
