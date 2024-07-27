@@ -18,16 +18,15 @@ const PostsPresentor = (props) => {
 		maxRows = DEFAULT_MAX_ROWS,
 	} = props
 
+	const myQuery = buildQuery(type, published, pageSize)
+	const { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet } = usePostsGet(myQuery)
+
 	const [currentPage, setCurrentPage] = useState(1)
 	const [currentPosts, setCurrentPosts] = useState(null)
 	const [needToReload, setNeedToReload] = useState(false)
 	const [searchQuery, setSearchQuery] = useState('')
 	const [filteredPosts, setFilteredPosts] = useState(null)
 	const [maxPosts, setMaxPosts] = useState(pageSize ? pageSize : 1)
-
-	const myQuery = buildQuery(type, published, pageSize)
-
-	const { postsGet, loadingGet, errorGet, hasMore, reloadGet, loadMoreGet } = usePostsGet(myQuery)
 
 	const typeName = type === 'post' ? 'מאמר' : 'אירוע'
 

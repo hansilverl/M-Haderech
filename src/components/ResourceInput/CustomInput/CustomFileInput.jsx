@@ -1,8 +1,12 @@
-import React, { useCallback, useRef, useState } from 'react'
 import './CustomFileInput.css' // Import the CSS file for styling
+
+import React, { useCallback, useState } from 'react'
 import Dropzone from 'react-dropzone'
 
 const CustomFileInput = ({ setFile }) => {
+	const [error, setError] = useState(null)
+	const [fileName, setFileName] = useState(null)
+
 	const onDrop = useCallback((acceptedFiles) => {
 		console.log(acceptedFiles)
 		if (acceptedFiles.length > 1) {
@@ -13,10 +17,6 @@ const CustomFileInput = ({ setFile }) => {
 		setFile(acceptedFiles[0])
 		return
 	}, [])
-
-	const [error, setError] = useState(null)
-	const [fileName, setFileName] = useState(null)
-
 
 	const handleFileChange = (event) => {
 		if (event.target.files.length > 1) {
