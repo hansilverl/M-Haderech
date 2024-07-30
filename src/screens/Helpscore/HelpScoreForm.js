@@ -21,6 +21,7 @@ const HelpScoreForm = () => {
 		}))
 	}
 
+	
 	const handleSubmit = (e) => {
 		e.preventDefault()
 
@@ -85,5 +86,7 @@ const HelpScoreForm = () => {
 		</form>
 	)
 }
+
+
 
 export default HelpScoreForm
