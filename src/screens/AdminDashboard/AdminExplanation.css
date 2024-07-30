@@ -1,3 +1,12 @@
+.admin-explanation-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: #f5f5f5;
+}
 .admin-explanation-container {
   display: flex;
   justify-content: center;
@@ -11,7 +20,7 @@
 
 .admin-explanation {
   text-align: center;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 40px; /* Increased padding for a bigger box */
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
