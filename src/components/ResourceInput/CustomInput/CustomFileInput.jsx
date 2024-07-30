@@ -38,7 +38,7 @@ const CustomFileInput = ({ setFiles, maxFiles }) => {
 							{...getInputProps()}
 						/>
 						<div className='file-info-container'>
-							<p className='drag-message'>גרור קובץ או לחץ כאן לבחירת קובץ</p>
+							<p className='drag-message'>ניתן לגרור קובץ לשטח זה, או ללחוץ כאן לבחירת קובץ</p>
 							{error && <p className='drag-error-message'>{error}</p>}
 						</div>
 					</div>
