@@ -60,7 +60,6 @@ body {
 	/* Ensure the form is positioned relative for pseudo-element */
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	background-color: #ffffff;
 }
 
 .q-container {
@@ -310,119 +309,118 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-	.help-score-form button[type='submit'] {
-		width: 73vw;
-		align-self: center;
-	}
 	.help-score-form {
-		padding-top: 2vh;
-		padding-bottom: 5vh;
-		max-width: 85%;
-	}
+        padding-top: 2vh;
+        padding-bottom: 5vh;
+    }
 
-	.bordered-container {
-		width: 100%;
-		padding: 1%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		/* padding-left: 2.39em; */
-	}
+    .bordered-container {
+        width: 100%;
+        padding: 1%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* padding-left: 2.39em; */
+    }
 
-	.option-vert {
-		display: block !important;
-	}
+    .option-vert {
+        display: block !important;
+    }
 
-	.q-container {
-		align-items: right;
-		width: 100%;
-		/* Ensure full width for proper alignment */
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		/* Align to the right within the container */
-		margin: auto 0;
-	}
+    .q-container {
+        align-items: right; 
+        width: 100%;
+        /* Ensure full width for proper alignment */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Align to the right within the container */
+        margin: auto 0;
 
-	.question-text {
-		width: 90%;
-		/* like the table */
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-		hyphens: auto;
-		flex-wrap: wrap;
-		margin-top: 1rem;
-		/* margin right will align the text with q-table */
-		margin-right: 4%;
-	}
+    }
 
-	.q-table {
-		display: inline-block;
-		/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-		align-self: center;
-	}
+    .question-text {
+        width: 90%;
+        /* like the table */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        /* margin right will align the text with q-table */
+        margin-right: 4%;
+    
 
-	.q-table thead {
-		display: none;
-	}
+    }
 
-	.q-table tr {
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		display: block;
-		margin-bottom: 1rem;
-		border: 1px solid #a9a9a9;
-		border-bottom: none;
-		width: 73vw;
-	}
+    .q-table {
+        display: inline-block;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        align-self: center;
+    }
 
-	.q-table td {
-		display: flex;
-		align-items: right;
-		padding: 0.5rem;
-		border: 1px solid #a9a9a9;
-		text-align: right;
-		border: none;
-		border-bottom: 1px solid #a9a9a9;
-	}
+    .q-table thead {
+        display: none;
+    }
 
-	.radio-label {
-		display: flex;
-		justify-content: space-between;
-	}
+    .q-table tr {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #a9a9a9;
+        border-bottom: none;
+        width: 60vw;
+    }
 
-	.custom-radio {
-		margin-left: 1rem;
-		width: 0.85em;
-		min-width: 0.85em;
-		height: 0.85em;
-		min-height: 0.85em;
-	}
+    .q-table td {
+        display: flex;
+        align-items: right;
+        padding: 0.5rem;
+        border: 1px solid #a9a9a9;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid #a9a9a9;
+    }
 
-	.option-text {
-		margin-left: 1rem;
-		display: inline-block;
-		/* margin-right: auto; */
-		overflow-wrap: break-word;
-	}
+    .radio-label {
+        display: flex;
+        justify-content: space-between;
+    }
 
-	/* pseudo element to use as element background: */
-	.req_question::after {
-		content: '';
-		position: absolute;
-		z-index: -1;
-		/* make sure it's behind the element */
-		/* use border as background, should be width of option table */
-		/* cover the element , until the end of option table , use % to make it responsive */
-		background-color: #ffdfdf80;
-		top: -0.05em;
-		bottom: 1em;
-		margin-right: 0.1em;
-		border-radius: 6px;
-		padding: 0.5rem;
-		padding-left: 1rem;
-	}
+    .custom-radio {
+        margin-left: 1rem;
+        width: 0.85em;
+        min-width: 0.85em;
+        height: 0.85em;
+        min-height: 0.85em;
+    }
 
-	.questionnaire-description {
-		display: none;
-	}
+    .option-text {
+        margin-left: 1rem;
+        display: inline-block;
+        /* margin-right: auto; */
+        overflow-wrap: break-word;
+    }
+
+    /* pseudo element to use as element background: */
+    .req_question::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        /* make sure it's behind the element */
+        /* use border as background, should be width of option table */
+        /* cover the element , until the end of option table , use % to make it responsive */
+        background-color: #ffdfdf80;
+        top: -0.05em;
+        bottom: 1em;
+        margin-right: 0.1em;
+        border-radius: 6px;
+        padding: 0.5rem;
+        padding-left: 1rem;
+    }
+
+    .questionnaire-description {
+        display: none;
+    }
+
 }

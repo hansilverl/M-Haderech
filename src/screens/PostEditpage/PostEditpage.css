@@ -10,7 +10,7 @@
 .edit-post-page {
 	display: flex;
 	flex-direction: column;
-	background: white;
+	background: #fff;
 	border: 1px solid #dee2e6;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
