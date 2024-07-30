@@ -73,12 +73,14 @@ const ElementsEditor = (props) => {
 		})
 	)
 
-	const handleDragStart = () => {
-		setDragging(true)
+	const handleDragStart = (event) => {
+		console.log(event?.active?.id)
+		if (event?.active?.id.includes('draggable-item')) setDragging(true)
 	}
 
 	const handleDragEnd = (event) => {
-		const { active, over } = event
+		const { active, over, id } = event
+		if (!dragging) return
 
 		setDragging(false)
 		if (!over || active.id === over.id) return
@@ -95,6 +97,7 @@ const ElementsEditor = (props) => {
 	return (
 		<div className='element-editors-container'>
 			<DndContext
+				id='element-editors-dnd-context'
 				sensors={sensors}
 				collisionDetection={closestCenter}
 				onDragStart={handleDragStart}

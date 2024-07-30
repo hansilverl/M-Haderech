@@ -15,6 +15,7 @@ import PdfViewer from '../../PdfViewer/PdfViewer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsUpDownLeftRight } from '@fortawesome/free-solid-svg-icons'
 import ElementGalleryPresentor from '../../PostElementPresentor/GalleryElementPresentor/GalleryElementPresentor'
+import ResourceListEditor from '../ResourceListEditor/ResourceListEditor'
 
 const typeValues = ['text', 'image', 'video', 'audio', 'document', 'gallery', 'other']
 const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מסמך pdf', 'גלריה', 'אחר']
@@ -25,8 +26,9 @@ const ElementGalleryEditor = (props) => {
 
 	return (
 		<div className='element-comp-container'>
-			<ElementGalleryPresentor files={resourcesPaths} />
-			<ResourceInput
+			{/* <ElementGalleryPresentor files={resourcesPaths} /> */}
+			<ResourceListEditor />
+			{/* <ResourceInput
 				types={type}
 				paths={resourcesPaths}
 				setPaths={setResourcesPaths}
@@ -34,7 +36,7 @@ const ElementGalleryEditor = (props) => {
 				setUrls={setUrls}
 				title=''
 				maxFiles={50}
-			/>
+			/> */}
 		</div>
 	)
 }
@@ -180,7 +182,6 @@ const ElementEditor = (props) => {
 	const displayResourceEditor =
 		displayEditor && !forceHideEditor && !displayTextEditor && !displayGalleryEditor
 
-	console.log(displayResourceEditor, displayTextEditor, displayGalleryEditor)
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} className='element-editor-container'>
 			<div className='element-editor-header'>

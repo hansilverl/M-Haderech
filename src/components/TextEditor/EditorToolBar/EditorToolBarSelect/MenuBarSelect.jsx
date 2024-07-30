@@ -16,10 +16,6 @@ const MenuBarSelectSize = (props) => {
 		editor.chain().focus().setFontSize(size).run()
 	}
 
-	const unsetFontSize = () => {
-		editor.chain().focus().unsetFontSize().run()
-	}
-
 	const getFontSize = () => {
 		const attrs = editor.getAttributes('textStyle')
 		return attrs.fontSize
@@ -34,7 +30,7 @@ const MenuBarSelectSize = (props) => {
 	const getPlaceHolder = () => {
 		const fontSize = getFontSize()
 
-		if (!fontSize) return 'בחירת גודל גופן'
+		if (!fontSize) return 'בחירה'
 		return `גודל גופן: ${fontSize}`
 	}
 

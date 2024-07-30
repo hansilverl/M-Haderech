@@ -46,7 +46,6 @@ export function ElementGalleryPresentor(props) {
 	]
 
 	const onSlideChange = (index) => {
-		console.log('index', index)
 		if (setCurentIndex) setCurentIndex(index)
 	}
 

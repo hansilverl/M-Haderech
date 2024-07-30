@@ -76,8 +76,6 @@ const uploadFile = async (file, types) => {
 	const generalFileType = fileType.split('/')[0]
 	const fileExtension = file.name.split('.').pop().toLowerCase()
 
-	console.log(fileType, generalFileType, fileExtension, types)
-	console.log(types.includes(generalFileType))
 
 	if (!types.includes('other') && !types.includes(generalFileType))
 		throw new Error(`הקובץ ${file.name} אינו חוקי`)
@@ -103,7 +101,6 @@ const downloadFile = async (filePath) => {
 }
 
 const useResourcesMgmt = (initialPaths = null) => {
-	console.log(initialPaths)
 	const [resourcesPaths, setResourcesPaths] = useState(initialPaths ? initialPaths : [])
 	const [loadingResourcesMgmt, setLoadingResourceMgmt] = useState(false)
 	const [errorResourcesMgmt, setErrorResourceMgmt] = useState(null)
@@ -127,7 +124,6 @@ const useResourcesMgmt = (initialPaths = null) => {
 	}
 
 	const uploadResources = async (newFiles, allowedTypes) => {
-		// return console.log(newFiles, allowedTypes, resourcesPaths)
 		if (!newFiles || loadingResourcesMgmt) return
 		setLoadingResourceMgmt(true)
 		setErrorResourceMgmt(null)
