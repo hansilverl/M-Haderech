@@ -76,6 +76,10 @@
 
 /* Media Queries */
 @media (max-width: 1200px) {
+  .admin-explanation-container::before
+  {
+    display: none;
+  }
   .welcome-header {
     font-size: 2.5em;
   }
