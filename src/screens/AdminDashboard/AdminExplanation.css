@@ -11,10 +11,10 @@
 
 .admin-explanation {
   text-align: center;
-  background-color: #f0f0f0;
+  background-color: #fff;
   padding: 40px; /* Increased padding for a bigger box */
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
   width: 90vw; /* Adjusted width */
 }
 
