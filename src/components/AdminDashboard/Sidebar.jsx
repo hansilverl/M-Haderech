@@ -45,7 +45,7 @@ const Sidebar = () => {
 					<li>
 						<Link to='/admin/users' onClick={closeSidebar}>
 							<FaUsers className='sidebar-icon' />
-							<span>משתמשים</span>
+							<span>משתמשות</span>
 						</Link>
 					</li>
 					<li>
