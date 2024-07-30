@@ -1,0 +1,40 @@
+.video-wrapper .image-gallery-play-button,
+.video-wrapper .image-gallery-fullscreen-button {
+	display: none !important;
+}
+
+.video-wrapper {
+	width: 100% !important;
+}
+
+.video-element {
+	width: 100% !important;
+}
+
+.image-gallery button {
+	background-color: transparent;
+}
+
+.image-gallery.items-1 .image-gallery-slide-wrapper {
+	display: block;
+}
+
+.image-gallery.items-2 .image-gallery-slide-wrapper {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.image-gallery.items-2 .image-gallery-slide {
+	flex: 1;
+	margin: 0 10px;
+}
+
+.image-gallery.items-3 .image-gallery-slide-wrapper {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.image-gallery.items-3 .image-gallery-slide {
+	flex: 1;
+	margin: 0 5px;
+}

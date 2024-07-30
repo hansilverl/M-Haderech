@@ -3,34 +3,27 @@ import './CustomFileInput.css' // Import the CSS file for styling
 import React, { useCallback, useState } from 'react'
 import Dropzone from 'react-dropzone'
 
-const CustomFileInput = ({ setFile }) => {
+const CustomFileInput = ({ setFiles, maxFiles }) => {
+	maxFiles = maxFiles == undefined || maxFiles <= 1 ? 1 : maxFiles
 	const [error, setError] = useState(null)
-	const [fileName, setFileName] = useState(null)
 
 	const onDrop = useCallback((acceptedFiles) => {
-		console.log(acceptedFiles)
-		if (acceptedFiles.length > 1) {
-			setError('אפשר להעלות רק קובץ אחד')
+		if (acceptedFiles.length > maxFiles) {
+			setError(`מספר הקבצים המקסימלי הוא ${maxFiles}`)
 			return
 		}
+		console.log('acceptedFiles', acceptedFiles)
 		setError(null)
-		setFile(acceptedFiles[0])
+		setFiles(acceptedFiles)
 		return
 	}, [])
 
 	const handleFileChange = (event) => {
-		if (event.target.files.length > 1) {
-			setError('אפשר להעלות רק קובץ אחד')
+		if (event.target.files.length > maxFiles) {
+			setError(`מספר הקבצים המקסימלי הוא ${maxFiles}`)
 			return
 		}
-		const file = event.target.files[0]
-		if (file) {
-			setFileName(file.name)
-			setFile(file)
-		} else {
-			setFileName('לא נבחר קובץ')
-			setFile(null)
-		}
+		setFiles(event.target.files)
 	}
 
 	return (
@@ -45,13 +38,7 @@ const CustomFileInput = ({ setFile }) => {
 							{...getInputProps()}
 						/>
 						<div className='file-info-container'>
-							{fileName && <p className='file-name'>{fileName}</p>}
-							{!fileName && (
-								<>
-									<p className='drag-message'>לא נבחר קובץ</p>
-									<p className='drag-message'>גרור קובץ או לחץ כאן לבחירת קובץ</p>
-								</>
-							)}
+							<p className='drag-message'>גרור קובץ או לחץ כאן לבחירת קובץ</p>
 							{error && <p className='drag-error-message'>{error}</p>}
 						</div>
 					</div>

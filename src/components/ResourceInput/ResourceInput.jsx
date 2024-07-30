@@ -7,7 +7,8 @@ import { FaDownload } from 'react-icons/fa'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const ResourceInput = (props) => {
-	const { path, setPath, type, title, url, setUrl } = props
+	const { paths, setPaths, types, title, urls, setUrls, maxFiles } = props
+
 	const {
 		resourcesPaths,
 		loadingResourcesMgmt,
@@ -15,61 +16,61 @@ const ResourceInput = (props) => {
 		deleteResources,
 		uploadResources,
 		downloadResource,
-	} = useResourcesMgmt([path])
+	} = useResourcesMgmt(paths && paths !== '' ? paths : [])
 
-	const [currentFile, setCurrentFile] = useState(undefined)
+	const [currentFiles, setCurrentFiles] = useState(undefined)
 
 	const deleteResourceHandler = () => {
-		setCurrentFile(null)
-		setUrl(null)
-		deleteResources()
+		deleteResources(paths)
 	}
 
 	const uploadResourceHandler = async () => {
-		if (!currentFile) return
-		if (path) await deleteResources([path])
-		await uploadResources([currentFile], [type])
+		if (!currentFiles) return
+		if (paths) await deleteResources(paths)
+		await uploadResources(currentFiles, types)
 	}
 
 	useEffect(() => {
 		const setInternalUrl = async () => {
-			const newUrl = await getDownloadURLFromPath(resourcesPaths[0])
-			setUrl(newUrl)
+			const newUrls = []
+			for (const path of resourcesPaths) {
+				const newUrl = await getDownloadURLFromPath(path)
+				newUrls.push(newUrl)
+			}
+			setUrls(newUrls)
 		}
-		setPath(resourcesPaths[0])
+		setPaths(resourcesPaths)
 		if (resourcesPaths && resourcesPaths !== '') setInternalUrl()
 	}, [resourcesPaths])
 
 	useEffect(() => {
 		uploadResourceHandler()
-	}, [currentFile])
+	}, [currentFiles])
 
 	return (
 		<div className='resource-input-container'>
 			<div className='file-input'>
 				<h3 className='title'>קובץ {title}:</h3>
-				{!path ? (
-					<CustomFileInput setFile={setCurrentFile} />
-				) : (
+				{paths && paths.length > 0 && paths[0] && (
 					<div className='file-info-container'>
-						{/* <h5>קיים כבר קובץ</h5> */}
-						<a href={url} target='_blank' rel='noopener noreferrer'>
+						<a href={urls} target='_blank' rel='noopener noreferrer'>
 							ניתן לראות כאן
 						</a>
 						<button onClick={deleteResourceHandler} className='delete-button-input'>
 							מחיקה
 						</button>
 						<button className='download-button' alt='הורדת קובץ' onClick={downloadResource}>
-							{/*download icon:*/}
 							<FaDownload />
 						</button>
 					</div>
 				)}
+				{paths && paths.length === 0 && (
+					<CustomFileInput maxFiles={maxFiles} setFiles={setCurrentFiles} />
+				)}
 			</div>
 			<div className='status-message-container'>
-				{loadingResourcesMgmt ? (
-					<LoadingSpinner />
-				) : !errorResourcesMgmt ? null : (
+				{loadingResourcesMgmt && <LoadingSpinner />}
+				{errorResourcesMgmt && (
 					<h2 className='status-message error'>שגיאה: {errorResourcesMgmt.toString()}</h2>
 				)}
 			</div>

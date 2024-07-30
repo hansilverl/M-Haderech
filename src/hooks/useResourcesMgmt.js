@@ -103,6 +103,7 @@ const downloadFile = async (filePath) => {
 }
 
 const useResourcesMgmt = (initialPaths = null) => {
+	console.log(initialPaths)
 	const [resourcesPaths, setResourcesPaths] = useState(initialPaths ? initialPaths : [])
 	const [loadingResourcesMgmt, setLoadingResourceMgmt] = useState(false)
 	const [errorResourcesMgmt, setErrorResourceMgmt] = useState(null)
@@ -113,9 +114,10 @@ const useResourcesMgmt = (initialPaths = null) => {
 		setErrorResourceMgmt(null)
 		for (const path of paths) {
 			try {
-				if (!path || !(path in resourcesPaths)) continue
+				if (!path || !resourcesPaths.includes(path))
+					throw new Error('לא נבחר קובץ למחיקה או שהקובץ אינו מנוהל על ידי רכיב זה')
 				await deleteObjectByFilePath(path)
-				setResourcesPaths(null)
+				setResourcesPaths((resourcesPaths) => resourcesPaths.filter((p) => p !== path))
 			} catch (error) {
 				setErrorResourceMgmt((msg) => `${msg}\n${error.message}`)
 				console.error('Error deleting object: ', error)
@@ -125,6 +127,7 @@ const useResourcesMgmt = (initialPaths = null) => {
 	}
 
 	const uploadResources = async (newFiles, allowedTypes) => {
+		// return console.log(newFiles, allowedTypes, resourcesPaths)
 		if (!newFiles || loadingResourcesMgmt) return
 		setLoadingResourceMgmt(true)
 		setErrorResourceMgmt(null)

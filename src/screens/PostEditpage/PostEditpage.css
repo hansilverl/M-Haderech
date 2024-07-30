@@ -15,9 +15,9 @@
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	align-items: center;
-	padding: 10px;
 	align-self: stretch;
 	justify-content: stretch;
+	padding: var(--padding-general);
 }
 
 .edit-post-page .edit-post-header {

@@ -14,65 +14,84 @@ import PdfViewer from '../../PdfViewer/PdfViewer'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsUpDownLeftRight } from '@fortawesome/free-solid-svg-icons'
+import ElementGalleryPresentor from '../../PostElementPresentor/GalleryElementPresentor/GalleryElementPresentor'
 
-const typeValues = ['text', 'image', 'video', 'audio', 'document', 'other']
-const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מסמך pdf', 'אחר']
+const typeValues = ['text', 'image', 'video', 'audio', 'document', 'gallery', 'other']
+const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מסמך pdf', 'גלריה', 'אחר']
 
-const ElementEditorComp = (props) => {
-	const { type, content, setContent, resourcePath, setResourcePath, dimensions, setDimensions } =
-		props
-
-	const [url, setUrl] = useState(null)
-	const [imageSize, setImageSize] = useState({ width: 800, height: 800 })
-
-	const getImageSize = (url) => {
-		const img = new Image()
-		img.onload = () => {
-			setImageSize({ width: img.width, height: img.height })
-		}
-		img.src = url
-	}
-
-	const index = typeValues.indexOf(type)
-
-	useEffect(() => {
-		if (type === 'image' && url) getImageSize(url)
-	}, [url])
-
-	if (index < 0) {
-		return <h2>שגיאה בטעינת עורך האלמנט</h2>
-	}
+const ElementGalleryEditor = (props) => {
+	const { type, resourcesPaths, setResourcesPaths } = props
+	const [urls, setUrls] = useState([])
 
 	return (
 		<div className='element-comp-container'>
-			{type === 'text' ? (
-				<TextEditor content={content} setContent={setContent} />
-			) : (
-				<>
-					<ResourceInput
-						type={type}
-						path={resourcePath}
-						setPath={setResourcePath}
-						title={typeNames[index]}
-						url={url}
-						setUrl={setUrl}
-					/>
-					{type === 'document' || type === 'pdf' ? (
-						<PdfViewer pdfFile={url} />
-					) : type === 'other' ? null : (
-						<ResizableComponent
-							mediaType={type}
-							src={url}
-							dimensions={dimensions}
-							setDimensions={setDimensions}
-							maxWidth={imageSize.width}
-							maxHeight={imageSize.height}
-						/>
-					)}
-				</>
+			<ElementGalleryPresentor files={resourcesPaths} />
+			<ResourceInput
+				types={type}
+				paths={resourcesPaths}
+				setPaths={setResourcesPaths}
+				urls={urls}
+				setUrls={setUrls}
+				title=''
+				maxFiles={50}
+			/>
+		</div>
+	)
+}
+
+const ElementResourceEditor = (props) => {
+	const { type, resourcePath, setResourcePath, dimensions, setDimensions } = props
+	const [urls, setUrls] = useState([])
+	const [paths, setPaths] = useState(resourcePath && resourcePath !== '' ? [resourcePath] : null)
+	const [imageSize, setImageSize] = useState(dimensions ? dimensions : { width: 800, height: 800 })
+
+	const typeIndex = typeValues.indexOf(type)
+	const typeName = typeIndex < 0 ? 'לא ידוע' : typeNames[typeIndex]
+
+	const getImageSize = (url) => {
+		const img = new Image()
+		img.onload = () => setImageSize({ width: img.width, height: img.height })
+		img.src = url
+	}
+
+	useEffect(() => {
+		if (type === 'image' && urls && urls[0]) getImageSize(urls[0])
+	}, [urls])
+
+	useEffect(() => {
+		if (paths && paths.length > 0 && paths[0] !== resourcePath) setResourcePath(paths[0])
+		if (paths && paths.length <= 0) setResourcePath(null)
+	}, [paths])
+
+	return (
+		<div className='element-comp-container'>
+			<ResourceInput
+				types={[type]}
+				paths={paths}
+				setPaths={setPaths}
+				title={typeName}
+				urls={urls}
+				setUrls={setUrls}
+				maxFiles={1}
+			/>
+			{(type === 'document' || type === 'pdf') && <PdfViewer pdfFile={urls[0]} />}
+			{(type === 'image' || type === 'video' || type === 'audio') && (
+				<ResizableComponent
+					mediaType={type}
+					src={urls[0]}
+					dimensions={dimensions}
+					setDimensions={setDimensions}
+					maxWidth={imageSize.width}
+					maxHeight={imageSize.height}
+				/>
 			)}
 		</div>
 	)
+}
+
+const ElementTextEditor = (props) => {
+	const { content, setContent } = props
+	return <TextEditor content={content} setContent={setContent} />
 }
 
 const ElementEditor = (props) => {
@@ -88,6 +107,7 @@ const ElementEditor = (props) => {
 	const [type, setType] = useState(elem.type)
 	const [content, setContent] = useState(elem.content)
 	const [resourcePath, setResourcePath] = useState(elem.resourcePath)
+	const [resourcesPaths, setResourcesPaths] = useState(elem.resourcePath)
 	const [displayEditor, setDisplayEditor] = useState(elem.displayEditor)
 	const [dimensions, setDimensions] = useState(elem.dimensions ? elem.dimensions : null)
 	const [isModalActive, setIsModalActive] = useState(false)
@@ -111,16 +131,18 @@ const ElementEditor = (props) => {
 			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 			autoSaveTimeout.current = null
 
-			let forceSave = false
+			let forceSave = resourcePath !== elem.resourcePath || resourcesPaths !== elem.resourcesPaths
 
 			setElement((elem) => {
 				const newElem = { ...elem }
 				newElem.type = type
-				if (type === 'pdf') newElem.type = 'document'
+				if (type === 'pdf' || type === 'document') newElem.type = 'application'
 				newElem.content = content
 				newElem.resourcePath = resourcePath
 				newElem.displayEditor = displayEditor
 				newElem.dimensions = dimensions
+				newElem.resourcesPaths = resourcesPaths
+
 				return newElem
 			})
 
@@ -132,7 +154,7 @@ const ElementEditor = (props) => {
 		autoSaveTimeout.current = setTimeout(() => {
 			onUpdateElement()
 		}, 500)
-	}, [type, content, resourcePath, displayEditor, dimensions])
+	}, [type, content, resourcePath, resourcesPaths, displayEditor, dimensions])
 
 	useEffect(() => {
 		if (elem != element) updateElement(elem)
@@ -152,6 +174,13 @@ const ElementEditor = (props) => {
 		setIsModalActive(true)
 	}
 
+	const displayTextEditor = displayEditor && !forceHideEditor && type === 'text'
+	const displayGalleryEditor = displayEditor && !forceHideEditor && type === 'gallery'
+
+	const displayResourceEditor =
+		displayEditor && !forceHideEditor && !displayTextEditor && !displayGalleryEditor
+
+	console.log(displayResourceEditor, displayTextEditor, displayGalleryEditor)
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} className='element-editor-container'>
 			<div className='element-editor-header'>
@@ -171,17 +200,28 @@ const ElementEditor = (props) => {
 					<button onClick={deleteElementButtonHandler}>מחיקת רכיב</button>
 				</div>
 			</div>
-			{!displayEditor || forceHideEditor ? null : (
-				<ElementEditorComp
-					type={type}
-					content={content}
+
+			{displayTextEditor && <ElementTextEditor content={content} setContent={setContent} />}
+
+			{displayResourceEditor && (
+				<ElementResourceEditor
+					key={`${element.id}-${type}`}
 					resourcePath={resourcePath}
-					dimensions={dimensions}
-					setContent={setContent}
 					setResourcePath={setResourcePath}
+					setDisplayEditor={setDisplayEditor}
 					setDimensions={setDimensions}
+					dimensions={dimensions}
+					type={type}
 				/>
 			)}
+
+			{displayGalleryEditor && (
+				<ElementGalleryEditor
+					resourcesPaths={resourcesPaths}
+					setResourcesPaths={setResourcesPaths}
+				/>
+			)}
+
 			<GeneralModal
 				isWarning={true}
 				isOpen={isModalActive}
