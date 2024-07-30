@@ -253,7 +253,7 @@ const History = () => {
         <div>
           <p className="no-history">אין לך מבדקים</p>
           <button className="fill-questionnaire-button" onClick={() => window.location.href = '/helpScore'}>
-            מלא מבדק
+            מילוי מבדק
           </button>
         </div>
       ) : (
