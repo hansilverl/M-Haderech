@@ -130,16 +130,16 @@ export const LoginPopup = ({ setShowLogin }) => {
           />
         </div>
         <button type="submit">
-          {currState === "הרשמה" ? "צור חשבון" : "התחברות"}
+          {currState === "הרשמה" ? "יצירת חשבון" : "התחברות"}
         </button>
         {authError && <p className="error-message">{authError}</p>}
         {currState === "התחברות" ? (
           <>
             <a className="reset-password-link" onClick={() => setModalIsOpen(true)}>איפוס סיסמה</a>
-            <p className='switcher' >אין לך חשבון? <span onClick={() => setCurrState("הרשמה")}>לחץ כאן</span></p>
+            <p className='switcher' >אין לך חשבון? <span onClick={() => setCurrState("הרשמה")}>לחצי כאן</span></p>
           </>
         ) : (
-          <p className='switcher'>כבר יש לך חשבון? <span onClick={() => setCurrState("התחברות")}>התחבר כאן</span></p>
+          <p className='switcher'>כבר יש לך חשבון? <span onClick={() => setCurrState("התחברות")}>התחברי כאן</span></p>
         )}
       </form>
 

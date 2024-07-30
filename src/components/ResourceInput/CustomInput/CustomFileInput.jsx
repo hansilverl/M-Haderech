@@ -49,7 +49,7 @@ const CustomFileInput = ({ setFile }) => {
 							{!fileName && (
 								<>
 									<p className='drag-message'>לא נבחר קובץ</p>
-									<p className='drag-message'>גרור קובץ או לחץ כאן לבחירת קובץ</p>
+									<p className='drag-message'>ניתן לגרור קובץ לשטח זה, או ללחוץ כאן לבחירת קובץ</p>
 								</>
 							)}
 							{error && <p className='drag-error-message'>{error}</p>}
