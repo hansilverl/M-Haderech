@@ -1,5 +1,6 @@
 {
-	"hosting": {
+	"hosting": [{
+		"target": "M-Haderech",
 		"public": "build",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
 		"rewrites": [
@@ -8,5 +9,16 @@
 				"destination": "/index.html"
 			}
 		]
-	}
+	},
+	{
+		"target": "hg-emhaderech",
+		"public": "build",
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+		"rewrites": [
+			{
+				"source": "**",
+				"function": "/index.html"
+			}
+		]
+	}]
 }
