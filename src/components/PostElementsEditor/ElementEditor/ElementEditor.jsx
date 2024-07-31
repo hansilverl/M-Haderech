@@ -21,7 +21,7 @@ const typeValues = ['text', 'image', 'video', 'audio', 'document', 'gallery', 'o
 const typeNames = ['טקסט', 'תמונה', 'וידאו', 'אודיו', 'מסמך pdf', 'גלריה', 'אחר']
 
 const ElementGalleryEditor = (props) => {
-	const { type, resourcesPaths, setResourcesPaths } = props
+	const { type, resourceList, setResourceList } = props
 	const [urls, setUrls] = useState([])
 
 	return (
@@ -109,7 +109,7 @@ const ElementEditor = (props) => {
 	const [type, setType] = useState(elem.type)
 	const [content, setContent] = useState(elem.content)
 	const [resourcePath, setResourcePath] = useState(elem.resourcePath)
-	const [resourcesPaths, setResourcesPaths] = useState(elem.resourcePath)
+	const [resourceList, setResourceList] = useState(elem.resourcePath)
 	const [displayEditor, setDisplayEditor] = useState(elem.displayEditor)
 	const [dimensions, setDimensions] = useState(elem.dimensions ? elem.dimensions : null)
 	const [isModalActive, setIsModalActive] = useState(false)
@@ -133,7 +133,7 @@ const ElementEditor = (props) => {
 			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 			autoSaveTimeout.current = null
 
-			let forceSave = resourcePath !== elem.resourcePath || resourcesPaths !== elem.resourcesPaths
+			let forceSave = resourcePath !== elem.resourcePath || resourceList !== elem.resourcesPaths
 
 			setElement((elem) => {
 				const newElem = { ...elem }
@@ -143,7 +143,7 @@ const ElementEditor = (props) => {
 				newElem.resourcePath = resourcePath
 				newElem.displayEditor = displayEditor
 				newElem.dimensions = dimensions
-				newElem.resourcesPaths = resourcesPaths
+				newElem.resourceList = resourceList
 
 				return newElem
 			})
@@ -156,7 +156,7 @@ const ElementEditor = (props) => {
 		autoSaveTimeout.current = setTimeout(() => {
 			onUpdateElement()
 		}, 500)
-	}, [type, content, resourcePath, resourcesPaths, displayEditor, dimensions])
+	}, [type, content, resourcePath, resourceList, displayEditor, dimensions])
 
 	useEffect(() => {
 		if (elem != element) updateElement(elem)
@@ -217,10 +217,7 @@ const ElementEditor = (props) => {
 			)}
 
 			{displayGalleryEditor && (
-				<ElementGalleryEditor
-					resourcesPaths={resourcesPaths}
-					setResourcesPaths={setResourcesPaths}
-				/>
+				<ElementGalleryEditor resourceList={resourceList} setResourceList={setResourceList} />
 			)}
 
 			<GeneralModal

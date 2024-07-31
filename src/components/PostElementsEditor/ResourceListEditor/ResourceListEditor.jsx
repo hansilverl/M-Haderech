@@ -1,37 +1,84 @@
 import './ResourceListEditor.css'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { useDroppable, useDraggable } from '@dnd-kit/core'
-import { useSortable } from '@dnd-kit/sortable'
+import {
+	DndContext,
+	useSensors,
+	useSensor,
+	MouseSensor,
+	TouchSensor,
+	KeyboardSensor,
+} from '@dnd-kit/core'
+import { SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-const DraggableResource = (props) => {
-	const { attributes, listeners, setNodeRef, transform } = useDraggable({
-		id: `draggable-resource-${props.id}`,
-	})
+const arrayMove = (array, from, to) => {
+	const newArray = array.slice()
 
-	const style = {
-		transform: CSS.Translate.toString(transform),
-	}
+	const temp = newArray[from]
+	newArray[from] = newArray[to]
+	newArray[to] = temp
 
-	return <button ref={setNodeRef} style={style} {...listeners} {...attributes}></button>
+	return newArray
 }
 
-const ResourceListEditor = (props) => {
-	const { type, resourcesPaths, setResourcesPaths, urls } = props
-	const { isOver, setNodeRef } = useDroppable({
-		id: 'droppable',
-	})
+const DraggableResource = (props) => {
+	const { id } = props
+	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
+
 	const style = {
-		color: isOver ? 'green' : undefined,
+		transform: CSS.Transform.toString(transform),
+		transition,
+		padding: '10px',
+		border: '1px solid #ccc',
+		marginBottom: '5px',
+		backgroundColor: '#f9f9f9',
 	}
 
 	return (
-		<div ref={setNodeRef} style={style}>
-			<DraggableResource id={1} />
-			<DraggableResource id={2} />
+		<div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+			Item {id}
 		</div>
+	)
+}
+
+const ResourceListEditor = (props) => {
+	const { elementID, type, resourceList, setResourceList, setCurrentResource } = props
+	const [items, setItems] = useState([1, 2, 3, 4, 5])
+
+	const sensors = useSensors(
+		useSensor(MouseSensor),
+		useSensor(TouchSensor),
+		useSensor(KeyboardSensor, {
+			coordinateGetter: sortableKeyboardCoordinates,
+		})
+	)
+
+	const handleDragEnd = (event) => {
+		const { active, over } = event
+		if (active.id !== over.id) {
+			setItems((items) => {
+				const oldIndex = items.indexOf(active.id)
+				const newIndex = items.indexOf(over.id)
+				return arrayMove(items, oldIndex, newIndex)
+			})
+		}
+	}
+
+	const handleDragStart = (event) => {
+		if (event?.active?.id.includes('draggable-item'))
+			setCurrentResource(items.find((item) => item?.id === event?.active?.id))
+	}
+
+	return (
+		<DndContext sensors={sensors} onDragEnd={handleDragEnd} on>
+			<SortableContext items={items}>
+				{items.map((id) => (
+					<DraggableResource key={id} id={id} />
+				))}
+			</SortableContext>
+		</DndContext>
 	)
 }
 
