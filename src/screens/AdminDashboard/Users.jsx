@@ -58,7 +58,7 @@ const Users = () => {
         <thead>
           <tr>
             <th>אימייל</th>
-            <th>מנהל</th>
+            <th>מנהלת</th>
             <th>פעולות</th>
           </tr>
         </thead>
