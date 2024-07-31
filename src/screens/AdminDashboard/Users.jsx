@@ -59,7 +59,7 @@ const Users = () => {
           <tr>
             <th>אימייל</th>
             <th>מנהלת</th>
-            <th>פעולות</th>
+            <th>איפוס סיסמא</th>
           </tr>
         </thead>
         <tbody>
