@@ -16,6 +16,10 @@ const Miscellaneous = () => {
 			<h1>שונות</h1>
 			<div className='miscellaneous-content'>
 			<div className='section'>
+					<h2>אודות</h2>
+					<AboutInfo />
+				</div>
+			<div className='section'>
 					<h2>קישורי תרומה</h2>
 					<DonationLink />
 				</div>
@@ -40,13 +44,10 @@ const Miscellaneous = () => {
 					<Contact />
 				</div>
 				<div className='section'>
-					<h2>אודות</h2>
-					<AboutInfo />
-				</div>
-				<div className='section'>
 					<h2>קישור לרשימת תפוצה</h2>
 					<NewsletterLinkAdmin />
 				</div>
+
 			</div>
 		</div>
 	)

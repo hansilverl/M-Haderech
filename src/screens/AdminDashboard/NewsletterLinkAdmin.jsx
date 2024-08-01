@@ -75,7 +75,7 @@ const NewsletterLinkAdmin = () => {
         overlayClassName="modal-overlay"
         className="modal-content"
       >
-        <h2>עדכון קישור לרשימת תפוצה</h2>
+        <h2>עדכון הקישור לרשימת התפוצה</h2>
         <form>
           <div className="modal-field">
             <label>
