@@ -133,7 +133,7 @@ const AdminUserHistory = () => {
           className="search-input"
         />
       </div>
-      <CSVLink data={csvData} filename="history.csv" className="export-button">יצא ל-CSV</CSVLink>
+      <CSVLink data={csvData} filename="history.csv" className="export-button">יצוא ל-CSV</CSVLink>
       {error && <p className="error-message">{error}</p>}
       {history.length === 0 && !error && <p className="no-history">אין היסטוריה.</p>}
       <div className="score-ranges">
