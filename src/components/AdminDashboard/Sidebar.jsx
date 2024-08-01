@@ -33,13 +33,13 @@ const Sidebar = () => {
 					<li>
 						<Link to='/admin/edit/about-us' onClick={closeSidebar}>
 							<FaRegNewspaper className='sidebar-icon' />
-							<span>ערוך קצת עלינו</span>
+							<span>עריכת קצת עלינו</span>
 						</Link>
 					</li>
 					<li>
 						<Link to='/admin/edit/thanks' onClick={closeSidebar}>
 							<FaRegNewspaper className='sidebar-icon' />
-							<span>ערוך תודות</span>
+							<span>עריכת תודות</span>
 						</Link>
 					</li>
 					<li>
