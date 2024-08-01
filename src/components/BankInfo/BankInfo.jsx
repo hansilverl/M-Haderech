@@ -148,7 +148,7 @@ const BankInfo = () => {
 								</tbody>
 							</table>
 							<div className='new-field-stat'>
-								<h3>הוסף שדה חדש</h3>
+								<h3>הוספת שדה חדש</h3>
 								<input
 									type='text'
 									placeholder='שם השדה'
@@ -165,7 +165,7 @@ const BankInfo = () => {
 								/>
 								<div className='add-field-button'>
 									<button type='button' onClick={handleAddField}>
-										הוסף שדה
+										הוספת שדה
 									</button>
 								</div>
 							</div>
