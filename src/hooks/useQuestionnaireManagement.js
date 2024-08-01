@@ -1,9 +1,9 @@
-// src/hooks/useHelpScore.js
+// src/hooks/useQuestionnaireManagement.js
 import { useState, useEffect } from 'react';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
-const useHelpScore = () => {
+const useQuestionnaireManagement = () => {
     const [questions, setQuestions] = useState([]);
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(true);
@@ -46,4 +46,4 @@ const useHelpScore = () => {
     return { questions, description, loading, error };
 };
 
-export default useHelpScore;
+export default useQuestionnaireManagement;
