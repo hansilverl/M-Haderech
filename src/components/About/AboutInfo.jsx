@@ -68,7 +68,7 @@ const AboutInfo = () => {
 				<>
 					<div className='about-info-content'>
 						<button className='update-button' onClick={openModal}>
-							עדכן
+							עדכון
 						</button>
 					</div>
 
