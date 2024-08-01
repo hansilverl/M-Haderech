@@ -1,4 +1,3 @@
-// src/screens/Helpscore/CalculateHelpScore.js
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './CalculateHelpScore.css';
@@ -21,19 +20,29 @@ const CalculateHelpScore = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [formError, setFormError] = useState('');
+    const [resultRanges, setResultRanges] = useState([]);
     const { user, loading: authLoading } = useAuthStatus();
     const { login, error: loginError } = useLogin();
     const translateErrorToHebrew = useFirebaseErrorTranslation();
 
-    const scoreDescription = (score) => {
+    const fetchResultRanges = async () => {
+        const querySnapshot = await getDocs(collection(db, 'QuestionnaireRes'));
+        const ranges = {};
+        querySnapshot.forEach((doc) => {
+            ranges[doc.id] = doc.data();
+        });
+        setResultRanges(ranges);
+    };
+
+    const getRangeDescription = (score) => {
         if (score <= 19) {
-            return "ללא\\קל"
+            return resultRanges['-19'] || { title: '', desc: '' };
         } else if (score <= 32) {
-            return "בינונית"
+            return resultRanges['20-32'] || { title: '', desc: '' };
         } else {
-            return "קשה"
+            return resultRanges['33-'] || { title: '', desc: '' };
         }
-    }
+    };
 
     const calculateScore = (answers) => {
         let totalScore = 0;
@@ -57,13 +66,11 @@ const CalculateHelpScore = () => {
             try {
                 const { answers } = location.state;
                 const questions = await getQuestions();
-
                 const responseData = Object.keys(answers).map(questionId => ({
                     question: questions[questionId].q,
                     selectedOption: answers[questionId],
                     score: questions[questionId][answers[questionId]]
                 }));
-
                 await addDoc(collection(db, 'QuestionnaireHistory'), {
                     userId: user.uid,
                     userEmail: user.email,
@@ -73,7 +80,7 @@ const CalculateHelpScore = () => {
                 });
                 setShowSuccessModal(true);
             } catch (error) {
-                console.error('Error saving questionnaire: ', error);
+                console.error('Error saving questionnaire:', error);
             }
         } else {
             setShowLoginModal(true);
@@ -85,11 +92,14 @@ const CalculateHelpScore = () => {
             navigate('/helpscore');
             return;
         }
-
         const { answers } = location.state;
         const calculatedScore = calculateScore(answers);
         setScore(calculatedScore);
     }, [location, navigate]);
+
+    useEffect(() => {
+        fetchResultRanges();
+    }, []);
 
     useEffect(() => {
         if (user && showLoginModal) {
@@ -103,7 +113,6 @@ const CalculateHelpScore = () => {
             setFormError('יש למלא את כל השדות.');
             return;
         }
-
         try {
             await login(email, password);
         } catch (error) {
@@ -111,48 +120,30 @@ const CalculateHelpScore = () => {
         }
     };
 
-    if (score === null || authLoading) {
-        return <LoadingSpinner />
+    if (score === null || authLoading || resultRanges.length === 0) {
+        return <LoadingSpinner />;
     }
+
+    const { title, desc } = getRangeDescription(score);
 
     return (
         <div className="score-container unique-background">
             <h1>תודה על מילוי המבדק.</h1>
             <div className="score-result">
-                <p> הניקוד שקיבלת:</p>
+                <p>הניקוד שקיבלת:</p>
                 <div className="user-score">{score}</div>
             </div>
             <div className="score-description">
-                <p>רמת היפרמזיס: {scoreDescription(score)}</p>
-
+                <p>רמת היפרמזיס: {title}</p>
             </div>
             <div className="info-score">
-                <p>תיאור הציון: {scoreDescription(score)}</p>
-                <p>
-                    {score <= 19 && (
-                        <>
-                            ציון קל מסמן כי המטופלת חולה מאוד, אינה מסוגלת לאכול כמות נורמלית, ומתקשה לתפקד אך עשויה להיות מסוגלת לבצע חלק מהפעילויות. תמיכה וטיפול רפואי עשויים למנוע התקדמות לתסמינים חמורים יותר.
-                        </>
-                    )}
-                    {score > 19 && score <= 32 && (
-                        <>
-                            ציון בינוני מסמן כי המטופלת אינה מסוגלת לאכול/לשתות באופן נורמלי או לבצע את רוב פעילויותיה הרגילות. היא עשויה להיות לא מסוגלת לטפל במשפחתה ואפילו בעצמה ולהזדקק למנוחה נוספת. סיבוכים המשפיעים הן על האם והן על הילד עלולים להתרחש אם לא מטופלים כראוי. ההתמודדות קשה וסביר להניח שנדרשת תמיכה בבריאות הנפש כדי להפחית טראומה. נדרשת התערבות אגרסיבית למקרים בינוניים עד חמורים, כולל תוספי ויטמינים, במיוחד B1.
-                        </>
-                    )}
-                    {score > 32 && (
-                        <>
-                            ציון קשה מסמן כי החולה נמצא בסיכון הגבוה ביותר לסיבוכים חמורים לאם ולילד, במיוחד אם תת-תזונה נמשכת מעבר לטרימסטר הראשון. מנוחה היא קריטית כדי למנוע החמרה.
-                        </>
-                    )}
-                </p>
+                <p>{desc}</p>
             </div>
             <div className="button-wrapper">
                 <button onClick={saveHistory}>לשמור להשוואה</button>
                 <button onClick={() => navigate('/helpscore')}>חזרה לטופס</button>
             </div>
-            <button className="contact-calc-button"
-             onClick={() => navigate('/contact')}>צרי קשר</button>
-
+            <button className="contact-calc-button" onClick={() => navigate('/contact')}>צרי קשר</button>
             <Modal
                 isOpen={showLoginModal}
                 onRequestClose={() => setShowLoginModal(false)}
@@ -185,7 +176,6 @@ const CalculateHelpScore = () => {
                 </div>
                 {formError && <p className="error-message">{formError}</p>}
             </Modal>
-
             <Modal
                 isOpen={showSuccessModal}
                 onRequestClose={() => setShowSuccessModal(false)}
@@ -193,8 +183,7 @@ const CalculateHelpScore = () => {
                 className="Modal"
                 overlayClassName="Overlay"
             >
-                <h3>מחכים לך באיזור האישי שלך
-                כדי שתוכלי לעקוב ולהשוות נתונים </h3>
+                <h3>מחכים לך באזור האישי שלך כדי שתוכלי לעקוב ולהשוות נתונים</h3>
                 <div className="button-group">
                     <button onClick={() => navigate('/history')}>צפיה בהיסטוריה</button>
                     <button onClick={() => navigate('/helpscore')} className="cancel-button">חזרה לטופס</button>
