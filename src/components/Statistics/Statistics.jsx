@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc, deleteField } from 'firebase/firestore'
 import Modal from 'react-modal'
 import { FaTrashAlt } from 'react-icons/fa'
 import './Statistics.css'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+// import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 Modal.setAppElement('#root')
 
@@ -101,7 +101,7 @@ const Statistics = () => {
 
 	return (
 		<div className='stat-item'>
-			{loading && <LoadingSpinner />}
+			{loading }
 			{error && <p>שגיאה: {error}</p>}
 			{!loading && !error && (
 				<>
@@ -116,7 +116,7 @@ const Statistics = () => {
 							))}
 					</div> */}
 					<button className='update-button' onClick={openModal}>
-						עדכן
+						עדכון
 					</button>
 
 					<Modal /* Modal for updating statistics */

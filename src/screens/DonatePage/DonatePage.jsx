@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/config'
 import { doc, getDoc } from 'firebase/firestore'
 import { FaUniversity, FaLink, FaPhone } from 'react-icons/fa'
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const DonatePage = () => {
 	const [bankInfo, setBankInfo] = useState(null)
@@ -90,7 +89,7 @@ const DonatePage = () => {
 
 	return (
 		<div className='donate-page'>
-			{loading && <LoadingSpinner />}
+			{loading}
 			{error && <p>שגיאה: {error}</p>}
 			{!loading && !error && (
 				<>

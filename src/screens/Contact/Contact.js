@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser'
 import './Contact.css'
 // closing icon
 import { FaTimes } from 'react-icons/fa'
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
+// import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const Contact = () => {
 	const [user_name, setName] = useState('')
@@ -98,7 +98,7 @@ const Contact = () => {
 					</label>
 					<button type='submit'>שליחה</button>
 				</form>
-				{loading && <LoadingSpinner />}
+				{loading}
 				{error && <p>שגיאה: {error}</p>}
 				{!loading && !error && (
 					<div className='contact-info'>

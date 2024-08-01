@@ -86,7 +86,7 @@ const DonationLink = () => {
 							<strong>קישור תרומה באנגלית:</strong> {donationLinkEnglish}
 						</p> */}
 						<button className='update-button' onClick={openModal}>
-							עדכן
+							עדכון
 						</button>
 					</div>
 

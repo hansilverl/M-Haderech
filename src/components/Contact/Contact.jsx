@@ -105,7 +105,7 @@ const Contact = () => {
 			{!loading && !error && (
 				<>
 					<button className='update-button' onClick={openModal}>
-						עדכן
+						עדכון
 					</button>
 
 					<Modal

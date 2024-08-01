@@ -5,7 +5,6 @@ import Modal from 'react-modal'
 import { db } from '../../firebase/config'
 import { doc, getDoc, updateDoc, deleteField } from 'firebase/firestore'
 import { FaTrashAlt } from 'react-icons/fa'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 Modal.setAppElement('#root')
 
@@ -99,12 +98,12 @@ const BankInfo = () => {
 		}
 	}
 
-	if (loading) return <LoadingSpinner />
+	if (loading) return 
 	if (error) return <p>שגיאה: {error}</p>
 
 	return (
 		<div className='stat-item'>
-			{loading && <LoadingSpinner />}
+			{loading }
 			{error && <p>שגיאה: {error}</p>}
 			{!loading && !error && (
 				<>
@@ -119,7 +118,7 @@ const BankInfo = () => {
 							))}
 					</div> */}
 					<button className='update-button' onClick={openModal}>
-						עדכן
+						עדכון
 					</button>
 
 					<Modal /* Modal for updating bank info */
