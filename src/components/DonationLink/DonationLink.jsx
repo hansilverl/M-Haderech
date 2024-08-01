@@ -116,7 +116,7 @@ const DonationLink = () => {
 						</form>
 						<div className='modal-actions'>
 							<button onClick={handleSave}>שמירה</button>
-							<button onClick={closeModal}>בטל</button>
+							<button onClick={closeModal}>ביטול</button>
 						</div>
 					</Modal>
 				</>

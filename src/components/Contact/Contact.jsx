@@ -163,7 +163,7 @@ const Contact = () => {
 							</button>
 
 							<button className='cancel-changes' onClick={closeModal}>
-								בטל
+								ביטול
 							</button>
 						</div>
 					</Modal>
@@ -177,7 +177,7 @@ const Contact = () => {
 						<p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
 						<div className='modal-actions'>
 							<button onClick={confirmDeleteField}>מחק</button>
-							<button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
+							<button onClick={() => setDeleteConfirmIsOpen(false)}>ביטול</button>
 						</div>
 					</Modal>
 				</>
