@@ -37,11 +37,11 @@ const CalculateHelpScore = () => {
 
     const getRangeDescription = (score) => {
         if (score <= 19) {
-            return resultRanges['-19'] || { title: '', desc: '' };
+            return resultRanges['0-19'] || { title: '', desc: '' };
         } else if (score <= 32) {
             return resultRanges['20-32'] || { title: '', desc: '' };
         } else {
-            return resultRanges['33-'] || { title: '', desc: '' };
+            return resultRanges['33+'] || { title: '', desc: '' };
         }
     };
 
@@ -138,7 +138,7 @@ const CalculateHelpScore = () => {
                 <p>רמת היפרמזיס: {title}</p>
             </div>
             <div className="info-score">
-                <p>{desc}</p>
+            <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>{desc}</pre>
             </div>
             <div className="button-wrapper">
                 <button onClick={saveHistory}>לשמור להשוואה</button>
