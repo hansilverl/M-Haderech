@@ -37,11 +37,11 @@ const CalculateHelpScore = () => {
 
     const getRangeDescription = (score) => {
         if (score <= 19) {
-            return resultRanges['-19'] || { title: '', desc: '' };
+            return resultRanges['0-19'] || { title: '', desc: '' };
         } else if (score <= 32) {
             return resultRanges['20-32'] || { title: '', desc: '' };
         } else {
-            return resultRanges['33-'] || { title: '', desc: '' };
+            return resultRanges['33+'] || { title: '', desc: '' };
         }
     };
 
