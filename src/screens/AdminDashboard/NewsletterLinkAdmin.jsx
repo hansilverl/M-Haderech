@@ -66,7 +66,7 @@ const NewsletterLinkAdmin = () => {
     <div className="newsletter-link">
       <div className="newsletter-link-content">
         {/* <p><strong>קישור לרשימת תפוצה:</strong> {newsletterLink}</p> */}
-        <button className="update-button" onClick={openModal}>עדכן</button>
+        <button className="update-button" onClick={openModal}>עדכון</button>
       </div>
 
       <Modal
@@ -75,7 +75,7 @@ const NewsletterLinkAdmin = () => {
         overlayClassName="modal-overlay"
         className="modal-content"
       >
-        <h2>עדכון קישור לרשימת תפוצה</h2>
+        <h2>עדכון הקישור לרשימת התפוצה</h2>
         <form>
           <div className="modal-field">
             <label>
@@ -90,7 +90,7 @@ const NewsletterLinkAdmin = () => {
         </form>
         <div className="modal-actions">
           <button onClick={handleSave}>שמירה</button>
-          <button onClick={closeModal}>בטל</button>
+          <button onClick={closeModal}>ביטול</button>
         </div>
       </Modal>
     </div>

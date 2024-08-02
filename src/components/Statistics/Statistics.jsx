@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc, deleteField } from 'firebase/firestore'
 import Modal from 'react-modal'
 import { FaTrashAlt } from 'react-icons/fa'
 import './Statistics.css'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+// import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 Modal.setAppElement('#root')
 
@@ -101,7 +101,7 @@ const Statistics = () => {
 
 	return (
 		<div className='stat-item'>
-			{loading && <LoadingSpinner />}
+			{loading }
 			{error && <p>שגיאה: {error}</p>}
 			{!loading && !error && (
 				<>
@@ -116,7 +116,7 @@ const Statistics = () => {
 							))}
 					</div> */}
 					<button className='update-button' onClick={openModal}>
-						עדכן
+						עדכון
 					</button>
 
 					<Modal /* Modal for updating statistics */
@@ -150,7 +150,7 @@ const Statistics = () => {
 								</tbody>
 							</table>
 							<div className='new-field-stat'>
-								<h3>הוסף שדה חדש</h3>
+								<h3>הוספת שדה חדש</h3>
 								<input
 									type='text'
 									placeholder='שם השדה'
@@ -167,7 +167,7 @@ const Statistics = () => {
 								/>
 								<div className='add-field-button'>
 									<button type='button' onClick={handleAddField}>
-										הוסף שדה
+										הוספת שדה
 									</button>
 								</div>
 							</div>
@@ -177,7 +177,7 @@ const Statistics = () => {
 								שמירה
 							</button>
 							<button className='cancel-changes' onClick={closeModal}>
-								בטל
+								ביטול
 							</button>
 						</div>
 					</Modal>
@@ -191,7 +191,7 @@ const Statistics = () => {
 						<p>האם אתה בטוח שברצונך למחוק את השדה הזה?</p>
 						<div className='modal-actions'>
 							<button onClick={confirmDeleteField}>מחק</button>
-							<button onClick={() => setDeleteConfirmIsOpen(false)}>בטל</button>
+							<button onClick={() => setDeleteConfirmIsOpen(false)}>ביטול</button>
 						</div>
 					</Modal>
 				</>

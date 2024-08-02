@@ -133,6 +133,12 @@
     font-size: 1.1em;
 }
 
+/* class for switcher that's not span */
+.switcher:not(span) {
+    /* CSS rules for the switcher that's not a span */
+    color: #8b8282;
+}
+
 .modal-password {
     place-self: center;
     width: max(23vw, 330px);

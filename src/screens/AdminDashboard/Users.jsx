@@ -45,11 +45,11 @@ const Users = () => {
 
   return (
     <div className='users'>
-      <h1>משתמשים</h1>
-      <p>מספר משתמשים רשומים: {users.length}</p> {/* Display the number of registered users */}
+      <h1>משתמשות</h1>
+      <p>מספר משתמשות רשומות: {users.length}</p> {/* Display the number of registered users */}
       <input
         type="text"
-        placeholder="חפש משתמש לפי אימייל"
+        placeholder="חיפוש משתמשת לפי אימייל"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className='search-input'
@@ -58,8 +58,8 @@ const Users = () => {
         <thead>
           <tr>
             <th>אימייל</th>
-            <th>מנהל</th>
-            <th>פעולות</th>
+            <th>מנהלת</th>
+            <th>איפוס סיסמא</th>
           </tr>
         </thead>
         <tbody>

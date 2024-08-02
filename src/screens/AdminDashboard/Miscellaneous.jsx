@@ -15,9 +15,25 @@ const Miscellaneous = () => {
 		<div className='admin-miscellaneous-container'>
 			<h1>שונות</h1>
 			<div className='miscellaneous-content'>
+			<div className='section'>
+					<h2>אודות</h2>
+					<AboutInfo />
+				</div>
+			<div className='section'>
+					<h2>קישורי תרומה</h2>
+					<DonationLink />
+				</div>
 				<div className='section'>
 					<h2>פרטי בנק</h2>
 					<BankInfo />
+				</div>
+				<div className='section'>
+					<h2>מספר תרומה</h2>
+					<DonationNumber />
+				</div>
+				<div className='section'>
+					<h2>כיתוב עמוד תרומה</h2>
+					<DonateTitleAdmin />
 				</div>
 				<div className='section'>
 					<h2>סטטיסטיקות</h2>
@@ -28,25 +44,10 @@ const Miscellaneous = () => {
 					<Contact />
 				</div>
 				<div className='section'>
-					<h2>אודות</h2>
-					<AboutInfo />
-				</div>
-				<div className='section'>
-					<h2>קישורי תרומה</h2>
-					<DonationLink />
-				</div>
-				<div className='section'>
-					<h2>מספר תרומה</h2>
-					<DonationNumber />
-				</div>
-				<div className='section'>
 					<h2>קישור לרשימת תפוצה</h2>
 					<NewsletterLinkAdmin />
 				</div>
-				<div className='section'>
-					<h2>כיתוב עמוד תרומה</h2>
-					<DonateTitleAdmin />
-				</div>
+
 			</div>
 		</div>
 	)

@@ -69,7 +69,7 @@ const DonationNumber = () => {
 				<>
 					<div className='donation-number-content'>
 						<button className='update-button' onClick={openModal}>
-							עדכן
+							עדכון
 						</button>
 					</div>
 
@@ -89,7 +89,7 @@ const DonationNumber = () => {
 						</form>
 						<div className='modal-actions'>
 							<button onClick={handleSave}>שמירה</button>
-							<button onClick={closeModal}>בטל</button>
+							<button onClick={closeModal}>ביטול</button>
 						</div>
 					</Modal>
 				</>

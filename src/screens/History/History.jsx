@@ -123,7 +123,7 @@ const History = () => {
         categoryPercentage: 1.0,
         title: {
           display: true,
-          text: 'זמן מילוי המבדק',
+          text: 'תאריך מילוי המבדק',
           font: {
             size: 16,
             weight: 'bold',
@@ -226,7 +226,7 @@ const History = () => {
     <div className="history-container">
       <div className="graph-container">
         <h2>התקדמות ציונים</h2>
-        <p className="graph-description">הגרף מציג את זמן מילוי המבדק לעומת הציון</p>
+        <p className="graph-description">הגרף מציג את תאריך מילוי המבדק לעומת הציון</p>
         <div className="graph-background">
           <Bar data={graphData} options={graphOptions} />
         </div>
@@ -253,7 +253,7 @@ const History = () => {
         <div>
           <p className="no-history">אין לך מבדקים</p>
           <button className="fill-questionnaire-button" onClick={() => window.location.href = '/helpScore'}>
-            מלא מבדק
+            מילוי מבדק
           </button>
         </div>
       ) : (

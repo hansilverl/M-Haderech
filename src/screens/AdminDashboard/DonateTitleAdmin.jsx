@@ -86,7 +86,7 @@ const DonateTitleAdmin = () => {
 							<strong>תת כותרת:</strong> {subtitle}
 						</p> */}
 						<button className='update-button' onClick={openModal}>
-							עדכן
+							עדכון
 						</button>
 					</div>
 
@@ -114,7 +114,7 @@ const DonateTitleAdmin = () => {
 							<button className='save-changes' onClick={handleSave}>
 								שמירה
 							</button>
-							<button onClick={closeModal}>בטל</button>
+							<button onClick={closeModal}>ביטול</button>
 						</div>
 					</Modal>
 				</>
