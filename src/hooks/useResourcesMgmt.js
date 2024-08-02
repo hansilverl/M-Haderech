@@ -76,7 +76,6 @@ const uploadFile = async (file, types) => {
 	const generalFileType = fileType.split('/')[0]
 	const fileExtension = file.name.split('.').pop().toLowerCase()
 
-
 	if (!types.includes('other') && !types.includes(generalFileType))
 		throw new Error(`הקובץ ${file.name} אינו חוקי`)
 
@@ -100,8 +99,8 @@ const downloadFile = async (filePath) => {
 	window.open(url, '_blank')
 }
 
-const useResourcesMgmt = (initialPaths = null) => {
-	const [resourcesPaths, setResourcesPaths] = useState(initialPaths ? initialPaths : [])
+const useResourcesMgmt = (initialList = null) => {
+	const [resourceList, setResourceList] = useState(initialList ? initialList : [])
 	const [loadingResourcesMgmt, setLoadingResourceMgmt] = useState(false)
 	const [errorResourcesMgmt, setErrorResourceMgmt] = useState(null)
 
@@ -111,10 +110,10 @@ const useResourcesMgmt = (initialPaths = null) => {
 		setErrorResourceMgmt(null)
 		for (const path of paths) {
 			try {
-				if (!path || !resourcesPaths.includes(path))
+				if (!path || !resourceList.includes(path))
 					throw new Error('לא נבחר קובץ למחיקה או שהקובץ אינו מנוהל על ידי רכיב זה')
 				await deleteObjectByFilePath(path)
-				setResourcesPaths((resourcesPaths) => resourcesPaths.filter((p) => p !== path))
+				setResourceList((resourceList) => resourceList.filter((p) => p !== path))
 			} catch (error) {
 				setErrorResourceMgmt((msg) => `${msg}\n${error.message}`)
 				console.error('Error deleting object: ', error)
@@ -137,16 +136,16 @@ const useResourcesMgmt = (initialPaths = null) => {
 				console.error('Error uploading resource: ', error)
 			}
 		}
-		setResourcesPaths((paths) => [...paths, ...filePaths])
+		setResourceList((paths) => [...paths, ...filePaths])
 		setLoadingResourceMgmt(false)
 	}
 
 	const downloadResource = async (path) => {
-		if (!resourcesPaths || loadingResourcesMgmt) return
+		if (!resourceList || loadingResourcesMgmt) return
 		setLoadingResourceMgmt(true)
 		try {
 			setErrorResourceMgmt(null)
-			if (!path || !(path in resourcesPaths))
+			if (!path || !(path in resourceList))
 				throw new Error('לא נבחר קובץ או שהקובץ אינו ברשימה של רכיב זה')
 			await downloadFile(path)
 		} catch (error) {
@@ -157,7 +156,7 @@ const useResourcesMgmt = (initialPaths = null) => {
 	}
 
 	return {
-		resourcesPaths,
+		resourceList,
 		loadingResourcesMgmt,
 		errorResourcesMgmt,
 		deleteResources,

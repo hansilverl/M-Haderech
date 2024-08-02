@@ -10,7 +10,7 @@ const ResourceInput = (props) => {
 	const { paths, setPaths, types, title, urls, setUrls, maxFiles } = props
 
 	const {
-		resourcesPaths,
+		resourceList,
 		loadingResourcesMgmt,
 		errorResourcesMgmt,
 		deleteResources,
@@ -33,15 +33,15 @@ const ResourceInput = (props) => {
 	useEffect(() => {
 		const setInternalUrl = async () => {
 			const newUrls = []
-			for (const path of resourcesPaths) {
+			for (const path of resourceList) {
 				const newUrl = await getDownloadURLFromPath(path)
 				newUrls.push(newUrl)
 			}
 			setUrls(newUrls)
 		}
-		setPaths(resourcesPaths)
-		if (resourcesPaths && resourcesPaths !== '') setInternalUrl()
-	}, [resourcesPaths])
+		setPaths(resourceList)
+		if (resourceList && resourceList !== '') setInternalUrl()
+	}, [resourceList])
 
 	useEffect(() => {
 		uploadResourceHandler()

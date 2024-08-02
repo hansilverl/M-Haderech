@@ -26,12 +26,12 @@ const ElementGalleryEditor = (props) => {
 
 	return (
 		<div className='element-comp-container'>
-			{/* <ElementGalleryPresentor files={resourcesPaths} /> */}
+			{/* <ElementGalleryPresentor files={resourceList} /> */}
 			<ResourceListEditor />
 			{/* <ResourceInput
 				types={type}
-				paths={resourcesPaths}
-				setPaths={setResourcesPaths}
+				paths={resourceList}
+				setPaths={setresourceList}
 				urls={urls}
 				setUrls={setUrls}
 				title=''
@@ -133,7 +133,7 @@ const ElementEditor = (props) => {
 			if (autoSaveTimeout.current) clearTimeout(autoSaveTimeout.current)
 			autoSaveTimeout.current = null
 
-			let forceSave = resourcePath !== elem.resourcePath || resourceList !== elem.resourcesPaths
+			let forceSave = resourcePath !== elem.resourcePath || resourceList !== elem.resourceList
 
 			setElement((elem) => {
 				const newElem = { ...elem }
