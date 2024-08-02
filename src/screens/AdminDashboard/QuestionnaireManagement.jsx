@@ -18,6 +18,7 @@ import { FaTrashAlt, FaEdit, FaTimes } from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
+import EditScoreDescModal from '../../components/helpScore/EditScoreDescModal'
 
 Modal.setAppElement('#root') // Adjust this selector to your app's root element
 
@@ -39,6 +40,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 	const [addQuestionModalIsOpen, setAddQuestionModalIsOpen] = useState(false)
 	const [editingAnswer, setEditingAnswer] = useState(null) // New state for editing answer
 	const [showNewAnswerFields, setShowNewAnswerFields] = useState(false)
+	const [editScoreDescModalIsOpen, setEditScoreDescModalIsOpen] = useState(false);
+
 	// for loading icon:
 	const [isReordering, setIsReordering] = useState(false)
 
@@ -133,9 +136,9 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 				prevQuestions.map((question) =>
 					question.id === questionId
 						? {
-								...question,
-								answers: question.answers.filter((answer) => answer.id !== answerId),
-						  }
+							...question,
+							answers: question.answers.filter((answer) => answer.id !== answerId),
+						}
 						: question
 				)
 			)
@@ -397,6 +400,11 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 							<button className='add-question-button' onClick={handleAddQuestion}>
 								הוספת שאלה
 							</button>
+							<button className='edit-score-desc-button'
+							onClick={() => setEditScoreDescModalIsOpen(true)}>
+								עריכת תיאורי תוצאות המבדק
+							</button>
+
 						</DragDropContext>
 					)}
 
@@ -639,6 +647,12 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 							</div>
 						</Modal>
 					)}
+					<EditScoreDescModal
+						isOpen={editScoreDescModalIsOpen}
+						onRequestClose={() => setEditScoreDescModalIsOpen(false)}
+						
+					/>
+
 				</>
 			)}
 		</div>

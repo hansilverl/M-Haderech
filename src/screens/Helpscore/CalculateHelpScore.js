@@ -138,7 +138,7 @@ const CalculateHelpScore = () => {
                 <p>רמת היפרמזיס: {title}</p>
             </div>
             <div className="info-score">
-                <p>{desc}</p>
+            <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>{desc}</pre>
             </div>
             <div className="button-wrapper">
                 <button onClick={saveHistory}>לשמור להשוואה</button>

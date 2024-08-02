@@ -108,7 +108,7 @@
 }
 
 /* Ensure the modal has a fixed size */
-.ReactModal__Content {
+.ReactModal__Content:not(.EditScoreDescModal) {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -234,7 +234,7 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
 
 /* all buttons on page, but not on whole website */
 
-.questionnaire-management button:not(.add-question-button) {
+.questionnaire-management button:not(.add-question-button):not(.edit-score-desc-button) {
   border: none;
   cursor: pointer;
   padding: 8px 12px;
@@ -242,6 +242,7 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   font-size: 14px;
   transition: background-color 0.2s ease;
   background-color: transparent !important;
+  /* position in corner */
 }
 
 .questionnaire-management button:hover {
@@ -266,6 +267,26 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
 
 .add-question-button:hover {
   background-color: #218838 !important;
+}
+
+.edit-score-desc-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #2980b9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.edit-score-desc-button:hover {
+  background-color: #1c6da8 !important;
 }
 
 .add-answer-button {
@@ -314,7 +335,7 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
 
 
 /* Modal Styles */
-.ReactModal__Overlay {
+.ReactModal__Overlay:not(.ESDOverlay) {
   background-color: rgba(0, 0, 0, 0.5) !important;
   z-index: 1000;
   display: flex;
@@ -322,7 +343,7 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   justify-content: center;
 }
 
-.ReactModal__Content {
+.questionnaire-management .ReactModal__Content {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

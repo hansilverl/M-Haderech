@@ -1,0 +1,83 @@
+/* src/components/EditScoreDescModal/EditScoreDescModal.css */
+
+.ESDModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.esd-modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.ESDOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+}
+
+
+.esd-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.esd-content {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.esd-range-section {
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #f8f9fa;
+}
+
+.esd-range-title {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.esd-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.esd-input-group label {
+  margin-bottom: 5px;
+}
+
+.esd-input,
+.esd-textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.esd-textarea {
+  resize: vertical;
+}
