@@ -42,7 +42,7 @@
 }
 
 .esd-content {
-  direction: rtl;
+  direction: rtl; /* for scrollbar */
   display: flex;
   flex-direction: column;
   gap: 20px;
