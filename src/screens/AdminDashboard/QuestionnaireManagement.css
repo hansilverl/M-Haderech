@@ -59,7 +59,7 @@
   padding: 15px;
   margin-bottom: 15px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.255);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
 
 }
 
@@ -493,6 +493,11 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
 
 div.questionnaire-management > div.description-section h3{
   margin: 0 auto;
+}
+
+div.questionnaire-management > h4{
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 
