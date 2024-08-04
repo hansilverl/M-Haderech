@@ -13,6 +13,11 @@ const getDateStringFromTimeStamp = (timeStamp) => {
 	return `${day}/${month}/${year}`
 }
 
+const truncateDescription = (text, maxLength) => {
+	if (text.length <= maxLength) return text;
+	return text.slice(0, maxLength) + '...';
+  }
+
 const Post = ({ article, onPostClick }) => {
 	const { id, title, datePublished, description, elements } = article
 	const navigate = useNavigate()
@@ -55,7 +60,7 @@ const Post = ({ article, onPostClick }) => {
 			</div>
 			{!imageUrl ? null : <img src={imageUrl} alt={title} className='post-image' />}
 
-			<p className='post-description'>{description}</p>
+			<p className='post-description'>{truncateDescription(description, 100)}</p>
 
 			{!pdfUrls
 				? null

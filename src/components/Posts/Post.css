@@ -89,6 +89,9 @@
 	overflow: hidden;
 	display: inline-block;
 	margin-right: 10px;
+	align-self: flex-end;
+	/*place at bottom of container: */
+	margin-top: auto;
 }
 
 .detailed-post-container .post-pdf-button img {
