@@ -23,7 +23,7 @@
 
 .detailed-post-container .post-preview {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: flex-end; /* Ensure content goes to the bottom */
 	flex: 1;
 }
@@ -32,6 +32,7 @@
 	width: 100%;
 	min-height: 200px;
 	max-height: 200px;
+	margin-bottom: 0.5em;
 	object-fit: scale-down;
 }
 
@@ -95,13 +96,11 @@
 	max-width: 20%;
 	transition: background-color 0.3s;
 	overflow: hidden;
-	display: inline-block;
 	align-self: flex-end;
-	margin-top: 1em; /* Ensure some space between description and PDF button */
+	margin-top: -1em;
 }
 
 .detailed-post-container .post-pdf-button img {
-	display: block;
 	width: 24px;
 	height: 24px;
 }
