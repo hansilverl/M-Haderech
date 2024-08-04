@@ -45,7 +45,6 @@ const DraggableResource = (props) => {
 
 const ResourceListEditor = (props) => {
 	const { elementID, type, resourceList, setResourceList, setCurrentResource } = props
-	const [items, setItems] = useState([1, 2, 3, 4, 5])
 
 	const sensors = useSensors(
 		useSensor(MouseSensor),
@@ -57,24 +56,29 @@ const ResourceListEditor = (props) => {
 
 	const handleDragEnd = (event) => {
 		const { active, over } = event
-		if (active.id !== over.id) {
-			setItems((items) => {
-				const oldIndex = items.indexOf(active.id)
-				const newIndex = items.indexOf(over.id)
-				return arrayMove(items, oldIndex, newIndex)
-			})
-		}
+		if (active.id === over.id) return
+		
+		const oldIndex = resourceList.indexOf(active.id)
+		const newIndex = resourceList.indexOf(over.id)
+		if (oldIndex === newIndex) return
+
+		setResourceList((items) => {
+			const newItems = [...items]
+			const item = newItems.splice(oldIndex, 1)[0]
+			newItems.splice(newIndex, 0, item)
+			return newItems
+		})
 	}
 
 	const handleDragStart = (event) => {
 		if (event?.active?.id.includes('draggable-item'))
-			setCurrentResource(items.find((item) => item?.id === event?.active?.id))
+			setCurrentResource(resourceList.find((item) => item?.id === event?.active?.id))
 	}
 
 	return (
 		<DndContext sensors={sensors} onDragEnd={handleDragEnd} on>
-			<SortableContext items={items}>
-				{items.map((id) => (
+			<SortableContext items={resourceList}>
+				{resourceList.map((id) => (
 					<DraggableResource key={id} id={id} />
 				))}
 			</SortableContext>
