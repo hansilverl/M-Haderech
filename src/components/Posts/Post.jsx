@@ -1,3 +1,4 @@
+// src/components/Posts/Post.jsx
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import pdfIcon from '../../assets/pdf-file.png'
