@@ -19,7 +19,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import EditScoreDescModal from '../../components/helpScore/EditScoreDescModal'
-import Swal from 'sweetalert2'	
 
 Modal.setAppElement('#root') // Adjust this selector to your app's root element
 
@@ -237,15 +236,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 			);
 	
 			if (scoreExists) {
-				Swal.fire({
-					title: 'Error!',
-					text: 'This score already exists. Please choose a different score.',
-					icon: 'error',
-					confirmButtonText: 'OK',
-					preConfirm: () => {
-						setCurrentScore(previousScore); // Reset score to previous state
-					}
-				});
+				// clown alert
 				return;
 			}
 	
