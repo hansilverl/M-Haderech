@@ -97,7 +97,6 @@
 	transition: background-color 0.3s;
 	overflow: hidden;
 	align-self: flex-end;
-	margin-top: -1em;
 }
 
 .detailed-post-container .post-pdf-button img {
