@@ -65,7 +65,7 @@ const Post = ({ article, onPostClick }) => {
                 <p className='post-date'>{getDateStringFromTimeStamp(datePublished)}</p>
             </div>
             <img src={imageUrl || defaultCoverImage} alt={title} className='post-image' />
-
+			<div className='post-preview'>
             <p className='post-description'>{truncateDescription(description, 100)}</p>
 
             {pdfUrls && pdfUrls.map((pdfUrl, index) => (
@@ -80,6 +80,7 @@ const Post = ({ article, onPostClick }) => {
                     <img src={pdfIcon} alt='pdf-icon' className='pdf-icon' />
                 </a>
             ))}
+			</div>
         </div>
     )
 }

@@ -13,6 +13,7 @@
 	cursor: pointer;
 	transition: background-color 0.3s;
 	margin-bottom: 1em;
+
 }
 
 .detailed-post-container:hover {
@@ -21,12 +22,18 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.detailed-post-container .post-preview {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .detailed-post-container .post-image {
-	max-width: 95%;
+	width: 100%;
+	min-height: 200px;
 	max-height: 200px;
-	height: auto;
-	border-radius: 8px;
-	align-self: center;
+    object-fit:scale-down;
 }
 
 .detailed-post-container .post-title {
@@ -34,6 +41,7 @@
 	/* only need right and left margins , top and bottom are set to 0 */
 	margin: 0 0 0.5em 0;
 	overflow-wrap: break-word;
+
 }
 
 .detailed-post-container .title-date-container {
@@ -42,6 +50,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: first baseline;
+	margin-right: 10px;
 }
 
 .detailed-post-container .post-date {
@@ -54,8 +63,10 @@
 .detailed-post-container .post-description {
 	font-size: 16px;
 	margin: 5px 0;
-	text-wrap: balance;
+	text-wrap: break-word;
 	overflow-wrap: break-word;
+	text-align: right;
+	margin-right: 10px;
 }
 
 .detailed-post-container .post-button {
