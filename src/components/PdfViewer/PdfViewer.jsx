@@ -5,7 +5,7 @@ import { Document, Page, pdfjs } from 'react-pdf'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 // deployment
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@latest/build/pdf.worker.min.mjs`
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs`
 
 // local
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
