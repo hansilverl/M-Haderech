@@ -179,12 +179,12 @@
 }
 
 .edit-post-page .buttons-container {
-	display: inline-flex;
+	display: flex;
 	flex-direction: row;
-	width: auto;
-	align-self: stretch;
 	justify-content: center;
 	gap: 10px;
+	align-items: center;
+	width: 100%;
 	font-weight: 550;
 	border-radius: 5px;
 	/* bottom of modal: */

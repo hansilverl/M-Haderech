@@ -143,12 +143,14 @@ const PostEditPageComp = ({ postID, post }) => {
 							className='unpublish-button'>
 							תצוגה מקדימה
 						</button>
+						{articleType === 'special' ? null : (
 						<button
 							onClick={() => setIsModalOpen(true)}
 							disabled={loadingDelete}
 							className='delete-button'>
 							מחיקה
 						</button>
+						)}
 					</div>
 				</>
 			)}
