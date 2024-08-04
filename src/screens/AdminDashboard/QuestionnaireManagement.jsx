@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import EditScoreDescModal from '../../components/helpScore/EditScoreDescModal'
+import Swal from 'sweetalert2'	
 
 Modal.setAppElement('#root') // Adjust this selector to your app's root element
 
@@ -41,6 +42,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 	const [editingAnswer, setEditingAnswer] = useState(null) // New state for editing answer
 	const [showNewAnswerFields, setShowNewAnswerFields] = useState(false)
 	const [editScoreDescModalIsOpen, setEditScoreDescModalIsOpen] = useState(false);
+	
 
 	// for loading icon:
 	const [isReordering, setIsReordering] = useState(false)
@@ -166,9 +168,17 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 
 	const handleAddAnswer = async () => {
 		if (newAnswerText && newAnswerScore) {
+			const score = parseInt(newAnswerScore, 10)
+			const scoreExists = selectedQuestion.answers.some((answer) => answer.score === score)
+
+			if (scoreExists) {
+				alert('This score already exists. Please choose a different score.')
+				return
+			}
+
 			const updatedAnswers = [
 				...selectedQuestion.answers,
-				{ id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) },
+				{ id: newAnswerScore, text: newAnswerText, score: score },
 			]
 
 			// Sort the updatedAnswers array by score
@@ -177,11 +187,23 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 			const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers }
 			setSelectedQuestion(updatedQuestion)
 
-			// Reset the input fields
-			setNewAnswerText('')
-			setNewAnswerScore('')
+			// Update Firebase
+			try {
+				const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id)
+				await updateDoc(questionDocRef, {
+					[newAnswerScore]: newAnswerText,
+				})
+
+				// Reset the input fields
+				setNewAnswerText('')
+				setNewAnswerScore('')
+				alert('Answer added successfully!')
+			} catch (error) {
+				handleFirestoreError(error)
+			}
 		}
 	}
+
 
 	const handleEditAnswer = (answer) => {
 		setEditingAnswer(answer)
@@ -189,26 +211,67 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 		setCurrentScore(answer.score)
 	}
 	const saveEditedAnswer = async () => {
+		const previousScore = editingAnswer.score;
 		const updatedAnswers = selectedQuestion.answers.map((answer) =>
 			answer.id === editingAnswer.id
-				? { ...answer, text: currentText, score: currentScore }
+				? { ...answer, text: currentText, score: parseInt(currentScore, 10) }
 				: answer
-		)
-
+		);
+	
 		// Sort the updatedAnswers array by score
-		updatedAnswers.sort((a, b) => a.score - b.score)
-
-		const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers }
-		setSelectedQuestion(updatedQuestion)
-		setEditingAnswer(null)
-	}
+		updatedAnswers.sort((a, b) => a.score - b.score);
+	
+		const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
+		setSelectedQuestion(updatedQuestion);
+		setEditingAnswer(null);
+	
+		// Update Firebase
+		try {
+			const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id);
+			const questionDoc = await getDoc(questionDocRef);
+			const questionData = questionDoc.data();
+	
+			// Check if the new score already exists
+			const scoreExists = Object.keys(questionData).some(
+				(key) => key !== editingAnswer.id && parseInt(key, 10) === parseInt(currentScore, 10)
+			);
+	
+			if (scoreExists) {
+				Swal.fire({
+					title: 'Error!',
+					text: 'This score already exists. Please choose a different score.',
+					icon: 'error',
+					confirmButtonText: 'OK',
+					preConfirm: () => {
+						setCurrentScore(previousScore); // Reset score to previous state
+					}
+				});
+				return;
+			}
+	
+			// Remove the old answer
+			await updateDoc(questionDocRef, {
+				[editingAnswer.id]: deleteField(),
+			});
+	
+			// Add the updated answer with the new score as the key
+			await updateDoc(questionDocRef, {
+				[currentScore]: currentText,
+			});
+	
+			alert('Answer updated successfully!');
+		} catch (error) {
+			handleFirestoreError(error);
+		}
+	};
+	
 
 	const saveQuestionChanges = async () => {
 		const { id, question, required, answers } = selectedQuestion
 		try {
 			const questionDocRef = doc(db, 'Questionnaire', id)
 			const updatedAnswers = answers.reduce((acc, answer) => {
-				acc[answer.id] = answer.text
+				acc[answer.score.toString()] = answer.text
 				return acc
 			}, {})
 
@@ -217,8 +280,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 				prevQuestions.map((q) => (q.id === id ? { ...q, question, required, answers } : q))
 			)
 			setModalIsOpen(false)
-			resetInputFields() // Reset the input fields
-			alert('השאלה עודכנה בהצלחה!')
+			resetInputFields()
+			alert('Question updated successfully!')
 		} catch (error) {
 			handleFirestoreError(error)
 		}
