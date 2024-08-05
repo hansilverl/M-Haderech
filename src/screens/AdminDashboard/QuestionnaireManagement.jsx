@@ -209,6 +209,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 		setCurrentText(answer.text)
 		setCurrentScore(answer.score)
 	}
+	
 	const saveEditedAnswer = async () => {
 		const previousScore = editingAnswer.score;
 		const updatedAnswers = selectedQuestion.answers.map((answer) =>
@@ -236,7 +237,8 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 			);
 	
 			if (scoreExists) {
-				// clown alert
+				// Here clown
+				alert('This score already exists. Please choose a different score.');
 				return;
 			}
 	
@@ -297,6 +299,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 	}
 
 	const handleAnswerChange = (e) => {
+		// clown
 		const { name, value } = e.target
 		if (name === 'answerText') {
 			setCurrentText(value)
