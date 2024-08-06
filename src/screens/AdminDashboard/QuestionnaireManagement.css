@@ -81,6 +81,19 @@
   box-sizing: border-box;
 }
 
+/* not mui input */
+.edit-answer-row input:not(.MuiInputBase-input), .new-answer-row input:not(.MuiInputBase-input) {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+}
+
+/*when typing in input, not mui input */
+.edit-answer-row input:not(.MuiInputBase-input):focus, .new-answer-row input:not(.MuiInputBase-input):focus {
+  outline: none;
+  border: 2px solid #1976d2;
+}
 .cancel-answer {
   background-color: #dc3545;
   color: black;
