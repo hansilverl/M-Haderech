@@ -1,5 +1,3 @@
-/* src/screens/AdminDashboard/QuestionnaireManagement.css */
-
 .questionnaire-management::before {
   content: '';
   position: fixed;
@@ -11,26 +9,22 @@
   z-index: -1;
 }
 
-
 .questionnaire-management {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: calc(100% - 250px);
-  /* Adjust based on your navbar width */
+  max-width: calc(100% - 250px); /* Adjust based on your navbar width */
   width: 100%;
   padding: 30px;
   background-color: inherit;
   min-height: 100vh;
   box-sizing: border-box;
   text-align: right;
-
 }
 
-.answers-section>h3 {
-  /* text-align: center;
+.answers-section > h3 {
+    /* text-align: center;
   margin: 0 auto; */
   margin-bottom: 5px;
 }
-
 
 .button {
   background-color: #3498db;
@@ -40,16 +34,10 @@
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 20px;
-  /* Added margin space below the button */
 }
 
 .button:hover {
   background-color: #2980b9;
-}
-
-.spacer {
-  height: 20px;
-  /* Add space between the button and the question list */
 }
 
 .question {
@@ -60,7 +48,6 @@
   margin-bottom: 15px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.28);
-
 }
 
 .answers-table {
@@ -70,7 +57,6 @@
   border: 1px solid #a9a9a9;
   width: 100%;
   table-layout: fixed;
-  /* Ensure fixed layout */
 }
 
 .answers-table tr {
@@ -82,7 +68,6 @@
   text-align: right;
   padding: 0.5rem;
   word-wrap: break-word;
-  /* Ensure text does not overflow */
 }
 
 /* only for the third column of the table */
@@ -94,11 +79,10 @@
   display: table-row;
 }
 
-.edit-answer-row input ,.new-answer-row input{
+.edit-answer-row input, .new-answer-row input {
+    /* Ensure input takes full width of the cell */
   width: 100%;
-  /* Ensure input takes full width of the cell */
   box-sizing: border-box;
-  /* Include padding and border in the element's total width and height */
 }
 
 .cancel-answer {
@@ -107,7 +91,6 @@
   flex-direction: flex-end;
 }
 
-/* Ensure the modal has a fixed size */
 .ReactModal__Content:not(.EditScoreDescModal) {
   background-color: white;
   border-radius: 8px;
@@ -117,14 +100,13 @@
   overflow: hidden;
   transition: all 0.3s ease;
   max-width: 50vw;
-  max-height: 90vh;
-  /* Fix the height */
+  max-height: 95vh;
   align-self: center;
   justify-self: center;
 }
 
 .answers-section {
-  max-height: calc(80vh - 100px);
+  max-height: 100%;
 }
 
 .answers-table-wrapper {
@@ -137,9 +119,7 @@
 
 .answers-table-container {
   width: 60vw;
-  /* Fixed width */
 }
-
 
 .edit-answer-row input {
   justify-self: center;
@@ -156,20 +136,15 @@
   margin-right: 10px;
   text-justify: center;
   font-weight: 600;
-
 }
 
-/* styles for checkbox itself */
 .required-checkbox input[type="checkbox"] {
   margin-left: 5px;
 }
 
-
-
 .question-label {
   display: flex;
   gap: 8px;
-  /* Adds some space between the checkbox and the text */
 }
 
 .question:hover {
@@ -195,31 +170,24 @@
   justify-content: space-between;
 }
 
-
-.add-checkbox h1{
+.add-checkbox h1 {
   order: 1;
 }
 
 .required-checkbox-add {
-  /* size and position as newQuestionText */
   margin-left: 20px;
   margin-top: 30px;
-
 }
 
-
-body > div.ReactModalPortal > div > div > div > div > label{
-  margin-left: 5px;
-  /* same style as required-checkbox: checkbox */
-}
-
-body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbox]
-{
+body > div.ReactModalPortal > div > div > div > div > label {
   margin-left: 5px;
 }
 
-/* Styling the label for newQuestionText specifically */
-#newQuestionText{
+body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbox] {
+  margin-left: 5px;
+}
+
+#newQuestionText {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -232,8 +200,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* all buttons on page, but not on whole website */
-
 .questionnaire-management button:not(.add-question-button):not(.edit-score-desc-button) {
   border: none;
   cursor: pointer;
@@ -242,7 +208,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   font-size: 14px;
   transition: background-color 0.2s ease;
   background-color: transparent !important;
-  /* position in corner */
 }
 
 .questionnaire-management button:hover {
@@ -300,8 +265,7 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   background-color: #0056b3;
 }
 
-.editButton,
-.trashButton {
+.editButton, .trashButton {
   background-color: transparent;
   color: white;
   display: inline-flex;
@@ -316,25 +280,21 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   color: #343a40;
 }
 
-
 .save-button {
   background-color: #28a745 !important;
   font-weight: 600;
   color: white;
   border: none;
-  /* align button center */
   margin: 0 auto;
   display: block;
   padding: 10px;
   margin-top: 20px;
-
 }
+
 .save-button:hover {
   background-color: #218838 !important;
 }
 
-
-/* Modal Styles */
 .ReactModal__Overlay:not(.ESDOverlay) {
   background-color: rgba(0, 0, 0, 0.5) !important;
   z-index: 1000;
@@ -348,7 +308,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-  /* Adjusted to center the modal */
   box-sizing: border-box;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -357,30 +316,24 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   justify-self: center;
 }
 
-
 .Modal input {
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  /* Example style */
   border-radius: 4px;
-  /* Example style */
+  width: 30vw;
 }
-
-
 
 .question-input {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* Example style */
   width: 30vw;
 }
 
 .question-input:focus {
   outline: none;
   border-color: #3498db;
-  /* Example style */
 }
 
 .save-answer {
@@ -392,7 +345,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
 .save-answer:hover {
   background-color: #218838;
 }
-
 
 .close-button {
   position: absolute;
@@ -424,8 +376,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-  /* width should be same as newQuestionText */
-  /* width: 30vw; */
   margin: 0 auto;
   display: block;
   transition: background-color 0.2s ease;
@@ -434,8 +384,6 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
 .submit-add-question:hover {
   background-color: #218838;
 }
-
-/* ... (previous CSS remains unchanged) ... */
 
 .delete-confirm-content {
   display: flex;
@@ -485,42 +433,37 @@ body > div.ReactModalPortal > div > div > div > div > label > input[type=checkbo
   background-color: #5a6268;
 }
 
-.description-actions
-{
+.description-actions {
   display: flex;
 }
 
-
-div.questionnaire-management > div.description-section h3{
+div.questionnaire-management > div.description-section h3 {
   margin: 0 auto;
 }
 
-div.questionnaire-management > h4{
+div.questionnaire-management > h4 {
   margin: auto;
   margin-bottom: 10px;
 }
-
 
 .description-actions {
   display: flex;
   flex-direction: row;
 }
 
-.description-actions .description-textarea{
+.description-actions .description-textarea {
   width: 100%;
   margin-left: 10px;
   border-radius: 4px;
   padding: 10px;
-  /*scrollbar style*/
   scrollbar-width: thin;
 }
 
-#root > div > div > div > div.admin-dashboard-content > div > div.description-section > div.description-actions > button{
+#root > div > div > div > div.admin-dashboard-content > div > div.description-section > div.description-actions > button {
   background-color: #28a745 !important;
   font-weight: 600;
   color: white;
   border: none;
-  /* align button center */
   margin: 0 auto;
   display: block;
   padding: 5px 20px;
@@ -528,11 +471,10 @@ div.questionnaire-management > h4{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#root > div > div > div > div.admin-dashboard-content > div > div.description-section > div.description-actions > button:hover{
+#root > div > div > div > div.admin-dashboard-content > div > div.description-section > div.description-actions > button:hover {
   background-color: #218838 !important;
 }
 
-
-div.questionnaire-management > h1{
+div.questionnaire-management > h1 {
   text-align: center;
 }
