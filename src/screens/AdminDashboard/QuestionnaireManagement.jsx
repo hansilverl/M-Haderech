@@ -1,4 +1,3 @@
-// src/components/QuestionnaireManagement/QuestionnaireManagement.jsx
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/config'
 import {
@@ -19,8 +18,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFloppyDisk, faBars } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import EditScoreDescModal from '../../components/helpScore/EditScoreDescModal'
+import { Tooltip, TextField } from '@mui/material'
 
-Modal.setAppElement('#root') // Adjust this selector to your app's root element
+Modal.setAppElement('#root')
+
+const ScoreTooltip = ({ children, error }) => (
+	
+	<Tooltip title="ניקוד זה כבר קיים. אנא בחרי ניקוד אחר." open={error}
+	classes={{ tooltip: 'custom-tooltip' }}
+>
+		
+		{children}
+	</Tooltip>
+)
 
 const QuestionnaireManagement = ({ questionnaireId }) => {
 	const [description, setDescription] = useState('')
@@ -164,11 +174,22 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 		setModalIsOpen(true)
 	}
 
+	const checkDuplicateScore = (score, answers) => {
+		return answers.some((answer) => answer.score === parseInt(score, 10))
+	}
+
 	const handleAddAnswer = async () => {
 		if (newAnswerText && newAnswerScore) {
+			const score = parseInt(newAnswerScore, 10)
+			const scoreExists = checkDuplicateScore(score, selectedQuestion.answers)
+
+			if (scoreExists) {
+				return
+			}
+
 			const updatedAnswers = [
 				...selectedQuestion.answers,
-				{ id: newAnswerScore, text: newAnswerText, score: parseInt(newAnswerScore, 10) },
+				{ id: newAnswerScore, text: newAnswerText, score: score },
 			]
 
 			// Sort the updatedAnswers array by score
@@ -177,9 +198,24 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 			const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers }
 			setSelectedQuestion(updatedQuestion)
 
-			// Reset the input fields
-			setNewAnswerText('')
-			setNewAnswerScore('')
+			// Update Firebase
+			// check if we need to update(if any changes were made)
+			if (JSON.stringify(selectedQuestion.answers) !== JSON.stringify(updatedAnswers)) {
+
+				try {
+					const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id)
+					await updateDoc(questionDocRef, {
+						[newAnswerScore]: newAnswerText,
+					})
+
+					// Reset the input fields
+					setNewAnswerText('')
+					setNewAnswerScore('')
+				} catch (error) {
+					handleFirestoreError(error)
+				}
+			}
+
 		}
 	}
 
@@ -188,27 +224,60 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 		setCurrentText(answer.text)
 		setCurrentScore(answer.score)
 	}
+
 	const saveEditedAnswer = async () => {
+		// const previousScore = editingAnswer.score;
 		const updatedAnswers = selectedQuestion.answers.map((answer) =>
 			answer.id === editingAnswer.id
-				? { ...answer, text: currentText, score: currentScore }
+				? { ...answer, text: currentText, score: parseInt(currentScore, 10) }
 				: answer
-		)
+		);
+
+		// Check for duplicate scores
+		const scoreExists = checkDuplicateScore(currentScore, updatedAnswers.filter(a => a.id !== editingAnswer.id))
+		if (scoreExists) {
+			// don't save the answer, show an error message
+			return
+			
+		}
 
 		// Sort the updatedAnswers array by score
-		updatedAnswers.sort((a, b) => a.score - b.score)
+		updatedAnswers.sort((a, b) => a.score - b.score);
 
-		const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers }
-		setSelectedQuestion(updatedQuestion)
-		setEditingAnswer(null)
-	}
+		const updatedQuestion = { ...selectedQuestion, answers: updatedAnswers };
+		setSelectedQuestion(updatedQuestion);
+		setEditingAnswer(null);
+
+		// Update Firebase
+		// check if we need to update(if any changes were made)
+		if (JSON.stringify(selectedQuestion.answers) !== JSON.stringify(updatedAnswers)) {
+			try {
+				const questionDocRef = doc(db, 'Questionnaire', selectedQuestion.id);
+				const questionDoc = await getDoc(questionDocRef);
+				const questionData = questionDoc.data();
+
+				// Remove the old answer
+				await updateDoc(questionDocRef, {
+					[editingAnswer.id]: deleteField(),
+				});
+
+				// Add the updated answer with the new score as the key
+				await updateDoc(questionDocRef, {
+					[currentScore]: currentText,
+				});
+
+			} catch (error) {
+				handleFirestoreError(error);
+			}
+		}
+	};
 
 	const saveQuestionChanges = async () => {
 		const { id, question, required, answers } = selectedQuestion
 		try {
 			const questionDocRef = doc(db, 'Questionnaire', id)
 			const updatedAnswers = answers.reduce((acc, answer) => {
-				acc[answer.id] = answer.text
+				acc[answer.score.toString()] = answer.text
 				return acc
 			}, {})
 
@@ -217,7 +286,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 				prevQuestions.map((q) => (q.id === id ? { ...q, question, required, answers } : q))
 			)
 			setModalIsOpen(false)
-			resetInputFields() // Reset the input fields
+			resetInputFields()
 			alert('השאלה עודכנה בהצלחה!')
 		} catch (error) {
 			handleFirestoreError(error)
@@ -401,7 +470,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 								הוספת שאלה
 							</button>
 							<button className='edit-score-desc-button'
-							onClick={() => setEditScoreDescModalIsOpen(true)}>
+								onClick={() => setEditScoreDescModalIsOpen(true)}>
 								עריכת תיאורי תוצאות המבדק
 							</button>
 
@@ -529,12 +598,15 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 															</td>
 															<td>
 																{editingAnswer && editingAnswer.id === answer.id ? (
-																	<input
-																		type='number'
-																		name='answerScore'
-																		value={currentScore}
-																		onChange={handleAnswerChange}
-																	/>
+																	<ScoreTooltip error={checkDuplicateScore(currentScore, selectedQuestion.answers.filter(a => a.id !== editingAnswer.id))}>
+																		<TextField
+																			type='number'
+																			name='answerScore'
+																			value={currentScore}
+																			onChange={handleAnswerChange}
+																			error={checkDuplicateScore(currentScore, selectedQuestion.answers.filter(a => a.id !== editingAnswer.id))}
+																		/>
+																	</ScoreTooltip>
 																) : (
 																	<>ניקוד: {answer.score}</>
 																)}
@@ -582,12 +654,15 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 															/>
 														</td>
 														<td>
-															<input
-																type='number'
-																placeholder='ניקוד'
-																value={newAnswerScore}
-																onChange={(e) => setNewAnswerScore(e.target.value)}
-															/>
+															<ScoreTooltip error={checkDuplicateScore(newAnswerScore, selectedQuestion.answers)}>
+																<TextField
+																	type='number'
+																	placeholder='ניקוד'
+																	value={newAnswerScore}
+																	onChange={(e) => setNewAnswerScore(e.target.value)}
+																	error={checkDuplicateScore(newAnswerScore, selectedQuestion.answers)}
+																/>
+															</ScoreTooltip>
 														</td>
 														<td>
 															<button
@@ -650,7 +725,7 @@ const QuestionnaireManagement = ({ questionnaireId }) => {
 					<EditScoreDescModal
 						isOpen={editScoreDescModalIsOpen}
 						onRequestClose={() => setEditScoreDescModalIsOpen(false)}
-						
+
 					/>
 
 				</>
