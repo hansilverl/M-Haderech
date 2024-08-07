@@ -34,7 +34,6 @@ function App() {
 		<div className='App'>
 			{!isAdminRoute && <Navbar setShowLogin={setShowLogin} />} {/* Pass setShowLogin */}
 			{showLogin && <LoginPopup setShowLogin={setShowLogin} />}
-			<h1 className='App-title'>אם הדרך</h1>
 			<div className='App-content'>
 				<Routes>
 					<Route exact path='/' element={<HomePage />} />
