@@ -34,6 +34,7 @@ function App() {
 		<div className='App'>
 			{!isAdminRoute && <Navbar setShowLogin={setShowLogin} />} {/* Pass setShowLogin */}
 			{showLogin && <LoginPopup setShowLogin={setShowLogin} />}
+			<h1 className='App-title'>אם הדרך</h1>
 			<div className='App-content'>
 				<Routes>
 					<Route exact path='/' element={<HomePage />} />
@@ -66,7 +67,9 @@ function App() {
 						}
 					/>
 				</Routes>
-			</div>
+				{/* analytics.js tag */}
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-XTE5N7RJJM"></script>
+				</div>
 		</div>
 	)
 }
