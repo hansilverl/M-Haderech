@@ -155,12 +155,13 @@ body {
 
 .radio-input:checked + .custom-radio::after {
 	transform: translate(-50%, -50%) scale(1.2);
-	/* slightly larger than the radio button */
-	content: '✔';
+	/* marlet and webdings are used for the checkmark */
+	font-family: 'marlet';
+	content: ' ✔';
 	font-size: 0.5em;
-	font-weight: bold;
+	font-weight: 600;
 	border-radius: 50%;
-	color: forestgreen;
+	color: forestgreen !important;
 	display: block;
 	position: absolute;
 	/* aligns the checkmark to the center of the radio button */
@@ -394,7 +395,9 @@ body {
         height: 0.85em;
         min-height: 0.85em;
     }
-
+	.radio-input:checked + .custom-radio::after {
+		content: '✓';
+	}
     .option-text {
         margin-left: 1rem;
         display: inline-block;
