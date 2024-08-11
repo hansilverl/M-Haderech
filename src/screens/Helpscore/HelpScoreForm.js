@@ -58,6 +58,7 @@ const HelpScoreForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit} className='help-score-form'>
+			<title>מבדק היפרמאזיס (HG) אישי</title>
 			{loading && <LoadingSpinner />}
 			{error && <p>שגיאה: {error}</p>}
 			{!loading && !error && (
