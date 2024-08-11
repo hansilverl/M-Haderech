@@ -3,6 +3,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DonationSection.style.css';
+import donationImage from '../../assets/donation-dandelion-335222_1280.webp';
 
 const DonationSection = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const DonationSection = () => {
         <button className="donate-button" onClick={handleDonateClick}>תורמים חיים {">>"}</button>
       </div>
       <div className="donation-image">
-        <img src="https://cdn.pixabay.com/photo/2014/05/01/01/43/dandelion-335222_1280.png" alt="donation illustration" className="donation-image" />
+        <img src={donationImage}  alt="donation illustration" className="donation-image" />
       </div>
     </section>
   );
