@@ -63,7 +63,7 @@ const HelpScoreForm = () => {
 			{!loading && !error && (
 				<>
 					<div className='help-score-form-header'>
-						<h2> מבדק היפרמאזיס (HG) אישי</h2>
+						<h1> מבדק היפרמאזיס (HG) אישי</h1>
 						{description && <p className='questionnaire-description'>{description}</p>}
 						<div className='bordered-container'>
 							{questions.map((question) => (
