@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /admin 
+
+Sitemap: https://hg-emhaderech.web.app/sitemap.xml
+Sitemap: https://m-haderech.web.app/sitemap.xml
