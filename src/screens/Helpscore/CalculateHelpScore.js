@@ -48,7 +48,7 @@ const CalculateHelpScore = () => {
     const calculateScore = (answers) => {
         let totalScore = 0;
         Object.values(answers).forEach(answer => {
-            totalScore += parseInt(answer, 10);
+            totalScore += parseInt(answer, 10); // the score is a string
         });
         return totalScore;
     };
