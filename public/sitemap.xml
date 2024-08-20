@@ -39,6 +39,10 @@
   <priority>0.8</priority>
 </url>
 <url>
+  <loc>https://hg-emhaderech.web.app/posts/<loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.5</priority>
+<url>
   <loc>https://hg-emhaderech.web.app/posts/1</loc>
   <changefreq>weekly</changefreq>
   <priority>0.5</priority>
