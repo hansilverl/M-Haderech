@@ -24,6 +24,11 @@
   <priority>0.8</priority>
 </url>
 <url>
+  <loc>https://hg-emhaderech.web.app/helpscore</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
   <loc>https://hg-emhaderech.web.app/donate</loc>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
