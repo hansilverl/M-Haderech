@@ -11,15 +11,15 @@ import DonateTitleAdmin from '../AdminDashboard/DonateTitleAdmin';
 import './Miscellaneous.css';
 
 const Miscellaneous = () => {
-  return (
+	return (
 		<div className='admin-miscellaneous-container'>
 			<h1>שונות</h1>
 			<div className='miscellaneous-content'>
-			<div className='section'>
+				<div className='section'>
 					<h2>אודות</h2>
 					<AboutInfo />
 				</div>
-			<div className='section'>
+				<div className='section'>
 					<h2>קישורי תרומה</h2>
 					<DonationLink />
 				</div>
@@ -44,7 +44,9 @@ const Miscellaneous = () => {
 					<Contact />
 				</div>
 				<div className='section'>
-					<h2>קישור לרשימת תפוצה</h2>
+					<h2>
+						קישור לניוזלטר
+					</h2>
 					<NewsletterLinkAdmin />
 				</div>
 
