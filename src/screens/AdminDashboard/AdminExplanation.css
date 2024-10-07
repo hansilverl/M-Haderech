@@ -34,6 +34,27 @@
   margin-bottom: 20px;
 }
 
+/* Container for the PDF icon and title */
+.pdf-container-explain {
+  /* left corner */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pdf-icon-explain {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.pdf-title-explain{
+  font-size: 1em;
+  color: #34495e;
+}
+
+
 .category-list {
   list-style-type: none;
   padding: 0;
